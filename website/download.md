@@ -13,6 +13,18 @@ devtools::install_github('leekgroup/recount')
 library('recount')
 browseVignettes('recount')
 
-## Run the example for downloading a study
-example('download_study', package = 'recount')
+## Download the RangedSummarizedExperiment object at the gene level for 
+## study SRP009615
+url <- download_study('SRP009615')
+
+## This is the original url for the file
+url
+
+## Load the data
+load(file.path('SRP009615', 'rse_gene.Rdata'))
+
+## Scale counts
+rse <- scale_counts(rse_gene)
+
+## Then use your favorite differential expression software
 ```
