@@ -23,11 +23,11 @@ if (!is.null(opt$help)) {
 ## For testing
 if(FALSE) {
     opt <- list(project = 'sra', projectid = 'DRP000499',
-        'metadata' = '/dcl01/leek/data/gtex_work/runs/recount2/metadata/metadata_sra.Rdata'
+        'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'
     )
     ## Largest one, to find memory needed
     opt <- list(project = 'sra', projectid = 'SRP025982',
-        'metadata' = '/dcl01/leek/data/gtex_work/runs/recount2/metadata/metadata_sra.Rdata'
+        'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'
     )
 }
 
@@ -47,7 +47,7 @@ if(nrow(metadata) == 0) stop(paste('No samples have bwtool tsv files for project
 rownames(metadata) <- NULL
 
 ## Locate counts and rse files
-rse_path <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/rse',
+rse_path <- file.path('/dcl01/leek/data/recount-website/rse',
     paste0('rse_', opt$project), opt$projectid)
 rse_files <- dir(rse_path, full.names = TRUE)
 names(rse_files) <- dir(rse_path)
@@ -58,19 +58,19 @@ if(!all(rse_up %in% names(rse_files))) stop(paste('Missing counts/rse files for 
     opt$projectid))
 
 ## Locate metadata file
-meta_path <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/metadata',
+meta_path <- file.path('/dcl01/leek/data/recount-website/metadata',
     paste0('project_metadata_', opt$project), paste0(opt$projectid, '.tsv'))
 names(meta_path) <- paste0(opt$projectid, '.tsv')
 if(!file.exists(meta_path)) stop(paste('Missing metadata file for project', opt$projecid))
 
 ## Find mean bigwig file
-mean_bw <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/mean', 
+mean_bw <- file.path('/dcl01/leek/data/recount-website/mean', 
     paste0('means_', opt$project), paste0('mean_', opt$projectid, '.bw'))
 if(!file.exists(mean_bw)) stop(paste('Missing mean bigwig file for project', opt$projecid))
 names(mean_bw) <- paste0('mean_', opt$projectid, '.bw')
 
 ## Create output dir for the project
-outdir <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/upload_figshare', 
+outdir <- file.path('/dcl01/leek/data/recount-website/upload_figshare', 
     paste0('upload_', opt$project), opt$projectid)
 dir.create(outdir, showWarnings = FALSE)
 stopifnot(dir.exists(outdir))
@@ -144,7 +144,7 @@ load('.auth_string.Rdata') ## String from creating a "Personal Token" at https:/
 
 ## Upload files
 fs_my_upload <- function(article, files, token) {
-    cmd <- paste('python /dcl01/leek/data/gtex_work/runs/recount2/figshare.py --article-id', article, '--paths', paste(files, collapse = ' '), '--token', token)
+    cmd <- paste('python /dcl01/leek/data/recount-website/figshare.py --article-id', article, '--paths', paste(files, collapse = ' '), '--token', token)
     system(cmd)
 }
 print('Time spent uploading files')

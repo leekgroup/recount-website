@@ -26,13 +26,13 @@ if(FALSE) {
 }
 
 ## Load metadata
-file <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/metadata/',
+file <- file.path('/dcl01/leek/data/recount-website/metadata/',
     paste0('metadata_', opt$project, '.Rdata'))
 stopifnot(file.exists(file))
 load(file)
 
 ## Load abstracts
-file <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/metadata_abstract/', 
+file <- file.path('/dcl01/leek/data/recount-website/metadata_abstract/', 
     paste0('abstracts_', opt$project, '.Rdata'))
 stopifnot(file.exists(file))
 load(file)
@@ -59,7 +59,7 @@ meta_web <- data.frame(
 )
 rownames(meta_web) <- NULL
 for(project in projects) {
-    if(dir.exists(file.path('/dcl01/leek/data/gtex_work/runs/recount2/rse/', paste0('rse_', opt$project), project))) {
+    if(dir.exists(file.path('/dcl01/leek/data/recount-website/rse/', paste0('rse_', opt$project), project))) {
         ## Have to change this to actual URLs once the data is uploaded        
         meta_web$rse_gene[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
@@ -74,13 +74,13 @@ for(project in projects) {
             '<a href="http://duffel.rail.bio/recount/', project,
             '/counts_exon.tsv.gz">link</a>')
     }
-    if(file.exists(file.path('/dcl01/leek/data/gtex_work/runs/recount2/metadata/', paste0('project_metadata_', opt$project), paste0(project, '.tsv')))) {
+    if(file.exists(file.path('/dcl01/leek/data/recount-website/metadata/', paste0('project_metadata_', opt$project), paste0(project, '.tsv')))) {
        ## Have to change this to actual URLs once the data is uploaded    
         meta_web$phenotype[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project, '/', project,
             '.tsv">link</a>')
     }
-    if(dir.exists(file.path('/dcl01/leek/data/gtex_work/runs/recount2/fileinfo/', paste0('fileinfo_', opt$project), project))) {
+    if(dir.exists(file.path('/dcl01/leek/data/recount-website/fileinfo/', paste0('fileinfo_', opt$project), project))) {
         ## Might host these files on the website itself, if so we'll have to
         ## change them to relative URLs
         meta_web$files_info[projects == project] <- paste0(

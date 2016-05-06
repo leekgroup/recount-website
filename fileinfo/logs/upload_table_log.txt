@@ -1,11 +1,11 @@
 Loading required package: colorout
                                                                                   path
-1    /dcl01/leek/data/gtex_work/runs/recount2/rse/rse_sra/DRP000366/counts_exon.tsv.gz
-2    /dcl01/leek/data/gtex_work/runs/recount2/rse/rse_sra/DRP000366/counts_gene.tsv.gz
-3        /dcl01/leek/data/gtex_work/runs/recount2/rse/rse_sra/DRP000366/rse_exon.Rdata
-4        /dcl01/leek/data/gtex_work/runs/recount2/rse/rse_sra/DRP000366/rse_gene.Rdata
-5 /dcl01/leek/data/gtex_work/runs/recount2/metadata/project_metadata_sra/DRP000366.tsv
-6            /dcl01/leek/data/gtex_work/runs/recount2/mean/means_sra/mean_DRP000366.bw
+1    /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_exon.tsv.gz
+2    /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_gene.tsv.gz
+3        /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_exon.Rdata
+4        /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_gene.Rdata
+5 /dcl01/leek/data/recount-website/metadata/project_metadata_sra/DRP000366.tsv
+6            /dcl01/leek/data/recount-website/mean/means_sra/mean_DRP000366.bw
            file_name   project
 1 counts_exon.tsv.gz DRP000366
 2 counts_gene.tsv.gz DRP000366

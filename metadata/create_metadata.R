@@ -49,7 +49,7 @@ if(opt$project == 'sra') {
 
 
 ## Find bigwig files
-bigwigs <- system(paste0('cut -f 5 -d " " /dcl01/leek/data/gtex_work/runs/recount2/bwtool/bwtool_cmds_', opt$project, '.txt'), intern = TRUE)
+bigwigs <- system(paste0('cut -f 5 -d " " /dcl01/leek/data/recount-website/bwtool/bwtool_cmds_', opt$project, '.txt'), intern = TRUE)
 names(bigwigs) <- gsub('.*coverage_bigwigs/|.bw', '', bigwigs)
 j <- match(metadata$run, names(bigwigs))
 

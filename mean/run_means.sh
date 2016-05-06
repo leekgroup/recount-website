@@ -5,7 +5,7 @@
 # sh run_means.sh gtex
 
 # Directories
-MAINDIR=/dcl01/leek/data/gtex_work/runs/recount2
+MAINDIR=/dcl01/leek/data/recount-website
 WDIR=${MAINDIR}/mean
 
 # Define variables

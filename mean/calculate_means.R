@@ -20,11 +20,11 @@ if (!is.null(opt$help)) {
 ## For testing
 if(FALSE) {
     opt <- list(project = 'sra', projectid = 'DRP000499',
-        'metadata' = '/dcl01/leek/data/gtex_work/runs/recount2/metadata/metadata_sra.Rdata'
+        'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'
     )
     ## Largest one, to find memory needed
     opt <- list(project = 'sra', projectid = 'SRP025982',
-        'metadata' = '/dcl01/leek/data/gtex_work/runs/recount2/metadata/metadata_sra.Rdata'
+        'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'
     )
 }
 
@@ -49,9 +49,9 @@ if(FALSE) {
 }
 
 ## Name resulting mean.bw file
-outbw <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/mean', 
+outbw <- file.path('/dcl01/leek/data/recount-website/mean', 
     paste0('means_', opt$project), paste0('mean_', opt$projectid, '.bw'))
-outwig <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/mean', 
+outwig <- file.path('/dcl01/leek/data/recount-website/mean', 
     paste0('means_', opt$project), paste0('mean_', opt$projectid, '.wig'))
     
 
@@ -89,7 +89,7 @@ if(nrow(metadata) < 100) {
         
         ## Use TMPDIR if available
         if(Sys.getenv('TMPDIR') == '') {
-            tmpdir <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/mean', paste0('means_', opt$project), paste0('.', opt$projectid))
+            tmpdir <- file.path('/dcl01/leek/data/recount-website/mean', paste0('means_', opt$project), paste0('.', opt$projectid))
             dir.create(tmpdir, showWarnings = FALSE)
         } else {
             tmpdir <- tempdir()

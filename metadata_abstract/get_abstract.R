@@ -27,7 +27,7 @@ if(FALSE) {
 }
 
 ## Load metadata
-file <- file.path('/dcl01/leek/data/gtex_work/runs/recount2/metadata/',
+file <- file.path('/dcl01/leek/data/recount-website/metadata/',
     paste0('metadata_', opt$project, '.Rdata'))
 stopifnot(file.exists(file))
 load(file)

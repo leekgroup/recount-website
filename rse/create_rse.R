@@ -32,9 +32,9 @@ if(FALSE) {
 dir.create(paste0('rse_', opt$project), showWarnings = FALSE)
 
 ## Load GRanges and metadata
-load('/dcl01/leek/data/gtex_work/runs/recount2/genes/ucsc-knowngene-hg38-genes-bp-length.Rdata')
-load('/dcl01/leek/data/gtex_work/runs/recount2/genes/ucsc-knowngene-hg38-exons.Rdata')
-load('/dcl01/leek/data/gtex_work/runs/recount2/genes/count_groups.Rdata')
+load('/dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38-genes-bp-length.Rdata')
+load('/dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38-exons.Rdata')
+load('/dcl01/leek/data/recount-website/genes/count_groups.Rdata')
 load(opt$metadata)
 
 ## Subset to project of interest
