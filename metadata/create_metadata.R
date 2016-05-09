@@ -42,7 +42,37 @@ if(opt$project == 'sra') {
     stopifnot(identical(metadata$run, sra$run[i]))
     metadata$avg_read_length <- sra$avglength[i]
 } else if (opt$project == 'gtex') {
-    stop('Have not implemented metadata for gtex project')
+    stop('Have not finished implementing metadata for gtex project')
+    
+    ## Load SRA metadata (metadata object)
+    stopifnot(file.exists('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'))
+    load('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata')
+    
+    ## Load GTEx metadata (pheno object)
+    load('/dcl01/leek/data/gtex_work/runs/gtex/DER_analysis/pheno/pheno_complete.Rdata')
+    
+    ## Fix GTEx data
+    pheno$auc <- pheno$SumCoverage
+    colnames(pheno) <- tolower(colnames(pheno))
+    pheno$avg_read_length <- pheno$avglength
+    pheno$bigwig_path <- pheno$bigwigpath
+    pheno$bigwig_file <- gsub('.*coverage_bigwigs/', '', pheno$bigwigpath)
+    pheno$paired_end <- pheno$librarylayout == 'PAIRED'
+    pheno$project <- as.character(pheno$srastudy)
+    pheno$sample <- as.character(pheno$sample)
+    pheno$experiment <- as.character(pheno$experiment)
+    
+    ## Store column names
+    sra <- colnames(metadata)
+    gtex <- colnames(pheno)
+    
+    ## Create GTEx metadata
+    m <- as.data.frame(matrix(NA, nrow = nrow(pheno), ncol = length(sra)))
+    colnames(m) <- sra
+    for(i in sra) {
+        if(i %in% gtex) m[, i] <- pheno[, i]
+    }
+    
 } else {
     stop("Invalid 'project' choice. Use gtex or sra")
 }
@@ -59,8 +89,9 @@ metadata$bigwig_path <- bigwigs[j]
 metadata$bigwig_file <- gsub('.*coverage_bigwigs/', '', metadata$bigwig_path)
 
 ## Locate tsv files
-tsv <- dir('/dcl01/leek/data/recount2/coverage', pattern = 'tsv', full.names = TRUE)
-names(tsv) <- gsub('.sum.tsv', '', dir('/dcl01/leek/data/recount2/coverage', pattern = 'tsv'))
+tsv_dir <- ifelse(opt$project == 'sra', '/dcl01/leek/data/recount2/coverage', '/dcl01/leek/data/recount2/coverage_gtex')
+tsv <- dir(tsv_dir, pattern = 'tsv', full.names = TRUE)
+names(tsv) <- gsub('.sum.tsv', '', dir(tsv_dir, pattern = 'tsv'))
 k <- match(metadata$run, names(tsv))
 
 ## Number of tsv files matches number of bigwig files
