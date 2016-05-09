@@ -2,7 +2,7 @@
 
 # Usage
 # sh run_bwtool.sh sra
-# sh run_bwtool gtex
+# sh run_bwtool.sh gtex
 
 # Directories
 MAINDIR=/dcl01/leek/data/recount-website
