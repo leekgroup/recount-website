@@ -87,7 +87,7 @@ if(nrow(metadata) < 100) {
     if(opt$project == 'sra') {
         bp <- SerialParam()
     } else {
-        bp <- MulticoreParam(4, outfile = Sys.getenv('SGE_STDERR_PATH'))
+        bp <- MulticoreParam(2, outfile = Sys.getenv('SGE_STDERR_PATH'))
     }
     
     ## Calculate sums per subsets
