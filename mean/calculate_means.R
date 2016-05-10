@@ -1,5 +1,6 @@
 ## Load libraries
 library('getopt')
+library('BiocParallel')
 
 ## Specify parameters
 spec <- matrix(c(
@@ -83,8 +84,14 @@ if(nrow(metadata) < 100) {
     meta <- split(metadata, sets)
     names(meta) <- seq_len(length(meta))
     
+    if(opt$project == 'sra') {
+        bp <- SerialParam()
+    } else {
+        bp <- MulticoreParam(5, outfile = Sys.getenv('SGE_STDERR_PATH'))
+    }
+    
     ## Calculate sums per subsets
-    system.time( tmpfiles <- mapply(function(m, i) {
+    system.time( tmpfiles <- bpmapply(function(m, i) {
         cmd <- scaleWig(m)
         
         ## Use TMPDIR if available
@@ -100,7 +107,7 @@ if(nrow(metadata) < 100) {
         cmd <- paste('wiggletools write', tmpwig, 'sum', cmd)
         runCmd(cmd, opt$projectid, i)
         return(tmpwig)
-    }, meta, names(meta)) )
+    }, meta, names(meta), BPPARAM = bp) )
     
     ## Calculate final mean
     cmd <- paste('wiggletools write', outwig, 'scale', 1/nrow(metadata), 'sum', 

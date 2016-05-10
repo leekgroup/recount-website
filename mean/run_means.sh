@@ -21,10 +21,12 @@ if [[ "${PROJECT}" == "sra" ]]
 then
     echo "$PROJECT"
     MEM="mem_free=50G,h_vmem=60G,h_fsize=100G"
+    CORES=1
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=200G,h_vmem=250G,h_fsize=100G"
+    MEM="mem_free=40G,h_vmem=60G,h_fsize=100G"
+    CORES=5
 else
     echo "Specify a valid project: gtex, sra"
 fi
@@ -46,6 +48,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -l ${MEM}
 #$ -N ${sname}
 #$ -t 1:${LINES}
+#$ -pe local ${CORES}
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
