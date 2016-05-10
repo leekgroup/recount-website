@@ -1,0 +1,27 @@
+**** Job starts ****
+Mon May  9 19:02:49 EDT 2016
+   user  system elapsed 
+  0.106   0.060 167.267 
+[1] TRUE
+   user  system elapsed 
+  1.006   0.194 169.122 
+ setting  value                                      
+ version  R version 3.3.0 Patched (2016-05-05 r70590)
+ system   x86_64, linux-gnu                          
+ ui       X11                                        
+ language (EN)                                       
+ collate  en_US.UTF-8                                
+ tz       <NA>                                       
+ date     2016-05-09                                 
+
+ package      * version date       source        
+ BiocParallel * 1.6.0   2016-05-08 Bioconductor  
+ devtools       1.11.1  2016-04-21 CRAN (R 3.3.0)
+ digest         0.6.9   2016-01-08 CRAN (R 3.3.0)
+ memoise        1.0.0   2016-01-29 CRAN (R 3.3.0)
+ R.methodsS3  * 1.7.1   2016-02-16 CRAN (R 3.3.0)
+ R.oo         * 1.20.0  2016-02-17 CRAN (R 3.3.0)
+ R.utils      * 2.3.0   2016-04-14 CRAN (R 3.3.0)
+ withr          1.0.1   2016-02-04 CRAN (R 3.3.0)
+**** Job ends ****
+Mon May  9 19:05:38 EDT 2016
