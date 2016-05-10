@@ -8,4 +8,4 @@ logs
 bwtool_cmds*
 
 ## File length check
-tsv_lines.Rdata
+tsv_lines*.Rdata
