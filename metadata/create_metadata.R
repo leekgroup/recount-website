@@ -41,9 +41,7 @@ if(opt$project == 'sra') {
     i <- match(metadata$run, sra$run)
     stopifnot(identical(metadata$run, sra$run[i]))
     metadata$avg_read_length <- sra$avglength[i]
-} else if (opt$project == 'gtex') {
-    stop('Have not finished implementing metadata for gtex project')
-    
+} else if (opt$project == 'gtex') {    
     ## Load SRA metadata (metadata object)
     stopifnot(file.exists('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'))
     load('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata')
@@ -61,6 +59,42 @@ if(opt$project == 'sra') {
     pheno$project <- as.character(pheno$srastudy)
     pheno$sample <- as.character(pheno$sample)
     pheno$experiment <- as.character(pheno$experiment)
+    pheno$proportion_of_reads_reported_by_sra_aligned <- pheno$smmaprt
+    
+    
+    ## Get mapped reads by Rail-RNA
+    ## Find count files
+    counts_files <- file.path(dir('/dcl01/leek/data/gtex', pattern = 'batch',
+        full.names = TRUE), 'cross_sample_results', 'counts.tsv.gz')
+    names(counts_files) <- dir('/dcl01/leek/data/gtex', pattern = 'batch')
+
+    ## Read in counts info
+    counts <- lapply(counts_files, function(i) {
+        read.table(i, header = TRUE, sep = '\t', stringsAsFactors = FALSE)
+    })
+    counts <- do.call(rbind, counts)
+    counts$totalMapped <- as.integer(sapply(strsplit(counts$total.mapped.reads,
+        ','), '[[', 1))
+
+    ## Match files to counts
+    map <- match(gsub('.bw', '', pheno$bigwig_file), counts$X)
+    counts <- counts[map, ]
+    stopifnot(identical(counts$X, gsub('.bw', '', pheno$bigwig_file)))
+    
+    ## Find number of reads (for paired-end samples, that's 2x)
+    counts$n_reads <- as.numeric(sapply(strsplit(counts$total.reads, ','),
+        '[[', 1))
+    
+    pheno$read_count_as_reported_by_sra <- counts$n_reads
+    pheno$reads_aligned <- pheno$read_count_as_reported_by_sra * pheno$proportion_of_reads_reported_by_sra_aligned
+    pheno$mapped_read_count <- counts$totalMapped
+    
+    ## Mis-reported?
+    ## See https://github.com/nellore/runs/blob/93c80b34f9e09c84831d4ffd652c3742dd804487/sra/v2/recount2_metadata.py#L134-L148
+    ratio <- pheno$mapped_read_count / pheno$read_count_as_reported_by_sra
+    summary(ratio)
+    pheno$sra_misreported_paired_end <- ratio == 0.5 | ratio > 1
+    
     
     ## Store column names
     sra <- colnames(metadata)
@@ -72,6 +106,7 @@ if(opt$project == 'sra') {
     for(i in sra) {
         if(i %in% gtex) m[, i] <- pheno[, i]
     }
+    metadata <- m
     
 } else {
     stop("Invalid 'project' choice. Use gtex or sra")
@@ -79,14 +114,19 @@ if(opt$project == 'sra') {
 
 
 ## Find bigwig files
-bigwigs <- system(paste0('cut -f 5 -d " " /dcl01/leek/data/recount-website/bwtool/bwtool_cmds_', opt$project, '.txt'), intern = TRUE)
-names(bigwigs) <- gsub('.*coverage_bigwigs/|.bw', '', bigwigs)
-j <- match(metadata$run, names(bigwigs))
+if(opt$project == 'sra') {
+    bigwigs <- system(paste0('cut -f 5 -d " " /dcl01/leek/data/recount-website/bwtool/bwtool_cmds_',
+        opt$project, '.txt'), intern = TRUE)
+    names(bigwigs) <- gsub('.*coverage_bigwigs/|.bw', '', bigwigs)
+    j <- match(metadata$run, names(bigwigs))
 
-## Matches number of bigwig files
-stopifnot(sum(is.na(j)) == sum(is.na(metadata$auc)))
-metadata$bigwig_path <- bigwigs[j]
-metadata$bigwig_file <- gsub('.*coverage_bigwigs/', '', metadata$bigwig_path)
+    ## Matches number of bigwig files
+    stopifnot(sum(is.na(j)) == sum(is.na(metadata$auc)))
+    metadata$bigwig_path <- bigwigs[j]
+    metadata$bigwig_file <- gsub('.*coverage_bigwigs/', '',
+        metadata$bigwig_path)
+}
+
 
 ## Locate tsv files
 tsv_dir <- ifelse(opt$project == 'sra', '/dcl01/leek/data/recount2/coverage', '/dcl01/leek/data/recount2/coverage_gtex')
