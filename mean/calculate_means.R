@@ -88,7 +88,7 @@ if(nrow(metadata) < 100) {
         cmd <- scaleWig(m)
         
         ## Use TMPDIR if available
-        if(Sys.getenv('TMPDIR') == '') {
+        if(Sys.getenv('TMPDIR') == '' | opt$project == 'gtex') {
             tmpdir <- file.path('/dcl01/leek/data/recount-website/mean', paste0('means_', opt$project), paste0('.', opt$projectid))
             dir.create(tmpdir, showWarnings = FALSE)
         } else {
