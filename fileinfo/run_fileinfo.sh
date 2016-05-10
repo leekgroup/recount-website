@@ -20,9 +20,11 @@ mkdir -p ${WDIR}/logs
 if [[ "${PROJECT}" == "sra" ]]
 then
     echo "$PROJECT"
+    MEM="mem_free=1G,h_vmem=2G,h_fsize=10G"
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
+    MEM="mem_free=10G,h_vmem=15G,h_fsize=10G"
 else
     echo "Specify a valid project: gtex, sra"
 fi
@@ -41,7 +43,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m a
-#$ -l mem_free=1G,h_vmem=2G,h_fsize=10G
+#$ -l ${MEM}
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -hold_jid copy_means,${PROJECT}.mean
