@@ -62,12 +62,11 @@ counts <- do.call(cbind, counts)
 ## Memory used by counts
 print('Memory used by exon counts')
 print(object.size(counts), units = 'Mb')
-dim(counts)
 save(counts, file = file.path(outdir, 'counts_exon.Rdata'))
 
 ## Save exon counts
 message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_exon.tsv')))
-write.table(counts, file = file.path(outdir, 'counts_exon.tsv'),
+write.table(as.data.frame(counts), file = file.path(outdir, 'counts_exon.tsv'),
     sep = '\t', row.names = FALSE, quote = FALSE, col.names = TRUE)
 system(paste('gzip', file.path(outdir, 'counts_exon.tsv')))
 
@@ -90,11 +89,13 @@ rownames(counts_gene) <- names(genes)
 ## Memory used by counts at gene level
 print('Memory used by gene counts')
 print(object.size(counts_gene), units = 'Mb')
+save(counts_gene, file = file.path(outdir, 'counts_gene.Rdata'))
 
 ## Save gene counts
 message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_gene.tsv')))
-write.table(counts_gene, file = file.path(outdir, 'counts_gene.tsv'),
-    sep = '\t', row.names = FALSE, quote = FALSE, col.names = TRUE)
+write.table(as.data.frame(counts_gene), file = file.path(outdir,
+    'counts_gene.tsv'), sep = '\t', row.names = FALSE, quote = FALSE,
+    col.names = TRUE)
 system(paste('gzip', file.path(outdir, 'counts_gene.tsv')))
 
 ## Create gene level rse
