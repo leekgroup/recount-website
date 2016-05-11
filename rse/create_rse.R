@@ -62,6 +62,8 @@ counts <- do.call(cbind, counts)
 ## Memory used by counts
 print('Memory used by exon counts')
 print(object.size(counts), units = 'Mb')
+dim(counts)
+save(counts, file = file.path(outdir, 'counts_exon.Rdata'))
 
 ## Save exon counts
 message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_exon.tsv')))
