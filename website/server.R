@@ -6,7 +6,7 @@ library('markdown')
 # mkdir www
 # cp ../genes/ucsc-knowngene-hg38-exons.Rdata www/
 # cp ../genes/ucsc-knowngene-hg38-genes-bp-length.Rdata www/
-load('meta_web_sra.Rdata')
+load('meta_web.Rdata')
 
 meta_web$species <- factor(meta_web$species)
 colnames(meta_web)[colnames(meta_web) == 'number_samples'] <- 'number of samples'
