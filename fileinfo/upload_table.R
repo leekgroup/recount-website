@@ -4,9 +4,17 @@
 # Rscript upload_table.R > logs/upload_table_log.txt 2>&1
 
 ## Identify files to upload
-upload <- dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_sra', full.names = TRUE)
+upload <- c(
+    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_sra',
+        full.names = TRUE),
+    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_gtex',
+        full.names = TRUE)
+)
 upload <- file.path(upload, 'upload_files.Rdata')
-names(upload) <-  dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_sra')
+names(upload) <-  c(
+    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_sra'),
+    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_gtex')
+)
 
 ## Find all the info to upload
 upload_table <- mapply(function(rda, project) {
