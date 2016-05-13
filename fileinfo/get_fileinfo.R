@@ -1,6 +1,7 @@
 ## Load libraries
 library('getopt')
 library('tools')
+library('Hmisc')
 
 ## Specify parameters
 spec <- matrix(c(
