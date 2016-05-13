@@ -27,6 +27,10 @@ if(FALSE) {
     opt <- list(project = 'sra', projectid = 'SRP025982',
         'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'
     )
+    ## GTEx
+    opt <- list(project = 'gtex', projectid = 'SRP012682',
+        'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_gtex.Rdata'
+    )
 }
 
 ## Create output dir
@@ -87,8 +91,14 @@ system.time( files_md5sum <- md5sum(upload_files) )
 
 ## Calculate total file size
 print('Time spent calculating file sizes')
-system.time( file_size <- as.numeric(system(paste('du -l',
-    paste(upload_files, collapse = ' '), '| cut -f1'), intern = TRUE)) )
+fileSize <- function(files) {
+    as.numeric(system(paste('du -l', paste(files, collapse = ' '), 
+        '| cut -f1'), intern = TRUE))
+}
+up_sets <- cut2(seq_len(length(upload_files)), m = 1000)
+up_files <- split(upload_files, up_sets)
+
+system.time( file_size <- unlist(lapply(up_files, fileSize)) )
 names(file_size) <- names(upload_files)
 project_size <- sum(file_size / 1024)
 if(project_size < 1024) {
