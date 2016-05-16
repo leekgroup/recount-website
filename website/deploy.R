@@ -7,7 +7,7 @@ if(file.exists('../metadata_web/meta_web_gtex.Rdata')) {
     load('../metadata_web/meta_web_gtex.Rdata')
     meta_web <- rbind(m, meta_web)
 }
-save('meta_web.Rdata')
+save(meta_web, file = 'meta_web.Rdata')
 
 
 library('rsconnect')
