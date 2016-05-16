@@ -1,5 +1,5 @@
 Loading required package: colorout
-                                                                                  path
+                                                                          path
 1    /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_exon.tsv.gz
 2    /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_gene.tsv.gz
 3        /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_exon.Rdata
@@ -13,23 +13,23 @@ Loading required package: colorout
 4     rse_gene.Rdata DRP000366
 5      DRP000366.tsv DRP000366
 6  mean_DRP000366.bw DRP000366
-[1] 63895     3
+[1] 73564     3
    user  system elapsed 
- 14.274   2.752  20.135 
-2016-05-03 15:26:06
+  8.354   2.045 133.907 
+2016-05-16 08:39:09
 Session info -----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.0 Patched (2016-05-03 r70575)
+ version  R version 3.3.0 Patched (2016-05-12 r70617)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2016-05-03                                 
+ date     2016-05-16                                 
 
 Packages ---------------------------------------------------------------------------------------------------------------
  package  * version date       source                            
- colorout * 1.1-2   2016-04-02 Github (jalvesaq/colorout@f96c00c)
+ colorout * 1.1-2   2016-05-08 Github (jalvesaq/colorout@6538970)
  devtools   1.11.1  2016-04-21 CRAN (R 3.3.0)                    
  digest     0.6.9   2016-01-08 CRAN (R 3.3.0)                    
  memoise    1.0.0   2016-01-29 CRAN (R 3.3.0)                    
