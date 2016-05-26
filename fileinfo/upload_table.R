@@ -25,7 +25,16 @@ upload_table <- mapply(function(rda, project) {
 upload_table <- do.call(rbind, upload_table)
 rownames(upload_table) <- NULL
 
+## Remove GTEx bigWigs for now
+print('Removing GTEx bigWigs')
+dim(upload_table)
+gtex <- upload_table$project == 'SRP012682' & grepl('bw', upload_table$file_name)
+table(gtex)
+upload_table <- upload_table[!gtex, ]
+rownames(upload_table) <- NULL
+
 ## Explore table a little bit
+print('Final table: minor exploration')
 head(upload_table)
 dim(upload_table)
 
