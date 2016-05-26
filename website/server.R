@@ -27,11 +27,12 @@ shinyServer(function(input, output, session) {
                 list(className = 'dt-center', targets = 1)
             ),
             pageLength = 10,
-            lengthMenu = c(5, 10, 25, 50, 100, nrow(meta_web))
+            lengthMenu = c(5, 10, 25, 50, 100, nrow(meta_web)),
+            order = list(list(1, 'desc'))
         )
     )
     output$popular = DT::renderDataTable(
-        meta_web[meta_web[, 2] > 500, - which(colnames(meta_web) %in%
+        meta_web[meta_web[, 2] > 400, - which(colnames(meta_web) %in%
             c('genes', 'exons'))],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
             'abstract')),
@@ -41,7 +42,8 @@ shinyServer(function(input, output, session) {
                 list(className = 'dt-center', targets = 1)
             ),
             pageLength = 10,
-            lengthMenu = c(5, 10, 25, 50, 100, nrow(meta_web))
+            lengthMenu = c(5, 10, 25, 50, 100, nrow(meta_web)),
+            order = list(list(1, 'desc'))
         )
     )
 })
