@@ -1,7 +1,7 @@
 Recount: A multi-experiment resource of analysis-ready RNA-seq gene and exon count datasets
 ====
 
-* Website: [lcolladotor.shinyapps.io/recount/](https://lcolladotor.shinyapps.io/recount/)
+* Website: [jhubiostatistics.shinyapps.io/recount/](https://jhubiostatistics.shinyapps.io/recount/)
 * R package: [leekgroup/recount](https://github.com/leekgroup/recount) with vignettes at [leekgroup.github.io/recount/](http://leekgroup.github.io/recount/)
 
 

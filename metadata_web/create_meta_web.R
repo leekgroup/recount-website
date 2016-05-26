@@ -52,8 +52,8 @@ meta_web <- data.frame(
     counts_gene = NA,
     counts_exon = NA,
     phenotype = NA,
-    genes = '<a href="https://lcolladotor.shinyapps.io/recount/ucsc-knowngene-hg38-genes-bp-length.Rdata">link</a>',
-    exons = '<a href="https://lcolladotor.shinyapps.io/recount/ucsc-knowngene-hg38-exons.Rdata">link</a>',
+    genes = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-genes-bp-length.Rdata">link</a>',
+    exons = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-exons.Rdata">link</a>',
     files_info = NA,
     stringsAsFactors = FALSE
 )
