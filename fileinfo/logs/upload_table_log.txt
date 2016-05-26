@@ -1,4 +1,10 @@
 Loading required package: colorout
+[1] "Removing GTEx bigWigs"
+[1] 73564     3
+gtex
+FALSE  TRUE 
+63901  9663 
+[1] "Final table: minor exploration"
                                                                           path
 1    /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_exon.tsv.gz
 2    /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_gene.tsv.gz
@@ -13,19 +19,19 @@ Loading required package: colorout
 4     rse_gene.Rdata DRP000366
 5      DRP000366.tsv DRP000366
 6  mean_DRP000366.bw DRP000366
-[1] 73564     3
+[1] 63901     3
    user  system elapsed 
-  8.354   2.045 133.907 
-2016-05-16 08:39:09
+  7.167   2.791  12.320 
+2016-05-26 15:29:35
 Session info -----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.0 Patched (2016-05-12 r70617)
+ version  R version 3.3.0 Patched (2016-05-20 r70657)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2016-05-16                                 
+ date     2016-05-26                                 
 
 Packages ---------------------------------------------------------------------------------------------------------------
  package  * version date       source                            
