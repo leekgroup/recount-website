@@ -16,4 +16,5 @@ rsconnect::setAccountInfo(name=deploy_info$name, token=deploy_info$token,
     secret=deploy_info$secret)
 deployApp(appFiles = c('ui.R', 'server.R', 'meta_web.Rdata', 'download.md',
     'www/ucsc-knowngene-hg38-genes-bp-length.Rdata',
-    'www/ucsc-knowngene-hg38-exons.Rdata'), appName = 'recount')
+    'www/ucsc-knowngene-hg38-exons.Rdata'), appName = 'recount',
+    account = deploy_info$name)
