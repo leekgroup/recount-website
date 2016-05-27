@@ -41,7 +41,7 @@ projects <- unique(metadata$project)
 meta_web <- data.frame(
     accession = paste0(
         '<a href="http://trace.ncbi.nlm.nih.gov/Traces/sra/?study=',
-        projects, '">', projects, '</a>'),
+        projects, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'srainfo\', 1)">', projects, '</a>'),
     number_samples = sapply(projects, function(project) {
         sum(metadata$project == project)}),
     species = 'human',
@@ -52,8 +52,8 @@ meta_web <- data.frame(
     counts_gene = NA,
     counts_exon = NA,
     phenotype = NA,
-    genes = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-genes-bp-length.Rdata">link</a>',
-    exons = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-exons.Rdata">link</a>',
+    genes = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-genes-bp-length.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'genes\', 1)">link</a>',
+    exons = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-exons.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'exons\', 1)">link</a>',
     files_info = NA,
     stringsAsFactors = FALSE
 )
@@ -63,29 +63,26 @@ for(project in projects) {
         ## Have to change this to actual URLs once the data is uploaded        
         meta_web$rse_gene[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/rse_gene.Rdata">link</a>')
+            '/rse_gene.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">link</a>')
         meta_web$rse_exon[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/rse_exon.Rdata">link</a>')
+            '/rse_exon.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">link</a>')
         meta_web$counts_gene[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/counts_gene.tsv.gz">link</a>')
+            '/counts_gene.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-gene\', 1)">link</a>')
         meta_web$counts_exon[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/counts_exon.tsv.gz">link</a>')
+            '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">link</a>')
     }
-    if(file.exists(file.path('/dcl01/leek/data/recount-website/metadata/', paste0('project_metadata_', opt$project), paste0(project, '.tsv')))) {
-       ## Have to change this to actual URLs once the data is uploaded    
+    if(file.exists(file.path('/dcl01/leek/data/recount-website/metadata/', paste0('project_metadata_', opt$project), paste0(project, '.tsv')))) {   
         meta_web$phenotype[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project, '/', project,
-            '.tsv">link</a>')
+            '.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-phenotype\', 1)">link</a>')
     }
     if(dir.exists(file.path('/dcl01/leek/data/recount-website/fileinfo/', paste0('fileinfo_', opt$project), project))) {
-        ## Might host these files on the website itself, if so we'll have to
-        ## change them to relative URLs
         meta_web$files_info[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/files_info.tsv">link</a>')
+            '/files_info.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-filesinfo\', 1)">link</a>')
     }
 }
 
