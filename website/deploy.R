@@ -1,4 +1,4 @@
-## Currently can only be deployed with R 3.2.5
+## Can now be deployed with R 3.3.0
 
 ## Load metadata information
 load('../metadata_web/meta_web_sra.Rdata')
