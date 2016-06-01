@@ -6,6 +6,7 @@
 
 library('getopt')
 library('SRAdb')
+library('GenomicRanges')
 
 ## Specify parameters
 spec <- matrix(c(

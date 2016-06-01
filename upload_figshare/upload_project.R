@@ -2,6 +2,7 @@
 library('getopt')
 library('rfigshare')
 library('tools')
+library('GenomicRanges')
 library('RCurl')
 
 ## Specify parameters

@@ -1,10 +1,12 @@
 ## Prepare metadata
-# module load R/3.3
+# module load R/3.3.x
 # mkdir -p logs
 # Rscript create_metadata.R -p "sra" > logs/create_metadata_sra_log.txt 2>&1
 # Rscript create_metadata.R -p "gtex" > logs/create_metadata_gtex_log.txt 2>&1
 
 library('getopt')
+library('GenomicRanges')
+library('recount')
 
 ## Specify parameters
 spec <- matrix(c(
@@ -130,6 +132,23 @@ find_geo <- function(run) {
 # find_geo('DRR000897')
 metadata$geo_accession <- sapply(metadata$run, find_geo)
 
+## Find some information from geo
+extract_geo <- function(geoid) {
+    if(is.na(geoid)) {
+        res <- DataFrame('title' = NA, 'characteristics' = CharacterList(NA))
+    } else {
+        info <- geo_info(geoid)
+        res <- DataFrame('title' = info$title,
+            'characteristics' = info$characteristics)
+    }
+    return(res)
+}
+geo <- do.call(rbind, lapply(metadata$geo_accession, extract_geo))
+
+## Combine information (metadata will now be a DataFrame object)
+metadata <- cbind(metadata, geo)
+
+
 ## Find bigwig files
 if(opt$project == 'sra') {
     bigwigs <- system(paste0('cut -f 5 -d " " /dcl01/leek/data/recount-website/bwtool/bwtool_cmds_',
@@ -172,10 +191,10 @@ print('First couple of rows')
 head(metadata)
 
 print('Number of NAs per column')
-sapply(metadata, function(x) { sum(is.na(x)) })
+sapply(metadata, function(x) { sum(sum(is.na(x))) })
 
 print('Percent of NAs per column')
-sapply(metadata, function(x) { sum(is.na(x)) }) / nrow(metadata) * 100
+sapply(metadata, function(x) { sum(sum(is.na(x))) }) / nrow(metadata) * 100
 
 ## Save a file per project ID
 dir.create(paste0('project_metadata_', opt$project), showWarnings = FALSE)

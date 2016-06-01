@@ -1,6 +1,7 @@
 ## Load libraries
 library('getopt')
 library('BiocParallel')
+library('GenomicRanges')
 
 ## Specify parameters
 spec <- matrix(c(

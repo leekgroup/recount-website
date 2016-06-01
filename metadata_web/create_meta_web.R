@@ -5,6 +5,7 @@
 # Rscript create_meta_web.R -p "gtex" > logs/create_meta_web_gtex_log.txt 2>&1
 
 library('getopt')
+library('GenomicRanges')
 
 ## Specify parameters
 spec <- matrix(c(
