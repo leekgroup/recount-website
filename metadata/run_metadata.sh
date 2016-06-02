@@ -34,7 +34,7 @@ sname="${PROJECT}.metadata"
 cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
-#$ -m a
+#$ -m e
 #$ -l mem_free=130G,h_vmem=150G
 #$ -N ${sname}
 
