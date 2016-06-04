@@ -119,14 +119,14 @@ colnames(metadata)[colnames(metadata) == 'sharq_tissue'] <- 'sharq_beta_tissue'
 colnames(metadata)[colnames(metadata) == 'sharq_cell_type'] <- 'sharq_beta_cell_type'
 
 ## Find GEO number
-find_geo <- function(run) {
-    geo <- system(paste0("curl \"http://www.ncbi.nlm.nih.gov/gds?LinkName=sra_gds&from_uid=$(curl \"http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=sra&term=", run ,"\" | sed -n 's|[^<]*<Id>\\([^<]*\\)</Id>[^<]*|\\1|gp')\" | grep Series | awk -F 'acc\\\\=GSM' '{print \"GSM\" $2}' | grep -vFx GSM | awk -F '\"' '{print $1}'"), intern = TRUE)
-    if(length(geo) == 0) {
-        return(NA)
-    } else {
-        return(geo)
-    }
-}
+#find_geo <- function(run) {
+#    geo <- system(paste0("curl \"http://www.ncbi.nlm.nih.gov/gds?LinkName=sra_gds&from_uid=$(curl \"http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=sra&term=", run ,"\" | sed -n 's|[^<]*<Id>\\([^<]*\\)</Id>[^<]*|\\1|gp')\" | grep Series | awk -F 'acc\\\\=GSM' '{print \"GSM\" $2}' | grep -vFx GSM | awk -F '\"' '{print $1}'"), intern = TRUE)
+#    if(length(geo) == 0) {
+#        return(NA)
+#    } else {
+#        return(geo)
+#    }
+#}
 
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
