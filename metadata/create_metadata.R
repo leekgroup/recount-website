@@ -7,6 +7,7 @@
 library('getopt')
 library('GenomicRanges')
 library('recount')
+library('XML')
 
 ## Specify parameters
 spec <- matrix(c(
@@ -130,7 +131,7 @@ colnames(metadata)[colnames(metadata) == 'sharq_cell_type'] <- 'sharq_beta_cell_
 
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
-metadata$geo_accession <- sapply(metadata$run, find_geo)
+metadata$geo_accession <- sapply(metadata$run, find_geo, verbose = TRUE)
 
 ## Find some information from geo
 extract_geo <- function(geoid) {
