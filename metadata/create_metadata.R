@@ -131,7 +131,17 @@ colnames(metadata)[colnames(metadata) == 'sharq_cell_type'] <- 'sharq_beta_cell_
 
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
-metadata$geo_accession <- sapply(metadata$run, find_geo, verbose = TRUE)
+metadata$geo_accession <- sapply(metadata$run, function(run) {
+    res <- 'trying'
+    while(res == 'trying') {
+        res <- tryCatch(find_geo(run, verbose = TRUE), error = function(e) {
+            Sys.sleep(round(runif(1, max = 6), 0))
+            return('trying')
+        })
+        if(is.na(res)) break
+    }
+    return(res)
+})
 
 ## Find some information from geo
 extract_geo <- function(geoid) {
