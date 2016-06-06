@@ -135,7 +135,7 @@ metadata$geo_accession <- sapply(metadata$run, function(run) {
     res <- 'trying'
     while(res == 'trying') {
         res <- tryCatch(find_geo(run, verbose = TRUE), error = function(e) {
-            Sys.sleep(round(runif(1, max = 6), 0))
+            Sys.sleep(round(runif(1, min = 1, max = 6), 0))
             return('trying')
         })
         if(is.na(res)) break
