@@ -8,6 +8,7 @@ library('getopt')
 library('GenomicRanges')
 library('recount')
 library('BiocParallel')
+library('parallel')
 library('XML')
 
 ## Specify parameters
@@ -197,7 +198,7 @@ extract_geo <- function(id) {
     }
     return(res)
 }
-geo <- do.call(rbind, bplapply(metadata$geo_accession, extract_geo, BPPARAM = bp))
+geo <- do.call(rbind, mclapply(metadata$geo_accession, extract_geo, mc.cores = 25))
 
 ## Combine information (metadata will now be a DataFrame object)
 metadata <- cbind(metadata, geo)
