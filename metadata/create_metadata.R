@@ -7,6 +7,7 @@
 library('getopt')
 library('GenomicRanges')
 library('recount')
+library('BiocParallel')
 library('XML')
 
 ## Specify parameters
@@ -119,6 +120,11 @@ if(opt$project == 'sra') {
 colnames(metadata)[colnames(metadata) == 'sharq_tissue'] <- 'sharq_beta_tissue'
 colnames(metadata)[colnames(metadata) == 'sharq_cell_type'] <- 'sharq_beta_cell_type'
 
+## Save project ids in a file
+write.table(unique(metadata$project), file = paste0('project_ids_',
+    opt$project, '.txt'), sep = '\t', row.names = FALSE, quote = FALSE,
+    col.names = FALSE)
+
 ## Find GEO number
 #find_geo <- function(run) {
 #    geo <- system(paste0("curl \"http://www.ncbi.nlm.nih.gov/gds?LinkName=sra_gds&from_uid=$(curl \"http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=sra&term=", run ,"\" | sed -n 's|[^<]*<Id>\\([^<]*\\)</Id>[^<]*|\\1|gp')\" | grep Series | awk -F 'acc\\\\=GSM' '{print \"GSM\" $2}' | grep -vFx GSM | awk -F '\"' '{print $1}'"), intern = TRUE)
@@ -129,32 +135,43 @@ colnames(metadata)[colnames(metadata) == 'sharq_cell_type'] <- 'sharq_beta_cell_
 #    }
 #}
 
-## Not all cases have GEO id's, like:
-# find_geo('DRR000897')
-metadata$geo_accession <- sapply(metadata$run, function(run) {
+runMyFun <- function(f, ...) {
     res <- 'trying'
     while(res == 'trying') {
-        res <- tryCatch(find_geo(run, verbose = TRUE), error = function(e) {
-            Sys.sleep(round(runif(1, min = 1, max = 6), 0))
+        res <- tryCatch(f(...), error = function(e) {
+            Sys.sleep(round(runif(1, min =1 , max = 6), 0))
             return('trying')
         })
         if(is.na(res)) break
     }
     return(res)
-})
+}
+
+bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
+
+## Not all cases have GEO id's, like:
+# find_geo('DRR000897')
+metadata$geo_accession <- unlist(bplapply(metadata$run, function(runid) {
+    runMyFun(find_geo, run = runid, verbose = TRUE)
+}, BPPARAM = bp), use.names = FALSE)
+
+
+## Save the metadata (backup with geo info)
+save(metadata, file = paste0('metadata_', opt$project, '.Rdata'))
+
 
 ## Find some information from geo
-extract_geo <- function(geoid) {
-    if(is.na(geoid)) {
+extract_geo <- function(id) {
+    if(is.na(id)) {
         res <- DataFrame('title' = NA, 'characteristics' = CharacterList(NA))
     } else {
-        info <- geo_info(geoid)
+        info <- runMyFun(geo_info, geoid = id, verbose = TRUE)
         res <- DataFrame('title' = info$title,
             'characteristics' = info$characteristics)
     }
     return(res)
 }
-geo <- do.call(rbind, lapply(metadata$geo_accession, extract_geo))
+geo <- do.call(rbind, bplapply(metadata$geo_accession, extract_geo, BPPARAM = bp))
 
 ## Combine information (metadata will now be a DataFrame object)
 metadata <- cbind(metadata, geo)
@@ -185,7 +202,7 @@ k <- match(metadata$run, names(tsv))
 stopifnot(sum(is.na(k)) == sum(is.na(metadata$auc)))
 metadata$tsv_path <- tsv[k]
 
-## Save the metadata
+## Save the metadata (final version)
 save(metadata, file = paste0('metadata_', opt$project, '.Rdata'))
 
 ## Explore metadata
@@ -223,11 +240,6 @@ xx <- sapply(unique(metadata_clean$project), function(project) {
         opt$project), paste0(project, '.tsv')), sep = '\t', row.names = FALSE,
         quote = FALSE)
 })
-
-## Save project ids in a file
-write.table(unique(metadata_clean$project), file = paste0('project_ids_',
-    opt$project, '.txt'), sep = '\t', row.names = FALSE, quote = FALSE,
-    col.names = FALSE)
 
 ## Reproducibility info
 proc.time()
