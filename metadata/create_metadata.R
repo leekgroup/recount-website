@@ -26,9 +26,10 @@ if (!is.null(opt$help)) {
 
 if(opt$project == 'sra') {
     ## Load sra info
+    ## ignoring GSM column since it has a bit of everything on it, not only GEO
+    ## accesion ids
     metadata <- read.table('/dcl01/leek/data/gtex_work/runs/sra/v2/recount2_metadata.tsv',
-    header = TRUE, sep = '\t', stringsAsFactors = FALSE
-    )
+    header = TRUE, sep = '\t', stringsAsFactors = FALSE, quote = "", colClasses = rep(c('character', 'integer', 'numeric', 'integer', 'numeric', 'character', 'NULL'), c(4, 2, 1, 3, 1, 5, 1)))
     colnames(metadata) <- tolower(colnames(metadata))
     colnames(metadata) <- gsub('\\.', '_', colnames(metadata))
 
@@ -124,6 +125,31 @@ colnames(metadata)[colnames(metadata) == 'sharq_cell_type'] <- 'sharq_beta_cell_
 write.table(unique(metadata$project), file = paste0('project_ids_',
     opt$project, '.txt'), sep = '\t', row.names = FALSE, quote = FALSE,
     col.names = FALSE)
+    
+## Find bigwig files
+if(opt$project == 'sra') {
+    bigwigs <- system(paste0('cut -f 5 -d " " /dcl01/leek/data/recount-website/bwtool/bwtool_cmds_',
+        opt$project, '.txt'), intern = TRUE)
+    names(bigwigs) <- gsub('.*coverage_bigwigs/|.bw', '', bigwigs)
+    j <- match(metadata$run, names(bigwigs))
+
+    ## Matches number of bigwig files
+    stopifnot(sum(is.na(j)) == sum(is.na(metadata$auc)))
+    metadata$bigwig_path <- bigwigs[j]
+    metadata$bigwig_file <- gsub('.*coverage_bigwigs/', '',
+        metadata$bigwig_path)
+}
+
+
+## Locate tsv files
+tsv_dir <- ifelse(opt$project == 'sra', '/dcl01/leek/data/recount2/coverage', '/dcl01/leek/data/recount2/coverage_gtex')
+tsv <- dir(tsv_dir, pattern = 'tsv', full.names = TRUE)
+names(tsv) <- gsub('.sum.tsv', '', dir(tsv_dir, pattern = 'tsv'))
+k <- match(metadata$run, names(tsv))
+
+## Number of tsv files matches number of bigwig files
+stopifnot(sum(is.na(k)) == sum(is.na(metadata$auc)))
+metadata$tsv_path <- tsv[k]
 
 ## Find GEO number
 #find_geo <- function(run) {
@@ -175,32 +201,6 @@ geo <- do.call(rbind, bplapply(metadata$geo_accession, extract_geo, BPPARAM = bp
 
 ## Combine information (metadata will now be a DataFrame object)
 metadata <- cbind(metadata, geo)
-
-
-## Find bigwig files
-if(opt$project == 'sra') {
-    bigwigs <- system(paste0('cut -f 5 -d " " /dcl01/leek/data/recount-website/bwtool/bwtool_cmds_',
-        opt$project, '.txt'), intern = TRUE)
-    names(bigwigs) <- gsub('.*coverage_bigwigs/|.bw', '', bigwigs)
-    j <- match(metadata$run, names(bigwigs))
-
-    ## Matches number of bigwig files
-    stopifnot(sum(is.na(j)) == sum(is.na(metadata$auc)))
-    metadata$bigwig_path <- bigwigs[j]
-    metadata$bigwig_file <- gsub('.*coverage_bigwigs/', '',
-        metadata$bigwig_path)
-}
-
-
-## Locate tsv files
-tsv_dir <- ifelse(opt$project == 'sra', '/dcl01/leek/data/recount2/coverage', '/dcl01/leek/data/recount2/coverage_gtex')
-tsv <- dir(tsv_dir, pattern = 'tsv', full.names = TRUE)
-names(tsv) <- gsub('.sum.tsv', '', dir(tsv_dir, pattern = 'tsv'))
-k <- match(metadata$run, names(tsv))
-
-## Number of tsv files matches number of bigwig files
-stopifnot(sum(is.na(k)) == sum(is.na(metadata$auc)))
-metadata$tsv_path <- tsv[k]
 
 ## Save the metadata (final version)
 save(metadata, file = paste0('metadata_', opt$project, '.Rdata'))
