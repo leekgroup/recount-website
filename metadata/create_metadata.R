@@ -118,6 +118,28 @@ if(opt$project == 'sra') {
     }
     metadata <- m
     
+    ## Read in public data available via http://www.gtexportal.org/home/datasets
+    ## after you register at the GTEx portal
+    meta <- read.table('GTEx_Data_V6_Annotations_SampleAttributesDS.txt',
+        header = TRUE, sep = '\t', quote = "", stringsAsFactors = FALSE)
+       
+    ## Load previous GTEx data
+      load('/dcl01/leek/data/gtex_work/runs/gtex/DER_analysis/pheno/pheno_missing_less_10.Rdata')
+    ## Match the tables
+    map1 <- match(metadata$run, pheno$Run)
+    pheno <- pheno[map1, ]
+    map2 <- match(pheno$SAMPID, meta$SAMPID)
+    meta <- meta[map2, ]
+    stopifnot(nrow(meta) == nrow(metadata))
+    
+    ## Lower case the variable names
+    colnames(meta) <- tolower(colnames(meta))
+    
+    ## Check that none of the metadata columns are duplicated
+    stopifnot(all(!colnames(metadata) %in% colnames(meta)))
+    
+    ## Add the information
+    metadata <- cbind(metadata, meta)
 } else {
     stop("Invalid 'project' choice. Use gtex or sra")
 }
@@ -181,10 +203,16 @@ runMyFun <- function(f, ...) {
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
 if(!'geo_accession' %in% colnames(metadata)) {
-    bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
-    metadata$geo_accession <- unlist(bplapply(metadata$run, function(runid) {
-        runMyFun(find_geo, run = runid, verbose = TRUE)
-    }, BPPARAM = bp), use.names = FALSE)
+    if(opt$project == 'gtex') {
+        metadata$geo_accession <- NA
+    } else {
+        bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
+        metadata$geo_accession <- unlist(bplapply(metadata$run,
+            function(runid) {
+                runMyFun(find_geo, run = runid, verbose = TRUE)
+            }, BPPARAM = bp),
+        use.names = FALSE)
+    }
 }
 
 
