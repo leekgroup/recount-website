@@ -30,7 +30,7 @@ if(opt$project == 'sra') {
     ## ignoring GSM column since it has a bit of everything on it, not only GEO
     ## accesion ids
     metadata <- read.table('/dcl01/leek/data/gtex_work/runs/sra/v2/recount2_metadata.tsv',
-    header = TRUE, sep = '\t', stringsAsFactors = FALSE, quote = "", colClasses = rep(c('character', 'integer', 'numeric', 'integer', 'numeric', 'character', 'NULL'), c(4, 2, 1, 3, 1, 5, 1)))
+    header = TRUE, sep = '\t', stringsAsFactors = FALSE, quote = "", colClasses = rep(c('character', 'integer', 'numeric', 'integer', 'numeric', 'character', 'character'), c(4, 2, 1, 3, 1, 5, 1)))
     colnames(metadata) <- tolower(colnames(metadata))
     colnames(metadata) <- gsub('\\.', '_', colnames(metadata))
 
@@ -47,6 +47,10 @@ if(opt$project == 'sra') {
     i <- match(metadata$run, sra$run)
     stopifnot(identical(metadata$run, sra$run[i]))
     metadata$avg_read_length <- sra$avglength[i]
+    metadata$geo_accesion <- NA
+    i <- grepl('GSM', metadata$gsm)
+    metadata$geo_accesion[i] <- metadata$gsm[i]
+    metadata <- metadata[, -which(colnames(metadata) == 'gsm')]
 } else if (opt$project == 'gtex') {    
     ## Load SRA metadata (metadata object)
     stopifnot(file.exists('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'))
@@ -178,9 +182,11 @@ bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
 
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
-metadata$geo_accession <- unlist(bplapply(metadata$run, function(runid) {
-    runMyFun(find_geo, run = runid, verbose = TRUE)
-}, BPPARAM = bp), use.names = FALSE)
+if(!'geo_accession' %in% colnames(metadata)) {
+    metadata$geo_accession <- unlist(bplapply(metadata$run, function(runid) {
+        runMyFun(find_geo, run = runid, verbose = TRUE)
+    }, BPPARAM = bp), use.names = FALSE)
+}
 
 
 ## Save the metadata (backup with geo info)
