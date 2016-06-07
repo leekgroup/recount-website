@@ -47,9 +47,9 @@ if(opt$project == 'sra') {
     i <- match(metadata$run, sra$run)
     stopifnot(identical(metadata$run, sra$run[i]))
     metadata$avg_read_length <- sra$avglength[i]
-    metadata$geo_accesion <- NA
+    metadata$geo_accession <- NA
     i <- grepl('GSM', metadata$gsm)
-    metadata$geo_accesion[i] <- metadata$gsm[i]
+    metadata$geo_accession[i] <- metadata$gsm[i]
     metadata <- metadata[, -which(colnames(metadata) == 'gsm')]
 } else if (opt$project == 'gtex') {    
     ## Load SRA metadata (metadata object)
@@ -178,11 +178,10 @@ runMyFun <- function(f, ...) {
     return(res)
 }
 
-bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
-
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
 if(!'geo_accession' %in% colnames(metadata)) {
+    bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
     metadata$geo_accession <- unlist(bplapply(metadata$run, function(runid) {
         runMyFun(find_geo, run = runid, verbose = TRUE)
     }, BPPARAM = bp), use.names = FALSE)
