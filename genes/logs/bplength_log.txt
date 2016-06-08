@@ -1,5 +1,6 @@
 Loading required package: colorout
 Loading required package: methods
+Loading required package: stats4
 Loading required package: BiocGenerics
 Loading required package: parallel
 
@@ -25,7 +26,6 @@ The following objects are masked from ‘package:base’:
     unique, unsplit
 
 Loading required package: S4Vectors
-Loading required package: stats4
 
 Attaching package: ‘S4Vectors’
 
@@ -35,31 +35,47 @@ The following objects are masked from ‘package:base’:
 
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
+Loading required package: AnnotationDbi
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+'select()' returned 1:1 mapping between keys and columns
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
        0     2696    15830    60670    51230 36620000 
    user  system elapsed 
-  4.352   0.550   5.177 
-2016-04-22 10:35:24
+  6.165   1.263   9.768 
+2016-06-08 17:23:38
 Session info -----------------------------------------------------------------------------------------------------------
- setting  value                                   
- version  R version 3.3.0 beta (2016-04-21 r70529)
- system   x86_64, linux-gnu                       
- ui       X11                                     
- language (EN)                                    
- collate  en_US.UTF-8                             
- tz       <NA>                                    
- date     2016-04-22                              
+ setting  value                                      
+ version  R version 3.3.0 Patched (2016-05-20 r70657)
+ system   x86_64, linux-gnu                          
+ ui       X11                                        
+ language (EN)                                       
+ collate  en_US.UTF-8                                
+ tz       <NA>                                       
+ date     2016-06-08                                 
 
 Packages ---------------------------------------------------------------------------------------------------------------
  package       * version date       source                            
- BiocGenerics  * 0.17.5  2016-04-18 Bioconductor                      
- colorout      * 1.1-2   2016-04-02 Github (jalvesaq/colorout@f96c00c)
- devtools        1.10.0  2016-01-23 CRAN (R 3.3.0)                    
+ AnnotationDbi * 1.35.3  2016-06-07 Bioconductor                      
+ Biobase       * 2.32.0  2016-05-05 Bioconductor                      
+ BiocGenerics  * 0.18.0  2016-05-08 Bioconductor                      
+ colorout      * 1.1-2   2016-05-08 Github (jalvesaq/colorout@6538970)
+ DBI             0.4-1   2016-05-08 CRAN (R 3.3.0)                    
+ devtools        1.11.1  2016-04-21 CRAN (R 3.3.0)                    
  digest          0.6.9   2016-01-08 CRAN (R 3.3.0)                    
- GenomeInfoDb  * 1.7.6   2016-04-02 Bioconductor                      
- GenomicRanges * 1.23.27 2016-04-18 Bioconductor                      
- IRanges       * 2.5.46  2016-04-18 Bioconductor                      
+ GenomeInfoDb  * 1.8.1   2016-06-08 Bioconductor                      
+ GenomicRanges * 1.25.1  2016-06-07 Bioconductor                      
+ IRanges       * 2.7.2   2016-06-07 Bioconductor                      
  memoise         1.0.0   2016-01-29 CRAN (R 3.3.0)                    
- S4Vectors     * 0.9.51  2016-04-18 Bioconductor                      
- XVector         0.11.8  2016-04-11 Bioconductor                      
- zlibbioc        1.17.1  2016-03-28 Bioconductor                      
+ org.Hs.eg.db  * 3.3.0   2016-05-08 Bioconductor                      
+ RSQLite         1.0.0   2014-10-25 CRAN (R 3.3.0)                    
+ S4Vectors     * 0.11.3  2016-06-07 Bioconductor                      
+ withr           1.0.1   2016-02-04 CRAN (R 3.3.0)                    
+ XVector         0.12.0  2016-05-08 Bioconductor                      
+ zlibbioc        1.18.0  2016-05-05 Bioconductor                      
