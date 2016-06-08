@@ -35,8 +35,8 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m e
-#$ -l mem_free=3G,h_vmem=4G
-#$ -pe local 25
+#$ -l mem_free=10G,h_vmem=11G
+#$ -pe local 3
 #$ -N ${sname}
 
 echo "**** Job starts ****"

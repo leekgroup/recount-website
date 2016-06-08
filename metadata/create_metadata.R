@@ -206,10 +206,10 @@ if(!'geo_accession' %in% colnames(metadata)) {
     if(opt$project == 'gtex') {
         metadata$geo_accession <- NA
     } else {
-        bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
+        bp <- MulticoreParam(workers = 3, outfile = Sys.getenv('SGE_STDERR_PATH'))
         metadata$geo_accession <- unlist(bplapply(metadata$run,
             function(runid) {
-                runMyFun(find_geo, run = runid, verbose = TRUE)
+                runMyFun(find_geo, run = runid, verbose = TRUE, sleep = 1)
             }, BPPARAM = bp),
         use.names = FALSE)
     }
@@ -226,15 +226,14 @@ extract_geo <- function(id) {
     if(is.na(id)) {
         res <- DataFrame('title' = NA, 'characteristics' = CharacterList(NA))
     } else {
-        Sys.sleep(sample(1:2, 1, p = c(0.8, 0.2)))
         info <- runMyFun(geo_info, geoid = id, verbose = TRUE,
-            desdir = paste0('geo_info_', opt$project))
+            destdir = paste0('geo_info_', opt$project), sleep = 1)
         res <- DataFrame('title' = info$title,
             'characteristics' = info$characteristics)
     }
     return(res)
 }
-geo <- do.call(rbind, mclapply(metadata$geo_accession, extract_geo, mc.cores = 25))
+geo <- do.call(rbind, mclapply(metadata$geo_accession, extract_geo, mc.cores = 3))
 
 ## Combine information (metadata will now be a DataFrame object)
 metadata <- cbind(metadata, geo)
