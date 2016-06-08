@@ -2,6 +2,7 @@
 library('getopt')
 library('tools')
 library('Hmisc')
+library('GenomicRanges')
 
 ## Specify parameters
 spec <- matrix(c(
