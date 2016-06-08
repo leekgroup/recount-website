@@ -221,11 +221,14 @@ save(metadata, file = paste0('metadata_', opt$project, '.Rdata'))
 
 
 ## Find some information from geo
+dir.create(paste0('geo_info_', opt$project))
 extract_geo <- function(id) {
     if(is.na(id)) {
         res <- DataFrame('title' = NA, 'characteristics' = CharacterList(NA))
     } else {
-        info <- runMyFun(geo_info, geoid = id, verbose = TRUE)
+        Sys.sleep(sample(1:2, 1, p = c(0.8, 0.2)))
+        info <- runMyFun(geo_info, geoid = id, verbose = TRUE,
+            desdir = paste0('geo_info_', opt$project))
         res <- DataFrame('title' = info$title,
             'characteristics' = info$characteristics)
     }
