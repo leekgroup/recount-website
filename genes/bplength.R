@@ -14,6 +14,20 @@ load('ucsc-knowngene-hg38-exons.Rdata')
 
 ## Add length of reduced exons by gene
 genes$bp_length <- sum(width(exons))
+
+## Add gene symbol
+## Load required library
+library('org.Hs.eg.db')
+
+## Extract ENTREZ gene ids
+entrez <- names(genes)
+
+## Find the gene information we are interested in
+gene_info <- select(org.Hs.eg.db, entrez, c('ENTREZID', 'GENENAME', 'SYMBOL'),
+    'ENTREZID')
+
+genes$symbol <- gene_info$SYMBOL
+
 save(genes, file = 'ucsc-knowngene-hg38-genes-bp-length.Rdata')
 
 ## See length difference summary
