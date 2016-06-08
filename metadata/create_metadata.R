@@ -98,7 +98,7 @@ if(opt$project == 'sra') {
     ## Find reads_downloaded
     reads_info <- read.csv('/dcl01/leek/data/gtex_work/runs/gtex/SraRunInfo.csv', stringsAsFactors = FALSE)
     map_reads <- match(pheno$run, reads_info$Run)
-    ## All GTEx samples are paired end (although SRA mis-repors 18 of them as 
+    ## All GTEx samples are paired end (although SRA mis-reports 18 of them as 
     ## single-end.
     pheno$read_count_as_reported_by_sra <- reads_info$spots[map_reads] * 2
     
