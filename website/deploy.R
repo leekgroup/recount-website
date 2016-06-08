@@ -10,6 +10,11 @@ if(file.exists('../metadata_web/meta_web_gtex.Rdata')) {
 save(meta_web, file = 'meta_web.Rdata')
 
 
+dir.create('www', showWarnings = FALSE)
+system('cp ../genes/ucsc-knowngene-hg38-exons.Rdata www/')
+system('cp ../genes/ucsc-knowngene-hg38-genes-bp-length.Rdata www/')
+
+
 library('rsconnect')
 load('.deploy_info.Rdata')
 rsconnect::setAccountInfo(name=deploy_info$name, token=deploy_info$token,
