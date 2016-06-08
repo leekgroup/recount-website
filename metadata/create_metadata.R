@@ -1,8 +1,4 @@
 ## Prepare metadata
-# module load R/3.3.x
-# mkdir -p logs
-# Rscript create_metadata.R -p "sra" > logs/create_metadata_sra_log.txt 2>&1
-# Rscript create_metadata.R -p "gtex" > logs/create_metadata_gtex_log.txt 2>&1
 
 library('getopt')
 library('GenomicRanges')
@@ -50,8 +46,14 @@ if(opt$project == 'sra') {
     metadata$geo_accession <- NA
     i <- grepl('GSM', metadata$gsm)
     metadata$geo_accession[i] <- metadata$gsm[i]
+    
+    ## Fix some column names
+    colnames(metadata)[colnames(metadata) == 'reads_aligned'] <- 'reads_downloaded'
+    colnames(metadata)[colnames(metadata) == 'proportion_of_reads_reported_by_sra_aligned'] <- 'proportion_of_reads_reported_by_sra_downloaded'
+    
+    ## Drop GSM
     metadata <- metadata[, -which(colnames(metadata) == 'gsm')]
-} else if (opt$project == 'gtex') {    
+} else if (opt$project == 'gtex') {
     ## Load SRA metadata (metadata object)
     stopifnot(file.exists('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'))
     load('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata')
@@ -65,11 +67,10 @@ if(opt$project == 'sra') {
     pheno$avg_read_length <- pheno$avglength
     pheno$bigwig_path <- pheno$bigwigpath
     pheno$bigwig_file <- gsub('.*coverage_bigwigs/', '', pheno$bigwigpath)
-    pheno$paired_end <- pheno$librarylayout == 'PAIRED'
+    pheno$paired_end <- TRUE ## They are all paired-end
     pheno$project <- as.character(pheno$srastudy)
     pheno$sample <- as.character(pheno$sample)
     pheno$experiment <- as.character(pheno$experiment)
-    pheno$proportion_of_reads_reported_by_sra_aligned <- pheno$smmaprt
     
     
     ## Get mapped reads by Rail-RNA
@@ -91,21 +92,37 @@ if(opt$project == 'sra') {
     counts <- counts[map, ]
     stopifnot(identical(counts$X, gsub('.bw', '', pheno$bigwig_file)))
     
-    ## Find number of reads (for paired-end samples, that's 2x)
-    counts$n_reads <- as.numeric(sapply(strsplit(counts$total.reads, ','),
-        '[[', 1))
-    
-    pheno$read_count_as_reported_by_sra <- counts$n_reads
-    pheno$reads_aligned <- pheno$read_count_as_reported_by_sra * pheno$proportion_of_reads_reported_by_sra_aligned
+    ## Save mapped read counts (from Rail-RNA)
     pheno$mapped_read_count <- counts$totalMapped
     
-    ## Mis-reported?
-    ## See https://github.com/nellore/runs/blob/93c80b34f9e09c84831d4ffd652c3742dd804487/sra/v2/recount2_metadata.py#L134-L148
-    ratio <- pheno$mapped_read_count / pheno$read_count_as_reported_by_sra
-    summary(ratio)
-    pheno$sra_misreported_paired_end <- ratio == 0.5 | ratio > 1
+    ## Find reads_downloaded
+    reads_info <- read.csv('/dcl01/leek/data/gtex_work/runs/gtex/SraRunInfo.csv', stringsAsFactors = FALSE)
+    map_reads <- match(pheno$run, reads_info$Run)
+    ## All GTEx samples are paired end (although SRA mis-repors 18 of them as 
+    ## single-end.
+    pheno$read_count_as_reported_by_sra <- reads_info$spots[map_reads] * 2
+    
+    ## For the complete samples, reads_downloaded is the same as
+    ## read_count_as_reported_by_sra
+    pheno$reads_downloaded <- pheno$read_count_as_reported_by_sra
+    pheno$proportion_of_reads_reported_by_sra_downloaded <- 1
+    
+    ## Label mis-reported samples
+    pheno$sra_misreported_paired_end <- reads_info$LibraryLayout[map_reads] == 'SINGLE'
+    
+    ## Fix the incomplete samples
+    incomplete <- read.table('/dcl01/leek/data/gtex_work/runs/gtex/incomplete.tsv', sep = '\t', header = TRUE, stringsAsFactors = FALSE)
+    colnames(incomplete) <- tolower(colnames(incomplete))
+    colnames(incomplete) <- gsub('\\.', '_', colnames(incomplete))
+    map_inc <- match(incomplete$run, pheno$run)
+    
+    ## Now actually fix them
+    pheno$proportion_of_reads_reported_by_sra_downloaded[map_inc] <-  incomplete$proportion_of_reads_reported_by_sra_aligned
+    pheno$reads_downloaded[map_inc] <- incomplete$reads_aligned
+    pheno$read_count_as_reported_by_sra[map_inc] <- incomplete$read_count_as_reported_by_sra
     
     
+        
     ## Store column names
     sra <- colnames(metadata)
     gtex <- colnames(pheno)
@@ -122,14 +139,9 @@ if(opt$project == 'sra') {
     ## after you register at the GTEx portal
     meta <- read.table('GTEx_Data_V6_Annotations_SampleAttributesDS.txt',
         header = TRUE, sep = '\t', quote = "", stringsAsFactors = FALSE)
-       
-    ## Load previous GTEx data
-      load('/dcl01/leek/data/gtex_work/runs/gtex/DER_analysis/pheno/pheno_missing_less_10.Rdata')
-    ## Match the tables
-    map1 <- match(metadata$run, pheno$Run)
-    pheno <- pheno[map1, ]
-    map2 <- match(pheno$SAMPID, meta$SAMPID)
-    meta <- meta[map2, ]
+    
+    map_meta <- match(pheno$sampid, meta$SAMPID)
+    meta <- meta[map_meta, ]
     stopifnot(nrow(meta) == nrow(metadata))
     
     ## Lower case the variable names
@@ -178,16 +190,7 @@ k <- match(metadata$run, names(tsv))
 stopifnot(sum(is.na(k)) == sum(is.na(metadata$auc)))
 metadata$tsv_path <- tsv[k]
 
-## Find GEO number
-#find_geo <- function(run) {
-#    geo <- system(paste0("curl \"http://www.ncbi.nlm.nih.gov/gds?LinkName=sra_gds&from_uid=$(curl \"http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=sra&term=", run ,"\" | sed -n 's|[^<]*<Id>\\([^<]*\\)</Id>[^<]*|\\1|gp')\" | grep Series | awk -F 'acc\\\\=GSM' '{print \"GSM\" $2}' | grep -vFx GSM | awk -F '\"' '{print $1}'"), intern = TRUE)
-#    if(length(geo) == 0) {
-#        return(NA)
-#    } else {
-#        return(geo)
-#    }
-#}
-
+## Function for re-running in case something fails
 runMyFun <- function(f, ...) {
     res <- 'trying'
     while(res == 'trying') {
@@ -200,6 +203,7 @@ runMyFun <- function(f, ...) {
     return(res)
 }
 
+## Find GEO accession id
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
 if(!'geo_accession' %in% colnames(metadata)) {
@@ -215,12 +219,11 @@ if(!'geo_accession' %in% colnames(metadata)) {
     }
 }
 
-
-## Save the metadata (backup with geo info)
+## Save the metadata (backup with geo accession ids)
 save(metadata, file = paste0('metadata_', opt$project, '.Rdata'))
 
 
-## Find some information from geo
+## Find some sample information from geo
 dir.create(paste0('geo_info_', opt$project), showWarnings = FALSE)
 extract_geo <- function(id) {
     if(is.na(id)) {
