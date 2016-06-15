@@ -44,3 +44,8 @@ for filename in sorted(glob(os.path.join(junctions_path, '*.gz'))):
     if project != current_project:
         project_dir = os.path.join(root_dir, project)
     os.link(filename, os.path.join(project_dir, basename))
+
+os.link(
+        os.path.join(junctions_path, 'sample_ids.tsv'),
+        os.path.join(root_dir, 'sample_ids.tsv')
+    )
