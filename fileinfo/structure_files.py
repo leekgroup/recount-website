@@ -6,11 +6,14 @@ Symlinks to create directory structure for syncing Recount2 files with Amazon
 Cloud Drive. Requires upload_table.tsv (in current directory).
 
 Arg 1: root dir for files to upload
+Arg 2: location of output of junctions_by_project.py and add_knowngene.py
 """
 import sys
 import os
+from glob import glob
 
 root_dir = sys.argv[1]
+junctions_path = sys.argv[2]
 
 # Create root dir if it doesn't exist
 try:
@@ -33,3 +36,11 @@ for line in sys.stdin:
         os.link(filename, os.path.join(bw_dir, basename))
     else:
         os.link(filename, os.path.join(project_dir, basename))
+
+current_project = None
+for filename in sorted(glob(os.path.join(sys.argv[2], '*.gz'))):
+    basename = os.path.basename(filename)
+    project = basename.partition('.')[0]
+    if project != current_project:
+        project_dir = os.path.join(root_dir, project)
+    os.link(filename, os.path.join(project_dir, basename))
