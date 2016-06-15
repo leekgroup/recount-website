@@ -38,7 +38,7 @@ for line in sys.stdin:
         os.link(filename, os.path.join(project_dir, basename))
 
 current_project = None
-for filename in sorted(glob(os.path.join(sys.argv[2], '*.gz'))):
+for filename in sorted(glob(os.path.join(junctions_path, '*.gz'))):
     basename = os.path.basename(filename)
     project = basename.partition('.')[0]
     if project != current_project:
