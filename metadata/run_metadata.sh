@@ -35,7 +35,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m e
-#$ -l rnet mem_free=10G,h_vmem=11G
+#$ -l rnet,mem_free=10G,h_vmem=11G
 #$ -pe local 3
 #$ -N ${sname}
 
