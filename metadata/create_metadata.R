@@ -210,7 +210,8 @@ if(!'geo_accession' %in% colnames(metadata)) {
     if(opt$project == 'gtex') {
         metadata$geo_accession <- NA
     } else {
-        bp <- MulticoreParam(workers = 3, outfile = Sys.getenv('SGE_STDERR_PATH'))
+        #bp <- MulticoreParam(workers = 3, outfile = Sys.getenv('SGE_STDERR_PATH'))
+        bp <- SerialParam()
         metadata$geo_accession <- unlist(bplapply(metadata$run,
             function(runid) {
                 runMyFun(find_geo, run = runid, verbose = TRUE, sleep = 1)
