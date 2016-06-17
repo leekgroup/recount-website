@@ -192,13 +192,12 @@ metadata$tsv_path <- tsv[k]
 
 ## Function for re-running in case something fails
 runMyFun <- function(f, ...) {
-    res <- 'trying'
-    while(res == 'trying') {
+    res <- FALSE
+    while(!is(res, 'DataFrame')) {
         res <- tryCatch(f(...), error = function(e) {
             Sys.sleep(round(runif(1, min =1 , max = 6), 0))
             return('trying')
         })
-        if(is.na(res)) break
     }
     return(res)
 }
@@ -210,13 +209,7 @@ if(!'geo_accession' %in% colnames(metadata)) {
     if(opt$project == 'gtex') {
         metadata$geo_accession <- NA
     } else {
-        #bp <- MulticoreParam(workers = 3, outfile = Sys.getenv('SGE_STDERR_PATH'))
-        bp <- SerialParam()
-        metadata$geo_accession <- unlist(bplapply(metadata$run,
-            function(runid) {
-                runMyFun(find_geo, run = runid, verbose = TRUE, sleep = 1)
-            }, BPPARAM = bp),
-        use.names = FALSE)
+        stop('geo_accession should be a column in metadata when project="sra"')
     }
 }
 
