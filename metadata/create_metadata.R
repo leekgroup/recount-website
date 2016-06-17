@@ -231,8 +231,13 @@ extract_geo <- function(id) {
     } else {
         info <- runMyFun(geo_info, geoid = id, verbose = TRUE,
             destdir = paste0('geo_info_', opt$project), sleep = 1)
-        res <- DataFrame('title' = info$title,
-            'characteristics' = info$characteristics)
+        if(identical(info, DataFrame())) {
+            res <- DataFrame('title' = NA,
+                'characteristics' = CharacterList(NA))
+        } else {
+            res <- DataFrame('title' = info$title,
+                'characteristics' = info$characteristics)
+        }
     }
     return(res)
 }
