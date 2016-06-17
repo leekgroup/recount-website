@@ -237,6 +237,8 @@ extract_geo <- function(id) {
     return(res)
 }
 geo <- do.call(rbind, mclapply(metadata$geo_accession, extract_geo, mc.cores = 3))
+## For debugging (if needed)
+save(geo, file = paste0('geo_', opt$project, '.Rdata'))
 
 ## Combine information (metadata will now be a DataFrame object)
 metadata <- cbind(metadata, geo)
