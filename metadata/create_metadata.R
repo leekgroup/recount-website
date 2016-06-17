@@ -191,11 +191,17 @@ stopifnot(sum(is.na(k)) == sum(is.na(metadata$auc)))
 metadata$tsv_path <- tsv[k]
 
 ## Function for re-running in case something fails
-runMyFun <- function(f, ...) {
+runMyFun <- function(f, geoid, ...) {
     res <- FALSE
+    attempt <- 1
     while(!is(res, 'DataFrame')) {
-        res <- tryCatch(f(...), error = function(e) {
+        res <- tryCatch(f(geoid = geoid, ...), error = function(e) {
             Sys.sleep(round(runif(1, min =1 , max = 6), 0))
+            if(attempt == 5) {
+                res <- DataFrame('title' = NA, 'characteristics' = CharacterList(NA))
+            }
+            attempt <- attempt + 1
+            message(paste(Sys.time(), 'attempt number', attempt, 'for', geoid))
             return('trying')
         })
     }
