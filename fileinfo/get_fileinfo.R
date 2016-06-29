@@ -57,7 +57,7 @@ rse_files <- dir(rse_path, full.names = TRUE)
 names(rse_files) <- dir(rse_path)
 
 rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
-    'rse_gene.Rdata')
+    'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
 if(!all(rse_up %in% names(rse_files))) stop(paste('Missing counts/rse files for project',
     opt$projectid))
 
