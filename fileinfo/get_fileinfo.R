@@ -84,8 +84,16 @@ upload_bigwig <- metadata$bigwig_path
 names(upload_bigwig) <- metadata$bigwig_file
 
 
+## Build paths for junction raw files
+jx_raw <- c(
+    file.path('/dcl01/leek/data/recount_junctions',
+        paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'),
+    file.path('/dcl01/leek/data/recount_junctions',
+        paste0(opt$projectid, '.junction_coverage.tsv.gz')
+)
+
 ## List of files to upload
-upload_files <- c(rse_files[rse_up], meta_path, mean_bw, upload_bigwig)
+upload_files <- c(rse_files[rse_up], meta_path, mean_bw, upload_bigwig, jx_raw)
 
 ## Compute md5sums
 print('Time spent calculating md5sums')
