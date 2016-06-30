@@ -23,10 +23,16 @@ if (!is.null(opt$help)) {
 
 ## For testing
 if(FALSE) {
-    opt <- list(project = 'sra', 'metadata' = 'metadata_sra.Rdata',
+    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
         projectid = 'DRP000499')
+        
+    ## Debugging
+    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
+            projectid = 'DRP000366')
+    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
+            projectid = 'DRP000987')
     ## Largest one, to find memory needed
-    opt <- list(project = 'sra', 'metadata' = 'metadata_sra.Rdata',
+    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
         projectid = 'SRP025982')
 }
 
@@ -111,14 +117,15 @@ save(rse_gene, file = file.path(outdir, 'rse_gene.Rdata'))
 message(paste(Sys.time(), 'loading junctions sample information'))
 jx_samples <- read.table('/dcl01/leek/data/recount_junctions/sample_ids.tsv',
     sep = '\t', col.names = c('sample_id', 'project', 'run'),
-    stringsAsFactors = FALSE)
+    stringsAsFactors = FALSE, colClasses = 'character')
 
 message(paste(Sys.time(), 'processing project junctions read information'))
 ## Load project junctions info
 jx_project <- read.table(file.path('/dcl01/leek/data/recount_junctions',
     paste0(opt$projectid, '.junction_coverage.tsv.gz')), sep = '\t',
-    col.names = c('jx_id', 'sample_ids', 'reads'), stringsAsFactors = FALSE)
-    
+    col.names = c('jx_id', 'sample_ids', 'reads'), stringsAsFactors = FALSE,
+    colClasses = 'character')
+
 ## Create a table with 1 row per sample for a given junction
 jx_project_samples <- strsplit(jx_project$sample_ids, ',')
 jx_project_reads <- strsplit(jx_project$reads, ',')
@@ -126,7 +133,7 @@ stopifnot(identical(elementNROWS(jx_project_samples),
     elementNROWS(jx_project_reads)))
 jx_project_tab <- data.frame(
     jx_id = rep(jx_project$jx_id, elementNROWS(jx_project_samples)),
-    sample_id = as.integer(unlist(jx_project_samples)),
+    sample_id = unlist(jx_project_samples),
     reads = as.integer(unlist(jx_project_reads))
 )
 rm(jx_project_samples, jx_project_reads)
@@ -189,8 +196,11 @@ jx_bed$found_junction <- parse_bed_name('J:', slot = 4)
 mcols(jx_bed) <- mcols(jx_bed)[, c('junction_id', 'found_donor',
     'found_acceptor', 'found_junction')]
 
-## Fix seqlengths
-seqlengths(jx_bed) <- seqlengths(exons)[names(seqlengths(jx_bed))]
+## Fix seqlengths, have to use data from web for chrEBV
+chr_info <- read.table('https://raw.githubusercontent.com/nellore/runs/master/gtex/hg38.sizes', sep = '\t', col.names = c('chr', 'length'), stringsAsFactors = FALSE)
+chrs <- chr_info$length
+names(chrs) <- chr_info$chr
+seqlengths(jx_bed) <- chrs[names(seqlengths(jx_bed))]
 
 ## Find all transcripts
 message(paste(Sys.time(), 'setup for identifying gene ids for transcripts'))
