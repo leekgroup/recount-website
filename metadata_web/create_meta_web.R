@@ -60,8 +60,7 @@ meta_web <- data.frame(
 )
 rownames(meta_web) <- NULL
 for(project in projects) {
-    if(dir.exists(file.path('/dcl01/leek/data/recount-website/rse/', paste0('rse_', opt$project), project))) {
-        ## Have to change this to actual URLs once the data is uploaded        
+    if(dir.exists(file.path('/dcl01/leek/data/recount-website/rse/', paste0('rse_', opt$project), project))) {      
         meta_web$rse_gene[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
             '/rse_gene.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">link</a>')

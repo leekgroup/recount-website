@@ -23,16 +23,16 @@ if (!is.null(opt$help)) {
 
 ## For testing
 if(FALSE) {
-    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
+    opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
         projectid = 'DRP000499')
         
     ## Debugging
-    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
+    opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
             projectid = 'DRP000366')
-    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
+    opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
             projectid = 'DRP000987')
     ## Largest one, to find memory needed
-    opt <- list(project = 'sra', 'metadata' = '../metadata/metadata_sra.Rdata',
+    opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
         projectid = 'SRP025982')
 }
 
@@ -197,7 +197,9 @@ mcols(jx_bed) <- mcols(jx_bed)[, c('junction_id', 'found_donor',
     'found_acceptor', 'found_junction')]
 
 ## Fix seqlengths, have to use data from web for chrEBV
-chr_info <- read.table('https://raw.githubusercontent.com/nellore/runs/master/gtex/hg38.sizes', sep = '\t', col.names = c('chr', 'length'), stringsAsFactors = FALSE)
+chr_info <- read.table(
+    'https://raw.githubusercontent.com/nellore/runs/master/gtex/hg38.sizes',
+    sep = '\t', col.names = c('chr', 'length'), stringsAsFactors = FALSE)
 chrs <- chr_info$length
 names(chrs) <- chr_info$chr
 seqlengths(jx_bed) <- chrs[names(seqlengths(jx_bed))]

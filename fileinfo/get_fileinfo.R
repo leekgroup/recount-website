@@ -87,9 +87,13 @@ names(upload_bigwig) <- metadata$bigwig_file
 ## Build paths for junction raw files
 jx_raw <- c(
     file.path('/dcl01/leek/data/recount_junctions',
-        paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'),
+        paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz')),
     file.path('/dcl01/leek/data/recount_junctions',
-        paste0(opt$projectid, '.junction_coverage.tsv.gz')
+        paste0(opt$projectid, '.junction_coverage.tsv.gz'))
+)
+names(jx_raw) <- c(
+    paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'),
+    paste0(opt$projectid, '.junction_coverage.tsv.gz')
 )
 
 ## List of files to upload
