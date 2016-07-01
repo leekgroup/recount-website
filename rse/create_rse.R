@@ -134,7 +134,7 @@ stopifnot(identical(elementNROWS(jx_project_samples),
 jx_project_tab <- data.frame(
     jx_id = rep(jx_project$jx_id, elementNROWS(jx_project_samples)),
     sample_id = unlist(jx_project_samples),
-    reads = as.integer(unlist(jx_project_reads))
+    reads = as.numeric(unlist(jx_project_reads))
 )
 rm(jx_project_samples, jx_project_reads)
 
