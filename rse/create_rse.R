@@ -218,7 +218,7 @@ rse_jx <- SummarizedExperiment(assays = list('counts' = jx_counts),
 message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_jx.Rdata')))
 save(rse_jx, file = file.path(outdir, 'rse_jx.Rdata'))
 
-
+rm(rse_jx, map_jx, jx_bed, jx_counts, trans_names, map_gene, unique_names)
 
 ## Read counts from bwtool tsv output files
 counts <- mapply(function(tsvFile, sampleName) {
