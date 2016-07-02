@@ -127,16 +127,21 @@ jx_project <- read.table(file.path('/dcl01/leek/data/recount_junctions',
     colClasses = 'character')
 
 ## Create a table with 1 row per sample for a given junction
-jx_project_samples <- strsplit(jx_project$sample_ids, ',')
-jx_project_reads <- strsplit(jx_project$reads, ',')
-stopifnot(identical(elementNROWS(jx_project_samples),
-    elementNROWS(jx_project_reads)))
-jx_project_tab <- data.frame(
-    jx_id = rep(jx_project$jx_id, elementNROWS(jx_project_samples)),
-    sample_id = unlist(jx_project_samples),
-    reads = as.numeric(unlist(jx_project_reads))
-)
-rm(jx_project_samples, jx_project_reads)
+jx_project.split <- split(jx_project, cut2(seq_len(nrow(jx_project)), m = 1e5))
+jx_project_tab <- lapply(jx_project.split, function(jx_split) {
+    jx_project_samples <- strsplit(jx_split$sample_ids, ',')
+    jx_project_reads <- strsplit(jx_split$reads, ',')
+    stopifnot(identical(elementNROWS(jx_project_samples),
+        elementNROWS(jx_project_reads)))
+    res <- data.frame(
+        jx_id = rep(jx_split$jx_id, elementNROWS(jx_project_samples)),
+        sample_id = unlist(jx_project_samples),
+        reads = as.numeric(unlist(jx_project_reads))
+    )
+    return(res)
+})
+jx_project_tab <- do.call(rbind, jx_project_tab)
+rm(jx_project.split)
 
 
 message(paste(Sys.time(), 'creating junction counts table'))
