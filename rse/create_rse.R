@@ -81,7 +81,7 @@ jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
 jx_project.end <- c(jx_project.start[2:length(jx_project.start)] - 1, nrow(jx_project))
 
 jx_project_tab <- mapply(function(start, end) {
-    jx_project.split <- jx_project[start:end, ]
+    jx_split <- jx_project[start:end, ]
     jx_project_samples <- strsplit(jx_split$sample_ids, ',')
     jx_project_reads <- strsplit(jx_split$reads, ',')
     stopifnot(identical(elementNROWS(jx_project_samples),
