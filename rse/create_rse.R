@@ -72,10 +72,16 @@ jx_project <- read.table(file.path('/dcl01/leek/data/recount_junctions',
     col.names = c('jx_id', 'sample_ids', 'reads'), stringsAsFactors = FALSE,
     colClasses = 'character')
 
+message(paste(Sys.time(), 'creating jx_project_tab object'))
+print('jx_project dimensions')
+dim(jx_project)
+
 ## Create a table with 1 row per sample for a given junction
-jx_project.split <- split(jx_project, Hmisc::cut2(seq_len(nrow(jx_project)),
-    m = 1e5))
-jx_project_tab <- lapply(jx_project.split, function(jx_split) {
+jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
+jx_project.end <- c(jx_project.start[2:length(jx_project.start)] - 1, nrow(jx_project))
+
+jx_project_tab <- mapply(function(start, end) {
+    jx_project.split <- jx_project[start:end, ]
     jx_project_samples <- strsplit(jx_split$sample_ids, ',')
     jx_project_reads <- strsplit(jx_split$reads, ',')
     stopifnot(identical(elementNROWS(jx_project_samples),
@@ -86,9 +92,9 @@ jx_project_tab <- lapply(jx_project.split, function(jx_split) {
         reads = as.numeric(unlist(jx_project_reads))
     )
     return(res)
-})
+}, jx_project.start, jx_project.end)
 jx_project_tab <- do.call(rbind, jx_project_tab)
-rm(jx_project.split)
+rm(jx_project.start, jx_project.end)
 
 
 message(paste(Sys.time(), 'creating junction counts table'))
