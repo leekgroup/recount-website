@@ -65,7 +65,7 @@ jx_samples <- read.table('/dcl01/leek/data/recount_junctions/sample_ids.tsv',
     sep = '\t', col.names = c('sample_id', 'project', 'run'),
     stringsAsFactors = FALSE, colClasses = 'character')
 
-message(paste(Sys.time(), 'processing project junctions read information'))
+message(paste(Sys.time(), 'loading junction coverage file'))
 ## Load project junctions info
 jx_project <- read.table(file.path('/dcl01/leek/data/recount_junctions',
     paste0(opt$projectid, '.junction_coverage.tsv.gz')), sep = '\t',
