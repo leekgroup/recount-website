@@ -54,6 +54,10 @@ metadata <- metadata[!is.na(metadata$tsv_path), ]
 if(nrow(metadata) == 0) stop(paste('No samples have bwtool tsv files for project', opt$projectid))
 rownames(metadata) <- NULL
 
+## Remove bigwig and tsv file paths
+metadata_clean <- metadata[, !colnames(metadata) %in% c('bigwig_path',
+    'tsv_path')]
+
 ## Create output dir for the project
 outdir <- paste0('rse_', opt$project, '/', opt$projectid)
 dir.create(outdir, showWarnings = FALSE)
@@ -245,10 +249,6 @@ message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_exon.tsv')))
 write.table(as.data.frame(counts), file = file.path(outdir, 'counts_exon.tsv'),
     sep = '\t', row.names = FALSE, quote = FALSE, col.names = TRUE)
 system(paste('gzip', file.path(outdir, 'counts_exon.tsv')))
-
-## Remove bigwig and tsv file paths
-metadata_clean <- metadata[, !colnames(metadata) %in% c('bigwig_path',
-    'tsv_path')]
 
 ## Create exon level rse
 exons_all <- unlist(exons)
