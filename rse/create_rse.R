@@ -79,6 +79,7 @@ jx_project <- read.table(file.path('/dcl01/leek/data/recount_junctions',
 message(paste(Sys.time(), 'creating jx_project_tab object'))
 print('jx_project dimensions')
 dim(jx_project)
+head(jx_project)
 
 ## Create a table with 1 row per sample for a given junction
 jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
@@ -93,16 +94,19 @@ jx_project_tab <- mapply(function(start, end) {
     res <- data.frame(
         jx_id = rep(jx_split$jx_id, elementNROWS(jx_project_samples)),
         sample_id = unlist(jx_project_samples),
-        reads = as.numeric(unlist(jx_project_reads))
+        reads = as.numeric(unlist(jx_project_reads)),
+        stringsAsFactors = FALSE
     )
     return(res)
 }, jx_project.start, jx_project.end)
 message(paste(Sys.time(), 'saving jx_project_tab_ori.Rdata'))
-head(jx_project_tab[[1]])
-length(jx_project_tab)
+print('jx_project_tab info (ori)')
+head(jx_project_tab[1:6, 1:6])
+dim(jx_project_tab)
 save(jx_project_tab, file = file.path(outdir, 'jx_project_tab_ori.Rdata'))
-jx_project_tab <- do.call(rbind, jx_project_tab)
+jx_project_tab <- t(jx_project_tab)
 message(paste(Sys.time(), 'saving jx_project_tab.Rdata'))
+print('jx_project_tab info (after t)')
 head(jx_project_tab)
 dim(jx_project_tab)
 save(jx_project_tab, file = file.path(outdir, 'jx_project_tab.Rdata'))
