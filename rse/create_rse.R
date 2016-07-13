@@ -108,34 +108,75 @@ dim(jx_project_tab)
 save(jx_project_tab, file = file.path(outdir, 'jx_project_tab.Rdata'))
 rm(jx_project.start, jx_project.end)
 
+if(opt$project == 'gtex') {
+    suppressPackageStartupMessages(library('Matrix'))
+    message(paste(Sys.time(), 'creating pieces for the junction counts table'))
+    ## Fill in table
+    jx_table_info <- lapply(metadata_clean$run, function(run) {
+        sample <- jx_samples$sample_id[jx_samples$run == run]
+        sample_reads <- subset(jx_project_tab, sample_id == sample)
+        if(nrow(sample_reads) == 0)  {
+            message(paste(Sys.time(), 'found no junction counts for run', run))
+            next
+        }
+        jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
+        x <- sample_reads$reads[jx_map[!is.na(jx_map)]]
+        j <- which(!is.na(jx_map))
+        i <- rep(which(metadata_clean$run == run), length(j))
+        stopifnot(length(j) == length(x))
+        return(list(i = i, j = j, x = x))
+    })
 
-message(paste(Sys.time(), 'creating junction counts table'))
-## Create junction counts table
-jx_counts <- matrix(0, ncol = nrow(metadata_clean), nrow = nrow(jx_project))
-colnames(jx_counts) <- metadata_clean$run
+    ## Create junction counts table
+    message(paste(Sys.time(), 'creating junction counts table'))
+    jx_counts <- sparseMatrix(i = sapply(jx_table_info, '[[', 'i'),
+        j = sapply(jx_table_info, '[[', 'j'),
+        x = sapply(jx_table_info, '[[', 'x')
+    )
+    colnames(jx_counts) <- metadata_clean$run
+    rm(jx_table_info)
+} else {
+    message(paste(Sys.time(), 'creating pieces for the junction counts table'))
+    ## Fill in table
+    jx_table_info <- lapply(metadata_clean$run, function(run) {
+        sample <- jx_samples$sample_id[jx_samples$run == run]
+        sample_reads <- subset(jx_project_tab, sample_id == sample)
+        if(nrow(sample_reads) == 0)  {
+            message(paste(Sys.time(), 'found no junction counts for run', run))
+            next
+        }
+        jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
+        x <- sample_reads$reads[jx_map[!is.na(jx_map)]]
+        j <- which(!is.na(jx_map))
+        i <- rep(which(metadata_clean$run == run), length(j))
+        stopifnot(length(j) == length(x))
+        return(list(i = i, j = j, x = x))
+    })
 
-## Fill in table
-for(run in metadata_clean$run) {
-    sample <- jx_samples$sample_id[jx_samples$run == run]
-    sample_reads <- subset(jx_project_tab, sample_id == sample)
-    if(nrow(sample_reads) == 0)  {
-        message(paste(Sys.time(), 'found no junction counts for run', run))
-        next
-    }
-    jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
-    jx_counts[!is.na(jx_map), run] <- sample_reads$reads[jx_map[!is.na(jx_map)]]
+    ## Create junction counts table
+    message(paste(Sys.time(), 'creating junction counts table'))
+    jx_counts <- sparseMatrix(i = sapply(jx_table_info, '[[', 'i'),
+        j = sapply(jx_table_info, '[[', 'j'),
+        x = sapply(jx_table_info, '[[', 'x')
+    )
+    colnames(jx_counts) <- metadata_clean$run
+    rm(jx_table_info)
 }
-rm(sample, sample_reads, jx_map)
+
 
 print('Memory used by junction counts')
 print(object.size(jx_counts), units = 'Mb')
 
 ## Save junction counts
-message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_jx.tsv')))
-write.table(as.data.frame(jx_counts), file = file.path(outdir,
-    'counts_jx.tsv'), sep = '\t', row.names = FALSE, quote = FALSE,
-    col.names = TRUE)
-system(paste('gzip', file.path(outdir, 'counts_jx.tsv')))
+if(opt$project != 'gtex') {
+    message(paste(Sys.time(), 'writing file', file.path(outdir,
+        'counts_jx.tsv')))
+    write.table(as.data.frame(jx_counts), file = file.path(outdir,
+        'counts_jx.tsv'), sep = '\t', row.names = FALSE, quote = FALSE,
+        col.names = TRUE)
+    system(paste('gzip', file.path(outdir, 'counts_jx.tsv')))
+}
+
 
 
 ## Load junction bed file
