@@ -48,10 +48,9 @@ meta_web <- data.frame(
     species = 'human',
     abstract = abstracts$study_abstract[match(projects,
         abstracts$study_accession)],
-    rse_gene = NA,
-    rse_exon = NA,
-    counts_gene = NA,
-    counts_exon = NA,
+    gene = NA,
+    exon = NA,
+    junctions = NA,
     phenotype = NA,
     genes = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-genes-bp-length.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'genes\', 1)">link</a>',
     exons = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-exons.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'exons\', 1)">link</a>',
@@ -61,18 +60,39 @@ meta_web <- data.frame(
 rownames(meta_web) <- NULL
 for(project in projects) {
     if(dir.exists(file.path('/dcl01/leek/data/recount-website/rse/', paste0('rse_', opt$project), project))) {      
-        meta_web$rse_gene[projects == project] <- paste0(
+        meta_web$gene[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/rse_gene.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">link</a>')
-        meta_web$rse_exon[projects == project] <- paste0(
+            '/rse_gene.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">RSE</a>', 
+            ' <a href="http://duffel.rail.bio/recount/', project,
+            '/counts_gene.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-gene\', 1)">counts</a>')
+        meta_web$exon[projects == project] <- paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/rse_exon.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">link</a>')
-        meta_web$counts_gene[projects == project] <- paste0(
+            '/rse_exon.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">RSE</a>', 
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/counts_gene.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-gene\', 1)">link</a>')
-        meta_web$counts_exon[projects == project] <- paste0(
-            '<a href="http://duffel.rail.bio/recount/', project,
-            '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">link</a>')
+            '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts</a>')
+        if(project != 'SRP025982') {
+            meta_web$junctions[projects == project] <- paste0(
+                '<a href="http://duffel.rail.bio/recount/', project,
+                '/rse_jx.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-jx\', 1)">RSE</a>',
+                '<a href="http://duffel.rail.bio/recount/', project, '/',
+                project, '.junction_id_with_transcripts.bed.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-jx-bed\', 1)">jx_bed</a>',
+                '<a href="http://duffel.rail.bio/recount/', project, '/',
+                project, '.junction_coverage.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-jx-cov\', 1)">jx_cov</a>',
+                '<a href="http://duffel.rail.bio/recount/', project,
+                '/counts_jx.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-jx\', 1)">counts</a>')
+        } else {
+            ## There's no counts_jx.tsv.gz file for GTEx
+            meta_web$junctions[projects == project] <- paste0(
+                '<a href="http://duffel.rail.bio/recount/', project,
+                '/rse_jx.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-jx\', 1)">RSE</a>',
+                '<a href="http://duffel.rail.bio/recount/', project, '/',
+                project, '.junction_id_with_transcripts.bed.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-jx-bed\', 1)">jx_bed</a>',
+                '<a href="http://duffel.rail.bio/recount/', project, '/',
+                project, '.junction_coverage.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-jx-cov\', 1)">jx_cov</a>'
+            )
+        }
+        
+
     }
     if(file.exists(file.path('/dcl01/leek/data/recount-website/metadata/', paste0('project_metadata_', opt$project), paste0(project, '.tsv')))) {   
         meta_web$phenotype[projects == project] <- paste0(

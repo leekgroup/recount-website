@@ -6,10 +6,6 @@ load('meta_web.Rdata')
 
 meta_web$species <- factor(meta_web$species)
 colnames(meta_web)[colnames(meta_web) == 'number_samples'] <- 'number of samples'
-colnames(meta_web)[colnames(meta_web) == 'rse_gene'] <- 'RSE gene'
-colnames(meta_web)[colnames(meta_web) == 'rse_exon'] <- 'RSE exon'
-colnames(meta_web)[colnames(meta_web) == 'counts_gene'] <- 'counts gene'
-colnames(meta_web)[colnames(meta_web) == 'counts_exon'] <- 'counts exon'
 colnames(meta_web)[colnames(meta_web) == 'files_info'] <- 'files info'
 
 shinyServer(function(input, output, session) {
