@@ -129,9 +129,10 @@ if(opt$project == 'gtex') {
 
     ## Create junction counts table
     message(paste(Sys.time(), 'creating junction counts table'))
-    jx_counts <- sparseMatrix(i = sapply(jx_table_info, '[[', 'i'),
-        j = sapply(jx_table_info, '[[', 'j'),
-        x = sapply(jx_table_info, '[[', 'x')
+    jx_counts <- sparseMatrix(
+        i = unlist(lapply(jx_table_info, '[[', 'i')),
+        j = unlist(lapply(jx_table_info, '[[', 'j')),
+        x = unlist(lapply(jx_table_info, '[[', 'x'))
     )
     colnames(jx_counts) <- metadata_clean$run
     rm(jx_table_info)
