@@ -97,7 +97,15 @@ jx_project_tab <- mapply(function(start, end) {
     )
     return(res)
 }, jx_project.start, jx_project.end)
+message(paste(Sys.time(), 'saving jx_project_tab_ori.Rdata'))
+head(jx_project_tab[[1]])
+length(jx_project_tab)
+save(jx_project_tab, file = file.path(outdir, 'jx_project_tab_ori.Rdata'))
 jx_project_tab <- do.call(rbind, jx_project_tab)
+message(paste(Sys.time(), 'saving jx_project_tab.Rdata'))
+head(jx_project_tab)
+dim(jx_project_tab)
+save(jx_project_tab, file = file.path(outdir, 'jx_project_tab.Rdata'))
 rm(jx_project.start, jx_project.end)
 
 
