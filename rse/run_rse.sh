@@ -49,7 +49,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -hold_jid ${PROJECT}.metadata
-$${CORES}
+${CORES}
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
