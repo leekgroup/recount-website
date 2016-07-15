@@ -107,7 +107,7 @@ if(opt$project == 'gtex') {
     message(paste(Sys.time(), 'creating junction counts (list)'))
     ## Fill in table
     jx_n <- length(unique(jx_project$jx_id))
-    bp <- MulticoreParam(workers = 5, outfile = Sys.getenv('SGE_STDERR_PATH'))
+    bp <- MulticoreParam(workers = 3, outfile = Sys.getenv('SGE_STDERR_PATH'))
     jx_counts <- lapply(metadata_clean$run, function(run) {
         sample <- jx_samples$sample_id[jx_samples$run == run]
         
