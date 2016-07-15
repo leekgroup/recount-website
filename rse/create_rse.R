@@ -85,7 +85,7 @@ head(jx_project)
 jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
 jx_project.end <- c(jx_project.start[2:length(jx_project.start)] - 1, nrow(jx_project))
 
-jx_project_tab_raw <- mapply(function(start, end) {
+jx_project_tab <- mapply(function(start, end) {
     jx_split <- jx_project[start:end, ]
     jx_project_samples <- strsplit(jx_split$sample_ids, ',')
     jx_project_reads <- strsplit(jx_split$reads, ',')
@@ -99,26 +99,8 @@ jx_project_tab_raw <- mapply(function(start, end) {
     )
     return(res)
 }, jx_project.start, jx_project.end, SIMPLIFY = FALSE)
-message(paste(Sys.time(), 'jx_project_tab_raw info'))
-print('jx_project_tab info (ori)')
-class(jx_project_tab_raw)
-head(jx_project_tab_raw[[1]])
-dim(jx_project_tab_raw[[1]])
-message(paste(Sys.time(), 'creating jx_project_tab'))
-jx_project_tab_l <- elementNROWS(jx_project_tab_raw)
-jx_project_tab_rle <- Rle(as.numeric(seq_len(length(jx_project_tab_l))),
-    jx_project_tab_l)
-jx_project_tab <- data.frame(matrix(NA, ncol = 3, nrow = sum(jx_project_tab_l)))
-for(i in seq_len(jx_project_tab_l)) {
-    jx_project_tab[which(jx_project_tab_rle == i), ] <- jx_project_tab_raw[[i]]
-}
-colnames(jx_project_tab) <- colnames(jx_project_tab_raw[[1]])
-rm(jx_project_tab_l, jx_project_tab_rle, i, jx_project_tab_raw)
-message(paste(Sys.time(), 'saving jx_project_tab.Rdata'))
-print('jx_project_tab info')
-head(jx_project_tab)
-dim(jx_project_tab)
-save(jx_project_tab, file = file.path(outdir, 'jx_project_tab.Rdata'))
+# message(paste(Sys.time(), 'saving jx_project_tab.Rdata'))
+# save(jx_project_tab, file = file.path(outdir, 'jx_project_tab.Rdata'))
 rm(jx_project.start, jx_project.end)
 
 if(opt$project == 'gtex') {
@@ -127,7 +109,14 @@ if(opt$project == 'gtex') {
     ## Fill in table
     jx_table_info <- lapply(metadata_clean$run, function(run) {
         sample <- jx_samples$sample_id[jx_samples$run == run]
-        sample_reads <- subset(jx_project_tab, sample_id == sample)
+        
+        message(paste(Sys.time(), 
+            'extracting info from jx_project_tab for run', run))
+        
+        sample_reads <- lapply(jx_project_tab, function(jx_proj_tab) {
+            subset(jx_proj_tab, sample_id == sample)
+        })
+        sample_reads <- do.call(rbind, sample_reads)
         if(nrow(sample_reads) == 0)  {
             message(paste(Sys.time(), 'found no junction counts for run', run))
             next
@@ -150,6 +139,9 @@ if(opt$project == 'gtex') {
     colnames(jx_counts) <- metadata_clean$run
     rm(jx_table_info)
 } else {
+    message(paste(Sys.time(), 'running rbind on jx_project_tab'))
+    jx_project_tab <- do.call(rbind, jx_project_tab)
+    
     message(paste(Sys.time(), 'creating junction counts table'))
     ## Create junction counts table
     jx_counts <- matrix(0, ncol = nrow(metadata_clean), nrow = nrow(jx_project))
@@ -168,6 +160,7 @@ if(opt$project == 'gtex') {
     }
     rm(sample, sample_reads, jx_map, run)
 }
+rm(jx_project_tab)
 
 
 print('Memory used by junction counts')
