@@ -106,7 +106,8 @@ head(jx_project_tab_raw[[1]])
 dim(jx_project_tab_raw[[1]])
 message(paste(Sys.time(), 'creating jx_project_tab'))
 jx_project_tab_l <- elementNROWS(jx_project_tab_raw)
-jx_project_tab_rle <- Rle(seq_len(length(jx_project_tab_l)), jx_project_tab_l)
+jx_project_tab_rle <- Rle(as.numeric(seq_len(length(jx_project_tab_l))),
+    jx_project_tab_l)
 jx_project_tab <- data.frame(matrix(NA, ncol = 3, nrow = sum(jx_project_tab_l)))
 for(i in seq_len(jx_project_tab_l)) {
     jx_project_tab[which(jx_project_tab_rle == i), ] <- jx_project_tab_raw[[i]]
