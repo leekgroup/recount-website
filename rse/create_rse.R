@@ -85,7 +85,7 @@ head(jx_project)
 jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
 jx_project.end <- c(jx_project.start[2:length(jx_project.start)] - 1, nrow(jx_project))
 
-jx_project_tab <- mapply(function(start, end) {
+jx_project_tab_raw <- mapply(function(start, end) {
     jx_split <- jx_project[start:end, ]
     jx_project_samples <- strsplit(jx_split$sample_ids, ',')
     jx_project_reads <- strsplit(jx_split$reads, ',')
@@ -99,13 +99,20 @@ jx_project_tab <- mapply(function(start, end) {
     )
     return(res)
 }, jx_project.start, jx_project.end, SIMPLIFY = FALSE)
-message(paste(Sys.time(), 'jx_project_tab (ori) info'))
+message(paste(Sys.time(), 'jx_project_tab_raw info'))
 print('jx_project_tab info (ori)')
-class(jx_project_tab)
-head(jx_project_tab[[1]])
-dim(jx_project_tab[[1]])
-message(paste(Sys.time(), 'running rbind on jx_project_tab'))
-jx_project_tab <- do.call(rbind, jx_project_tab)
+class(jx_project_tab_raw)
+head(jx_project_tab_raw[[1]])
+dim(jx_project_tab_raw[[1]])
+message(paste(Sys.time(), 'creating jx_project_tab'))
+jx_project_tab_l <- elementNROWS(jx_project_tab_raw)
+jx_project_tab_rle <- Rle(seq_len(length(jx_project_tab_l)), jx_project_tab_l)
+jx_project_tab <- data.frame(matrix(NA, ncol = 3, nrow = sum(jx_project_tab_l)))
+for(i in seq_len(jx_project_tab_l)) {
+    jx_project_tab[which(jx_project_tab_rle == i), ] <- jx_project_tab_raw[[i]]
+}
+colnames(jx_project_tab) <- colnames(jx_project_tab_raw[[1]])
+rm(jx_project_tab_l, jx_project_tab_rle, i, jx_project_tab_raw)
 message(paste(Sys.time(), 'saving jx_project_tab.Rdata'))
 print('jx_project_tab info')
 head(jx_project_tab)
