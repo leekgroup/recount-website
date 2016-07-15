@@ -99,23 +99,24 @@ jx_project_tab <- mapply(function(start, end) {
     )
     return(res)
 }, jx_project.start, jx_project.end, SIMPLIFY = FALSE)
-# message(paste(Sys.time(), 'saving jx_project_tab.Rdata'))
-# save(jx_project_tab, file = file.path(outdir, 'jx_project_tab.Rdata'))
 rm(jx_project.start, jx_project.end)
 
 if(opt$project == 'gtex') {
     suppressPackageStartupMessages(library('Matrix'))
-    message(paste(Sys.time(), 'creating pieces for the junction counts table'))
+    suppressPackageStartupMessages(library('BiocParallel'))
+    message(paste(Sys.time(), 'creating junction counts (list)'))
     ## Fill in table
-    jx_table_info <- lapply(metadata_clean$run, function(run) {
+    jx_n <- sum(length(unique(jx_project$jx_id)))
+    bp <- MulticoreParam(workers = 5, outfile = Sys.getenv('SGE_STDERR_PATH'))
+    jx_counts <- lapply(metadata_clean$run, function(run) {
         sample <- jx_samples$sample_id[jx_samples$run == run]
         
         message(paste(Sys.time(), 
             'extracting info from jx_project_tab for run', run))
         
-        sample_reads <- lapply(jx_project_tab, function(jx_proj_tab) {
+        sample_reads <- bplapply(jx_project_tab, function(jx_proj_tab) {
             subset(jx_proj_tab, sample_id == sample)
-        })
+        }, BPPARAM = bp)
         sample_reads <- do.call(rbind, sample_reads)
         if(nrow(sample_reads) == 0)  {
             message(paste(Sys.time(), 'found no junction counts for run', run))
@@ -123,21 +124,23 @@ if(opt$project == 'gtex') {
         }
         jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
         x <- sample_reads$reads[jx_map[!is.na(jx_map)]]
-        j <- which(!is.na(jx_map))
-        i <- rep(which(metadata_clean$run == run), length(j))
-        stopifnot(length(j) == length(x))
-        return(list(i = i, j = j, x = x))
+        i <- which(!is.na(jx_map))
+        j <- rep(1, length(j))
+        stopifnot(length(i) == length(x))
+        res <- sparseMatrix(i = i, j = j, x = x, dims = c(jx_n, 1))
+        colnames(res) <- run
+        return(res)
     })
+    
+    message(paste(Sys.time(), 'saving junction counts (list)'))
+    save(jx_counts, file = file.path(outdir, 'jx_counts_list.Rdata'))
 
     ## Create junction counts table
-    message(paste(Sys.time(), 'creating junction counts table'))
-    jx_counts <- sparseMatrix(
-        i = unlist(lapply(jx_table_info, '[[', 'i')),
-        j = unlist(lapply(jx_table_info, '[[', 'j')),
-        x = unlist(lapply(jx_table_info, '[[', 'x'))
-    )
-    colnames(jx_counts) <- metadata_clean$run
-    rm(jx_table_info)
+    message(paste(Sys.time(), 'running cbind on junction counts'))
+    jx_counts <- do.call(cbind, jx_counts)
+    
+    message(paste(Sys.time(), 'saving junction counts'))
+    save(jx_counts, file = file.path(outdir, 'jx_counts.Rdata'))
 } else {
     message(paste(Sys.time(), 'running rbind on jx_project_tab'))
     jx_project_tab <- do.call(rbind, jx_project_tab)
