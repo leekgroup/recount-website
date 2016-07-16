@@ -25,8 +25,8 @@ then
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=84G,h_vmem=117G,h_fsize=50G"
-    CORES="#$ -pe local 3"
+    MEM="mem_free=50G,h_vmem=70G,h_fsize=50G"
+    CORES="#$ -pe local 5"
 else
     echo "Specify a valid project: gtex, sra"
 fi
