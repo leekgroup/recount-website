@@ -61,7 +61,7 @@ if(opt$projectid != 'SRP025982') {
         'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
 } else {
     rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
-        'rse_gene.Rdata', 'rse_jx.Rdata')
+        'rse_gene.Rdata')#, 'rse_jx.Rdata')
 }
 
 if(!all(rse_up %in% names(rse_files))) {

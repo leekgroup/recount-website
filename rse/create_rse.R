@@ -63,59 +63,6 @@ outdir <- paste0('rse_', opt$project, '/', opt$projectid)
 dir.create(outdir, showWarnings = FALSE)
 
 
-#### Gene and exon level ####
-## Read counts from bwtool tsv output files
-counts <- mapply(function(tsvFile, sampleName) {
-    message(paste(Sys.time(), 'reading file', tsvFile))
-    res <- read.table(tsvFile, header = FALSE, colClasses = list(NULL, NULL, NULL, 'numeric'))
-    colnames(res) <- sampleName
-    return(as.matrix(res))
-}, metadata$tsv_path, metadata$run, SIMPLIFY = FALSE)
-counts <- do.call(cbind, counts)
-
-## Memory used by counts
-print('Memory used by exon counts')
-print(object.size(counts), units = 'Mb')
-save(counts, file = file.path(outdir, 'counts_exon.Rdata'))
-
-## Save exon counts
-message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_exon.tsv')))
-write.table(as.data.frame(counts), file = file.path(outdir, 'counts_exon.tsv'),
-    sep = '\t', row.names = FALSE, quote = FALSE, col.names = TRUE)
-system(paste('gzip', file.path(outdir, 'counts_exon.tsv')))
-
-## Create exon level rse
-exons_all <- unlist(exons)
-rse_exon <- SummarizedExperiment(assays = list('counts' = counts),
-    colData = DataFrame(metadata_clean), rowRanges = exons_all)
-message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_exon.Rdata')))
-save(rse_exon, file = file.path(outdir, 'rse_exon.Rdata'))
-
-## Summarize counts at gene level
-counts_gene <- lapply(split(as.data.frame(counts), count_groups), colSums)
-counts_gene <- do.call(rbind, counts_gene)
-rownames(counts_gene) <- names(genes)
-
-## Memory used by counts at gene level
-print('Memory used by gene counts')
-print(object.size(counts_gene), units = 'Mb')
-save(counts_gene, file = file.path(outdir, 'counts_gene.Rdata'))
-
-## Save gene counts
-message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_gene.tsv')))
-write.table(as.data.frame(counts_gene), file = file.path(outdir,
-    'counts_gene.tsv'), sep = '\t', row.names = FALSE, quote = FALSE,
-    col.names = TRUE)
-system(paste('gzip', file.path(outdir, 'counts_gene.tsv')))
-
-## Create gene level rse
-rse_gene <- SummarizedExperiment(assays = list('counts' = counts_gene),
-    colData = DataFrame(metadata_clean), rowRanges = genes)
-message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_gene.Rdata')))
-save(rse_gene, file = file.path(outdir, 'rse_gene.Rdata'))
-rm(counts, counts_gene, rse_exon, rse_gene)
-
-
 
 #### Junction level ####
 
@@ -172,7 +119,7 @@ if(opt$project == 'gtex') {
         
         sample_reads <- mclapply(jx_project_tab, function(jx_proj_tab) {
             subset(jx_proj_tab, sample_id == sample)
-        }, mc.cores = 5)
+        }, mc.cores = 3)
         sample_reads <- do.call(rbind, sample_reads)
         if(nrow(sample_reads) == 0)  {
             message(paste(Sys.time(), 'found no junction counts for run', run))
@@ -336,6 +283,60 @@ message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_jx.Rdata')))
 save(rse_jx, file = file.path(outdir, 'rse_jx.Rdata'))
 
 rm(rse_jx, map_jx, jx_bed, jx_counts, trans_names, map_gene, unique_names)
+
+
+
+#### Gene and exon level ####
+## Read counts from bwtool tsv output files
+counts <- mapply(function(tsvFile, sampleName) {
+    message(paste(Sys.time(), 'reading file', tsvFile))
+    res <- read.table(tsvFile, header = FALSE, colClasses = list(NULL, NULL, NULL, 'numeric'))
+    colnames(res) <- sampleName
+    return(as.matrix(res))
+}, metadata$tsv_path, metadata$run, SIMPLIFY = FALSE)
+counts <- do.call(cbind, counts)
+
+## Memory used by counts
+print('Memory used by exon counts')
+print(object.size(counts), units = 'Mb')
+save(counts, file = file.path(outdir, 'counts_exon.Rdata'))
+
+## Save exon counts
+message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_exon.tsv')))
+write.table(as.data.frame(counts), file = file.path(outdir, 'counts_exon.tsv'),
+    sep = '\t', row.names = FALSE, quote = FALSE, col.names = TRUE)
+system(paste('gzip', file.path(outdir, 'counts_exon.tsv')))
+
+## Create exon level rse
+exons_all <- unlist(exons)
+rse_exon <- SummarizedExperiment(assays = list('counts' = counts),
+    colData = DataFrame(metadata_clean), rowRanges = exons_all)
+message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_exon.Rdata')))
+save(rse_exon, file = file.path(outdir, 'rse_exon.Rdata'))
+
+## Summarize counts at gene level
+counts_gene <- lapply(split(as.data.frame(counts), count_groups), colSums)
+counts_gene <- do.call(rbind, counts_gene)
+rownames(counts_gene) <- names(genes)
+
+## Memory used by counts at gene level
+print('Memory used by gene counts')
+print(object.size(counts_gene), units = 'Mb')
+save(counts_gene, file = file.path(outdir, 'counts_gene.Rdata'))
+
+## Save gene counts
+message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_gene.tsv')))
+write.table(as.data.frame(counts_gene), file = file.path(outdir,
+    'counts_gene.tsv'), sep = '\t', row.names = FALSE, quote = FALSE,
+    col.names = TRUE)
+system(paste('gzip', file.path(outdir, 'counts_gene.tsv')))
+
+## Create gene level rse
+rse_gene <- SummarizedExperiment(assays = list('counts' = counts_gene),
+    colData = DataFrame(metadata_clean), rowRanges = genes)
+message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_gene.Rdata')))
+save(rse_gene, file = file.path(outdir, 'rse_gene.Rdata'))
+rm(counts, counts_gene, rse_exon, rse_gene)
 
 
 
