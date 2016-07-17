@@ -83,8 +83,8 @@ for(project in projects) {
         } else {
             ## There's no counts_jx.tsv.gz file for GTEx
             meta_web$junctions[projects == project] <- paste0(
-                '<a href="http://duffel.rail.bio/recount/', project,
-                '/rse_jx.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-jx\', 1)">RSE</a>',
+#                '<a href="http://duffel.rail.bio/recount/', project,
+#                '/rse_jx.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-jx\', 1)">RSE</a>',
                 '<a href="http://duffel.rail.bio/recount/', project, '/',
                 project, '.junction_id_with_transcripts.bed.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-jx-bed\', 1)">jx_bed</a>',
                 '<a href="http://duffel.rail.bio/recount/', project, '/',
