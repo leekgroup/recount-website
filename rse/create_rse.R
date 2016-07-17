@@ -122,7 +122,7 @@ if(opt$project == 'gtex') {
         
         sample_reads <- mclapply(jx_project_tab, function(jx_proj_tab) {
             subset(jx_proj_tab, sample_id == sample)
-        }, mc.cores = 3)
+        }, mc.cores = 2)
         sample_reads <- do.call(rbind, sample_reads)
         if(nrow(sample_reads) == 0)  {
             message(paste(Sys.time(), 'found no junction counts for run', run))
