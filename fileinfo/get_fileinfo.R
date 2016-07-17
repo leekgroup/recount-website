@@ -56,7 +56,7 @@ rse_path <- file.path('/dcl01/leek/data/recount-website/rse',
 rse_files <- dir(rse_path, full.names = TRUE)
 names(rse_files) <- dir(rse_path)
 
-if(opt$projectid != 'SRP025982') {
+if(opt$projectid != 'SRP012682') {
     rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
         'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
 } else {

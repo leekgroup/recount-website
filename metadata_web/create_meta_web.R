@@ -70,7 +70,7 @@ for(project in projects) {
             '/rse_exon.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">RSE</a>', 
             '<a href="http://duffel.rail.bio/recount/', project,
             '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts</a>')
-        if(project != 'SRP025982') {
+        if(project != 'SRP012682') {
             meta_web$junctions[projects == project] <- paste0(
                 '<a href="http://duffel.rail.bio/recount/', project,
                 '/rse_jx.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-jx\', 1)">RSE</a>',
