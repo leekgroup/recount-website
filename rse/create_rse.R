@@ -128,7 +128,7 @@ if(opt$project == 'gtex') {
         jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
         x <- sample_reads$reads[jx_map[!is.na(jx_map)]]
         i <- which(!is.na(jx_map))
-        j <- rep(1, length(j))
+        j <- rep(1, length(i))
         stopifnot(length(i) == length(x))
         res <- sparseMatrix(i = i, j = j, x = x, dims = c(jx_n, 1))
         colnames(res) <- run
