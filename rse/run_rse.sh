@@ -41,21 +41,18 @@ METADATA="${MAINDIR}/metadata/metadata_${PROJECT}.Rdata"
 echo "Creating script for project ${PROJECT}"
 sname="${PROJECT}.rse"
 
-for LINES in 95 192 211 221 223 231 233 235 238 239 244 246 256 297 299 300 303 325 346 352 365 375 385 388 413 414 425 442 457 475 489 499 514 519 525 532 533 568 613 617 626 646 700 718 719 820 850 932 943 1025 1027 1158 1312 1357 1405 1485 1491 1592 1725 1733 1995 2034 2035 2036 2038 2039
-do
-    cat > ${WDIR}/.${sname}.sh <<EOF
+cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m a
 #$ -l ${MEM}
 #$ -N ${sname}
-#$ -t ${LINES}
+#$ -t 1:${LINES}
 #$ -hold_jid ${PROJECT}.metadata
 ${CORES}
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
-rm -fr rse_sra/${PROJECTNAME}
 echo "**** Job starts project \${PROJECTNAME} ****"
 date
 
@@ -70,9 +67,8 @@ date
 mv ${WDIR}/${sname}.*.\${SGE_TASK_ID} ${WDIR}/logs/
 EOF
 
-    call="qsub ${WDIR}/.${sname}.sh"
-    echo $call
-    $call
-done
+call="qsub ${WDIR}/.${sname}.sh"
+echo $call
+$call
 
 
