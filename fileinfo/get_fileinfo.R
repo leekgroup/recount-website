@@ -56,16 +56,12 @@ rse_path <- file.path('/dcl01/leek/data/recount-website/rse',
 rse_files <- dir(rse_path, full.names = TRUE)
 names(rse_files) <- dir(rse_path)
 
-if(opt$projectid != 'SRP012682') {
-    rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
-        'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
-} else {
-    rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
-        'rse_gene.Rdata')#, 'rse_jx.Rdata')
-}
+rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
+    'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
 
 if(!all(rse_up %in% names(rse_files))) {
-    stop(paste('Missing counts/rse files for project', opt$projectid))
+    message('Missing files', rse_up[!rse_up %in% names(rse_files)])
+    rse_up <- rse_up[rse_up %in% names(rse_files)]
 }
 
 ## Locate metadata file
@@ -102,6 +98,11 @@ names(jx_raw) <- c(
     paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'),
     paste0(opt$projectid, '.junction_coverage.tsv.gz')
 )
+if(any(!file.exists(jx_raw))) {
+    ## Some projects don't have junction files
+    message('Missing files', jx_raw[!file.exists(jx_raw)])
+    jx_raw <- jx_raw[file.exists(jx_raw)]
+}
 
 ## List of files to upload
 upload_files <- c(rse_files[rse_up], meta_path, mean_bw, upload_bigwig, jx_raw)
