@@ -55,6 +55,7 @@ ${CORES}
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
+rm -fr rse_sra/${PROJECTNAME}
 echo "**** Job starts project \${PROJECTNAME} ****"
 date
 
