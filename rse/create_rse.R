@@ -31,6 +31,8 @@ if(FALSE) {
             projectid = 'DRP000366')
     opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
             projectid = 'DRP000987')
+    opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
+            projectid = 'ERP005274')
     ## Largest one, to find memory needed
     opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
         projectid = 'SRP025982')
@@ -79,33 +81,34 @@ jx_project <- read.table(file.path('/dcl01/leek/data/recount_junctions',
     paste0(opt$projectid, '.junction_coverage.tsv.gz')), sep = '\t',
     col.names = c('jx_id', 'sample_ids', 'reads'), stringsAsFactors = FALSE,
     colClasses = 'character')
-
-message(paste(Sys.time(), 'creating jx_project_tab object'))
 print('jx_project dimensions')
 dim(jx_project)
 head(jx_project)
 
-## Create a table with 1 row per sample for a given junction
-jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
-jx_project.end <- c(jx_project.start[2:length(jx_project.start)] - 1, nrow(jx_project))
+message(paste(Sys.time(), 'creating jx_project_tab object'))
 
-jx_project_tab <- mapply(function(start, end) {
-    jx_split <- jx_project[start:end, ]
-    jx_project_samples <- strsplit(jx_split$sample_ids, ',')
-    jx_project_reads <- strsplit(jx_split$reads, ',')
-    stopifnot(identical(elementNROWS(jx_project_samples),
-        elementNROWS(jx_project_reads)))
-    res <- data.frame(
-        jx_id = rep(jx_split$jx_id, elementNROWS(jx_project_samples)),
-        sample_id = unlist(jx_project_samples),
-        reads = as.numeric(unlist(jx_project_reads)),
-        stringsAsFactors = FALSE
-    )
-    return(res)
-}, jx_project.start, jx_project.end, SIMPLIFY = FALSE)
-rm(jx_project.start, jx_project.end)
 
 if(opt$project == 'gtex') {
+    ## Create a table with 1 row per sample for a given junction
+    jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
+    jx_project.end <- c(jx_project.start[2:length(jx_project.start)] - 1, nrow(jx_project))
+
+    jx_project_tab <- mapply(function(start, end) {
+        jx_split <- jx_project[start:end, ]
+        jx_project_samples <- strsplit(jx_split$sample_ids, ',')
+        jx_project_reads <- strsplit(jx_split$reads, ',')
+        stopifnot(identical(elementNROWS(jx_project_samples),
+            elementNROWS(jx_project_reads)))
+        res <- data.frame(
+            jx_id = rep(jx_split$jx_id, elementNROWS(jx_project_samples)),
+            sample_id = unlist(jx_project_samples),
+            reads = as.numeric(unlist(jx_project_reads)),
+            stringsAsFactors = FALSE
+        )
+        return(res)
+    }, jx_project.start, jx_project.end, SIMPLIFY = FALSE)
+    rm(jx_project.start, jx_project.end)
+    
     suppressPackageStartupMessages(library('Matrix'))
     suppressPackageStartupMessages(library('parallel'))
     message(paste(Sys.time(), 'creating junction counts (list)'))
@@ -145,8 +148,18 @@ if(opt$project == 'gtex') {
     message(paste(Sys.time(), 'saving junction counts'))
     save(jx_counts, file = file.path(outdir, 'jx_counts.Rdata'))
 } else {
-    message(paste(Sys.time(), 'running rbind on jx_project_tab'))
-    jx_project_tab <- do.call(rbind, jx_project_tab)
+    
+    ## Create a table with 1 row per sample for a given junction
+    jx_project_samples <- strsplit(jx_project$sample_ids, ',')
+    jx_project_reads <- strsplit(jx_project$reads, ',')
+    stopifnot(identical(elementNROWS(jx_project_samples),
+        elementNROWS(jx_project_reads)))
+    jx_project_tab <- data.frame(
+        jx_id = rep(jx_project$jx_id, elementNROWS(jx_project_samples)),
+        sample_id = unlist(jx_project_samples),
+        reads = as.numeric(unlist(jx_project_reads))
+    )
+    rm(jx_project_samples, jx_project_reads)
     
     message(paste(Sys.time(), 'creating junction counts table'))
     ## Create junction counts table
@@ -241,21 +254,25 @@ trans_names <- DataFrame(
 )
 
 ## Find ids for unique names
-unique_names <- DataFrame(
-    name = unique(trans_names$name[!is.na(trans_names$name)]),
-    gene_id = CharacterList(NA)
-)
-map_gene <- match(unique_names$name, transcripts$tx_name)
-unique_names$gene_id[!is.na(map_gene)] <- transcripts$gene_id[map_gene[!is.na(map_gene)]]
-unique_names$gene_id[elementNROWS(unique_names$gene_id) == 0] <- CharacterList(NA)
+hasIds <- any(!is.na(trans_names$name))
+if(hasIds) {
+    unique_names <- DataFrame(
+        name = unique(trans_names$name[!is.na(trans_names$name)]),
+        gene_id = CharacterList(NA)
+    )
+    map_gene <- match(unique_names$name, transcripts$tx_name)
+    unique_names$gene_id[!is.na(map_gene)] <- transcripts$gene_id[map_gene[!is.na(map_gene)]]
+    unique_names$gene_id[elementNROWS(unique_names$gene_id) == 0] <- CharacterList(NA)
 
-## Merge back results to large table
-map_names <- match(trans_names$name[!is.na(trans_names$name)],
-    unique_names$name)
-trans_names$gene_id[!is.na(trans_names$name)] <- unique_names$gene_id[map_names]
+    ## Merge back results to large table
+    map_names <- match(trans_names$name[!is.na(trans_names$name)],
+        unique_names$name)
+    trans_names$gene_id[!is.na(trans_names$name)] <- unique_names$gene_id[map_names]
 
-## Make table smaller by removing NAs
-trans_names <- trans_names[any(!is.na(trans_names$gene_id)), ]
+    ## Make table smaller by removing NAs
+    trans_names <- trans_names[any(!is.na(trans_names$gene_id)), ]
+    
+}
 
 ## Initialize the gene ids
 jx_bed$gene_ids <- CharacterList(NA)
@@ -271,10 +288,14 @@ find_gene <- function(jx_id) {
     }
     return(res)
 }
-message(paste(Sys.time(), 'finding the gene ids for each transcript'))
-map_jx <- match(jx_bed$junction_id, trans_names$jx_id)
-system.time( jx_bed$gene_ids[!is.na(map_jx)] <- do.call(c,
-    lapply(jx_bed$junction_id[!is.na(map_jx)], find_gene)) )
+
+if(hasIds) {
+    message(paste(Sys.time(), 'finding the gene ids for each transcript'))
+    map_jx <- match(jx_bed$junction_id, trans_names$jx_id)
+    system.time( jx_bed$gene_ids[!is.na(map_jx)] <- do.call(c,
+        lapply(jx_bed$junction_id[!is.na(map_jx)], find_gene)) )
+}
+
 
 ## Create the junctions level rse
 rse_jx <- SummarizedExperiment(assays = list('counts' = jx_counts),
