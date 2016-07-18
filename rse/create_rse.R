@@ -153,6 +153,8 @@ if(hasJx) {
         
         ## Number of junctions
         jx_n <- length(unique(jx_project$jx_id))
+        print('Number of junctions in GTEx')
+        print(jx_n)
         
         
         bioc_prep <- function(runs, samples, jx_n) {
