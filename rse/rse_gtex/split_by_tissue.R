@@ -4,7 +4,7 @@ message(paste(Sys.time(), 'loading exon level RSE object'))
 load('/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/rse_exon.Rdata')
 
 message(paste(Sys.time(), 'loading gene level RSE object'))
-load('/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/rse_gtex.Rdata')
+load('/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/rse_gene.Rdata')
 
 fix_tissue <- function(rse) {
     ## Fix 5 samples that are missing smts info but have smtsd info
