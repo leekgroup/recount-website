@@ -223,7 +223,7 @@ if(hasJx) {
         
         ## Extract information by sample
         jx_counts <- bpmapply(bioc_prep, run.groups, sample.groups,
-            MoreArgs = list(jx_n = jx_n), BPPARAM = bpparam, SIMPLIFY = FALSE))
+            MoreArgs = list(jx_n = jx_n), BPPARAM = bpparam, SIMPLIFY = FALSE)
         rm(i.groups, run.groups, sample.groups, jx_n, sample_ids)
 
         ## Create junction counts table
