@@ -46,7 +46,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -l ${MEM}
 #$ -N ${sname}
 #$ -t 1:${LINES}
-#$ -hold_jid copy_means,${PROJECT}.mean,${PROJECT}.rse
+#$ -hold_jid copy_means,${PROJECT}.mean,${PROJECT}.rse,split_${PROJECT}
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 

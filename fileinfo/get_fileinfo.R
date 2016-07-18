@@ -58,6 +58,10 @@ names(rse_files) <- dir(rse_path)
 
 rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
     'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
+if(opt$project == gtex) {
+    ## Add tissue files by pattern matching
+    rse_up <- c(rse_up, dir(rse_path, 'rse_exon_|rse_gene_'))
+}
 
 if(!all(rse_up %in% names(rse_files))) {
     message('Missing files', rse_up[!rse_up %in% names(rse_files)])

@@ -23,6 +23,19 @@ upload_table <- mapply(function(rda, project) {
         project = project, stringsAsFactors = FALSE)
 }, upload, names(upload), SIMPLIFY = FALSE)
 upload_table <- do.call(rbind, upload_table)
+
+## Add files that have all of SRA
+upload_table <- rbind(upload_table,
+    data.frame(
+        path = c(
+            '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata',
+            '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_gene.Rdata'
+        ),
+        file_name = c('rse_exon.Rdata', 'rse_gene.Rdata'),
+        project = 'sra', stringsAsFactors = FALSE
+    )
+)
+
 rownames(upload_table) <- NULL
 
 ## Remove GTEx bigWigs for now
