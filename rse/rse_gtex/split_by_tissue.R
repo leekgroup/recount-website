@@ -22,6 +22,8 @@ fix_tissue <- function(rse) {
 split_by_tissue <- function(rse, type) {
     ## Split data by tissue
     tissues <- unique(colData(rse)$smts)
+    
+    message(paste(Sys.time(), 'splitting', type, 'level information by tissue'))
     rse_split <- lapply(tissues, function(tissue) {
         subset(rse, select = colData(rse)$smts == tissue)
     })
@@ -35,8 +37,18 @@ split_by_tissue <- function(rse, type) {
     tissues <- gsub(' ', '_', tolower(tissues))
     
     res <- mapply(function(rse_tissue, tissue, type) {
+        
+        message(paste(Sys.time(), 'saving', type,
+            'level information for tissue', tissue))
+        
         rse_file <- paste0('/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/rse_', type, '_', tissue, '.Rdata')
-        save(rse_split, file = rse_file)
+        
+        ## Make sure the variable name is rse_exon or rse_gene
+        varname <- paste0('rse_', type)
+        assign(varname, rse_file)
+        
+        ## Save
+        save(list = varname, file = rse_file)
         return(rse_file)
     }, rse_split, tissues, MoreArgs = list(type = type), SIMPLIFY = FALSE)
 }
