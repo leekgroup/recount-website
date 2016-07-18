@@ -33,9 +33,14 @@ files_main <- function(type) {
     message(paste(Sys.time(), 'loading files'))
     rse_list <- lapply(rse_files_files, function(x) {
         res <- lapply(x, files_load, type = type)
-        message(paste(Sys.time(), 'merging RSE objects (groop)'))
+        message(paste(Sys.time(), 'merging RSE objects (group)'))
         do.call(cbind, res)
     })
+    
+    message(paste(Sys.time(), 'saving rse_list'))
+    save(rse_list, file = paste0(
+        '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_list_',
+        type, '.Rdata'))
     
     message(paste(Sys.time(), 'merging RSE objects from groups'))
     varname <- paste0('rse_', type)
