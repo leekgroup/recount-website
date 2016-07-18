@@ -128,15 +128,15 @@ if(hasJx) {
         message(paste(Sys.time(), 'creating junction counts (list)'))
         ## Fill in table
         jx_n <- length(unique(jx_project$jx_id))
-        jx_counts <- lapply(metadata_clean$run, function(run) {
+        jx_counts <- mclapply(metadata_clean$run, function(run) {
             sample <- jx_samples$sample_id[jx_samples$run == run]
     
             message(paste(Sys.time(), 
                 'extracting info from jx_project_tab for run', run))
     
-            sample_reads <- mclapply(jx_project_tab, function(jx_proj_tab) {
+            sample_reads <- lapply(jx_project_tab, function(jx_proj_tab) {
                 subset(jx_proj_tab, sample_id == sample)
-            }, mc.cores = 2)
+            })
             sample_reads <- do.call(rbind, sample_reads)
             if(nrow(sample_reads) == 0)  {
                 message(paste(Sys.time(), 'found no junction counts for run',
@@ -151,7 +151,7 @@ if(hasJx) {
             res <- sparseMatrix(i = i, j = j, x = x, dims = c(jx_n, 1))
             colnames(res) <- run
             return(res)
-        })
+        }, mc.cores = 2)
 
         message(paste(Sys.time(), 'saving junction counts (list)'))
         save(jx_counts, file = file.path(outdir, 'jx_counts_list.Rdata'))

@@ -133,7 +133,7 @@ summary(meta_web$number_samples)
 
 ## How much of it is missing?
 message(paste(Sys.time(), "number missing"))
-sapply(meta_web, function(x) sum(is.na(x)))
+sapply(meta_web, function(x) sum(is.na(x) | x == ''))
 
 ## Save info
 save(meta_web, file = paste0('meta_web_', opt$project, '.Rdata'))
