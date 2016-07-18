@@ -27,10 +27,17 @@ files_main <- function(type) {
     message(paste(Sys.time(), 'locating files'))
     rse_files <- files_locate(type)
     
-    message(paste(Sys.time(), 'loading files'))
-    rse_list <- lapply(rse_files, files_load, type = type)
+    ## Split files into groups of ~20
+    rse_files_list <- split(rse_files, cut2(seq_len(length(rse_files)), m = 20))
     
-    message(paste(Sys.time(), 'merging RSE objects'))
+    message(paste(Sys.time(), 'loading files'))
+    rse_list <- lapply(rse_files_files, function(x) {
+        res <- lapply(x, files_load, type = type)
+        message(paste(Sys.time(), 'merging RSE objects (groop)'))
+        do.call(cbind, res)
+    })
+    
+    message(paste(Sys.time(), 'merging RSE objects from groups'))
     varname <- paste0('rse_', type)
     assign(varname, do.call(cbind, rse_list))
     
