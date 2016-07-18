@@ -45,7 +45,7 @@ split_by_tissue <- function(rse, type) {
         
         ## Make sure the variable name is rse_exon or rse_gene
         varname <- paste0('rse_', type)
-        assign(varname, rse_file)
+        assign(varname, rse_tissue)
         
         ## Save
         save(list = varname, file = rse_file)
