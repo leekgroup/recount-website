@@ -152,7 +152,7 @@ if(hasJx) {
         })
         
         ## Number of junctions
-        jx_n <- length(unique(jx_project$jx_id)
+        jx_n <- length(unique(jx_project$jx_id))
         
         
         bioc_prep <- function(runs, samples, jx_n) {
@@ -211,7 +211,7 @@ if(hasJx) {
             
             print('jx_count size and dimensions')
             print(object.size(jx_count), units = 'Mb')
-            dim(jx_count)
+            print(dim(jx_count))
             
             return(jx_count)
         }
