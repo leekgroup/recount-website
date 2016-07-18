@@ -103,61 +103,131 @@ if(hasJx) {
 
     if(opt$project == 'gtex') {
         ## Create a table with 1 row per sample for a given junction
-        jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
-        jx_project.end <- c(jx_project.start[2:length(jx_project.start)] - 1,
-            nrow(jx_project))
-
-        jx_project_tab <- mapply(function(start, end) {
-            jx_split <- jx_project[start:end, ]
-            jx_project_samples <- strsplit(jx_split$sample_ids, ',')
-            jx_project_reads <- strsplit(jx_split$reads, ',')
-            stopifnot(identical(elementNROWS(jx_project_samples),
-                elementNROWS(jx_project_reads)))
-            res <- data.frame(
-                jx_id = rep(jx_split$jx_id, elementNROWS(jx_project_samples)),
-                sample_id = unlist(jx_project_samples),
-                reads = as.numeric(unlist(jx_project_reads)),
-                stringsAsFactors = FALSE
+        if(!file.exists(file.path(outdir, 'jx_project_tab.Rdata'))) {
+            jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
+            jx_project.end <- c(
+                jx_project.start[2:length(jx_project.start)] - 1,
+                nrow(jx_project)
             )
-            return(res)
-        }, jx_project.start, jx_project.end, SIMPLIFY = FALSE)
-        rm(jx_project.start, jx_project.end)
+        
+            jx_project_tab <- mapply(function(start, end) {
+                jx_split <- jx_project[start:end, ]
+                jx_project_samples <- strsplit(jx_split$sample_ids, ',')
+                jx_project_reads <- strsplit(jx_split$reads, ',')
+                stopifnot(identical(elementNROWS(jx_project_samples),
+                    elementNROWS(jx_project_reads)))
+                res <- data.frame(
+                    jx_id = rep(jx_split$jx_id,
+                        elementNROWS(jx_project_samples)),
+                    sample_id = unlist(jx_project_samples),
+                    reads = as.numeric(unlist(jx_project_reads)),
+                    stringsAsFactors = FALSE
+                )
+                return(res)
+            }, jx_project.start, jx_project.end, SIMPLIFY = FALSE)
+            rm(jx_project.start, jx_project.end)
+            message(paste(Sys.time(), 'saving jx_project_tab'))
+            save(jx_project_tab, file = file.path(outdir,
+                'jx_project_tab.Rdata'))
+            rm(jx_project_tab)
+        } else {
+            message(paste(Sys.time(), 'using previously created jx_project_tab'))
+        }
+        
 
         suppressPackageStartupMessages(library('Matrix'))
-        suppressPackageStartupMessages(library('parallel'))
+        suppressPackageStartupMessages(library('BiocParallel'))
+        suppressPackageStartupMessages(library('BatchJobs'))
+        suppressPackageStartupMessages(library('Hmisc'))
+        
+        ## Setup parallel envir
+        funs <- makeClusterFunctionsSGE('bioc.tmpl')
+        param <- BatchJobsParam(36, cluster.functions = funs, cleanup = FALSE)
+        
         message(paste(Sys.time(), 'creating junction counts (list)'))
-        ## Fill in table
-        jx_n <- length(unique(jx_project$jx_id))
-        jx_counts <- mclapply(metadata_clean$run, function(run) {
+        
+        ## Find sample ids
+        sample_ids <- lapply(metadata_clean$run, function(run) {
             sample <- jx_samples$sample_id[jx_samples$run == run]
-    
-            message(paste(Sys.time(), 
-                'extracting info from jx_project_tab for run', run))
-    
-            sample_reads <- lapply(jx_project_tab, function(jx_proj_tab) {
-                subset(jx_proj_tab, sample_id == sample)
-            })
-            sample_reads <- do.call(rbind, sample_reads)
-            if(nrow(sample_reads) == 0)  {
-                message(paste(Sys.time(), 'found no junction counts for run',
-                    run))
-                next
+        })
+        
+        ## Number of junctions
+        jx_n <- length(unique(jx_project$jx_id)
+        
+        
+        bioc_prep <- function(runs, samples, jx_n) {
+            
+            ## Define some functions
+            bioc_load <- function(f) {
+                load(f)
+                return(res)
             }
-            jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
-            x <- sample_reads$reads[jx_map[!is.na(jx_map)]]
-            i <- which(!is.na(jx_map))
-            j <- rep(1, length(i))
-            stopifnot(length(i) == length(x))
-            res <- sparseMatrix(i = i, j = j, x = x, dims = c(jx_n, 1))
-            colnames(res) <- run
-            return(res)
-        }, mc.cores = 2)
-
-        message(paste(Sys.time(), 'saving junction counts (list)'))
-        save(jx_counts, file = file.path(outdir, 'jx_counts_list.Rdata'))
+            ## Function for one run
+            bioc_run <- function(run, sample, jx_n) {
+                message(paste(Sys.time(), 
+                    'extracting info from jx_project_tab for run', run))
+                
+                resdir <- '/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/resdir'
+                dir.create(resdir, showWarnings = FALSE)
+    
+                sample_reads <- lapply(jx_project_tab, function(jx_proj_tab) {
+                    subset(jx_proj_tab, sample_id == sample)
+                })
+                sample_reads <- do.call(rbind, sample_reads)
+                if(nrow(sample_reads) == 0)  {
+                    message(paste(Sys.time(),
+                        'found no junction counts for run', run))
+                    next
+                }
+                jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
+                x <- sample_reads$reads[jx_map[!is.na(jx_map)]]
+                i <- which(!is.na(jx_map))
+                j <- rep(1, length(i))
+                stopifnot(length(i) == length(x))
+                res <- sparseMatrix(i = i, j = j, x = x, dims = c(jx_n, 1))
+                colnames(res) <- run
+            
+                ## Write result
+                res_file <- file.path(resdir, paste0('res_', run, '.Rdata'))
+                save(res, file = res_file)
+                return(res_file)
+            }
+            
+            library('Matrix')
+            
+            message(paste(Sys.time(), 'loading jx_project_tab file'))
+            load('/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/jx_project_tab.Rdata')
+            
+            res_files <- mapply(bioc_run, runs, samples,
+                MoreArgs = list(jx_n = jx_n), SIMPLIFY = FALSE)
+            
+            ## Load results
+            message(paste(Sys.time(), 'loading sample results'))
+            jx_count <- lapply(res_files, bioc_load)
+            
+            ## Create junction counts table for subset
+            message(paste(Sys.time(), 'running cbind on junction counts'))
+            jx_count <- do.call(cbind, jx_count)
+            
+            print('jx_count size and dimensions')
+            print(object.size(jx_count), units = 'Mb')
+            dim(jx_count)
+            
+            return(jx_count)
+        }
+        
+        ## Create groups of samples to analyze at a time
+        i.groups <- cut2(seq_len(length(metadata_clean$run)), g = 36)
+        run.groups <- split(metadata_clean$run, i.groups)
+        sample.groups <- split(sample_ids, i.groups)
+        
+        ## Extract information by sample
+        jx_counts <- bpmapply(bioc_prep, run.groups, sample.groups,
+            MoreArgs = list(jx_n = jx_n), BPPARAM = bpparam, SIMPLIFY = FALSE))
+        rm(i.groups, run.groups, sample.groups, jx_n, sample_ids)
 
         ## Create junction counts table
-        message(paste(Sys.time(), 'running cbind on junction counts'))
+        message(paste(Sys.time(), 'running cbind on junction counts subsets'))
         jx_counts <- do.call(cbind, jx_counts)
 
         message(paste(Sys.time(), 'saving junction counts'))
@@ -194,10 +264,8 @@ if(hasJx) {
             jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
             jx_counts[!is.na(jx_map), run] <- sample_reads$reads[jx_map[!is.na(jx_map)]]
         }
-        rm(sample, sample_reads, jx_map, run)
+        rm(sample, sample_reads, jx_map, run, jx_project_tab)
     }
-    rm(jx_project_tab)
-
 
     print('Memory used by junction counts')
     print(object.size(jx_counts), units = 'Mb')
