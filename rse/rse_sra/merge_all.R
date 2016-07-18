@@ -1,4 +1,5 @@
 library('SummarizedExperiment')
+library('Hmisc')
 
 ## Locate rse files
 files_locate <- function(type) {
