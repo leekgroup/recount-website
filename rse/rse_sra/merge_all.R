@@ -111,6 +111,7 @@ files_main <- function(type) {
 
     
     ## Save results
+    message(paste(Sys.time(), 'saving the final rse object'))
     rse_file <- paste0('/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_',
         type, '.Rdata')
     save(list = varname, file = rse_file)
