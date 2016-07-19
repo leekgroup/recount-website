@@ -34,7 +34,7 @@ stopifnot(file.exists(file))
 load(file)
 
 sqlfile <- 'SRAmetadb.sqlite'
-if(!file.exists('SRAmetadb.sqlite')) sqlfile <<- getSRAdbFile()
+if(!file.exists('SRAmetadb.sqlite')) sqlfile <- getSRAdbFile()
 
 ## Create connection
 sra_con <- dbConnect(SQLite(), sqlfile)

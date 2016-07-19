@@ -80,7 +80,8 @@ for(project in projects) {
             paste0('rse_', opt$project), project, 'rse_gene.Rdata'),
         file.path('/dcl01/leek/data/recount-website/rse/',
             paste0('rse_', opt$project), project, 'counts_gene.tsv.gz')
-    )    
+    )
+    
     meta_web$gene[projects == project] <- paste(c(
         paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
@@ -98,6 +99,34 @@ for(project in projects) {
             '<a href="http://duffel.rail.bio/recount/', project,
         '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts</a>')
         )[file.exists(exon_files)], collapse = ' ')
+    if(opt$project == 'gtex') {      
+        ## Add tissue files
+        extra_exon <- dir(
+            '/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682',
+            'rse_exon_')
+        names(extra_exon) <- gsub('_', ' ', gsub('rse_exon_|.Rdata', '',
+            extra_exon))
+        extra_gene <- dir(
+            '/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682',
+            'rse_gene_')
+        names(extra_gene) <- gsub('_', ' ', gsub('rse_gene_|.Rdata', '',
+            extra_gene))
+        
+        meta_web$gene[projects == project] <- paste(
+            meta_web$gene[projects == project], 'RSE by tissue:',
+            paste0(
+                '<a href="http://duffel.rail.bio/recount/', project,
+                '/', extra_gene, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">', names(extra_gene),'</a>'
+            , collapse = ' '), collapse = ' ')
+        
+        meta_web$exon[projects == project] <- paste(
+            meta_web$exon[projects == project], 'RSE by tissue:',
+            paste0(
+                '<a href="http://duffel.rail.bio/recount/', project,
+                '/', extra_exon, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">', names(extra_exon),'</a>'
+            , collapse = ' '), collapse = ' ')
+    }
+    
     meta_web$junctions[projects == project] <- paste(c(
         paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
