@@ -64,7 +64,8 @@ if(opt$project == 'gtex') {
 }
 
 if(!all(rse_up %in% names(rse_files))) {
-    message('Missing files', rse_up[!rse_up %in% names(rse_files)])
+    message('Missing files ', paste(rse_up[!rse_up %in% names(rse_files)],
+        collapse = ' '))
     rse_up <- rse_up[rse_up %in% names(rse_files)]
 }
 
@@ -104,7 +105,8 @@ names(jx_raw) <- c(
 )
 if(any(!file.exists(jx_raw))) {
     ## Some projects don't have junction files
-    message('Missing files', jx_raw[!file.exists(jx_raw)])
+    message('Missing files ', paste(jx_raw[!file.exists(jx_raw)],
+        collapse = ' '))
     jx_raw <- jx_raw[file.exists(jx_raw)]
 }
 
