@@ -118,7 +118,7 @@ files_main <- function(type) {
     return(rse_file)
 }
 
-if(!file.exists('rse_gene.Rdata')) {
+if(!file.exists('/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_gene.Rdata')) {
     message(paste(Sys.time(), 'processing gene files'))
     files_main('gene')
 } else {
@@ -126,7 +126,7 @@ if(!file.exists('rse_gene.Rdata')) {
 }
 
 
-if(!file.exists('rse_exon.Rdata')) {
+if(!file.exists('/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata')) {
     message(paste(Sys.time(), 'processing exon files'))
     files_main('exon')
 } else {
