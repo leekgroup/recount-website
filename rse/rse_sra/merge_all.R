@@ -65,6 +65,8 @@ files_main <- function(type) {
         rse_list_sets <- lapply(levels(group.sets), function(group) {
             do.call(cbind, rse_list[group.sets == group])
         })
+        message(paste(Sys.time(), 'saving rse_list_sets'))
+        save(rse_list_sets, file = rse_list_sets_file)
     } else {
         message(paste(Sys.time(),
             'loading previously computed rse_list_sets at the', type, 'level'))
