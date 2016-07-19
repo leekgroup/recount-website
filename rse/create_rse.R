@@ -163,6 +163,7 @@ if(hasJx) {
         bioc_prep <- function(runs, samples, jx_n) {
             ## Define some functions
             bioc_load <- function(f) {
+                message(paste(Sys.time(), 'loading result file', f))
                 load(f)
                 return(res)
             }
@@ -214,6 +215,7 @@ if(hasJx) {
             message(paste(Sys.time(), 'running cbind on junction counts'))
             jx_count <- do.call(cbind, jx_count)
             
+        
             print('jx_count size and dimensions')
             print(object.size(jx_count), units = 'Mb')
             print(dim(jx_count))
@@ -221,22 +223,56 @@ if(hasJx) {
             return(jx_count)
         }
         
-        ## Create groups of samples to analyze at a time
-        i.groups <- cut2(seq_len(length(metadata_clean$run)), g = 36)
-        run.groups <- split(metadata_clean$run, i.groups)
-        sample.groups <- split(sample_ids, i.groups)
+        if(!file.exists(file.path(outdir, 'jx_counts.Rdata'))) {
+            if(!file.exists(file.path(outdir, 'jx_counts_list.Rdata'))) {
+                ## Create groups of samples to analyze at a time
+                i.groups <- cut2(seq_len(length(metadata_clean$run)), g = 36)
+                run.groups <- split(metadata_clean$run, i.groups)
+                sample.groups <- split(sample_ids, i.groups)
         
-        ## Extract information by sample
-        jx_counts <- bpmapply(bioc_prep, run.groups, sample.groups,
-            MoreArgs = list(jx_n = jx_n), BPPARAM = param, SIMPLIFY = FALSE)
-        rm(i.groups, run.groups, sample.groups, jx_n, sample_ids)
+                ## Extract information by sample
+                jx_counts_list <- bpmapply(bioc_prep, run.groups, sample.groups,
+                    MoreArgs = list(jx_n = jx_n), BPPARAM = param,
+                    SIMPLIFY = FALSE)
+                rm(i.groups, run.groups, sample.groups, sample_ids)
+        
+                message(paste(Sys.time(), 'saving junction counts list'))
+                save(jx_counts_list, file = file.path(outdir,
+                    'jx_counts_list.Rdata'))
+            } else {
+                message(paste(Sys.time(),
+                    'loading previously computed jx_counts_list.Rdata'))
+                load(file.path(outdir, 'jx_counts_list.Rdata'))
+            }
+        
 
-        ## Create junction counts table
-        message(paste(Sys.time(), 'running cbind on junction counts subsets'))
-        jx_counts <- do.call(cbind, jx_counts)
+            ## Create junction counts table        
+            message(paste(Sys.time(), 'preparing the counts matrix'))
+            counts_n <- sapply(jx_counts_list, ncol)
+            counts_adj <- c(0, cumsum(counts_n[1:(length(counts_n) - 1)]))
+            counts_idx <- mapply(function(n, adj) { seq_len(n) + adj },
+                counts_n, counts_adj, SIMPLIFY = FALSE)
+            
+            message(paste(Sys.time(), 'initializing counts matrix'))
+            jx_counts <- sparseMatrix(i = 1, j = 1, x = 1,
+                dims = c(jx_n, sum(counts_n)), dimnames = list(seq_len(jx_n),
+                unlist(lapply(jx_counts_list, colnames))))
+        
+            ## Fill in matrix
+            for(i in seq_len(length(counts_idx))) {
+                message(paste(Sys.time(), 'filling in counts matrix with run',
+                    i))
+                jx_counts[, counts_idx[[i]]] <- jx_counts_list[[i]]
+            }
+            rm(jx_counts_list, counts_n, counts_adj, counts_idx)
 
-        message(paste(Sys.time(), 'saving junction counts'))
-        save(jx_counts, file = file.path(outdir, 'jx_counts.Rdata'))
+            message(paste(Sys.time(), 'saving junction counts'))
+            save(jx_counts, file = file.path(outdir, 'jx_counts.Rdata'))
+        } else {
+            message(paste(Sys.time(),
+                'loading previously computed jx_counts.Rdata'))
+            load(file.path(outdir, 'jx_counts.Rdata'))
+        }
     } else {
 
         ## Create a table with 1 row per sample for a given junction
