@@ -39,6 +39,8 @@ files_main <- function(type) {
     })
     
     message(paste(Sys.time(), 'saving rse_list'))
+    dir.create('/dcl01/leek/data/recount-website/rse/rse_sra/all',
+        showWarnings = FALSE)
     save(rse_list, file = paste0(
         '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_list_',
         type, '.Rdata'))
@@ -48,8 +50,6 @@ files_main <- function(type) {
     assign(varname, do.call(cbind, rse_list))
     
     ## Save results
-    dir.create('/dcl01/leek/data/recount-website/rse/rse_sra/all',
-        showWarnings = FALSE)
     rse_file <- paste0('/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_',
         type, '.Rdata')
     save(list = varname, file = rse_file)
