@@ -32,7 +32,7 @@ files_main <- function(type) {
     rse_files_list <- split(rse_files, cut2(seq_len(length(rse_files)), m = 20))
     
     message(paste(Sys.time(), 'loading files'))
-    rse_list <- lapply(rse_files_files, function(x) {
+    rse_list <- lapply(rse_files_list, function(x) {
         res <- lapply(x, files_load, type = type)
         message(paste(Sys.time(), 'merging RSE objects (group)'))
         do.call(cbind, res)
