@@ -1,0 +1,42 @@
+Loading required package: colorout
+[1] "Removing GTEx bigWigs"
+[1] 81698     3
+gtex
+FALSE  TRUE 
+72035  9663 
+[1] "Final table: minor exploration"
+                                                                       path
+1 /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_exon.tsv.gz
+2 /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_gene.tsv.gz
+3     /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_exon.Rdata
+4     /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_gene.Rdata
+5   /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_jx.tsv.gz
+6       /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_jx.Rdata
+           file_name   project
+1 counts_exon.tsv.gz DRP000366
+2 counts_gene.tsv.gz DRP000366
+3     rse_exon.Rdata DRP000366
+4     rse_gene.Rdata DRP000366
+5   counts_jx.tsv.gz DRP000366
+6       rse_jx.Rdata DRP000366
+[1] 72035     3
+   user  system elapsed 
+ 11.171   2.096 132.128 
+2016-07-19 02:07:08
+Session info -----------------------------------------------------------------------------------------------------------
+ setting  value                                      
+ version  R version 3.3.0 Patched (2016-05-20 r70657)
+ system   x86_64, linux-gnu                          
+ ui       X11                                        
+ language (EN)                                       
+ collate  en_US.UTF-8                                
+ tz       <NA>                                       
+ date     2016-07-19                                 
+
+Packages ---------------------------------------------------------------------------------------------------------------
+ package  * version date       source                            
+ colorout * 1.1-2   2016-05-08 Github (jalvesaq/colorout@6538970)
+ devtools   1.11.1  2016-04-21 CRAN (R 3.3.0)                    
+ digest     0.6.9   2016-01-08 CRAN (R 3.3.0)                    
+ memoise    1.0.0   2016-01-29 CRAN (R 3.3.0)                    
+ withr      1.0.2   2016-06-20 CRAN (R 3.3.0)                    
