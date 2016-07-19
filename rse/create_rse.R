@@ -38,6 +38,10 @@ if(FALSE) {
     ## Largest one, to find memory needed
     opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
         projectid = 'SRP025982')
+    
+    ## GTEx
+    opt <- list(project = 'gtex', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_gtex.Rdata',
+        projectid = 'SRP012682')
 }
 
 ## Create output dir
@@ -70,7 +74,7 @@ dir.create(outdir, showWarnings = FALSE)
 
 #### Junction level ####
 
-message(paste(Sys.time(), 'loading junction coverage file'))
+
 ## Load project junctions info
 jx_file <- file.path('/dcl01/leek/data/recount_junctions',
     paste0(opt$projectid, '.junction_coverage.tsv.gz'))
@@ -92,15 +96,14 @@ if(hasJx) {
         sep = '\t', col.names = c('sample_id', 'project', 'run'),
         stringsAsFactors = FALSE, colClasses = 'character')
         
-        jx_project <- read.table(jx_file, sep = '\t',
-            col.names = c('jx_id', 'sample_ids', 'reads'),
-            stringsAsFactors = FALSE, colClasses = 'character')
-        print('jx_project dimensions')
-        dim(jx_project)
+    message(paste(Sys.time(), 'loading junction coverage file'))
+    jx_project <- read.table(jx_file, sep = '\t',
+        col.names = c('jx_id', 'sample_ids', 'reads'),
+        stringsAsFactors = FALSE, colClasses = 'character')
+    print('jx_project dimensions')
+    dim(jx_project)
 
-        message(paste(Sys.time(), 'creating jx_project_tab object'))
-
-
+    message(paste(Sys.time(), 'creating jx_project_tab object'))
     if(opt$project == 'gtex') {
         ## Create a table with 1 row per sample for a given junction
         if(!file.exists(file.path(outdir, 'jx_project_tab.Rdata'))) {
@@ -132,6 +135,7 @@ if(hasJx) {
             rm(jx_project_tab)
         } else {
             message(paste(Sys.time(), 'using previously created jx_project_tab'))
+            load(file.path(outdir, 'jx_project_tab.Rdata'))
         }
         
 

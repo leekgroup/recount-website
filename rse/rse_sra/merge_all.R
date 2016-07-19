@@ -81,7 +81,7 @@ files_main <- function(type) {
     col_data <- do.call(rbind, lapply(rse_list_sets, colData))
     row_ranges <- rowRanges(rse_list_sets[[1]])
     counts_list <- lapply(rse_list_sets, function(x) assays(x)$counts)
-    rm(rle_list_sets)
+    rm(rse_list_sets)
     
     ## Prepare counts matrix
     message(paste(Sys.time(), 'preparing the counts matrix'))
