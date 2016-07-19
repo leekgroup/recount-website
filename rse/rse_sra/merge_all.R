@@ -35,30 +35,30 @@ files_main <- function(type) {
     rse_list_file <- paste0(
         '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_list_',
         type, '.Rdata')
-    dir.create('/dcl01/leek/data/recount-website/rse/rse_sra/all',
-        showWarnings = FALSE)
-    
-    if(!file.exists(rse_list_file)) {
-        message(paste(Sys.time(), 'loading individual RSE files at the', type,
-            'level'))
-        rse_list <- lapply(rse_files_list, function(x) {
-            res <- lapply(x, files_load, type = type)
-            message(paste(Sys.time(), 'merging RSE objects (group)'))
-            do.call(cbind, res)
-        })
-    
-        message(paste(Sys.time(), 'saving rse_list'))
-        save(rse_list, file = rse_list_file)
-    } else {
-        message(paste(Sys.time(),
-            'loading previously computed rse_list at the', type, 'level'))
-        load(rse_list_file)
-    }
-    
     rse_list_sets_file <- paste0(
         '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_list_sets_',
         type, '.Rdata')
+    dir.create('/dcl01/leek/data/recount-website/rse/rse_sra/all',
+        showWarnings = FALSE)
+    
     if(!file.exists(rse_list_sets_file)) {
+        if(!file.exists(rse_list_file)) {
+            message(paste(Sys.time(), 'loading individual RSE files at the', type,
+                'level'))
+            rse_list <- lapply(rse_files_list, function(x) {
+                res <- lapply(x, files_load, type = type)
+                message(paste(Sys.time(), 'merging RSE objects (group)'))
+                do.call(cbind, res)
+            })
+    
+            message(paste(Sys.time(), 'saving rse_list'))
+            save(rse_list, file = rse_list_file)
+        } else {
+            message(paste(Sys.time(),
+                'loading previously computed rse_list at the', type, 'level'))
+            load(rse_list_file)
+        }
+        
         message(paste(Sys.time(),
             'merging RSE objects by sets of groups at the', type, 'level'))
         group.sets <- cut2(seq_len(length(rse_list)), m = 5)
@@ -67,6 +67,7 @@ files_main <- function(type) {
         })
         message(paste(Sys.time(), 'saving rse_list_sets'))
         save(rse_list_sets, file = rse_list_sets_file)
+        rm(rle_list)
     } else {
         message(paste(Sys.time(),
             'loading previously computed rse_list_sets at the', type, 'level'))
@@ -75,13 +76,12 @@ files_main <- function(type) {
     
     message(paste(Sys.time(), 'merging RSE objects from sets at the', type,
         'level'))
-    
-
     ## Extract data from sets
     message(paste(Sys.time(), 'extracting information from sets'))
     col_data <- do.call(rbind, lapply(rse_list_sets, colData))
     row_ranges <- rowRanges(rse_list_sets[[1]])
     counts_list <- lapply(rse_list_sets, function(x) assays(x)$counts)
+    rm(rle_list_sets)
     
     ## Prepare counts matrix
     message(paste(Sys.time(), 'preparing the counts matrix'))
