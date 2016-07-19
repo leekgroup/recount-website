@@ -135,7 +135,6 @@ if(hasJx) {
             rm(jx_project_tab)
         } else {
             message(paste(Sys.time(), 'using previously created jx_project_tab'))
-            load(file.path(outdir, 'jx_project_tab.Rdata'))
         }
         
 
@@ -151,7 +150,7 @@ if(hasJx) {
         message(paste(Sys.time(), 'creating junction counts (list)'))
         
         ## Find sample ids
-        sample_ids <- lapply(metadata_clean$run, function(run) {
+        sample_ids <- sapply(metadata_clean$run, function(run) {
             sample <- jx_samples$sample_id[jx_samples$run == run]
         })
         
@@ -195,7 +194,7 @@ if(hasJx) {
         
         ## Extract information by sample
         jx_counts <- bpmapply(bioc_prep, run.groups, sample.groups,
-            MoreArgs = list(jx_n = jx_n), BPPARAM = bpparam, SIMPLIFY = FALSE)
+            MoreArgs = list(jx_n = jx_n), BPPARAM = param, SIMPLIFY = FALSE)
         rm(i.groups, run.groups, sample.groups, jx_n, sample_ids)
 
         ## Create junction counts table
