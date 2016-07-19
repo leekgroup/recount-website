@@ -43,6 +43,17 @@ shinyUI(navbarPage(
         tags$br(),
         tags$br()
     ),
+    tabPanel('GTEx',
+        tags$head(includeScript("google-analytics.js")),
+        DT::dataTableOutput('gtex'),
+        tags$hr(),
+        p('This research was supported in part by COMPLETE ME. LCT was supported by Consejo Nacional de Ciencia y Tecnología México 351535.'),
+        HTML('<a href="http://idies.jhu.edu/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'idies\', 1)">'), img(src='http://idies.jhu.edu/wp-content/themes/idies/assets/img/idieslogo.png', align = "right"), HTML('</a>'),
+        tags$br(),
+        tags$br(),
+        tags$br(),
+        tags$br()
+    ),
     tabPanel('Documentation',
         tags$head(includeScript("google-analytics.js")),
         p('All columns of the table below are sortable and searchable. The columns are as follows:'),
