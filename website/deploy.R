@@ -13,6 +13,7 @@ save(meta_web, file = 'meta_web.Rdata')
 dir.create('www', showWarnings = FALSE)
 system('cp ../genes/ucsc-knowngene-hg38-exons.Rdata www/')
 system('cp ../genes/ucsc-knowngene-hg38-genes-bp-length.Rdata www/')
+system('scp e:/dcl01/leek/data/recount_junctions/sample_ids.tsv ww/')
 
 
 library('rsconnect')
@@ -22,5 +23,5 @@ rsconnect::setAccountInfo(name=deploy_info$name, token=deploy_info$token,
 deployApp(appFiles = c('ui.R', 'server.R', 'meta_web.Rdata', 'download.md',
     'www/ucsc-knowngene-hg38-genes-bp-length.Rdata',
     'www/ucsc-knowngene-hg38-exons.Rdata', 'google-analytics.js', 
-    'www/TxDb.Hsapiens.UCSC.hg38.knownGene_3.1.3.tar.gz'),
+    'www/TxDb.Hsapiens.UCSC.hg38.knownGene_3.1.3.tar.gz', 'www/sample_ids.tsv'),
     appName = 'recount', account = deploy_info$name)
