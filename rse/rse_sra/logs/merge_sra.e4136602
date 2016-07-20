@@ -1,0 +1,101 @@
+Loading required package: methods
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
+    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unsplit, which, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:base’:
+
+    colMeans, colSums, expand.grid, rowMeans, rowSums
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Warning messages:
+1: package ‘SummarizedExperiment’ was built under R version 3.3.1 
+2: package ‘GenomicRanges’ was built under R version 3.3.1 
+3: package ‘BiocGenerics’ was built under R version 3.3.1 
+4: package ‘S4Vectors’ was built under R version 3.3.1 
+5: package ‘IRanges’ was built under R version 3.3.1 
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:Biobase’:
+
+    combine, contents
+
+The following object is masked from ‘package:BiocGenerics’:
+
+    combine
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+2016-07-19 14:56:45 rse_gene.Rdata already exists
+2016-07-19 14:56:45 processing exon files
+2016-07-19 14:56:45 locating files
+2016-07-19 14:58:29 loading previously computed rse_list_sets at the exon level
+2016-07-19 15:10:17 merging RSE objects from sets at the exon level
+2016-07-19 15:10:17 extracting information from sets
+2016-07-19 15:13:49 preparing the counts matrix
+2016-07-19 15:13:49 initializing counts matrix
+2016-07-19 15:16:08 filling in counts matrix with set 1
+2016-07-19 15:16:11 filling in counts matrix with set 2
+2016-07-19 15:16:14 filling in counts matrix with set 3
+2016-07-19 15:16:15 filling in counts matrix with set 4
+2016-07-19 15:16:17 filling in counts matrix with set 5
+2016-07-19 15:16:18 filling in counts matrix with set 6
+2016-07-19 15:16:19 filling in counts matrix with set 7
+2016-07-19 15:16:20 filling in counts matrix with set 8
+2016-07-19 15:16:23 filling in counts matrix with set 9
+2016-07-19 15:16:24 filling in counts matrix with set 10
+2016-07-19 15:16:25 filling in counts matrix with set 11
+2016-07-19 15:16:27 filling in counts matrix with set 12
+2016-07-19 15:16:30 filling in counts matrix with set 13
+2016-07-19 15:16:31 filling in counts matrix with set 14
+2016-07-19 15:16:32 filling in counts matrix with set 15
+2016-07-19 15:16:34 filling in counts matrix with set 16
+2016-07-19 15:16:37 filling in counts matrix with set 17
+2016-07-19 15:16:40 filling in counts matrix with set 18
+2016-07-19 15:16:44 filling in counts matrix with set 19
+2016-07-19 15:16:48 filling in counts matrix with set 20
+2016-07-19 15:16:53 creating final rse object
+2016-07-19 15:16:53 saving the final rse object
+Session info -----------------------------------------------------------------------------------------------------------
+Packages ---------------------------------------------------------------------------------------------------------------

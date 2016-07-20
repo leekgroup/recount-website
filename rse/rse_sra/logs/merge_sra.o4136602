@@ -1,0 +1,53 @@
+**** Job starts ****
+Tue Jul 19 14:56:36 EDT 2016
+[1] "/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata"
+[1] "2016-07-19 17:18:10 EDT"
+    user   system  elapsed 
+7948.881  373.348 8493.357 
+ setting  value                                      
+ version  R version 3.3.0 Patched (2016-05-20 r70657)
+ system   x86_64, linux-gnu                          
+ ui       X11                                        
+ language (EN)                                       
+ collate  en_US.UTF-8                                
+ tz       <NA>                                       
+ date     2016-07-19                                 
+
+ package              * version date       source        
+ acepack                1.3-3.3 2014-11-24 CRAN (R 3.3.0)
+ Biobase              * 2.32.0  2016-05-05 Bioconductor  
+ BiocGenerics         * 0.19.1  2016-06-13 Bioconductor  
+ chron                  2.3-47  2015-06-24 CRAN (R 3.3.0)
+ cluster                2.0.4   2016-04-18 CRAN (R 3.3.0)
+ colorspace             1.2-6   2015-03-11 CRAN (R 3.3.0)
+ data.table             1.9.6   2015-09-19 CRAN (R 3.3.0)
+ devtools               1.11.1  2016-04-21 CRAN (R 3.3.0)
+ digest                 0.6.9   2016-01-08 CRAN (R 3.3.0)
+ foreign                0.8-66  2015-08-19 CRAN (R 3.3.0)
+ Formula              * 1.2-1   2015-04-07 CRAN (R 3.3.0)
+ GenomeInfoDb         * 1.8.1   2016-06-08 Bioconductor  
+ GenomicRanges        * 1.25.4  2016-06-13 Bioconductor  
+ ggplot2              * 2.1.0   2016-03-01 CRAN (R 3.3.0)
+ gridExtra              2.2.1   2016-02-29 CRAN (R 3.3.0)
+ gtable                 0.2.0   2016-02-26 CRAN (R 3.3.0)
+ Hmisc                * 3.17-4  2016-05-02 CRAN (R 3.3.0)
+ IRanges              * 2.7.6   2016-06-13 Bioconductor  
+ lattice              * 0.20-33 2015-07-14 CRAN (R 3.3.0)
+ latticeExtra           0.6-28  2016-02-09 CRAN (R 3.3.0)
+ Matrix                 1.2-6   2016-05-02 CRAN (R 3.3.0)
+ memoise                1.0.0   2016-01-29 CRAN (R 3.3.0)
+ munsell                0.4.3   2016-02-13 CRAN (R 3.3.0)
+ nnet                   7.3-12  2016-02-02 CRAN (R 3.3.0)
+ plyr                   1.8.4   2016-06-08 CRAN (R 3.3.1)
+ RColorBrewer           1.1-2   2014-12-07 CRAN (R 3.3.0)
+ Rcpp                   0.12.5  2016-05-14 CRAN (R 3.3.0)
+ rpart                  4.1-10  2015-06-29 CRAN (R 3.3.0)
+ S4Vectors            * 0.11.4  2016-06-13 Bioconductor  
+ scales                 0.4.0   2016-02-26 CRAN (R 3.3.0)
+ SummarizedExperiment * 1.3.4   2016-06-13 Bioconductor  
+ survival             * 2.39-4  2016-05-11 CRAN (R 3.3.0)
+ withr                  1.0.2   2016-06-20 CRAN (R 3.3.0)
+ XVector                0.12.0  2016-05-08 Bioconductor  
+ zlibbioc               1.18.0  2016-05-05 Bioconductor  
+**** Job ends ****
+Tue Jul 19 17:18:14 EDT 2016
