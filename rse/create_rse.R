@@ -105,6 +105,11 @@ if(hasJx) {
 
     message(paste(Sys.time(), 'creating jx_project_tab object'))
     if(opt$project == 'gtex') {
+        jx_project$
+        message(paste(Sys.time(), 'saving jx_project_ids.Rdata file'))
+        jx_project_ids <- jx_project$jx_id
+        save(jx_project_ids, file = file.path(outdir, 'jx_project_ids.Rdata'))
+        
         ## Create a table with 1 row per sample for a given junction
         if(!file.exists(file.path(outdir, 'jx_project_tab.Rdata'))) {
             jx_project.start <- seq(from = 1, to = nrow(jx_project), by = 1e5)
@@ -184,7 +189,7 @@ if(hasJx) {
                         'found no junction counts for run', run))
                     next
                 }
-                jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
+                jx_map <- match(jx_project_ids, sample_reads$jx_id)
                 x <- sample_reads$reads[jx_map[!is.na(jx_map)]]
                 i <- which(!is.na(jx_map))
                 j <- rep(1, length(i))
@@ -203,6 +208,8 @@ if(hasJx) {
             
             message(paste(Sys.time(), 'loading jx_project_tab file'))
             load('/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/jx_project_tab.Rdata')
+            message(paste(Sys.time(), 'loading jx_project_ids file'))
+            load('/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682/jx_project_ids.Rdata')
             
             res_files <- mapply(bioc_run, runs, samples,
                 MoreArgs = list(jx_n = jx_n), SIMPLIFY = FALSE)
