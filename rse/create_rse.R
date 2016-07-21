@@ -76,9 +76,9 @@ dir.create(outdir, showWarnings = FALSE)
 
 
 ## Load project junctions info
-jx_file <- file.path('/dcl01/leek/data/recount_junctions_v2',
+jx_file <- file.path('/dcl01/leek/data/recount_junctions_2',
     paste0(opt$projectid, '.junction_coverage.tsv.gz'))
-jx_file_bed <- file.path('/dcl01/leek/data/recount_junctions_v2',
+jx_file_bed <- file.path('/dcl01/leek/data/recount_junctions_2',
     paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'))
 hasJx <- file.exists(jx_file)
 if(!hasJx) message(paste('Missing file', jx_file))
@@ -92,7 +92,7 @@ if(hasJx) {
     ## Load junctions sample information
     message(paste(Sys.time(), 'loading junctions sample information'))
     jx_samples <- read.table(
-        '/dcl01/leek/data/recount_junctions_v2/sample_ids.tsv',
+        '/dcl01/leek/data/recount_junctions_2/sample_ids.tsv',
         sep = '\t', col.names = c('sample_id', 'project', 'run'),
         stringsAsFactors = FALSE, colClasses = 'character')
         
