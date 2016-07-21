@@ -76,9 +76,9 @@ dir.create(outdir, showWarnings = FALSE)
 
 
 ## Load project junctions info
-jx_file <- file.path('/dcl01/leek/data/recount_junctions_v3',
+jx_file <- file.path('/dcl01/leek/data/recount_junctions_v2',
     paste0(opt$projectid, '.junction_coverage.tsv.gz'))
-jx_file_bed <- file.path('/dcl01/leek/data/recount_junctions_v3',
+jx_file_bed <- file.path('/dcl01/leek/data/recount_junctions_v2',
     paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'))
 hasJx <- file.exists(jx_file)
 if(!hasJx) message(paste('Missing file', jx_file))
@@ -92,7 +92,7 @@ if(hasJx) {
     ## Load junctions sample information
     message(paste(Sys.time(), 'loading junctions sample information'))
     jx_samples <- read.table(
-        '/dcl01/leek/data/recount_junctions_v3/sample_ids.tsv',
+        '/dcl01/leek/data/recount_junctions_v2/sample_ids.tsv',
         sep = '\t', col.names = c('sample_id', 'project', 'run'),
         stringsAsFactors = FALSE, colClasses = 'character')
         
@@ -366,13 +366,17 @@ if(hasJx) {
     ## Find all transcripts
     if(!file.exists('introns_unique.Rdata')) {
         ## Find all transcripts
-        message(paste(Sys.time(), 'setup reference introns for finding gene ids'))
+        message(paste(Sys.time(),
+            'setup reference introns for finding gene ids'))
+        
         transcripts <- transcripts(TxDb.Hsapiens.UCSC.hg38.knownGene,
             columns = c('tx_name', 'gene_id'))
-        introns <- intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene, use.names = TRUE)
+        introns <- intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene,
+            use.names = TRUE)
         introns <- unlist(introns)
         introns$tx_name <- names(introns)
-        introns$gene_id <- transcripts$gene_id[match(introns$tx_name, transcripts$tx_name)]
+        introns$gene_id <- transcripts$gene_id[match(introns$tx_name,
+            transcripts$tx_name)]
 
         ## Keep only those that have a gene id
         introns <- introns[sapply(introns$gene_id, length) > 0]
@@ -396,7 +400,8 @@ if(hasJx) {
         intron_gi <- split(intron_gi, rep(queryHits(intron_oo),
             elementNROWS(introns$gene_id)))
         introns_unique$gene_id <- CharacterList(lapply(intron_gi, unique))
-        introns_unique$tx_name <- CharacterList(lapply(split(introns$tx_name, queryHits(intron_oo)), unique))
+        introns_unique$tx_name <- CharacterList(lapply(split(introns$tx_name,
+            queryHits(intron_oo)), unique))
         
         ## Save for later use
         save(introns_unique, file = 'introns_unique.Rdata')
@@ -409,7 +414,9 @@ if(hasJx) {
     ## Now to actual data, add the transcript names and gene ids
     oo <- findOverlaps(jx_bed, introns_unique, type = 'equal')
     stopifnot(length(unique(queryHits(oo))) == length(oo))
-    table(countOverlaps(jx_bed, introns_unique, type = 'equal') > 0)
+    print('Number of junctions overlapping at least one intron')
+    print(table(countOverlaps(jx_bed, introns_unique, type = 'equal') > 0))
+    
     jx_bed$gene_ids <- row$tx_names <- CharacterList(NA)
     jx_bed$gene_ids[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
     jx_bed$tx_names[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
