@@ -76,9 +76,9 @@ dir.create(outdir, showWarnings = FALSE)
 
 
 ## Load project junctions info
-jx_file <- file.path('/dcl01/leek/data/recount_junctions',
+jx_file <- file.path('/dcl01/leek/data/recount_junctions_v3',
     paste0(opt$projectid, '.junction_coverage.tsv.gz'))
-jx_file_bed <- file.path('/dcl01/leek/data/recount_junctions',
+jx_file_bed <- file.path('/dcl01/leek/data/recount_junctions_v3',
     paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'))
 hasJx <- file.exists(jx_file)
 if(!hasJx) message(paste('Missing file', jx_file))
@@ -92,7 +92,7 @@ if(hasJx) {
     ## Load junctions sample information
     message(paste(Sys.time(), 'loading junctions sample information'))
     jx_samples <- read.table(
-        '/dcl01/leek/data/recount_junctions/sample_ids.tsv',
+        '/dcl01/leek/data/recount_junctions_v3/sample_ids.tsv',
         sep = '\t', col.names = c('sample_id', 'project', 'run'),
         stringsAsFactors = FALSE, colClasses = 'character')
         
@@ -309,6 +309,7 @@ if(hasJx) {
                 next
             }
             jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
+            rm(jx_project)
             jx_counts[!is.na(jx_map), run] <- sample_reads$reads[jx_map[!is.na(jx_map)]]
         }
         rm(sample, sample_reads, jx_map, run, jx_project_tab)
@@ -335,9 +336,7 @@ if(hasJx) {
 
     message(paste(Sys.time(), 'parsing the junctions information'))
     jx_bed_name <- strsplit(jx_bed$name, '\\|')
-    jx_bed$junction_id <- sapply(jx_bed_name, '[[', 1)
-    stopifnot(identical(jx_bed$junction_id, as.character(jx_project$jx_id)))
-    rm(jx_project)
+    jx_bed$junction_id <- sapply(jx_bed_name, '[[', 1)   
 
     parse_bed_name <- function(pattern = 'D:', slot = 2) {
         CharacterList(
@@ -349,12 +348,12 @@ if(hasJx) {
             )
         )
     }
-    jx_bed$found_donor <- parse_bed_name('D:', slot = 2)
-    jx_bed$found_acceptor <- parse_bed_name('A:', slot = 3)
-    jx_bed$found_junction <- parse_bed_name('J:', slot = 4)
+    jx_bed$found_donor_gencode_v24 <- parse_bed_name('D:', slot = 2)
+    jx_bed$found_acceptor_gencode_v24 <- parse_bed_name('A:', slot = 3)
+    jx_bed$found_junction_gencode_v24 <- parse_bed_name('J:', slot = 4)
 
-    mcols(jx_bed) <- mcols(jx_bed)[, c('junction_id', 'found_donor',
-        'found_acceptor', 'found_junction')]
+    mcols(jx_bed) <- mcols(jx_bed)[, c('junction_id', 'found_donor_gencode_v24',
+        'found_acceptor_gencode_v24', 'found_junction_gencode_v24')]
 
     ## Fix seqlengths, have to use data from web for chrEBV
     chr_info <- read.table(
@@ -365,68 +364,55 @@ if(hasJx) {
     seqlengths(jx_bed) <- chrs[names(seqlengths(jx_bed))]
 
     ## Find all transcripts
-    message(paste(Sys.time(), 'setup for identifying gene ids for transcripts'))
-    transcripts <- transcripts(TxDb.Hsapiens.UCSC.hg38.knownGene,
-        columns = c('tx_name', 'gene_id'))
+    if(!file.exists('introns_unique.Rdata')) {
+        ## Find all transcripts
+        message(paste(Sys.time(), 'setup reference introns for finding gene ids'))
+        transcripts <- transcripts(TxDb.Hsapiens.UCSC.hg38.knownGene,
+            columns = c('tx_name', 'gene_id'))
+        introns <- intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene, use.names = TRUE)
+        introns <- unlist(introns)
+        introns$tx_name <- names(introns)
+        introns$gene_id <- transcripts$gene_id[match(introns$tx_name, transcripts$tx_name)]
 
-    ## Make a table with all the transcript names
-    trans_names <- DataFrame(
-        jx_id = c(
-            rep(jx_bed$junction_id, elementNROWS(jx_bed$found_donor)),
-            rep(jx_bed$junction_id, elementNROWS(jx_bed$found_acceptor)),
-            rep(jx_bed$junction_id, elementNROWS(jx_bed$found_junction))
-        ),
-        name = c(
-            unlist(jx_bed$found_donor),
-            unlist(jx_bed$found_acceptor),
-            unlist(jx_bed$found_junction)
-        ),
-        gene_id = CharacterList(NA)
-    )
+        ## Keep only those that have a gene id
+        introns <- introns[sapply(introns$gene_id, length) > 0]
 
-    ## Find ids for unique names
-    hasIds <- any(!is.na(trans_names$name))
-    if(hasIds) {
-        unique_names <- DataFrame(
-            name = unique(trans_names$name[!is.na(trans_names$name)]),
-            gene_id = CharacterList(NA)
-        )
-        map_gene <- match(unique_names$name, transcripts$tx_name)
-        unique_names$gene_id[!is.na(map_gene)] <- transcripts$gene_id[map_gene[!is.na(map_gene)]]
-        unique_names$gene_id[elementNROWS(unique_names$gene_id) == 0] <- CharacterList(NA)
+        ## Make them unique: can't do that, otherwise we lose gene_ids
+        # introns_test <- unique(introns)
+        # length(unique(unlist(introns$gene_id)))
+        # 21013
+        # length(unique(unlist(introns_test$gene_id)))
+        # 20994
 
-        ## Merge back results to large table
-        map_names <- match(trans_names$name[!is.na(trans_names$name)],
-            unique_names$name)
-        trans_names$gene_id[!is.na(trans_names$name)] <- unique_names$gene_id[map_names]
+        ## Compress by actual range
+        introns_unique <- GRanges(seqnames = seqnames(introns),
+            ranges(introns), strand = strand(introns))
+        names(introns_unique) <- NULL
+        introns_unique <- introns_unique[!duplicated(introns_unique)]
 
-        ## Make table smaller by removing NAs
-        trans_names <- trans_names[any(!is.na(trans_names$gene_id)), ]
-
+        ## To unique set of coordinates, add tx_name and gene_id
+        intron_oo <- findOverlaps(introns_unique, introns, type = 'equal')
+        intron_gi <- rep(unlist(introns$gene_id), elementNROWS(introns$gene_id))
+        intron_gi <- split(intron_gi, rep(queryHits(intron_oo),
+            elementNROWS(introns$gene_id)))
+        introns_unique$gene_id <- CharacterList(lapply(intron_gi, unique))
+        introns_unique$tx_name <- CharacterList(lapply(split(introns$tx_name, queryHits(intron_oo)), unique))
+        
+        ## Save for later use
+        save(introns_unique, file = 'introns_unique.Rdata')
+    } else {
+        message(paste(Sys.time(), 'loading reference introns for finding gene ids'))
+        load('introns_unique.Rdata')
     }
-
-    ## Initialize the gene ids
-    jx_bed$gene_ids <- CharacterList(NA)
-
-    ## Find gene ids
-    find_gene <- function(jx_id) {
-        gene_ids <- trans_names$gene_id[trans_names$jx_id == jx_id]
-        gene_ids <- gene_ids[sapply(gene_ids, function(x) !is.na(x))]
-        if(length(gene_ids) == 0) {
-            res <- CharacterList(NA)
-        } else {
-            res <- CharacterList(unique(do.call(c, gene_ids)))
-        }
-        return(res)
-    }
-
-    if(hasIds) {
-        message(paste(Sys.time(), 'finding the gene ids for each transcript'))
-        map_jx <- match(jx_bed$junction_id, trans_names$jx_id)
-        system.time( jx_bed$gene_ids[!is.na(map_jx)] <- do.call(c,
-            lapply(jx_bed$junction_id[!is.na(map_jx)], find_gene)) )
-    }
-
+    
+    message(paste(Sys.time(), 'finding tx_names and gene_ids based on the intron reference set'))
+    ## Now to actual data, add the transcript names and gene ids
+    oo <- findOverlaps(jx_bed, introns_unique, type = 'equal')
+    stopifnot(length(unique(queryHits(oo))) == length(oo))
+    table(countOverlaps(jx_bed, introns_unique, type = 'equal') > 0)
+    jx_bed$gene_ids <- row$tx_names <- CharacterList(NA)
+    jx_bed$gene_ids[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
+    jx_bed$tx_names[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
 
     ## Create the junctions level rse
     rse_jx <- SummarizedExperiment(assays = list('counts' = jx_counts),

@@ -13,7 +13,7 @@ save(meta_web, file = 'meta_web.Rdata')
 dir.create('www', showWarnings = FALSE)
 system('cp ../genes/ucsc-knowngene-hg38-exons.Rdata www/')
 system('cp ../genes/ucsc-knowngene-hg38-genes-bp-length.Rdata www/')
-system('scp e:/dcl01/leek/data/recount_junctions/sample_ids.tsv www/')
+system('scp e:/dcl01/leek/data/recount_junctions_v3/sample_ids.tsv www/')
 
 
 library('rsconnect')

@@ -62,9 +62,9 @@ for(project in projects) {
     jx_files <- c(
         file.path('/dcl01/leek/data/recount-website/rse',
             paste0('rse_', opt$project), project, 'rse_jx.Rdata'),
-        file.path('/dcl01/leek/data/recount_junctions',
+        file.path('/dcl01/leek/data/recount_junctions_v3',
             paste0(project, '.junction_id_with_transcripts.bed.gz')),
-        file.path('/dcl01/leek/data/recount_junctions',
+        file.path('/dcl01/leek/data/recount_junctions_v3',
             paste0(project, '.junction_coverage.tsv.gz')),
         file.path('/dcl01/leek/data/recount-website/rse',
             paste0('rse_', opt$project), project, 'counts_jx.tsv.gz')
