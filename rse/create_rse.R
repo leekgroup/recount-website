@@ -105,7 +105,6 @@ if(hasJx) {
 
     message(paste(Sys.time(), 'creating jx_project_tab object'))
     if(opt$project == 'gtex') {
-        jx_project$
         message(paste(Sys.time(), 'saving jx_project_ids.Rdata file'))
         jx_project_ids <- jx_project$jx_id
         save(jx_project_ids, file = file.path(outdir, 'jx_project_ids.Rdata'))
