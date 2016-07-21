@@ -102,7 +102,7 @@ if(hasJx) {
         col.names = c('jx_id', 'sample_ids', 'reads'),
         stringsAsFactors = FALSE, colClasses = 'character')
     print('jx_project dimensions')
-    dim(jx_project)
+    print(dim(jx_project))
 
     message(paste(Sys.time(), 'creating jx_project_tab object'))
     if(opt$project == 'gtex') {
