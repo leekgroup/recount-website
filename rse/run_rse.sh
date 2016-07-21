@@ -20,7 +20,7 @@ mkdir -p ${WDIR}/logs
 if [[ "${PROJECT}" == "sra" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=15G,h_vmem=85G,h_fsize=30G"
+    MEM="mem_free=15G,h_vmem=30G,h_fsize=50G"
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
@@ -31,8 +31,8 @@ fi
 
 # Count how many commands there are
 # For testing use: LINES=10
-LINES=10
-#LINES=$(wc -l ${MAINDIR}/metadata/project_ids_${PROJECT}.txt | cut -f1 -d " ")
+#LINES=10
+LINES=$(wc -l ${MAINDIR}/metadata/project_ids_${PROJECT}.txt | cut -f1 -d " ")
 METADATA="${MAINDIR}/metadata/metadata_${PROJECT}.Rdata"
 
 
