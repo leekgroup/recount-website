@@ -309,10 +309,9 @@ if(hasJx) {
                 next
             }
             jx_map <- match(jx_project$jx_id, sample_reads$jx_id)
-            rm(jx_project)
             jx_counts[!is.na(jx_map), run] <- sample_reads$reads[jx_map[!is.na(jx_map)]]
         }
-        rm(sample, sample_reads, jx_map, run, jx_project_tab)
+        rm(sample, sample_reads, jx_map, run, jx_project_tab, jx_project)
     }
 
     print('Memory used by junction counts')
