@@ -333,6 +333,9 @@ if(hasJx) {
     ## Load junction bed file
     message(paste(Sys.time(), 'loading the junctions bed file'))
     jx_bed <- import.bed(jx_file_bed)
+    
+    ## Fix end positions (R only)
+    end(jx_bed) <- end(jx_bed) + 1
 
     message(paste(Sys.time(), 'parsing the junctions information'))
     jx_bed_name <- strsplit(jx_bed$name, '\\|')
