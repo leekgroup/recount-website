@@ -348,12 +348,12 @@ if(hasJx) {
             )
         )
     }
-    jx_bed$found_donor_gencode_v24 <- parse_bed_name('D:', slot = 2)
-    jx_bed$found_acceptor_gencode_v24 <- parse_bed_name('A:', slot = 3)
+    #jx_bed$found_donor_gencode_v24 <- parse_bed_name('D:', slot = 2)
+    #jx_bed$found_acceptor_gencode_v24 <- parse_bed_name('A:', slot = 3)
     jx_bed$found_junction_gencode_v24 <- parse_bed_name('J:', slot = 4)
 
-    mcols(jx_bed) <- mcols(jx_bed)[, c('junction_id', 'found_donor_gencode_v24',
-        'found_acceptor_gencode_v24', 'found_junction_gencode_v24')]
+    mcols(jx_bed) <- mcols(jx_bed)[, c('junction_id', 
+        'found_junction_gencode_v24')]
 
     ## Fix seqlengths, have to use data from web for chrEBV
     chr_info <- read.table(
