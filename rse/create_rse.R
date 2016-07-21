@@ -4,6 +4,7 @@ suppressPackageStartupMessages(library('GenomicRanges'))
 suppressPackageStartupMessages(library('SummarizedExperiment'))
 suppressPackageStartupMessages(library('rtracklayer'))
 suppressPackageStartupMessages(library('TxDb.Hsapiens.UCSC.hg38.knownGene'))
+suppressPackageStartupMessages(library('org.Hs.eg.db'))
 
 ## Specify parameters
 spec <- matrix(c(
@@ -373,11 +374,24 @@ if(hasJx) {
         
         transcripts <- transcripts(TxDb.Hsapiens.UCSC.hg38.knownGene,
             columns = c('tx_name', 'gene_id'))
+        
+        ## Find gene symbol
+        gene_ids <- lapply(transcripts$gene_id, function(x) {
+            if(length(x) == 0) return(NA) else return(x)
+        })
+        stopifnot(all(elementNROWS(gene_ids) == 1))
+        gene_info <- select(org.Hs.eg.db, unlist(gene_ids),
+            c('ENTREZID', 'GENENAME', 'SYMBOL'), 'ENTREZID')
+        transcripts$symbol <- gene_info$SYMBOL
+        
+        ## Build intron reference set
         introns <- intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene,
             use.names = TRUE)
         introns <- unlist(introns)
         introns$tx_name <- names(introns)
         introns$gene_id <- transcripts$gene_id[match(introns$tx_name,
+            transcripts$tx_name)]
+        introns$symbol <- transcripts$symbol[match(introns$tx_name,
             transcripts$tx_name)]
 
         ## Keep only those that have a gene id
@@ -401,9 +415,13 @@ if(hasJx) {
         intron_gi <- rep(unlist(introns$gene_id), elementNROWS(introns$gene_id))
         intron_gi <- split(intron_gi, rep(queryHits(intron_oo),
             elementNROWS(introns$gene_id)))
-        introns_unique$gene_id <- CharacterList(lapply(intron_gi, unique))
+        intron_sb <- rep(unlist(introns$symbol), elementNROWS(introns$symbol))
+        intron_sb <- split(intron_sb, rep(queryHits(intron_oo),
+            elementNROWS(introns$symbol)))
         introns_unique$tx_name <- CharacterList(lapply(split(introns$tx_name,
             queryHits(intron_oo)), unique))
+        introns_unique$gene_id <- CharacterList(lapply(intron_gi, unique))
+        introns_unique$symbol <- CharacterList(lapply(intron_sb, unique))
         
         ## Save for later use
         save(introns_unique, file = 'introns_unique.Rdata')
@@ -419,9 +437,10 @@ if(hasJx) {
     print('Number of junctions overlapping at least one intron')
     print(table(countOverlaps(jx_bed, introns_unique, type = 'equal') > 0))
     
-    jx_bed$gene_ids <- jx_bed$tx_names <- CharacterList(NA)
-    jx_bed$gene_ids[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
-    jx_bed$tx_names[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
+    jx_bed$symbol <- jx_bed$gene_id <- jx_bed$tx_name <- CharacterList(NA)
+    jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
+    jx_bed$symbol[queryHits(oo)] <- introns_unique$symbol[subjectHits(oo)]
+    jx_bed$tx_name[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
 
     ## Create the junctions level rse
     rse_jx <- SummarizedExperiment(assays = list('counts' = jx_counts),
