@@ -420,7 +420,7 @@ if(hasJx) {
     print('Number of junctions overlapping at least one intron')
     print(table(countOverlaps(jx_bed, introns_unique, type = 'equal') > 0))
     
-    jx_bed$gene_ids <- row$tx_names <- CharacterList(NA)
+    jx_bed$gene_ids <- jx_bed$tx_names <- CharacterList(NA)
     jx_bed$gene_ids[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
     jx_bed$tx_names[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
 
