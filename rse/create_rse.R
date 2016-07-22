@@ -491,7 +491,11 @@ if(hasJx) {
     jx_bed$gene_id_proposed[queryHits(oo)] <- jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
     jx_bed$symbol_proposed[queryHits(oo)] <- jx_bed$symbol[queryHits(oo)] <- introns_unique$symbol[subjectHits(oo)]
     jx_bed$tx_name[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
-        
+    
+    ## See how junctions matched
+    print('Junctions matching or partial matching')
+    print(addmargins(table('has proposed gene_id' = !any(is.na(jx_bed$gene_id_proposed)), 'exact match, gene_id' = !any(is.na(jx_bed$gene_id)))))
+     
     ## Assign class
     message(paste(Sys.time(), 'assigning class'))
     left <- countOverlaps(jx_bed, introns_unique, type = 'start') > 0
