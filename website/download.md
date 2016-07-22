@@ -17,7 +17,7 @@ browseVignettes('recount')
 ## study SRP009615
 url <- download_study('SRP009615')
 
-## This is the original url for the file
+## View the url for the file by printing the object url
 url
 
 ## Load the data
@@ -27,4 +27,7 @@ load(file.path('SRP009615', 'rse_gene.Rdata'))
 rse <- scale_counts(rse_gene)
 
 ## Then use your favorite differential expression software
+
+## For more details, check the recount package vignette at
+## http://leekgroup.github.io/recount/
 ```
