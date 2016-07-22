@@ -438,8 +438,6 @@ if(hasJx) {
     ## Now to actual data, add the transcript names and gene ids
     oo <- findOverlaps(jx_bed, introns_unique, type = 'equal')
     stopifnot(length(unique(queryHits(oo))) == length(oo))
-    print('Number of junctions overlapping at least one intron')
-    print(table(countOverlaps(jx_bed, introns_unique, type = 'equal') > 0))
     
     jx_bed$symbol <- jx_bed$gene_id <- jx_bed$tx_name <- jx_bed$gene_id_partial  <-  jx_bed$symbol_partial <- CharacterList(NA)
     jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
@@ -468,26 +466,23 @@ if(hasJx) {
     
     ## Manually combine, since using paste(x, y, sep = '-') won't work
     ## for cases where x and y have different lengths
-    manual_c <- function(x, y) {
-        z <- c(x, y)
-        res <- unique(z[!is.na(z)])
-        if(length(res) == 0) return(NA) else return(res)
+    manual_c <- function(l, r) {
+        res <- CharacterList(mapply(function(x, y) { 
+            unique(c(x, y)) }, l, r, SIMPLIFY = FALSE))
+        res[!is.na(res)]
     }
+    message(paste(Sys.time(), 'combining left and right results'))
     has_hit <- not_both[unique(c(queryHits(oo_left), queryHits(oo_right)))]
     ends_hit <- not_both[intersect(queryHits(oo_left), queryHits(oo_right))]
-    jx_bed$gene_id_partial[has_hit] <- CharacterList(mapply(manual_c,
-        left_gene[has_hit], right_gene[has_hit], SIMPLIFY = FALSE))
-    jx_bed$symbol_partial[has_hit] <- CharacterList(mapply(manual_c,
-        left_symbol[has_hit], right_symbol[has_hit], SIMPLIFY = FALSE))
+    jx_bed$gene_id_partial[has_hit] <- manual_c(left_gene[has_hit],
+        right_gene[has_hit])
+    jx_bed$symbol_partial[has_hit] <- manual_c(left_symbol[has_hit],
+        right_symbol[has_hit])
     
-    ## Detect fusion
-    message(paste(Sys.time(), 'detecting gene fusions'))
-    rm_na <- function(x) { x[is.na(x)] }
-    fu <- lapply(ends_hit, function(fu) { intersect(left_gene[[fu]], right_gene[[fu]]) })
-    fusion <- ends_hit[which(elementNROWS(fu) == 0)]
-    jx_bed$fusion <- FALSE
-    jx_bed$fusion[fusion] <- TRUE
-    
+    ## See how junctions matched
+    print('Junctions matching or partial matching')
+    print(addmargins(table('partial match' = !any(is.na(jx_bed$gene_id_partial)), 'both match' = !any(is.na(jx_bed$gene_id)))))
+        
     ## Assign class
     message(paste(Sys.time(), 'assigning class'))
     left <- countOverlaps(jx_bed, introns_unique, type = 'start') > 0
@@ -495,6 +490,16 @@ if(hasJx) {
     jx_bed$class <- ifelse(both, 'annotated',
         ifelse(left & right, 'exon_skip',
         ifelse(left | right, 'alternative_end', 'novel')))
+        
+    ## Detect fusion
+    message(paste(Sys.time(), 'detecting gene fusions'))
+    fu <- lapply(ends_hit, function(fu) { intersect(left_gene[[fu]],
+        right_gene[[fu]]) })
+    fusion <- ends_hit[which(elementNROWS(fu) == 0)]
+    jx_bed$class[fusion] <- 'fusion'
+    
+    print('Junctions by class')
+    print(table(jx_bed$class))
 
     ## Create the junctions level rse
     rse_jx <- SummarizedExperiment(assays = list('counts' = jx_counts),
