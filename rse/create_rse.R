@@ -438,10 +438,31 @@ if(hasJx) {
     print('Number of junctions overlapping at least one intron')
     print(table(countOverlaps(jx_bed, introns_unique, type = 'equal') > 0))
     
-    jx_bed$symbol <- jx_bed$gene_id <- jx_bed$tx_name <- CharacterList(NA)
+    jx_bed$symbol <- jx_bed$gene_id <- jx_bed$tx_name <- jx_bed$gene_id_partial  <-  jx_bed$symbol_partial <- CharacterList(NA)
     jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
     jx_bed$symbol[queryHits(oo)] <- introns_unique$symbol[subjectHits(oo)]
     jx_bed$tx_name[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
+    
+    ## Partial overlap
+    both <- countOverlaps(introns_unique, jx_bed, type = 'equal') > 0
+    introns_partial <- introns_unique[!both]
+    oo_left <- findOverlaps(jx_bed, introns_partial, type = 'start')
+    left_gene <- left_symbol <- right_gene <- right_symbol <- jx_bed$gene_id_partial
+    
+    left_gene[queryHits(oo_left)] <- introns_partial$gene_id[subjectHits(oo_left)]
+    left_symbol[queryHits(oo_left)] <- introns_partial$symbol[subjectHits(oo_left)]
+    oo_right <- findOverlaps(jx_bed, introns_partial, type = 'end')
+    right_gene[queryHits(oo_right)] <- introns_partial$gene_id[subjectHits(oo_right)]
+    right_symbol[queryHits(oo_right)] <- introns_partial$symbol[subjectHits(oo_right)]
+    left <- countOverlaps(jx_bed, introns_partial, type = 'start') > 0
+    right <- countOverlaps(jx_bed, introns_partial, type = 'end') > 0
+    
+    jx_bed$gene_id_partial <- paste(left_gene, right_gene, sep = '-')
+    jx_bed$symbol_partial <- paste(left_symbol, right_symbol, sep = '-')
+    jx_bed$fusion <- grepl('-', jx_bed$gene_id_partial)
+    jx_bed$class <- ifelse(both, 'annotated',
+        ifelse(left & right, 'exon_skip',
+        ifelse(left | right, 'alternative_end', 'novel')))
 
     ## Create the junctions level rse
     rse_jx <- SummarizedExperiment(assays = list('counts' = jx_counts),
