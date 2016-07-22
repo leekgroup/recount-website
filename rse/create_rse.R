@@ -397,17 +397,15 @@ if(hasJx) {
         introns$symbol <- transcripts$symbol[match(introns$tx_name,
             transcripts$tx_name)]
 
-        ## Keep only those that have a gene id
-        #introns <- introns[sapply(introns$gene_id, length) > 0]
-        ## Actually, just label as NA the gene id if absent
+        ## Just label as NA the gene id if absent
         introns$gene_id[sapply(introns$gene_id, length) == 0] <- CharacterList(NA)
 
-        ## Make them unique: can't do that, otherwise we lose gene_ids
+        ## Make them unique: can't do that, otherwise we lose 19 gene_ids
         # introns_test <- unique(introns)
         # length(unique(unlist(introns$gene_id)))
-        # 21013
+        # 21014
         # length(unique(unlist(introns_test$gene_id)))
-        # 20994
+        # 20995
 
         ## Compress by actual range
         introns_unique <- GRanges(seqnames = seqnames(introns),
