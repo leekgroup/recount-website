@@ -75,7 +75,7 @@ shinyUI(navbarPage(
         h5('counts exon'),
         p('A tsv file with the count matrix used to create the RangedSummarizedExperiment object at the exon level.'),
         h5('RSE junctions'),
-        p('The RangedSummarizedExperiment object for the counts summarized at the junction level. This GRanges object has 1 element per junction. For each junction this object contains the transcript names for the Gencode v24 junctions, donors and acceptors; transcript names and gene ids matching those used in the RSE objects at the gene or exon levels (based on TxDb.Hsapiens.UCSC.hg38.knownGene). The junction ids match those used in the jx_cov and jx_bed files explained below. This file is present only if the project has at least one junction detected.'),
+        p('The RangedSummarizedExperiment object for the counts summarized at the junction level. This GRanges object has 1 element per junction. For each junction this object contains the transcript names for the Gencode v24 junctions, transcript names and gene ids matching those used in the RSE objects at the gene or exon levels (based on TxDb.Hsapiens.UCSC.hg38.knownGene), junction class, proposed gene ids and symbols. The junction ids match those used in the jx_cov and jx_bed files explained below. This file is present only if the project has at least one junction detected.'),
         h5('counts jx'),
         p('A tsv file with the count matrix used to create the RangedSummarizedExperiment object at the junction level. This file is present only if the project has at least one junction detected.'),
         h5('Junction raw coverage file'),
