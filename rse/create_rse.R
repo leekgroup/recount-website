@@ -495,10 +495,12 @@ if(hasJx) {
         
     ## Detect fusion
     message(paste(Sys.time(), 'detecting gene fusions'))
-    fu <- lapply(ends_hit, function(fu) { intersect(left_gene[[fu]],
-        right_gene[[fu]]) })
-    fusion <- ends_hit[which(elementNROWS(fu) == 0)]
-    jx_bed$class[fusion] <- 'fusion'
+    
+    find_fusions <- function(fu) {
+        tmp <- merge(left_gene[fu], right_gene[fu])
+        seq_len(length(fu))[!seq_len(length(fu)) %in% tmp$group]
+    }    
+    jx_bed$class[ends_hit[find_fusions(ends_hit)]] <- 'fusion'
     
     print('Junctions by class')
     print(table(jx_bed$class))
