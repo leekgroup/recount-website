@@ -470,6 +470,12 @@ if(hasJx) {
     manual_c <- function(l, r) {
         tmp <- merge(l, r, all = TRUE)
         tmp2 <- tmp[!is.na(tmp$value), ]
+        ## Add back if only it's NAs
+        missed <- unique(tmp$group)[!unique(tmp$group) %in% tmp2$group]
+        if(length(missed) > 0) {
+            tmp2 <- rbind(tmp2, subset(tmp, group %in% missed))
+        }
+        
         res <- CharacterList(split(as.character(tmp2$value), tmp2$group))
         names(res) <- NULL
         return(res)
