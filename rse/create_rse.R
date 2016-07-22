@@ -467,9 +467,11 @@ if(hasJx) {
     ## Manually combine, since using paste(x, y, sep = '-') won't work
     ## for cases where x and y have different lengths
     manual_c <- function(l, r) {
-        res <- CharacterList(mapply(function(x, y) { 
-            unique(c(x, y)) }, l, r, SIMPLIFY = FALSE))
-        res[!is.na(res)]
+        tmp <- merge(l, r, all = TRUE)
+        tmp2 <- tmp[!is.na(tmp$value), ]
+        res <- CharacterList(split(as.character(tmp2$value), tmp2$group))
+        names(res) <- NULL
+        return(res)
     }
     message(paste(Sys.time(), 'combining left and right results'))
     has_hit <- not_both[unique(c(queryHits(oo_left), queryHits(oo_right)))]
