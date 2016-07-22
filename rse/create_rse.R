@@ -429,7 +429,8 @@ if(hasJx) {
         ## Save for later use
         save(introns_unique, file = 'introns_unique.Rdata')
     } else {
-        message(paste(Sys.time(), 'loading reference introns for finding gene ids'))
+        message(paste(Sys.time(),
+            'loading reference introns for finding gene ids'))
         load('introns_unique.Rdata')
     }
     
