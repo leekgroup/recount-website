@@ -440,10 +440,9 @@ if(hasJx) {
     oo <- findOverlaps(jx_bed, introns_unique, type = 'equal')
     stopifnot(length(unique(queryHits(oo))) == length(oo))
     
-    jx_bed$symbol <- jx_bed$gene_id <- jx_bed$tx_name <- jx_bed$gene_id_partial  <-  jx_bed$symbol_partial <- CharacterList(NA)
-    jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
-    jx_bed$symbol[queryHits(oo)] <- introns_unique$symbol[subjectHits(oo)]
-    jx_bed$tx_name[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
+    jx_bed$symbol <- jx_bed$gene_id <- jx_bed$tx_name <- jx_bed$gene_id_proposed  <-  jx_bed$symbol_proposed <- CharacterList(NA)
+    left_gene <- left_symbol <- right_gene <- right_symbol <- jx_bed$gene_id_proposed
+    
     
     ## Partial overlap
     message(paste(Sys.time(),
@@ -451,7 +450,7 @@ if(hasJx) {
     both <- countOverlaps(jx_bed, introns_unique, type = 'equal') > 0
     not_both <- which(!both)
     
-    left_gene <- left_symbol <- right_gene <- right_symbol <- jx_bed$gene_id_partial
+    
     
     ## Left
     oo_left <- findOverlaps(jx_bed[not_both], introns_unique, type = 'start')
@@ -483,14 +482,15 @@ if(hasJx) {
     message(paste(Sys.time(), 'combining left and right results'))
     has_hit <- not_both[unique(c(queryHits(oo_left), queryHits(oo_right)))]
     ends_hit <- not_both[intersect(queryHits(oo_left), queryHits(oo_right))]
-    jx_bed$gene_id_partial[has_hit] <- manual_c(left_gene[has_hit],
+    jx_bed$gene_id_proposed[has_hit] <- manual_c(left_gene[has_hit],
         right_gene[has_hit])
-    jx_bed$symbol_partial[has_hit] <- manual_c(left_symbol[has_hit],
+    jx_bed$symbol_proposed[has_hit] <- manual_c(left_symbol[has_hit],
         right_symbol[has_hit])
-    
-    ## See how junctions matched
-    print('Junctions matching or partial matching')
-    print(addmargins(table('partial match' = !any(is.na(jx_bed$gene_id_partial)), 'both match' = !any(is.na(jx_bed$gene_id)))))
+        
+    ## Full match
+    jx_bed$gene_proposed[queryHits(oo)] <- jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
+    jx_bed$symbol_proposed[queryHits(oo)] <- jx_bed$symbol[queryHits(oo)] <- introns_unique$symbol[subjectHits(oo)]
+    jx_bed$tx_name[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
         
     ## Assign class
     message(paste(Sys.time(), 'assigning class'))
