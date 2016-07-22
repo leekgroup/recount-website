@@ -36,6 +36,8 @@ if(FALSE) {
             projectid = 'ERP005274')
     opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
             projectid = 'SRP002915')
+    opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
+            projectid = 'DRP000464')
     ## Largest one, to find memory needed
     opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
         projectid = 'SRP025982')
@@ -351,12 +353,12 @@ if(hasJx) {
             )
         )
     }
-    jx_bed$found_donor_gencode_v24 <- parse_bed_name('D:', slot = 2)
-    jx_bed$found_acceptor_gencode_v24 <- parse_bed_name('A:', slot = 3)
+    #jx_bed$found_donor_gencode_v24 <- parse_bed_name('D:', slot = 2)
+    #jx_bed$found_acceptor_gencode_v24 <- parse_bed_name('A:', slot = 3)
     jx_bed$found_junction_gencode_v24 <- parse_bed_name('J:', slot = 4)
 
     mcols(jx_bed) <- mcols(jx_bed)[, c('junction_id', 
-        'found_donor_gencode_v24', 'found_acceptor_gencode_v24',
+#        'found_donor_gencode_v24', 'found_acceptor_gencode_v24',
         'found_junction_gencode_v24')]
 
     ## Fix seqlengths, have to use data from web for chrEBV
@@ -431,7 +433,8 @@ if(hasJx) {
         load('introns_unique.Rdata')
     }
     
-    message(paste(Sys.time(), 'finding tx_names and gene_ids based on the intron reference set'))
+    message(paste(Sys.time(),
+        'finding tx_name and gene_id based on the intron reference set'))
     ## Now to actual data, add the transcript names and gene ids
     oo <- findOverlaps(jx_bed, introns_unique, type = 'equal')
     stopifnot(length(unique(queryHits(oo))) == length(oo))
@@ -444,22 +447,51 @@ if(hasJx) {
     jx_bed$tx_name[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
     
     ## Partial overlap
-    both <- countOverlaps(introns_unique, jx_bed, type = 'equal') > 0
-    introns_partial <- introns_unique[!both]
-    oo_left <- findOverlaps(jx_bed, introns_partial, type = 'start')
+    message(paste(Sys.time(),
+        'finding gene ids and symbols based on partial matching'))
+    both <- countOverlaps(jx_bed, introns_unique, type = 'equal') > 0
+    not_both <- which(!both)
+    
     left_gene <- left_symbol <- right_gene <- right_symbol <- jx_bed$gene_id_partial
     
-    left_gene[queryHits(oo_left)] <- introns_partial$gene_id[subjectHits(oo_left)]
-    left_symbol[queryHits(oo_left)] <- introns_partial$symbol[subjectHits(oo_left)]
-    oo_right <- findOverlaps(jx_bed, introns_partial, type = 'end')
-    right_gene[queryHits(oo_right)] <- introns_partial$gene_id[subjectHits(oo_right)]
-    right_symbol[queryHits(oo_right)] <- introns_partial$symbol[subjectHits(oo_right)]
-    left <- countOverlaps(jx_bed, introns_partial, type = 'start') > 0
-    right <- countOverlaps(jx_bed, introns_partial, type = 'end') > 0
+    ## Left
+    oo_left <- findOverlaps(jx_bed[not_both], introns_unique, type = 'start')
+    left_gene[not_both[queryHits(oo_left)]] <- introns_unique$gene_id[subjectHits(oo_left)]
+    left_symbol[not_both[queryHits(oo_left)]] <- introns_unique$symbol[subjectHits(oo_left)]
     
-    jx_bed$gene_id_partial <- paste(left_gene, right_gene, sep = '-')
-    jx_bed$symbol_partial <- paste(left_symbol, right_symbol, sep = '-')
-    jx_bed$fusion <- grepl('-', jx_bed$gene_id_partial)
+    ## Right
+    oo_right <- findOverlaps(jx_bed[not_both], introns_unique, type = 'end')
+    right_gene[not_both[queryHits(oo_right)]] <- introns_unique$gene_id[subjectHits(oo_right)]
+    right_symbol[not_both[queryHits(oo_right)]] <- introns_unique$symbol[subjectHits(oo_right)]
+    
+    
+    
+    ## Manually combine, since using paste(x, y, sep = '-') won't work
+    ## for cases where x and y have different lengths
+    manual_c <- function(x, y) {
+        z <- c(x, y)
+        res <- unique(z[!is.na(z)])
+        if(length(res) == 0) return(NA) else return(res)
+    }
+    has_hit <- not_both[unique(c(queryHits(oo_left), queryHits(oo_right)))]
+    ends_hit <- not_both[intersect(queryHits(oo_left), queryHits(oo_right))]
+    jx_bed$gene_id_partial[has_hit] <- CharacterList(mapply(manual_c,
+        left_gene[has_hit], right_gene[has_hit], SIMPLIFY = FALSE))
+    jx_bed$symbol_partial[has_hit] <- CharacterList(mapply(manual_c,
+        left_symbol[has_hit], right_symbol[has_hit], SIMPLIFY = FALSE))
+    
+    ## Detect fusion
+    message(paste(Sys.time(), 'detecting gene fusions'))
+    rm_na <- function(x) { x[is.na(x)] }
+    fu <- lapply(ends_hit, function(fu) { intersect(left_gene[[fu]], right_gene[[fu]]) })
+    fusion <- ends_hit[which(elementNROWS(fu) == 0)]
+    jx_bed$fusion <- FALSE
+    jx_bed$fusion[fusion] <- TRUE
+    
+    ## Assign class
+    message(paste(Sys.time(), 'assigning class'))
+    left <- countOverlaps(jx_bed, introns_unique, type = 'start') > 0
+    right <- countOverlaps(jx_bed, introns_unique, type = 'end') > 0
     jx_bed$class <- ifelse(both, 'annotated',
         ifelse(left & right, 'exon_skip',
         ifelse(left | right, 'alternative_end', 'novel')))
