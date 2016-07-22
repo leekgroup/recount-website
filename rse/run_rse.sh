@@ -20,7 +20,7 @@ mkdir -p ${WDIR}/logs
 if [[ "${PROJECT}" == "sra" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=100G,h_vmem=160G,h_fsize=50G"
+    MEM="mem_free=50G,h_vmem=160G,h_fsize=50G"
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
