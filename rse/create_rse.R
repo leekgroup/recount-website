@@ -488,7 +488,7 @@ if(hasJx) {
         right_symbol[has_hit])
         
     ## Full match
-    jx_bed$gene_proposed[queryHits(oo)] <- jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
+    jx_bed$gene_id_proposed[queryHits(oo)] <- jx_bed$gene_id[queryHits(oo)] <- introns_unique$gene_id[subjectHits(oo)]
     jx_bed$symbol_proposed[queryHits(oo)] <- jx_bed$symbol[queryHits(oo)] <- introns_unique$symbol[subjectHits(oo)]
     jx_bed$tx_name[queryHits(oo)] <- introns_unique$tx_name[subjectHits(oo)]
         
