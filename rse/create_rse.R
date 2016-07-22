@@ -398,7 +398,9 @@ if(hasJx) {
             transcripts$tx_name)]
 
         ## Keep only those that have a gene id
-        introns <- introns[sapply(introns$gene_id, length) > 0]
+        #introns <- introns[sapply(introns$gene_id, length) > 0]
+        ## Actually, just label as NA the gene id if absent
+        introns$gene_id[sapply(introns$gene_id, length) == 0] <- CharacterList(NA)
 
         ## Make them unique: can't do that, otherwise we lose gene_ids
         # introns_test <- unique(introns)
