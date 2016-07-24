@@ -37,14 +37,6 @@ for line in sys.stdin:
     else:
         os.link(filename, os.path.join(project_dir, basename))
 
-current_project = None
-for filename in sorted(glob(os.path.join(junctions_path, '*.gz'))):
-    basename = os.path.basename(filename)
-    project = basename.partition('.')[0]
-    if project != current_project:
-        project_dir = os.path.join(root_dir, project)
-    os.link(filename, os.path.join(project_dir, basename))
-
 os.link(
         os.path.join(junctions_path, 'sample_ids.tsv'),
         os.path.join(root_dir, 'sample_ids.tsv')
