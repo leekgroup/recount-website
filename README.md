@@ -1,4 +1,4 @@
-Recount: A multi-experiment resource of analysis-ready RNA-seq gene and exon count datasets
+recount: A multi-experiment resource of analysis-ready RNA-seq gene and exon count datasets
 ====
 
 * Website: [jhubiostatistics.shinyapps.io/recount/](https://jhubiostatistics.shinyapps.io/recount/)
