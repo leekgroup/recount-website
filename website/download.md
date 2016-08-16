@@ -3,11 +3,9 @@
 ## If needed
 install.packages('devtools')
 
-## Install recount from GitHub
-devtools::install_github('leekgroup/recount')
-## Will be available from Bioconductor in the future
-# source('http://bioconductor.org/biocLite.R')
-# biocLite('recount')
+## Install recount from Bioconductor
+source('http://bioconductor.org/biocLite.R')
+biocLite('recount')
 
 ## Browse the vignetets for a quick description of how to use the package
 library('recount')
@@ -29,5 +27,5 @@ rse <- scale_counts(rse_gene)
 ## Then use your favorite differential expression software
 
 ## For more details, check the recount package vignette at
-## http://leekgroup.github.io/recount/
+## http://bioconductor.org/packages/recount
 ```
