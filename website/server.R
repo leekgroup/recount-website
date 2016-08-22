@@ -11,7 +11,7 @@ colnames(meta_web)[colnames(meta_web) == 'files_info'] <- 'files info'
 not_gtex <- meta_web[, 2] != 9662
 
 shinyServer(function(input, output, session) {
-    output$metadata = DT::renderDataTable(
+    output$metadata <- DT::renderDataTable(
         meta_web[not_gtex, - which(colnames(meta_web) %in% c('genes',
             'exons'))],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
@@ -26,7 +26,7 @@ shinyServer(function(input, output, session) {
             order = list(list(1, 'desc'))
         )
     )
-    output$popular = DT::renderDataTable(
+    output$popular <- DT::renderDataTable(
         meta_web[meta_web[, 2] > 400 & not_gtex, - which(colnames(meta_web) %in%
             c('genes', 'exons'))],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
@@ -41,7 +41,7 @@ shinyServer(function(input, output, session) {
             order = list(list(1, 'desc'))
         )
     )
-    output$gtex = DT::renderDataTable(
+    output$gtex <- DT::renderDataTable(
         meta_web[!not_gtex, - which(colnames(meta_web) %in%
             c('genes', 'exons'))],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
@@ -55,5 +55,15 @@ shinyServer(function(input, output, session) {
             lengthMenu = c(1, 5),
             order = list(list(1, 'desc'))
         )
+    )
+    
+    output$downloadData <- downloadHandler(
+        filename = function() { paste0('recount_selection_', Sys.time(), '.csv') },
+        content = function(file) {
+            current <- meta_web[not_gtex, c('accession', 'number of samples', 'species', 'abstract')][, ]
+            current <- current[match(input$metadata_rows_all, current$accession), ]
+            current$accession <- gsub('</a>', '', gsub('.*">', '', current$accession))
+            write.csv(current, file, row.names = FALSE)
+        }
     )
 })
