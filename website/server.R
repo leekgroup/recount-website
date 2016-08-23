@@ -60,8 +60,7 @@ shinyServer(function(input, output, session) {
     output$downloadData <- downloadHandler(
         filename = function() { paste0('recount_selection_', Sys.time(), '.csv') },
         content = function(file) {
-            current <- meta_web[not_gtex, c('accession', 'number of samples', 'species', 'abstract')][, ]
-            current <- current[match(input$metadata_rows_all, current$accession), ]
+            current <- meta_web[not_gtex, c('accession', 'number of samples', 'species', 'abstract')][input$metadata_rows_all, ]
             current$accession <- gsub('</a>', '', gsub('.*">', '', current$accession))
             write.csv(current, file, row.names = FALSE)
         }

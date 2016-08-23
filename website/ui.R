@@ -14,8 +14,8 @@ shinyUI(navbarPage(
         h3('The Datasets'),
         DT::dataTableOutput('metadata'),
         tags$hr(),
-        downloadButton('downloadData', 'Download list of studies displayed'),
-        helpText('To download all the studies matching your search selection increase the number of entries displayed from 10 to a larger number. You can then proceed to download the list of studies matching your search selection. Note that GTEx is separated from this list.'),
+        downloadButton('downloadData', 'Download list of studies matching search results'),
+        helpText('Note that GTEx is separated from this list.'),
         tags$hr(),
         h3('Authors'),
         tags$ul(
