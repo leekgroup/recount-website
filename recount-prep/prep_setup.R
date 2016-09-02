@@ -2,6 +2,11 @@
 suppressMessages(library('downloader'))
 suppressMessages(library('devtools'))
 
+## Check that output files are not present
+stopifnot(!dir.exists('rse_temp'))
+stopifnot(!any(file.exists('rse_gene.Rdata', 'rse_exon.Rdata', 'rse_jx.Rdata')))
+stopifnot(!any(file.exists('counts_exon.tsv.gz', 'counts_gene.tsv.gz')))
+
 ## Helper function
 down_file <- function(file_name, repo = 'recount-website') {
     if(!file.exists(file_name)) {

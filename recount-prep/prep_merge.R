@@ -6,7 +6,7 @@ library('getopt')
 ## Specify parameters
 spec <- matrix(c(
     'bigwith_path', 'b', 1, 'character',
-    'Path to the directory with the bigwig files'
+    'Path to the directory with the bigwig files',
 	'jx_path', 'j', 1, 'character',
     'Path to the directory with the junction files',
     'wiggletools', 'w', 2, 'character',
