@@ -16,7 +16,7 @@ WIGGLE="wiggletools"
 Rscript prep_setup.R
 
 ## Display help info on how to run prep_sample.R
-Rscript prep_sample.R -h TRUE
+Rscript prep_sample.R -h "TRUE"
 
 ## Process a couple of samples (labeled as single-end)
 Rscript prep_sample.R -f ${DATADIR}/JH-13_GGCTAC_L006.bw -c ${COUNTS} -b ${BWTOOL} -w ${WIGGLE} -p FALSE -a "TRUE"

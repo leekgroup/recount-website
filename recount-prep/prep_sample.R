@@ -1,9 +1,7 @@
 ## Process the data for a given sample and create the data needed for recount
 
-## Load required libraries
+## For specifying parameters
 library('getopt')
-suppressMessages(library('recount'))
-suppressMessages(library('devtools'))
 
 ## Specify parameters
 spec <- matrix(c(
@@ -25,6 +23,10 @@ if (!is.null(opt$help)) {
 	cat(getopt(spec, usage=TRUE))
 	q(status=1)
 }
+
+## Load libraries
+suppressMessages(library('recount'))
+suppressMessages(library('devtools'))
 
 ## For testing
 if(FALSE) {
