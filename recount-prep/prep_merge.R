@@ -99,11 +99,11 @@ if(opt$calculate_mean) {
     }
     runCmd <- function(cmd, i = NULL) {
         if(is.null(i)) {
-            shell_name <- paste0('.createWig.sh')
+            shell_name <- '.createWig.sh'
         } else {
-            shell_name <- paste0('.createWig_part', i,
-                '.sh')
-        }    
+            shell_name <- paste0('.createWig_part', i, '.sh')
+        }
+        message(paste(Sys.time(), 'running:', cmd))
         cat(cmd, file = shell_name)
         system(paste('sh', shell_name))
     }
