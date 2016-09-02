@@ -2,8 +2,8 @@
 
 ## Load required libraries
 library('getopt')
-library('recount')
-library('devtools')
+suppressMessages(library('recount'))
+suppressMessages(library('devtools'))
 
 ## Specify parameters
 spec <- matrix(c(

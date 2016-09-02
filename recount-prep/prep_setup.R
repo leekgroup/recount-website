@@ -1,6 +1,6 @@
 ## Download required files for prep_sample.R
-library('downloader')
-library('devtools')
+suppressMessages(library('downloader'))
+suppressMessages(library('devtools'))
 
 ## Helper function
 down_file <- function(file_name) {
