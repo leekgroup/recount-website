@@ -160,6 +160,7 @@ to_clean <- c('ucsc-knowngene-hg38.bed',
     'ucsc-knowngene-hg38-genes-bp-length.Rdata',
     'ucsc-knowngene-hg38-exons.Rdata', 'count_groups.Rdata', 'hg38.sizes')
 sapply(to_clean, unlink)
+unlink('rse_temp', recursive = TRUE)
 
 ## Reproducibility info
 proc.time()
