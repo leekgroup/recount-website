@@ -1,9 +1,10 @@
 #!/bin/sh
 
 ## Example in JHPCE
-module load R/3.3.x
-module load ucsctools
-module load wiggletools/default
+## Have to run this manually, for now??
+#module load R/3.3.x
+#module load ucsctools
+#module load wiggletools/default
 
 ## Some common variables
 DATADIR="/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs/"
