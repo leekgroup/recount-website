@@ -59,6 +59,10 @@ if(jhpce & is.null(opt$wigToBigWig)) {
 if(is.null(opt$calculate_mean)) opt$calculate_mean <- TRUE
 if(is.null(opt$wiggletools)) opt$wiggletools <- 'wiggletools'
 if(is.null(opt$wigToBigWig)) opt$wigToBigWig <- 'wigToBigWig'
+    
+## Print options used
+message(paste(Sys.time(), 'options used:'))
+print(opt)
 
 ## Helper function for loading rse file
 load_rse <- function(rse_file, type = 'exon') {
@@ -87,6 +91,8 @@ save(rse_gene, file = 'rse_gene.Rdata')
 if(opt$calculate_mean) {
     ## Get metadata information
     metadata <- colData(rse_gene)
+    message(paste(Sys.time(), 'metadata used'))
+    print(metadata)
     
     ## Name resulting mean.bw file
     outbw <- 'mean.bw'
@@ -103,7 +109,7 @@ if(opt$calculate_mean) {
         } else {
             shell_name <- paste0('.createWig_part', i, '.sh')
         }
-        message(paste(Sys.time(), 'running:', cmd))
+        message(paste(Sys.time(), 'command used:', cmd))
         cat(cmd, file = shell_name)
         system(paste('sh', shell_name))
     }

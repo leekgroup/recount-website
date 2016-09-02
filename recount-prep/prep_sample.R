@@ -53,6 +53,10 @@ if(is.null(opt$calculate_auc)) opt$calculate_auc <- FALSE
 if(is.null(opt$wiggletools)) opt$wiggletools <- 'wiggletools'
 if(is.null(opt$paired)) opt$paired <- as.logical(NA)
     
+## Print options used
+message(paste(Sys.time(), 'options used:'))
+print(opt)
+    
 ## Get sample name
 bw <- opt$bigwig_file
 names(bw) <- gsub('.*/|.bw', '', bw)
@@ -105,7 +109,7 @@ cmd_bwtool <- paste(opt$bwtool, 'summary', bed, bw,
     "/dev/stdout -fill=0 -with-sum | cut -f1-3,10 | awk -v CONVFMT=%.17g '{print $1 \"\t\" $2 \"\t\" $3 \"\t\" $4}' >",
     bw_tsv)
 message(paste(Sys.time(), 'running bwtool on the exons'))
-message(paste('Command used:', cmd_bwtool))
+message(paste(Sys.time(), 'command used:', cmd_bwtool))
 system(cmd_bwtool)
 
 ## Read the counts information from bwtool
