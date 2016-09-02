@@ -34,6 +34,9 @@ gzip counts_exon.tsv
 paste rse_temp/counts_gene_* > counts_gene.tsv
 gzip counts_gene.tsv
 
+## Display help info on how to run prep_merge.R
+Rscript prep_merge.R -h
+
 ## Merge rse objects and create junction rse object
 BWDIR="/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs/"
 JUNCTIONSDIR="/dcl01/leek/data/sunghee_analysis/processed/junctions_and_indels"

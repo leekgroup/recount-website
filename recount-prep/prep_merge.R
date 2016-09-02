@@ -33,7 +33,7 @@ suppressMessages(library('devtools'))
 ## For testing
 if(FALSE) {
     opt <- list(
-        'bigwig_path' = '/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs/'
+        'bigwig_path' = '/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs/',
         'jx_path' = '/dcl01/leek/data/sunghee_analysis/processed/junctions_and_indels',
         'wiggletools' = 'wiggletools',
         'wigToBigWig' = 'wigToBigWig',
