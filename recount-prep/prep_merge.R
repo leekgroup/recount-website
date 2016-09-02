@@ -9,6 +9,10 @@ spec <- matrix(c(
     'Path to the directory with the bigwig files'
 	'jx_path', 'j', 1, 'character',
     'Path to the directory with the junction files',
+    'wiggletools', 'w', 2, 'character',
+    "Path to wiggletools. If not provided, it's assumed that it is on the $PATH",
+    'wigToBigWig', 't', 2, 'character',
+    "Path to wigToBigWig. If not provided, it's assumed that it is on the $PATH",
     'calculate_mean', 'm', 2, 'logical', 'Whether to calculate the AUC',
 	'help' , 'h', 0, 'logical', 'Display help'
 ), byrow=TRUE, ncol=5)
@@ -31,12 +35,30 @@ if(FALSE) {
     opt <- list(
         'bigwig_path' = '/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs/'
         'jx_path' = '/dcl01/leek/data/sunghee_analysis/processed/junctions_and_indels',
+        'wiggletools' = 'wiggletools',
+        'wigToBigWig' = 'wigToBigWig',
         'calculate_mean' = TRUE
     )
 }
 
+## Are we on JHPCE? Print some helpful info
+jhpce <- grepl('compute-', Sys.info()['nodename'])
+if(jhpce & is.null(opt$wiggletools)) {
+    message(paste(Sys.time(), 'Note that you can use wiggletools with:
+    module load wiggletools/default
+    '))
+}
+if(jhpce & is.null(opt$wigToBigWig)) {
+    message(paste(Sys.time(), 'Note that you can use wigToBigWig with:
+    module load ucsctools
+    '))
+}
+
+
 ## Set some defaults
 if(is.null(opt$calculate_mean)) opt$calculate_mean <- TRUE
+if(is.null(opt$wiggletools)) opt$wiggletools <- 'wiggletools'
+if(is.null(opt$wigToBigWig)) opt$wigToBigWig <- 'wigToBigWig'
 
 ## Helper function for loading rse file
 load_rse <- function(rse_file, type = 'exon') {
@@ -92,7 +114,7 @@ if(opt$calculate_mean) {
         cmd <- scaleWig(metadata)
         ## Calculate mean wig file
         message(paste(Sys.time(), 'creating file', outwig))
-        cmd <- paste('wiggletools write', outwig, 'mean', cmd)
+        cmd <- paste(opt$wiggletools, 'write', outwig, 'mean', cmd)
         system.time( runCmd(cmd) )
     } else {
         ## Define subsets to work on
@@ -107,14 +129,14 @@ if(opt$calculate_mean) {
             tmpdir <- tempdir()     
             tmpwig <- file.path(tmpdir, paste0('sum_part', i, '.wig'))
             message(paste(Sys.time(), 'creating file', tmpwig))
-            cmd <- paste('wiggletools write', tmpwig, 'sum', cmd)
+            cmd <- paste(opt$wiggletools, 'write', tmpwig, 'sum', cmd)
             runCmd(cmd, i)
             return(tmpwig)
         }, meta, names(meta)) )
     
         ## Calculate final mean
-        cmd <- paste('wiggletools write', outwig, 'scale', 1/nrow(metadata),
-            'sum', paste(tmpfiles, collapse = ' '))
+        cmd <- paste(opt$wiggletools, 'write', outwig, 'scale',
+            1/nrow(metadata), 'sum', paste(tmpfiles, collapse = ' '))
         system.time( runCmd(cmd) )
         
         ## Clean up
@@ -123,7 +145,7 @@ if(opt$calculate_mean) {
 
     ## Transform to bigwig file
     message(paste(Sys.time(), 'creating file', outbw))
-    cmd2 <- paste('wigToBigWig', outwig, 'hg38.sizes', outbw)
+    cmd2 <- paste(opt$wigToBigWig, outwig, 'hg38.sizes', outbw)
     system.time( system(cmd2) )
     
     ## Clean up

@@ -43,7 +43,6 @@ if(FALSE) {
 jhpce <- grepl('compute-', Sys.info()['nodename'])
 if(jhpce & is.null(opt$wiggletools)) {
     message(paste(Sys.time(), 'Note that you can use wiggletools with:
-    module load ucsctools
     module load wiggletools/default
     '))
 }
