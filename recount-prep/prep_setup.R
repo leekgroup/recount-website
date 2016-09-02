@@ -17,10 +17,12 @@ down_file <- function(file_name) {
 bed <- 'ucsc-knowngene-hg38.bed'
 gene <- 'ucsc-knowngene-hg38-genes-bp-length.Rdata'
 exon <- 'ucsc-knowngene-hg38-exons.Rdata'
+count_groups_file <- 'count_groups.Rdata'
 
 down_file(bed)
 down_file(gene)
 down_file(exon)
+down_file(count_groups_file)
 
 ## Reproducbility info
 options(width = 120)
