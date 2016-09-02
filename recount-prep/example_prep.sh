@@ -41,4 +41,4 @@ Rscript prep_merge.R -h
 BWDIR="/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs/"
 JUNCTIONSDIR="/dcl01/leek/data/sunghee_analysis/processed/junctions_and_indels"
 WIGTOBIGWIG="wigToBigWig"
-Rscript prep_merge.R -b ${BWDIR} -j ${JUNCTIONSDIR} -w ${WIGGLE} -t {WIGTOBIGWIG} -m TRUE
+Rscript prep_merge.R -b ${BWDIR} -j ${JUNCTIONSDIR} -w ${WIGGLE} -t ${WIGTOBIGWIG} -m TRUE
