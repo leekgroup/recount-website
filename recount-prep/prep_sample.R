@@ -162,7 +162,7 @@ message(paste(Sys.time(), 'writing file', file.path('rse_temp',
 save(rse_gene, file = file.path('rse_temp', paste0('rse_gene_', names(bw),
     '.Rdata')))
 
-## Reproducbility info
+## Reproducibility info
 proc.time()
 options(width = 120)
 session_info()
