@@ -33,7 +33,7 @@ suppressMessages(library('devtools'))
 ## For testing
 if(FALSE) {
     opt <- list(
-        'bigwig_path' = '/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs/',
+        'bigwig_path' = '/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs',
         'jx_path' = '/dcl01/leek/data/sunghee_analysis/processed/junctions_and_indels',
         'wiggletools' = 'wiggletools',
         'wigToBigWig' = 'wigToBigWig',
@@ -79,7 +79,7 @@ save(rse_exon, file = 'rse_exon.Rdata')
 
 ## Same for gene rse objects
 gene_files <- dir('rse_temp', 'rse_gene_', full.names = TRUE)
-rse_gene <- do.call(cbind, lapply(gene_files, load_rse))
+rse_gene <- do.call(cbind, lapply(gene_files, load_rse, type = 'gene'))
 message(paste(Sys.time(), 'saving rse_gene.Rdata'))
 save(rse_gene, file = 'rse_gene.Rdata')
 
