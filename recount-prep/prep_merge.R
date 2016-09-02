@@ -5,7 +5,7 @@ library('getopt')
 
 ## Specify parameters
 spec <- matrix(c(
-    'bigwith_path', 'b', 1, 'character',
+    'bigwig_path', 'b', 1, 'character',
     'Path to the directory with the bigwig files',
 	'jx_path', 'j', 1, 'character',
     'Path to the directory with the junction files',
@@ -91,8 +91,6 @@ save(rse_gene, file = 'rse_gene.Rdata')
 if(opt$calculate_mean) {
     ## Get metadata information
     metadata <- colData(rse_gene)
-    message(paste(Sys.time(), 'metadata used'))
-    print(metadata)
     
     ## Name resulting mean.bw file
     outbw <- 'mean.bw'
@@ -100,6 +98,7 @@ if(opt$calculate_mean) {
     
 
     scaleWig <- function(m) {
+        print(m)
         paste(paste('scale', round(1e6*100*40 / m$auc, digits = 17),
             file.path(opt$bigwig_path, m$bigwig_file)), collapse = ' ')
     }
@@ -153,16 +152,14 @@ if(opt$calculate_mean) {
     message(paste(Sys.time(), 'creating file', outbw))
     cmd2 <- paste(opt$wigToBigWig, outwig, 'hg38.sizes', outbw)
     system.time( system(cmd2) )
-    
-    ## Clean up
-    unlink(outwig)
 }
 
 
 ## Add code for rse_jx.Rdata
 
 ## Clean up
-to_clean <- c('ucsc-knowngene-hg38.bed',
+message(paste(Sys.time(), 'cleaning up temporary files'))
+to_clean <- c(outwig, 'ucsc-knowngene-hg38.bed',
     'ucsc-knowngene-hg38-genes-bp-length.Rdata',
     'ucsc-knowngene-hg38-exons.Rdata', 'count_groups.Rdata', 'hg38.sizes')
 sapply(to_clean, unlink)
