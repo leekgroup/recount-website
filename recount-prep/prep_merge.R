@@ -108,7 +108,7 @@ exon_files <- dir('rse_temp', 'rse_exon_', full.names = TRUE)
 rse_exon <- do.call(cbind, lapply(exon_files, load_rse))
 
 ## Re-order manifest info
-manifest_ord <- match(rownames(colData(rse_exon)))
+manifest_ord <- match(rownames(colData(rse_exon)), manifest_famples)
 manifest <- manifest[manifest_ord, manifest_samples]
 manifest_samples <- manifest_samples[manifest_ord]
 
