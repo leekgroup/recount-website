@@ -20,6 +20,8 @@ Rscript prep_setup.R
 
 ## Display help info on how to run prep_sample.R
 Rscript prep_sample.R -h
+## Note that if you setup the environment variable TMPDIR and export it, this
+## will control where R stores the temporary files. See ?tempdir for more info.
 
 ## Process two samples (labeled as single-end)
 Rscript prep_sample.R -f ${DATADIR}/JH-13_GGCTAC_L006.bw -c ${COUNTS} -b ${BWTOOL} -w ${WIGGLE} -p FALSE -a TRUE
