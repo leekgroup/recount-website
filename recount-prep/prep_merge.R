@@ -51,6 +51,11 @@ stopifnot(file.exists(opt$manifest_file))
 stopifnot(file.exists('introns_unique.Rdata'))
 stopifnot(file.exists('hg38.sizes'))
 
+## Check that outputs don't exist, to avoid overwriting
+stopifnot(!file.exists('rse_gene.Rdata'))
+stopifnot(!file.exists('rse_exon.Rdata'))
+stopifnot(!file.exists('rse_jx.Rdata'))
+
 ## Are we on JHPCE? Print some helpful info
 jhpce <- grepl('compute-', Sys.info()['nodename'])
 if(jhpce & is.null(opt$wiggletools)) {
@@ -85,9 +90,30 @@ load_rse <- function(rse_file, type = 'exon') {
     }
 }
 
+## Read manifest info
+message(paste(Sys.time(), 'reading', opt$manifest_file))
+manifest <- read.table(opt$manifest_file, sep = '\t', header = FALSE,
+    stringsAsFactors = FALSE, fill = TRUE)
+
+## Get sample names from the manifest file. Note that a manifest file can
+## have both paired-end and single-end data
+manifest_cols <- apply(manifest, 1, function(x) { sum(x != '') })
+manifest_samples <- sapply(seq_len(nrow(manifest)), function(i) {
+    manifest[i, manifest_cols[i]]
+})
+manifest$paired <- ifelse(manifest_cols == 5, TRUE, FALSE)
+
 ## Locate exon rse objects, load them, merge them and save results
 exon_files <- dir('rse_temp', 'rse_exon_', full.names = TRUE)
 rse_exon <- do.call(cbind, lapply(exon_files, load_rse))
+
+## Re-order manifest info
+manifest_ord <- match(rownames(colData(rse_exon)))
+manifest <- manifest[manifest_ord, manifest_samples]
+manifest_samples <- manifest_samples[manifest_ord]
+
+colData(rse_exon)$paired <- manifest$paired
+
 message(paste(Sys.time(), 'saving rse_exon.Rdata'))
 save(rse_exon, file = 'rse_exon.Rdata')
 rm(rse_exon, exon_files)
@@ -95,6 +121,7 @@ rm(rse_exon, exon_files)
 ## Same for gene rse objects
 gene_files <- dir('rse_temp', 'rse_gene_', full.names = TRUE)
 rse_gene <- do.call(cbind, lapply(gene_files, load_rse, type = 'gene'))
+colData(rse_gene)$paired <- manifest$paired
 message(paste(Sys.time(), 'saving rse_gene.Rdata'))
 save(rse_gene, file = 'rse_gene.Rdata')
 
@@ -103,7 +130,11 @@ metadata <- colData(rse_gene)
 rm(rse_gene, gene_files)
 
 ## Calculate the mean bigwig if necessary
-if(opt$calculate_mean) {    
+if(opt$calculate_mean) {
+    ## Check that outputs don't exist
+    stopifnot(!file.exists('mean.bw'))
+    stopifnot(!file.exists('mean.wig'))
+    
     ## Name resulting mean.bw file
     outbw <- 'mean.bw'
     outwig <- 'mean.wig'
@@ -168,11 +199,6 @@ if(opt$calculate_mean) {
 
 
 ## Code for creating rse_jx
-message(paste(Sys.time(), 'reading', opt$manifest_file))
-manifest <- read.table(opt$manifest_file, sep = '\t', header = FALSE,
-    stringsAsFactors = FALSE)
-
-
 message(paste(Sys.time(), 'reading', opt$jx_file))
 jx_info <- read.table(opt$jx_file, sep = '\t', header = FALSE,
     stringsAsFactors = FALSE, check.names = FALSE)
@@ -197,7 +223,7 @@ colnames(jx_counts) <- rownames(metadata)
 
 ## Fill in table
 for(sample in rownames(metadata)) {
-    sampleId <- as.character(which(manifest[, ncol(manifest)] == sample))
+    sampleId <- as.character(which(manifest_samples == sample))
     sample_reads <- subset(jx_info_tab, sample_id == sampleId)
     if(nrow(sample_reads) == 0)  {
         message(paste(Sys.time(), 'found no junction counts for sample',

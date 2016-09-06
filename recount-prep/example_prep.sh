@@ -23,12 +23,12 @@ Rscript prep_sample.R -h
 ## Note that if you setup the environment variable TMPDIR and export it, this
 ## will control where R stores the temporary files. See ?tempdir for more info.
 
-## Process two samples (labeled as paired-end)
-Rscript prep_sample.R -f ${DATADIR}/JH-13_GGCTAC_L006.bw -c ${COUNTS} -b ${BWTOOL} -w ${WIGGLE} -p TRUE -a TRUE
-#Rscript prep_sample.R -f ${DATADIR}/JH-30_GTGAAA_L004.bw -c ${COUNTS} -b ${BWTOOL} -w ${WIGGLE} -p TRUE -a TRUE
+## Process two samples
+Rscript prep_sample.R -f ${DATADIR}/JH-13_GGCTAC_L006.bw -c ${COUNTS} -b ${BWTOOL} -w ${WIGGLE} -a TRUE
+#Rscript prep_sample.R -f ${DATADIR}/JH-30_GTGAAA_L004.bw -c ${COUNTS} -b ${BWTOOL} -w ${WIGGLE} -a TRUE
 
 ## Use full arguments for another sample:
-Rscript prep_sample.R --bigwig_file ${DATADIR}/JH-11_GGCTAC_L003.bw --counts_file ${COUNTS} --bwtool ${BWTOOL} --wiggletools ${WIGGLE} --paired TRUE --calculate_auc TRUE
+Rscript prep_sample.R --bigwig_file ${DATADIR}/JH-11_GGCTAC_L003.bw --counts_file ${COUNTS} --bwtool ${BWTOOL} --wiggletools ${WIGGLE}--calculate_auc TRUE
 
 ## Now merge results
 paste rse_temp/counts_exon_* > counts_exon.tsv

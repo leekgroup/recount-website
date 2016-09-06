@@ -11,7 +11,6 @@ spec <- matrix(c(
     "Path to bwtool. If not provided, it's assumed that it is on the $PATH",
     'wiggletools', 'w', 2, 'character',
     "Path to wiggletools. If not provided, it's assumed that it is on the $PATH",
-    'paired', 'p', 2, 'logical', 'Is the sample paired end?',
     'calculate_auc', 'a', 2, 'logical', 'Whether to calculate the AUC',
 	'help' , 'h', 0, 'logical', 'Display help'
 ), byrow=TRUE, ncol=5)
@@ -34,8 +33,7 @@ if(FALSE) {
     'counts_file' = '/dcl01/leek/data/sunghee_analysis/processed/cross_sample_results/counts.tsv.gz',
     'bwtool' = '/dcl01/leek/data/bwtool/bwtool-1.0/bwtool',
     'wiggletools' = 'wiggletools',
-    'calculate_auc' = TRUE,
-    'paired' = FALSE
+    'calculate_auc' = TRUE
     )
 }
 
@@ -51,7 +49,6 @@ if(jhpce & is.null(opt$wiggletools)) {
 if(is.null(opt$bwtool)) opt$bwtool <- 'bwtool'
 if(is.null(opt$calculate_auc)) opt$calculate_auc <- FALSE
 if(is.null(opt$wiggletools)) opt$wiggletools <- 'wiggletools'
-if(is.null(opt$paired)) opt$paired <- as.logical(NA)
     
 ## Print options used
 message(paste(Sys.time(), 'options used:'))
@@ -101,7 +98,7 @@ metadata$mapped_read_count <- as.integer(
     strsplit(counts$total.mapped.reads, ',')[[1]][1])
 metadata$reads_downloaded <- as.integer(
     strsplit(counts$total.reads, ',')[[1]][1])
-metadata$paired_end <- opt$paired
+metadata$paired_end <- as.logical(NA)
 
 ## Run bwtool to count at the exon level
 bw_tsv <- file.path(tempdir(), paste0(names(bw), '.tsv'))
