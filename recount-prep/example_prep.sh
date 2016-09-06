@@ -39,6 +39,7 @@ Rscript prep_merge.R -h
 
 ## Merge rse objects and create junction rse object
 BWDIR="/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs"
-JUNCTIONSDIR="/dcl01/leek/data/sunghee_analysis/processed/junctions_and_indels"
+JUNCTIONS="/dcl01/leek/data/sunghee_analysis/processed/cross_sample_results/first_pass_junctions.tsv.gz"
+MANIFEST="/dcl01/leek/data/sunghee/all_s3.manifest"
 WIGTOBIGWIG="wigToBigWig"
-Rscript prep_merge.R -b ${BWDIR} -j ${JUNCTIONSDIR} -w ${WIGGLE} -t ${WIGTOBIGWIG} -m TRUE
+Rscript prep_merge.R -b ${BWDIR} -j ${JUNCTIONS} -m ${MANIFEST} -w ${WIGGLE} -t ${WIGTOBIGWIG} -c TRUE
