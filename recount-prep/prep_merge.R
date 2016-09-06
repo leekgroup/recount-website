@@ -107,12 +107,9 @@ manifest$paired <- ifelse(manifest_cols == 5, TRUE, FALSE)
 exon_files <- dir('rse_temp', 'rse_exon_', full.names = TRUE)
 rse_exon <- do.call(cbind, lapply(exon_files, load_rse))
 
-## Re-order manifest info
-manifest_ord <- match(rownames(colData(rse_exon)), manifest_famples)
-manifest <- manifest[manifest_ord, manifest_samples]
-manifest_samples <- manifest_samples[manifest_ord]
-
-colData(rse_exon)$paired <- manifest$paired
+## Assign paired-end info
+colData(rse_exon)$paired <- manifest$paired[match(rownames(colData(rse_exon)),
+    manifest_samples)]
 
 message(paste(Sys.time(), 'saving rse_exon.Rdata'))
 save(rse_exon, file = 'rse_exon.Rdata')
@@ -121,7 +118,8 @@ rm(rse_exon, exon_files)
 ## Same for gene rse objects
 gene_files <- dir('rse_temp', 'rse_gene_', full.names = TRUE)
 rse_gene <- do.call(cbind, lapply(gene_files, load_rse, type = 'gene'))
-colData(rse_gene)$paired <- manifest$paired
+colData(rse_gene)$paired <- manifest$paired[match(rownames(colData(rse_gene)),
+    manifest_samples)]
 message(paste(Sys.time(), 'saving rse_gene.Rdata'))
 save(rse_gene, file = 'rse_gene.Rdata')
 
