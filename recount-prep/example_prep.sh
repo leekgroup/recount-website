@@ -28,7 +28,7 @@ Rscript prep_sample.R -f ${DATADIR}/JH-13_GGCTAC_L006.bw -c ${COUNTS} -b ${BWTOO
 #Rscript prep_sample.R -f ${DATADIR}/JH-30_GTGAAA_L004.bw -c ${COUNTS} -b ${BWTOOL} -w ${WIGGLE} -a TRUE
 
 ## Use full arguments for another sample:
-Rscript prep_sample.R --bigwig_file ${DATADIR}/JH-11_GGCTAC_L003.bw --counts_file ${COUNTS} --bwtool ${BWTOOL} --wiggletools ${WIGGLE}--calculate_auc TRUE
+Rscript prep_sample.R --bigwig_file ${DATADIR}/JH-11_GGCTAC_L003.bw --counts_file ${COUNTS} --bwtool ${BWTOOL} --wiggletools ${WIGGLE} --calculate_auc TRUE
 
 ## Now merge results
 paste rse_temp/counts_exon_* > counts_exon.tsv
