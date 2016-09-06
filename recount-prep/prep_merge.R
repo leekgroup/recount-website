@@ -97,14 +97,13 @@ gene_files <- dir('rse_temp', 'rse_gene_', full.names = TRUE)
 rse_gene <- do.call(cbind, lapply(gene_files, load_rse, type = 'gene'))
 message(paste(Sys.time(), 'saving rse_gene.Rdata'))
 save(rse_gene, file = 'rse_gene.Rdata')
+
+## Get metadata information
 metadata <- colData(rse_gene)
 rm(rse_gene, gene_files)
 
 ## Calculate the mean bigwig if necessary
-if(opt$calculate_mean) {
-    ## Get metadata information
-    metadata <- colData(rse_gene)
-    
+if(opt$calculate_mean) {    
     ## Name resulting mean.bw file
     outbw <- 'mean.bw'
     outwig <- 'mean.wig'
