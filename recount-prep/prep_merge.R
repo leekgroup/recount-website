@@ -294,6 +294,7 @@ manual_c <- function(l, r) {
     names(res) <- NULL
     return(res)
 }
+
 message(paste(Sys.time(), 'combining left and right results'))
 has_hit <- not_both[unique(c(queryHits(oo_left), queryHits(oo_right)))]
 ends_hit <- not_both[intersect(queryHits(oo_left), queryHits(oo_right))]
