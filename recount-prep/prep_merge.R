@@ -130,12 +130,14 @@ rm(rse_gene, gene_files)
 ## Calculate the mean bigwig if necessary
 if(opt$calculate_mean) {
     ## Check that outputs don't exist
-    stopifnot(!file.exists('mean.bw'))
-    stopifnot(!file.exists('mean.wig'))
+    stopifnot(!file.exists('bw/mean.bw'))
+    stopifnot(!file.exists('bw/mean.wig'))
+    
+    dir.create('bw', showWarnings = FALSE)
     
     ## Name resulting mean.bw file
-    outbw <- 'mean.bw'
-    outwig <- 'mean.wig'
+    outbw <- 'bw/mean.bw'
+    outwig <- 'bw/mean.wig'
     
 
     scaleWig <- function(m) {

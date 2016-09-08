@@ -12,6 +12,7 @@ rse_jx.Rdata
 hg38.sizes
 introns_unique.Rdata
 mean.bw
+bw
 
 ## Temp bash files
 .*.sh
