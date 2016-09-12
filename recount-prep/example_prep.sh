@@ -37,7 +37,6 @@ paste rse_temp/counts_gene_* > counts_gene.tsv
 gzip counts_gene.tsv
 
 ## Display help info on how to run prep_merge.R
-module load R/3.3
 Rscript prep_merge.R -h
 
 ## Merge rse objects and create junction rse object

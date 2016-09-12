@@ -340,7 +340,7 @@ message(paste(Sys.time(), 'creating rse_jx object'))
 rse_jx <- SummarizedExperiment(assays = list('counts' = jx_counts),
     colData = metadata, rowRanges = jx_gr)
 message(paste(Sys.time(), 'saving rse_jx.Rdata'))
-save(rse_jx, file = 'rse_gene.Rdata')
+save(rse_jx, file = 'rse_jx.Rdata')
 
 
 ## Clean up
