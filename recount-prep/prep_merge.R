@@ -230,7 +230,7 @@ for(sample in rownames(metadata)) {
             sample))
         next
     }
-    jx_map <- match(jx_info$jx_id, sample_reads$jx_id)
+    jx_map <- match(seq_len(nrow(jx_info)), sample_reads$jx_id)
     jx_counts[!is.na(jx_map), sample] <- sample_reads$reads[jx_map[!is.na(jx_map)]]
 }
 rm(sample, sampleId, sample_reads, jx_map, jx_info_tab)
