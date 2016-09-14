@@ -203,7 +203,7 @@ message(paste(Sys.time(), 'reading', opt$jx_file))
 jx_info <- read.table(opt$jx_file, sep = '\t', header = FALSE,
     stringsAsFactors = FALSE, check.names = FALSE)
 colnames(jx_info) <- c('chr', 'start', 'end', 'sample_ids', 'reads')
-    
+
 ## Create the counts matrix
 message(paste(Sys.time(), 'processing count information'))
 jx_info_samples <- strsplit(jx_info$sample_ids, ',')
@@ -223,7 +223,8 @@ colnames(jx_counts) <- rownames(metadata)
 
 ## Fill in table
 for(sample in rownames(metadata)) {
-    sampleId <- as.character(which(manifest_samples == sample))
+    ## Note that the sample ids in opt$jx_file are 0-based
+    sampleId <- as.character(which(manifest_samples == sample) - 1)
     sample_reads <- subset(jx_info_tab, sample_id == sampleId)
     if(nrow(sample_reads) == 0)  {
         message(paste(Sys.time(), 'found no junction counts for sample',
