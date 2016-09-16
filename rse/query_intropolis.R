@@ -12,7 +12,8 @@ jx_df <- data.frame(chr = seqnames(introns_unique),
     strand = strand(introns_unique))
 
 ## Write to disk
-write.table(jx_df, file = 'jx.tsv', sep = '\t', quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(jx_df, file = 'jx.tsv', sep = '\t', quote = FALSE,
+    row.names = FALSE, col.names = FALSE)
 
 ## Reproducibility info
 proc.time()
