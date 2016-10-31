@@ -6,13 +6,13 @@ library('BiocParallel')
 
 ## Parallel environment
 bp <- MulticoreParam(workers = 25, outfile = Sys.getenv('SGE_STDERR_PATH'))
-tsv <- dir('/dcl01/leek/data/recount2/coverage_tgca', pattern = 'tsv', full.names = TRUE)
-names(tsv) <- gsub('.sum.tsv', '', dir('/dcl01/leek/data/recount2/coverage_tgca', pattern = 'tsv'))
+tsv <- dir('/dcl01/leek/data/recount2/coverage_tcga', pattern = 'tsv', full.names = TRUE)
+names(tsv) <- gsub('.sum.tsv', '', dir('/dcl01/leek/data/recount2/coverage_tcga', pattern = 'tsv'))
 
 system.time( tsv_lines <- bplapply(tsv, countLines, BPPARAM = bp) )
 all(tsv_lines == 226117)
 
-save(tsv_lines, file = 'tsv_lines_tgca.Rdata')
+save(tsv_lines, file = 'tsv_lines_tcga.Rdata')
 
 ## Reproducibility info
 proc.time()
