@@ -3,6 +3,7 @@
 # Usage
 # sh run_bwtool.sh sra
 # sh run_bwtool.sh gtex
+# sh run_bwtool.sh tgca
 
 # Directories
 MAINDIR=/dcl01/leek/data/recount-website
@@ -24,8 +25,11 @@ then
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38.bed /dcl01/leek/data/gtex /dcl01/leek/data/recount2/coverage_gtex > ${WDIR}/bwtool_cmds_${PROJECT}.txt
+elif [[ "${PROJECT}" == "tgca" ]]
+then
+    sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38.bed /dcl01/leek/data/tcga/v1 /dcl01/leek/data/recount2/coverage_tgca > ${WDIR}/bwtool_cmds_${PROJECT}.txt
 else
-    echo "Specify a valid project: gtex, sra"
+    echo "Specify a valid project: gtex, sra, tgca"
 fi
 
 # Count how many commands there are
