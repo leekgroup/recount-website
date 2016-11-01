@@ -65,3 +65,13 @@ res <- results(dds)
 
 ## Explore results
 plotMA(res, main="DESeq2 results for SRP009615")
+
+## Expressed-regions example
+regions <- expressed_regions('SRP009615', 'chrY', cutoff = 5L, 
+    maxClusterGap = 3000L, outdir = file.path(scipath, 'SRP009615'))
+regions
+
+## Reproducibility info
+library('devtools')
+options(width = 120)
+session_info()
