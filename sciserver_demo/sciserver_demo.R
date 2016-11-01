@@ -1,3 +1,6 @@
+## This code is part of the recount vignette section describing how to use
+## SciServer compute http://www.sciserver.org/ to access the recount data.
+
 # Install recount
 source("https://bioconductor.org/biocLite.R")
 biocLite(c('recount', 'DESeq2'))
