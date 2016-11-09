@@ -3,6 +3,7 @@
 # Usage
 # sh run_metadata.sh sra
 # sh run_metadata.sh gtex
+# sh run_metadata.sh tcga
 
 # Directories
 MAINDIR=/dcl01/leek/data/recount-website
@@ -23,8 +24,11 @@ then
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "${PROJECT}"
+elif [[ "${PROJECT}" == "tcga" ]]
+then
+    echo "${PROJECT}"
 else
-    echo "Specify a valid project: gtex, sra"
+    echo "Specify a valid project: gtex, sra, tcga"
 fi
 
 
