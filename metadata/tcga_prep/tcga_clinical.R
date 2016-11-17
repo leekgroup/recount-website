@@ -38,6 +38,7 @@ save(clin_all, file = 'clin_all.Rdata')
 
 write.table(clin_all, file = 'clin_all.tsv', quote = FALSE, row.names = FALSE,
     sep = '\t')
+system('gzip clin_all.tsv')
 
 ## Reproducibility info
 Sys.time()
