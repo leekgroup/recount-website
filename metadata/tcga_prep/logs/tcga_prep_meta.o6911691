@@ -1,0 +1,431 @@
+**** Job starts ****
+Fri Nov 18 13:56:16 EST 2016
+[1] "The following variables are still lists but do not match the 11285 rows expected and will be left as lists"
+[[1]]
+[1] 21700    12
+
+[[2]]
+[1] 11498     8
+
+[[3]]
+[1] 15294    19
+
+[[4]]
+[1] 11290     8
+
+[[5]]
+[1] 979906      8
+
+                                         annotations 
+                                               11285 
+                                   cases.annotations 
+                                               11285 
+                       cases.samples.portions.slides 
+                                               11285 
+         cases.samples.portions.analytes.annotations 
+                                               11285 
+cases.samples.portions.analytes.aliquots.annotations 
+                                               11285 
+[1] "Unique columns by data source"
+                                 gdc_file_name 
+                                         11285 
+                              gdc_submitter_id 
+                                         11285 
+                                   gdc_file_id 
+                                         11285 
+                                    gdc_md5sum 
+                                         11285 
+  gdc_metadata_files.updated_datetime.analysis 
+                                         11285 
+         gdc_metadata_files.file_name.analysis 
+                                         11285 
+            gdc_metadata_files.md5sum.analysis 
+                                         11285 
+           gdc_metadata_files.file_id.analysis 
+                                         11285 
+gdc_metadata_files.updated_datetime.experiment 
+                                         11285 
+       gdc_metadata_files.file_name.experiment 
+                                         11285 
+         gdc_metadata_files.file_id.experiment 
+                                         11285 
+       gdc_metadata_files.updated_datetime.run 
+                                         11285 
+              gdc_metadata_files.file_name.run 
+                                         11285 
+                gdc_metadata_files.file_id.run 
+                                         11285 
+xml_bcr_patient_barcode          xml_patient_id    xml_bcr_patient_uuid 
+                  11160                   11160                   11160 
+         cgc_gdc_uuid          cgc_filename cgc_file_submitter_id 
+                11348                 11348                 11348 
+     cgc_file_file_id 
+                11348 
+                                                                                          gdc_file_name
+1  UNCID_2187683.B045331F-5CB5-4BE4-896F-E4C60D5AAD8F.120817_UNC9-SN296_0312_AC0WHCACXX_4_AGTTCC.tar.gz
+2 UNCID_2651447.72f09d56-23d1-4cd8-9312-52ea1dfd94c8.140416_UNC15-SN850_0361_AC41LKACXX_3_ACTTGA.tar.gz
+3 UNCID_2318910.fdced5ba-d0d5-4e07-b001-9d740cc48898.131101_UNC13-SN749_0316_AC2LK9ACXX_4_GTGGCC.tar.gz
+4 UNCID_2167104.291167cc-8f00-47e1-abe2-72388c98170d.130621_UNC14-SN744_0352_BC253TACXX_1_GCCAAT.tar.gz
+5  UNCID_2185547.23447051-b9ad-4eb7-845c-2c4c1a71301a.121214_UNC9-SN296_0321_BC1FDUACXX_8_CAGATC.tar.gz
+6 UNCID_2366844.e926e7f1-c849-47b4-b466-b1c2d187fdd2.140102_UNC15-SN850_0344_AC384WACXX_2_CTTGTA.tar.gz
+                      gdc_submitter_id                          gdc_file_id
+1 d36ee832-b7ba-4981-a0b4-8b612733b333 ead712e4-563b-4a49-9da1-a2a6adfeb59a
+2 ab03d1d9-36bb-4023-82b0-27ddb09e9d0e 5381ed12-2adc-4bbf-993b-65bdec510bb4
+3 5745596e-e7fc-40d8-b959-5bab93734b6d be71f250-1529-43bd-84f3-3afe1b42d77d
+4 aca6ea2e-d676-4f40-8668-fc682bf80506 cdb44ecd-3f01-4865-b4cc-5190e0fb64dc
+5 a2ccc6ec-0f41-4e78-870f-0b30599ea7cc c58d6e8c-83ae-4fca-a075-445e178e5f12
+6 7de7b479-dfcb-4e31-b29d-2f78696ea981 339978dc-6806-47a4-b9df-0143a672e5db
+                        gdc_md5sum gdc_metadata_files.updated_datetime.analysis
+1 0ac257268ea2478b30ea2aa0480201f5             2016-09-29T20:05:30.312117-05:00
+2 7137e54298e3f2445ba6b6c94a131f6e             2016-09-29T20:44:53.855125-05:00
+3 ee578a2ffe10826369a06b129f6928c0             2016-09-29T18:41:39.026467-05:00
+4 cd74da0da33c1f893e55be4bcc10da50             2016-09-29T19:14:24.295289-05:00
+5 87dcd0550090d7f8459acf9a84a7d967             2016-09-29T20:39:20.908469-05:00
+6 b8414561f15ae08bfb6502df33f09e9d             2016-09-29T18:05:09.237234-05:00
+              gdc_metadata_files.file_name.analysis
+1 d36ee832-b7ba-4981-a0b4-8b612733b333_analysis.xml
+2 ab03d1d9-36bb-4023-82b0-27ddb09e9d0e_analysis.xml
+3 5745596e-e7fc-40d8-b959-5bab93734b6d_analysis.xml
+4 aca6ea2e-d676-4f40-8668-fc682bf80506_analysis.xml
+5 a2ccc6ec-0f41-4e78-870f-0b30599ea7cc_analysis.xml
+6 7de7b479-dfcb-4e31-b29d-2f78696ea981_analysis.xml
+  gdc_metadata_files.md5sum.analysis  gdc_metadata_files.file_id.analysis
+1   bc5f5d438c4722ff70d514c70ec9bc4f 607359c9-5f6a-471f-827d-9996d5398b5c
+2   860254e5590ea46a98e391b1416a9e13 78922010-a7c4-4f7c-a70a-ece85bf48f6e
+3   15dae098fc71a64957a23a3b8967641a 2c0c0a33-c97d-4310-91bc-57a1fa51ef30
+4   9522a72de3747323c7e952a149c11b16 40c4fffe-8505-473b-b292-30163c84a83e
+5   4777124710268a77718ab75570e4658d 75154ce9-5c1d-470c-a866-1f62c230a7f3
+6   d0dcb73f9462aef30faf9961aba94bb6 1544847b-fbab-45f1-9c69-a861738dc6be
+  gdc_metadata_files.updated_datetime.experiment
+1               2016-09-29T18:55:14.044287-05:00
+2               2016-09-29T22:16:13.641368-05:00
+3               2016-09-29T17:40:47.106692-05:00
+4               2016-09-29T23:14:25.856698-05:00
+5               2016-09-29T20:36:39.703509-05:00
+6               2016-10-07T16:00:42.662462-05:00
+              gdc_metadata_files.file_name.experiment
+1 d36ee832-b7ba-4981-a0b4-8b612733b333_experiment.xml
+2 ab03d1d9-36bb-4023-82b0-27ddb09e9d0e_experiment.xml
+3 5745596e-e7fc-40d8-b959-5bab93734b6d_experiment.xml
+4 aca6ea2e-d676-4f40-8668-fc682bf80506_experiment.xml
+5 a2ccc6ec-0f41-4e78-870f-0b30599ea7cc_experiment.xml
+6 7de7b479-dfcb-4e31-b29d-2f78696ea981_experiment.xml
+  gdc_metadata_files.file_id.experiment gdc_metadata_files.updated_datetime.run
+1  34ac245d-09cb-4fb8-ad94-04f1213adc16        2016-09-29T23:35:35.532075-05:00
+2  b1504f49-c23d-44bd-8795-0cb97b9134ae        2016-09-30T00:04:52.549878-05:00
+3  05bbc11d-4e0a-463d-9dbb-763c30ac594f        2016-09-29T19:28:30.901817-05:00
+4  d56d05d4-0f5d-4ede-91dd-18a22562352f        2016-09-29T22:27:13.522996-05:00
+5  7361730e-8025-4bd0-b27f-05a31e843553        2016-09-29T19:20:38.068575-05:00
+6  1b9ec3e2-aa0e-4c52-a4b7-6911fc5757f9        2016-09-29T21:10:46.672817-05:00
+              gdc_metadata_files.file_name.run
+1 d36ee832-b7ba-4981-a0b4-8b612733b333_run.xml
+2 ab03d1d9-36bb-4023-82b0-27ddb09e9d0e_run.xml
+3 5745596e-e7fc-40d8-b959-5bab93734b6d_run.xml
+4 aca6ea2e-d676-4f40-8668-fc682bf80506_run.xml
+5 a2ccc6ec-0f41-4e78-870f-0b30599ea7cc_run.xml
+6 7de7b479-dfcb-4e31-b29d-2f78696ea981_run.xml
+        gdc_metadata_files.file_id.run
+1 e27e1362-ae6e-4704-abd0-ab0f3fea4a6b
+2 f488b55e-c37f-44b7-87a3-f620453869a0
+3 49a56f84-5e40-4525-8c17-e88348afaa23
+4 b7fcf413-1cd9-46a9-8df4-b7a5bbb29de6
+5 44b170b3-7d16-4ab9-8740-631f007c0ba4
+6 88d02323-9483-4466-9577-693a29de2416
+  xml_bcr_patient_barcode xml_patient_id                 xml_bcr_patient_uuid
+1            TCGA-DX-A8BR           A8BR 5452FFD8-0408-4A78-B2FD-F1E0B0D05276
+2            TCGA-3B-A9HY           A9HY 2A2F2663-D813-41FF-A4E2-DFE0F16D236D
+3            TCGA-SI-AA8C           AA8C 9B781072-66D8-49F2-80F7-7B020746B6E9
+4            TCGA-WK-A8XY           A8XY 01C5F902-EC3C-4EB7-9E38-1D29AE6AB959
+5            TCGA-MB-A8JK           A8JK 8C279BC5-117E-440B-B118-AF01FC6C11A2
+6            TCGA-QQ-A8VH           A8VH 5A2B2E1B-B631-40AE-BA41-D8022CDDB550
+                          cgc_gdc_uuid
+1 1BBD421E-0B42-4760-9E9D-4819474ECF15
+2 FFE0C4B1-8EEC-484A-AB87-3401B71BD081
+3 311D089C-33F1-4722-9118-F56427C5C128
+4 9A33172F-AEEA-4B7D-9605-0C60D7872CEA
+5 EA3447B5-AA1F-4D29-81D5-A19B856C5E73
+6 D3A22E58-32E9-45DE-8CFB-43F239990879
+                                                                                           cgc_filename
+1 UNCID_2206678.9ab4ed5d-c8db-423e-9eb1-1fa2e305df3a.111006_UNC11-SN627_0158_BB01Y8ABXX_1_TAGCTT.tar.gz
+2 UNCID_2449698.08ed2b94-bffb-4814-9b9c-cbed531cd1a1.140218_UNC12-SN629_0350_BC38M1ACXX_5_GCCAAT.tar.gz
+3 UNCID_2519954.7c98cea2-9505-4fdf-998f-28f546ad5382.140124_UNC12-SN629_0346_BC375JACXX_6_ATCACG.tar.gz
+4  UNCID_2209891.71679725-d65f-47d4-b851-e4467f9d3f62.110420_UNC6-RDR300211_00096_FC_634WMAAXX_2.tar.gz
+5  UNCID_2197309.8c957960-d5a3-4d07-a3aa-6c13b16fff0e.120126_UNC9-SN296_0268_AD0JFTACXX_2_CGATGT.tar.gz
+6 UNCID_2642430.d609550d-7807-4e13-aae4-5b770c4f6722.140815_UNC11-SN627_0375_BC59VCACXX_1_AGTCAA.tar.gz
+                 cgc_file_submitter_id         cgc_file_file_id
+1 77114B87-1AA9-4463-B4E4-D9C48F4B54AB 564a36c8e4b08c5d86900934
+2 FF1D8A1E-51B3-4441-ACC1-143A13A1D0B9 564a5718e4b093830b6b9396
+3 E8F89AD2-1973-4BB5-B4C2-3D57A7EA5234 564a38d9e4b093830b687176
+4 0F4DAE0B-5ECE-409D-8A7E-EC09920A7A9C 56607bf6e4b016715ab6b02e
+5 CB224354-3A26-43F8-A67E-6E74FE1FC960 564a4075e4b0ef12181c1125
+6 B2FF50D2-DB13-47CB-9025-63D4086A93E5 564a36fde4b09c884b2302e9
+gdc_file_id 
+       8280 
+              gdc_cases.case_id gdc_associated_entities.case_id 
+                           8899                            8899 
+[1] "Dimensions of the merged data"
+[1] 11285   970
+[1] "Number of columns that are all NAs"
+[1] 83
+[1] "Dimensions of the data without variables made up only of NAs"
+[1] 11285   887
+[1] "Removing columns that are duplicated"
+cl
+character   integer      list   logical   numeric 
+      664       131         5         3        84 
+[1] "logical columns"
+  i j ident
+3 2 3  TRUE
+[1] "gdc_cases.samples.is_ffpe"          "gdc_cases.samples.portions.is_ffpe"
+[1] "numerical columns"
+      i  j ident
+873  12 27  TRUE
+1084 15 28  TRUE
+[1] "gdc_cases.exposures.weight" "xml_weight"                
+[3] "gdc_cases.exposures.height" "xml_height"                
+[1] "integer, list columns"
+[1] i     j     ident
+<0 rows> (or 0-length row.names)
+[1] i     j     ident
+<0 rows> (or 0-length row.names)
+[1] "character columns"
+        i   j ident
+141     1 142  TRUE
+4640    8  28  TRUE
+4650    8  38  TRUE
+4660    8  48  TRUE
+9938   16 114  TRUE
+10586  17 115  TRUE
+11233  18 116  TRUE
+11879  19 117  TRUE
+12524  20 118  TRUE
+13168  21 119  TRUE
+14365  23  33  TRUE
+14375  23  43  TRUE
+16285  26  36  TRUE
+16295  26  46  TRUE
+16923  27  37  TRUE
+16933  27  47  TRUE
+17560  28  38  TRUE
+17570  28  48  TRUE
+18831  30  40  TRUE
+18841  30  50  TRUE
+19465  31  41  TRUE
+19475  31  51  TRUE
+20730  33  43  TRUE
+22620  36  46  TRUE
+23248  37  47  TRUE
+23875  38  48  TRUE
+25126  40  50  TRUE
+25750  41  51  TRUE
+32577  52  91  TRUE
+32587  52 101  TRUE
+32590  52 104  TRUE
+32596  52 110  TRUE
+33782  54  75  TRUE
+33794  54  87  TRUE
+33843  54 136  TRUE
+34551  55 235  TRUE
+37410  60  64  TRUE
+40491  65 140  TRUE
+45181  73  74  TRUE
+45189  73  82  TRUE
+45191  73  84  TRUE
+45192  73  85  TRUE
+45779  74  82  TRUE
+45781  74  84  TRUE
+45782  74  85  TRUE
+46373  75  87  TRUE
+46422  75 136  TRUE
+50465  82  84  TRUE
+50466  82  85  TRUE
+51048  83  86  TRUE
+51627  84  85  TRUE
+53412  87 136  TRUE
+55675  91 101  TRUE
+55678  91 104  TRUE
+55684  91 110  TRUE
+56313  92 167  TRUE
+61353 101 104  TRUE
+61359 101 110  TRUE
+63042 104 110  TRUE
+67519 112 143  TRUE
+68068 113 141  TRUE
+81141 137 290  TRUE
+87303 149 206  TRUE
+89334 153 187  TRUE
+92894 160 198  TRUE
+95910 166 211  TRUE
+[1] "Character columns that are repeated (see other list below)"
+ [1] "gdc_associated_entities.case_id"                                
+ [2] "gdc_metadata_files.state.analysis"                              
+ [3] "gdc_metadata_files.state.experiment"                            
+ [4] "gdc_metadata_files.state.run"                                   
+ [5] "gdc_cases.samples.portions.analytes.aliquots.center.code"       
+ [6] "gdc_cases.samples.portions.analytes.aliquots.center.name"       
+ [7] "gdc_cases.samples.portions.analytes.aliquots.center.short_name" 
+ [8] "gdc_cases.samples.portions.analytes.aliquots.center.center_id"  
+ [9] "gdc_cases.samples.portions.analytes.aliquots.center.namespace"  
+[10] "gdc_cases.samples.portions.analytes.aliquots.center.center_type"
+[11] "gdc_metadata_files.created_datetime.experiment"                 
+[12] "gdc_metadata_files.created_datetime.run"                        
+[13] "gdc_metadata_files.data_format.experiment"                      
+[14] "gdc_metadata_files.data_format.run"                             
+[15] "gdc_metadata_files.access.experiment"                           
+[16] "gdc_metadata_files.access.run"                                  
+[17] "gdc_metadata_files.data_category.experiment"                    
+[18] "gdc_metadata_files.data_category.run"                           
+[19] "gdc_metadata_files.file_state.experiment"                       
+[20] "gdc_metadata_files.file_state.run"                              
+[21] "gdc_cases.samples.updated_datetime"                             
+[22] "gdc_cases.samples.portions.updated_datetime"                    
+[23] "gdc_cases.samples.portions.analytes.updated_datetime"           
+[24] "gdc_cases.samples.portions.analytes.aliquots.updated_datetime"  
+[25] "gdc_cases.diagnoses.updated_datetime"                           
+[26] "gdc_cases.diagnoses.treatments.updated_datetime"                
+[27] "gdc_cases.exposures.updated_datetime"                           
+[28] "xml_gender"                                                     
+[29] "gdc_cases.project.disease_type"                                 
+[30] "gdc_acl"                                                        
+[31] "gdc_cases.diagnoses.last_known_disease_status"                  
+[32] "gdc_cases.diagnoses.tumor_grade"                                
+[33] "gdc_cases.diagnoses.progression_or_recurrence"                  
+[34] "gdc_cases.diagnoses.prior_malignancy"                           
+[35] "gdc_cases.diagnoses.site_of_resection_or_biopsy"                
+[36] "cgc_sample_oct_embedded"                                        
+[37] "gdc_associated_entities.entity_submitter_id"                    
+[38] "gdc_associated_entities.entity_id"                              
+[39] "xml_alcohol_history_documented"                                 
+[40] "cgc_portion_sample"                                             
+[41] "cgc_case_investigation"                                         
+[42] "cgc_case_disease_type"                                          
+[43] "cgc_portion_is_ffpe"                                            
+[1] "Character columns that are duplicates of the previous list"
+ [1] "gdc_cases.case_id"                                        
+ [2] "gdc_state"                                                
+ [3] "gdc_center.code"                                          
+ [4] "gdc_center.name"                                          
+ [5] "gdc_center.short_name"                                    
+ [6] "gdc_center.center_id"                                     
+ [7] "gdc_center.namespace"                                     
+ [8] "gdc_center.center_type"                                   
+ [9] "gdc_metadata_files.created_datetime.analysis"             
+[10] "gdc_metadata_files.data_format.analysis"                  
+[11] "gdc_metadata_files.access.analysis"                       
+[12] "gdc_metadata_files.data_category.analysis"                
+[13] "gdc_metadata_files.file_state.analysis"                   
+[14] "gdc_cases.updated_datetime"                               
+[15] "gdc_cases.demographic.updated_datetime"                   
+[16] "gdc_cases.demographic.gender"                             
+[17] "gdc_cases.project.name"                                   
+[18] "gdc_cases.project.program.dbgap_accession_number"         
+[19] "gdc_cases.diagnoses.classification_of_tumor"              
+[20] "gdc_cases.diagnoses.tissue_or_organ_of_origin"            
+[21] "gdc_cases.samples.oct_embedded"                           
+[22] "gdc_cases.samples.portions.analytes.aliquots.submitter_id"
+[23] "gdc_cases.samples.portions.analytes.aliquots.aliquot_id"  
+[24] "gdc_cases.exposures.alcohol_history"                      
+[25] "cgc_file_sample"                                          
+[26] "cgc_file_investigation"                                   
+[27] "cgc_file_disease_type"                                    
+[28] "cgc_sample_is_ffpe"                                       
+[1] "Dimensions of the final merged metadata"
+[1] 11285   841
+[1] FALSE
+[1] "Final dimensions of the metadata"
+[1] 11284   863
+[1] "2016-11-18 16:04:07 EST"
+ setting  value                                      
+ version  R version 3.3.1 Patched (2016-09-30 r71426)
+ system   x86_64, linux-gnu                          
+ ui       X11                                        
+ language (EN)                                       
+ collate  en_US.UTF-8                                
+ tz       <NA>                                       
+ date     2016-11-18                                 
+
+ package              * version  date       source        
+ acepack                1.4.1    2016-10-29 CRAN (R 3.3.1)
+ AnnotationDbi          1.36.0   2016-11-18 Bioconductor  
+ assertthat             0.1      2013-12-06 CRAN (R 3.3.0)
+ Biobase              * 2.34.0   2016-10-20 Bioconductor  
+ BiocGenerics         * 0.20.0   2016-11-17 Bioconductor  
+ BiocParallel         * 1.8.1    2016-11-17 Bioconductor  
+ biomaRt                2.30.0   2016-10-20 Bioconductor  
+ Biostrings             2.42.0   2016-11-18 Bioconductor  
+ bitops                 1.0-6    2013-08-17 CRAN (R 3.3.0)
+ BSgenome               1.42.0   2016-11-18 Bioconductor  
+ bumphunter             1.14.0   2016-11-18 Bioconductor  
+ chron                  2.3-47   2015-06-24 CRAN (R 3.3.0)
+ cluster                2.0.4    2016-04-18 CRAN (R 3.3.1)
+ codetools              0.2-14   2015-07-15 CRAN (R 3.3.1)
+ colorspace             1.3-1    2016-11-18 CRAN (R 3.3.1)
+ data.table             1.9.6    2015-09-19 CRAN (R 3.3.1)
+ DBI                    0.5-1    2016-09-10 CRAN (R 3.3.1)
+ derfinder              1.8.0    2016-11-17 Bioconductor  
+ derfinderHelper        1.8.0    2016-11-17 Bioconductor  
+ devtools             * 1.12.0   2016-06-24 CRAN (R 3.3.1)
+ digest                 0.6.10   2016-08-02 CRAN (R 3.3.1)
+ doRNG                  1.6      2014-03-07 CRAN (R 3.3.0)
+ downloader             0.4      2015-07-09 cran (@0.4)   
+ foreach                1.4.3    2015-10-13 CRAN (R 3.3.0)
+ foreign                0.8-67   2016-09-13 CRAN (R 3.3.1)
+ Formula                1.2-1    2015-04-07 CRAN (R 3.3.0)
+ GenomeInfoDb         * 1.10.1   2016-11-17 Bioconductor  
+ GenomicAlignments      1.10.0   2016-11-18 Bioconductor  
+ GenomicFeatures        1.26.0   2016-11-18 Bioconductor  
+ GenomicFiles           1.10.3   2016-11-18 Bioconductor  
+ GenomicRanges        * 1.26.1   2016-11-18 Bioconductor  
+ GEOquery               2.40.0   2016-10-21 Bioconductor  
+ ggplot2                2.2.0    2016-11-11 CRAN (R 3.3.1)
+ gridExtra              2.2.1    2016-02-29 CRAN (R 3.3.0)
+ gtable                 0.2.0    2016-02-26 CRAN (R 3.3.0)
+ Hmisc                  4.0-0    2016-11-01 CRAN (R 3.3.1)
+ htmlTable              1.7      2016-10-19 CRAN (R 3.3.1)
+ htmltools              0.3.5    2016-03-21 CRAN (R 3.3.0)
+ httr                   1.2.1    2016-07-03 cran (@1.2.1) 
+ IRanges              * 2.8.1    2016-11-18 Bioconductor  
+ iterators              1.0.8    2015-10-13 CRAN (R 3.3.0)
+ jsonlite             * 1.1      2016-09-14 CRAN (R 3.3.1)
+ knitr                  1.15     2016-11-09 CRAN (R 3.3.1)
+ lattice                0.20-34  2016-09-06 CRAN (R 3.3.1)
+ latticeExtra           0.6-28   2016-02-09 CRAN (R 3.3.0)
+ lazyeval               0.2.0    2016-06-12 CRAN (R 3.3.1)
+ locfit                 1.5-9.1  2013-04-20 CRAN (R 3.3.0)
+ magrittr               1.5      2014-11-22 CRAN (R 3.3.1)
+ Matrix                 1.2-7.1  2016-09-01 CRAN (R 3.3.1)
+ matrixStats            0.51.0   2016-10-09 CRAN (R 3.3.1)
+ memoise                1.0.0    2016-01-29 CRAN (R 3.3.0)
+ munsell                0.4.3    2016-02-13 CRAN (R 3.3.0)
+ nnet                   7.3-12   2016-02-02 CRAN (R 3.3.1)
+ pkgmaker               0.22     2014-05-14 CRAN (R 3.3.0)
+ plyr                   1.8.4    2016-06-08 CRAN (R 3.3.1)
+ qvalue                 2.6.0    2016-11-17 Bioconductor  
+ R6                     2.2.0    2016-10-05 CRAN (R 3.3.1)
+ RColorBrewer           1.1-2    2014-12-07 CRAN (R 3.3.0)
+ Rcpp                   0.12.8   2016-11-17 CRAN (R 3.3.1)
+ RCurl                  1.95-4.8 2016-03-01 CRAN (R 3.3.0)
+ recount              * 1.0.0    2016-11-18 Bioconductor  
+ registry               0.3      2015-07-08 CRAN (R 3.3.0)
+ rentrez                1.0.4    2016-10-26 CRAN (R 3.3.1)
+ reshape2               1.4.2    2016-10-22 CRAN (R 3.3.1)
+ rngtools               1.2.4    2014-03-06 CRAN (R 3.3.0)
+ rpart                  4.1-10   2015-06-29 CRAN (R 3.3.1)
+ Rsamtools              1.26.1   2016-11-18 Bioconductor  
+ RSQLite                1.0.0    2014-10-25 CRAN (R 3.3.0)
+ rtracklayer            1.34.1   2016-11-18 Bioconductor  
+ S4Vectors            * 0.12.0   2016-11-18 Bioconductor  
+ scales                 0.4.1    2016-11-09 CRAN (R 3.3.1)
+ stringi                1.1.2    2016-10-01 CRAN (R 3.3.1)
+ stringr                1.1.0    2016-08-19 CRAN (R 3.3.1)
+ SummarizedExperiment * 1.4.0    2016-11-18 Bioconductor  
+ survival               2.40-1   2016-10-30 CRAN (R 3.3.1)
+ tibble                 1.2      2016-08-26 CRAN (R 3.3.1)
+ VariantAnnotation      1.20.1   2016-11-18 Bioconductor  
+ withr                  1.0.2    2016-06-20 CRAN (R 3.3.1)
+ XML                    3.98-1.5 2016-11-10 CRAN (R 3.3.1)
+ xtable                 1.8-2    2016-02-05 CRAN (R 3.3.0)
+ XVector                0.14.0   2016-11-18 Bioconductor  
+ zlibbioc               1.20.0   2016-10-20 Bioconductor  
+**** Job ends ****
+Fri Nov 18 16:04:08 EST 2016
