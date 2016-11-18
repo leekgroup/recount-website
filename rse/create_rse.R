@@ -537,12 +537,19 @@ hasGeneExon <- file.exists(file.path(outdir, c('counts_exon.Rdata',
 
 if(any(!hasGeneExon)) {
     ## Read counts from bwtool tsv output files
+    if(opt$project != 'tcga') {
+        sampleNames <- metadata$run
+    } else {
+        sampleNames <- toupper(metadata$gdc_file_id)
+    }
+    
+    
     counts <- mapply(function(tsvFile, sampleName) {
         message(paste(Sys.time(), 'reading file', tsvFile))
         res <- read.table(tsvFile, header = FALSE, colClasses = list(NULL, NULL, NULL, 'numeric'))
         colnames(res) <- sampleName
         return(as.matrix(res))
-    }, metadata$tsv_path, metadata$run, SIMPLIFY = FALSE)
+    }, metadata$tsv_path, sampleNames, SIMPLIFY = FALSE)
     counts <- do.call(cbind, counts)
 
     ## Memory used by counts

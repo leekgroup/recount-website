@@ -42,6 +42,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -l rnet,mem_free=10G,h_vmem=11G
 #$ -pe local 3
 #$ -N ${sname}
+#$ -hold_jid tcga_meta_prep
 
 echo "**** Job starts ****"
 date
