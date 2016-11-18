@@ -191,7 +191,7 @@ names(tsv) <- gsub('.sum.tsv', '', dir(tsv_dir, pattern = 'tsv'))
 if(opt$project != 'tcga') {
     k <- match(metadata$run, names(tsv))
 } else {
-    k <- match(metadata$gdc_cases.case_id, tolower(names(tsv)))
+    k <- match(metadata$gdc_file_id, tolower(names(tsv)))
 }
 
 
