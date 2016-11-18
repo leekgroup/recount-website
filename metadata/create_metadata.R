@@ -6,7 +6,6 @@ library('recount')
 library('BiocParallel')
 library('parallel')
 library('XML')
-library('jsonlite')
 
 ## Specify parameters
 spec <- matrix(c(
@@ -154,105 +153,9 @@ if(opt$project == 'sra') {
     ## Add the information
     metadata <- cbind(metadata, meta)
 } else if (opt$project == 'tcga') {
-    ## Load SRA metadata (metadata object)
-    stopifnot(file.exists('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata'))
-    load('/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata')
-    
-    ## Load TCGA metadata
-    metaraw <- fromJSON(
-        '/dcl01/leek/data/gtex_work/runs/tcga/tcga_metadata.json',
-        flatten = TRUE)
-        
-    ## Parse out
-    parse <- function(var, df = metaraw$data$hits) {
-        ## Find which are NULL
-        i.null <- which(sapply(df[, var], is.null))
-        
-        if(length(i.null) == 0) {
-            i.null <- which(sapply(df[, var], is.logical))
-        }
-        
-        if(length(i.null) > 0) {
-            ## Make NAs the ones that are missing
-            i.df <- df[, var][which(!sapply(df[, var], is.null))[1]]
-            i.df[[1]][1, ] <- NA
-            i.list <- rep(i.df, length(i.null))
-            
-            ## Make a list with the complete data
-            ori.list <- df[, var]
-            ori.list[i.null] <- i.list
-            
-            ## rbind
-            res <- rbind.pages(ori.list)
-        } else {
-            res <- rbind.pages(df[, var])
-        }        
-        
-        colnames(res) <- paste0(var, '.', colnames(res))
-        return(res)
-    }
-    
-    parse_nested <- function(var, df) {
-        new <- parse(var, df)
-        res <- cbind(df[, colnames(df) != var], new)
-    }
-    
-    meta.special <- c('metadata_files', 'cases', 'acl', 'associated_entities')
-    stopifnot(all(colnames(metaraw$data$hits)[
-        sapply(metaraw$data$hits, is.list)] %in% c(meta.special,
-            'annotations')))
-    
-    mfiles <- parse('metadata_files')
-    mfiles$idvar <- rep(seq_len(nrow(mfiles) / 3), each = 3)
-    mfiles <- reshape(mfiles, timevar = 'metadata_files.data_type',
-        direction = 'wide', idvar = 'idvar')[, -1]
-    colnames(mfiles) <- gsub(' ', '_', tolower(colnames(mfiles)))
-    
-    cases <- parse('cases')
-    cases.special <- c('cases.diagnoses', 'cases.samples', 'cases.exposures')
-    
-    cases.vars <- lapply(cases.special, parse, df = cases)
-    names(cases.vars) <- cases.special
-    
-    ## Fix nested case for diagnoses
-    cases.vars$cases.diagnoses <- parse_nested('cases.diagnoses.treatments',
-        cases.vars$cases.diagnoses)
-    
-    ## Fix nested cases for samples
-    cases.vars$cases.samples <- parse_nested('cases.samples.portions',
-        cases.vars$cases.samples)
-    cases.vars$cases.samples <- parse_nested('cases.samples.portions.analytes',
-        cases.vars$cases.samples)
-    cases.vars$cases.samples <- parse_nested(
-        'cases.samples.portions.analytes.aliquots', cases.vars$cases.samples)
-    
-    cases.vars$cases.samples <- parse_nested('cases.samples.portions.annotations',
-        cases.vars$cases.samples)
-
-    cases.vars$cases.samples <- parse_nested('cases.samples.annotations',
-        cases.vars$cases.samples)
-    
-    
-    stopifnot(all(sapply(cases.vars, nrow) == nrow(cases)))
-    
-    cases <- cases[, !colnames(cases) %in% cases.special]
-    ## Avoid longer names
-    names(cases.vars) <- NULL
-    cases <- cbind(cases, cases.vars)
-    
-    acl <- data.frame('acl' = unlist(metaraw$data$hits$acl))
-    assoc <- parse('associated_entities')
-        
-    meta <- metaraw$data$hits[, !colnames(metaraw$data$hits) %in% meta.special]
-    meta <- cbind(meta, mfiles, cases, acl, assoc)
-    
-    are.list <- function(df) { colnames(df)[sapply(df, is.list)] }
-    print('The following variables are still lists but do not match the 11285 rows expected and will be left as lists as such')
-    lapply(are.list(meta), function(var) { dim(parse(var, meta)) })
-    
-    
-    
-    
+    ## Load tcga metadata created by tcga_prep/tcga_meta.R
+    stopifnot(file.exists('/dcl01/leek/data/recount-website/metadata/tcga_prep/metadata.Rdata'))
+    load('/dcl01/leek/data/recount-website/metadata/tcga_prep/metadata.Rdata')
 } else {
     stop("Invalid 'project' choice. Use gtex, sra or tcga")
 }
@@ -282,13 +185,18 @@ if(opt$project == 'sra') {
 
 
 ## Locate tsv files
-tsv_dir <- ifelse(opt$project == 'sra', '/dcl01/leek/data/recount2/coverage', '/dcl01/leek/data/recount2/coverage_gtex')
+tsv_dir <- ifelse(opt$project == 'sra', '/dcl01/leek/data/recount2/coverage', ifelse(opt$project == 'gtex', '/dcl01/leek/data/recount2/coverage_gtex', '/dcl01/leek/data/recount2/coverage_tcga'))
 tsv <- dir(tsv_dir, pattern = 'tsv', full.names = TRUE)
 names(tsv) <- gsub('.sum.tsv', '', dir(tsv_dir, pattern = 'tsv'))
-k <- match(metadata$run, names(tsv))
+if(opt$project != 'tcga') {
+    k <- match(metadata$run, names(tsv))
+} else {
+    k <- match(metadata$gdc_cases.case_id, tolower(names(tsv)))
+}
+
 
 ## Number of tsv files matches number of bigwig files
-stopifnot(sum(is.na(k)) == sum(is.na(metadata$auc)))
+stopifnot(sum(!is.na(k)) == sum(!is.na(metadata$auc)))
 metadata$tsv_path <- tsv[k]
 
 ## Function for re-running in case something fails
@@ -313,7 +221,7 @@ runMyFun <- function(f, geoid, ...) {
 ## Not all cases have GEO id's, like:
 # find_geo('DRR000897')
 if(!'geo_accession' %in% colnames(metadata)) {
-    if(opt$project == 'gtex') {
+    if(opt$project != 'sra') {
         metadata$geo_accession <- NA
     } else {
         stop('geo_accession should be a column in metadata when project="sra"')
@@ -342,12 +250,16 @@ extract_geo <- function(id) {
     }
     return(res)
 }
-geo <- do.call(rbind, mclapply(metadata$geo_accession, extract_geo, mc.cores = 3))
-## For debugging (if needed)
-save(geo, file = paste0('geo_', opt$project, '.Rdata'))
+if(opt$project != 'tcga') {
+    geo <- do.call(rbind, mclapply(metadata$geo_accession, extract_geo, mc.cores = 3))
+    ## For debugging (if needed)
+    save(geo, file = paste0('geo_', opt$project, '.Rdata'))
 
-## Combine information (metadata will now be a DataFrame object)
-metadata <- cbind(metadata, geo)
+    ## Combine information (metadata will now be a DataFrame object)
+    metadata <- cbind(metadata, geo)
+} else {
+    metadata <- DataFrame(metadata)
+}
 
 ## Save the metadata (final version)
 save(metadata, file = paste0('metadata_', opt$project, '.Rdata'))
@@ -360,7 +272,7 @@ print('Number of unique project IDs')
 length(unique(metadata$project))
 
 print('Number of unique run IDs')
-length(unique(metadata$run))
+ifelse(opt$project != 'tcga', length(unique(metadata$run)), length(unique(metadata$gdc_cases.case_id)))
 
 print('First couple of rows')
 head(metadata)
