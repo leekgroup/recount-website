@@ -274,7 +274,8 @@ calculate_auc <- function(bw) {
 
 readmeta$auc[!is.na(readmeta$bigwig_path)] <- unlist(
     bplapply(readmeta$bigwig_path[!is.na(readmeta$bigwig_path)], calculate_auc,
-    BPPARAM = MulticoreParam(workers = 20)))
+    BPPARAM = MulticoreParam(workers = 10,
+        outfile = Sys.getenv('SGE_STDERR_PATH'))))
 
 ## Final merge
 metadata <- cbind(readmeta, metadata)

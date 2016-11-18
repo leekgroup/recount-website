@@ -1,8 +1,8 @@
 #!/bin/bash
 #$ -cwd
 #$ -m e
-#$ -l mem_free=5G,h_vmem=6G
-#$ -pe local 20
+#$ -l mem_free=20G,h_vmem=21G
+#$ -pe local 10
 #$ -N tcga_prep_meta
 
 echo "**** Job starts ****"
