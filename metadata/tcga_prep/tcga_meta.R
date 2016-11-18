@@ -93,7 +93,7 @@ meta <- metaraw$data$hits[, !colnames(metaraw$data$hits) %in% meta.special]
 meta <- cbind(meta, mfiles, cases, acl, assoc)
 
 ## Clean up workspace
-rm(mfiles, cases, acl, assoc, cases.vars, cases.special, metaraw, parse, parse_nested, meta.special)
+rm(mfiles, cases, acl, assoc, cases.vars, cases.special, metaraw, meta.special)
 
 are.list <- function(df) { colnames(df)[sapply(df, is.list)] }
 print('The following variables are still lists but do not match the 11285 rows expected and will be left as lists')
@@ -110,7 +110,10 @@ load('/dcl01/leek/data/recount-website/metadata/tcga_prep/clin_all.Rdata')
 
 
 ## Load metadata from CGC queries
-cgc <- read.table('/dcl01/leek/data/gtex_work/runs/tcga/all_cgc_metadata.tsv.gz', header = TRUE, sep = '\t', comment.char = '', quote = '', stringsAsFactors = FALSE)
+cgc <- read.table(
+    '/dcl01/leek/data/gtex_work/runs/tcga/all_cgc_metadata.tsv.gz',
+    header = TRUE, sep = '\t', comment.char = '', quote = '',
+    stringsAsFactors = FALSE)
 
 ## Set column names depending on the data source
 colnames(meta) <- paste0('gdc_', tolower(colnames(meta)))
@@ -214,7 +217,7 @@ print('Dimensions of the final merged metadata')
 dim(metadata)
 
 ## Clean up workspace
-rm(cgc, clin_all, meta, cl, remove, i.char, m.char, nas, ident, i, find_col, uniq)
+rm(cgc, clin_all, meta, cl, remove, i.char, m.char, nas, i)
 
 
 ## Find count files
