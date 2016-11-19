@@ -3,6 +3,7 @@
 # Usage
 # sh run_fileinfo.sh sra
 # sh run_fileinfo.sh gtex
+# sh run_fileinfo.sh tcga
 
 # Directories
 MAINDIR=/dcl01/leek/data/recount-website
@@ -25,8 +26,12 @@ elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
     MEM="mem_free=10G,h_vmem=15G,h_fsize=10G"
+elif [[ "${PROJECT}" == "tcga" ]]
+then
+    echo "$PROJECT"
+    MEM="mem_free=10G,h_vmem=15G,h_fsize=10G"
 else
-    echo "Specify a valid project: gtex, sra"
+    echo "Specify a valid project: gtex, sra, tcga"
 fi
 
 # Count how many commands there are

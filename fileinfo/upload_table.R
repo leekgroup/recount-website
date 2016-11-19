@@ -8,12 +8,15 @@ upload <- c(
     dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_sra',
         full.names = TRUE),
     dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_gtex',
+        full.names = TRUE),
+    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_tcga',
         full.names = TRUE)
 )
 upload <- file.path(upload, 'upload_files.Rdata')
 names(upload) <-  c(
     dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_sra'),
-    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_gtex')
+    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_gtex'),
+    dir('/dcl01/leek/data/recount-website/fileinfo/fileinfo_tcga')
 )
 
 ## Find all the info to upload

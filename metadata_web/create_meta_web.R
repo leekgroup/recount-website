@@ -3,6 +3,7 @@
 # mkdir -p logs
 # Rscript create_meta_web.R -p "sra" > logs/create_meta_web_sra_log.txt 2>&1
 # Rscript create_meta_web.R -p "gtex" > logs/create_meta_web_gtex_log.txt 2>&1
+# Rscript create_meta_web.R -p "tcga" > logs/create_meta_web_tcga_log.txt 2>&1
 
 library('getopt')
 library('GenomicRanges')
@@ -58,17 +59,34 @@ meta_web <- data.frame(
     stringsAsFactors = FALSE
 )
 rownames(meta_web) <- NULL
+
+if(opt$project == 'tcga') meta_web$accession[1] <- '<a href="https://cancergenome.nih.gov/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'srainfo\', 1)">TCGA</a>'
+
 for(project in projects) {
-    jx_files <- c(
-        file.path('/dcl01/leek/data/recount-website/rse',
-            paste0('rse_', opt$project), project, 'rse_jx.Rdata'),
-        file.path('/dcl01/leek/data/recount_junctions_2',
-            paste0(project, '.junction_id_with_transcripts.bed.gz')),
-        file.path('/dcl01/leek/data/recount_junctions_2',
-            paste0(project, '.junction_coverage.tsv.gz')),
-        file.path('/dcl01/leek/data/recount-website/rse',
-            paste0('rse_', opt$project), project, 'counts_jx.tsv.gz')
-    )
+    if(project != 'TCGA') {
+        jx_files <- c(
+            file.path('/dcl01/leek/data/recount-website/rse',
+                paste0('rse_', opt$project), project, 'rse_jx.Rdata'),
+            file.path('/dcl01/leek/data/recount_junctions_2',
+                paste0(project, '.junction_id_with_transcripts.bed.gz')),
+            file.path('/dcl01/leek/data/recount_junctions_2',
+                paste0(project, '.junction_coverage.tsv.gz')),
+            file.path('/dcl01/leek/data/recount-website/rse',
+                paste0('rse_', opt$project), project, 'counts_jx.tsv.gz'),
+            'nothing'
+        )
+    } else {
+        jx_files <- c(
+            file.path('/dcl01/leek/data/recount-website/rse',
+                paste0('rse_', opt$project), project, 'rse_jx.Rdata'),
+        '/dcl01/leek/data/tcga_work/TCGA.junction_id_with_transcripts.bed.gz',
+            '/dcl01/leek/data/tcga_work/TCGA.junction_coverage.tsv.gz',
+            file.path('/dcl01/leek/data/recount-website/rse',
+                paste0('rse_', opt$project), project, 'counts_jx.tsv.gz'),
+            '/dcl01/leek/data/tcga_work/samples.tsv'
+        )
+    }
+    
     exon_files <- c(
         file.path('/dcl01/leek/data/recount-website/rse/',
             paste0('rse_', opt$project), project, 'rse_exon.Rdata'),
@@ -99,16 +117,13 @@ for(project in projects) {
             '<a href="http://duffel.rail.bio/recount/', project,
         '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts</a>')
         )[file.exists(exon_files)], collapse = ' ')
-    if(opt$project == 'gtex') {      
+    if(opt$project != 'sra') {      
         ## Add tissue files
-        extra_exon <- dir(
-            '/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682',
-            'rse_exon_')
+        rse_dir <- ifelse(opt$project == 'gtex', '/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682', '/dcl01/leek/data/recount-website/rse/rse_tcga/TCGA')
+        extra_exon <- dir(rse_dir, 'rse_exon_')
         names(extra_exon) <- gsub('_', ' ', gsub('rse_exon_|.Rdata', '',
             extra_exon))
-        extra_gene <- dir(
-            '/dcl01/leek/data/recount-website/rse/rse_gtex/SRP012682',
-            'rse_gene_')
+        extra_gene <- dir(rse_dir, 'rse_gene_')
         names(extra_gene) <- gsub('_', ' ', gsub('rse_gene_|.Rdata', '',
             extra_gene))
         
@@ -143,6 +158,10 @@ for(project in projects) {
         paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
         '/counts_jx.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-jx\', 1)">counts</a>'
+        ),
+        paste0(
+            '<a href="http://duffel.rail.bio/recount/', project,
+        '/samples.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'tcga-jx-samples\', 1)">samples.tsv</a>'
         ))[file.exists(jx_files)], collapse = ' ')
     if(file.exists(file.path('/dcl01/leek/data/recount-website/metadata/', paste0('project_metadata_', opt$project), paste0(project, '.tsv')))) {   
         meta_web$phenotype[projects == project] <- paste0(
