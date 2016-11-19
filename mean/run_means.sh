@@ -3,6 +3,7 @@
 # Usage
 # sh run_means.sh sra
 # sh run_means.sh gtex
+# sh run_means.sh tcga
 
 # Directories
 MAINDIR=/dcl01/leek/data/recount-website
@@ -27,8 +28,13 @@ then
     echo "$PROJECT"
     MEM="mem_free=100G,h_vmem=150G,h_fsize=100G"
     CORES=2
+elif [[ "${PROJECT}" == "tcga" ]]
+then
+    echo "$PROJECT"
+    MEM="mem_free=100G,h_vmem=150G,h_fsize=100G"
+    CORES=2
 else
-    echo "Specify a valid project: gtex, sra"
+    echo "Specify a valid project: gtex, sra, tcga"
 fi
 
 # Count how many commands there are
