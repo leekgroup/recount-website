@@ -95,9 +95,10 @@ if(nrow(metadata) < 100) {
     system.time( tmpfiles <- bpmapply(function(m, i) {
         cmd <- scaleWig(m)
         
-        ## Use TMPDIR if available
-        if(Sys.getenv('TMPDIR') == '' | opt$project == 'gtex') {
-            tmpdir <- file.path('/dcl01/leek/data/recount-website/mean', paste0('means_', opt$project), paste0('.', opt$projectid))
+        ## Use TMPDIR if available for SRA
+        if(Sys.getenv('TMPDIR') == '' | opt$project %in% c('gtex', 'tcga')) {
+            tmpdir <- file.path('/dcl01/leek/data/recount-website/mean',
+                paste0('means_', opt$project), paste0('.', opt$projectid))
             dir.create(tmpdir, showWarnings = FALSE)
         } else {
             tmpdir <- tempdir()
