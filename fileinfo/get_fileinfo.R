@@ -102,16 +102,14 @@ if(opt$project != 'tcga') {
     )
 } else {
     jx_raw <- c(
-        '/dcl01/leek/data/tcga_work/TCGA.junction_id_with_transcripts.bed.gz',
-        '/dcl01/leek/data/tcga_work/TCGA.junction_coverage.tsv.gz',
-        '/dcl01/leek/data/tcga_work/samples.tsv')
+        '/dcl01/leek/data/tcga_work/tcga_recount_junctions/TCGA.junction_id_with_transcripts.bed.gz',
+        '/dcl01/leek/data/tcga_work/tcga_recount_junctions/TCGA.junction_coverage.tsv.gz')
 }
 
-names(jx_raw)[1:2] <- c(
+names(jx_raw) <- c(
     paste0(opt$projectid, '.junction_id_with_transcripts.bed.gz'),
     paste0(opt$projectid, '.junction_coverage.tsv.gz')
 )
-if(opt$project == 'tcga') names(jx_raw)[3] <- 'samples.tsv'
 
 if(any(!file.exists(jx_raw))) {
     ## Some projects don't have junction files
