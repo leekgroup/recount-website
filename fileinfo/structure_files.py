@@ -38,6 +38,6 @@ for line in sys.stdin:
         os.link(filename, os.path.join(project_dir, basename))
 
 os.link(
-        os.path.join(junctions_path, 'sample_ids.tsv'),
+        '/dcl01/leek/data/tcga_work/tcga_recount_junctions/sample_ids.tsv',
         os.path.join(root_dir, 'sample_ids.tsv')
     )
