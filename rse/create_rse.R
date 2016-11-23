@@ -95,7 +95,7 @@ if(hasJx) {
     ## Load junctions sample information
     message(paste(Sys.time(), 'loading junctions sample information'))
     jx_samples <- read.table(
-        '/dcl01/leek/data/recount_junctions_2/sample_ids.tsv',
+        '/dcl01/leek/data/tcga_work/tcga_recount_junctions/sample_ids.tsv',
         sep = '\t', col.names = c('sample_id', 'project', 'run'),
         stringsAsFactors = FALSE, colClasses = 'character')
         
