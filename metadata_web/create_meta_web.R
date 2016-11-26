@@ -72,7 +72,7 @@ for(project in projects) {
             file.path('/dcl01/leek/data/recount_junctions_2',
                 paste0(project, '.junction_coverage.tsv.gz')),
             file.path('/dcl01/leek/data/recount-website/rse',
-                paste0('rse_', opt$project), project, 'counts_jx.tsv.gz'))
+                paste0('rse_', opt$project), project, 'counts_jx.tsv.gz')
         )
     } else {
         jx_files <- c(
