@@ -81,7 +81,7 @@ for(project in projects) {
         '/dcl01/leek/data/tcga_work/tcga_recount_junctions/TCGA.junction_id_with_transcripts.bed.gz',
             '/dcl01/leek/data/tcga_work/tcga_recount_junctions/TCGA.junction_coverage.tsv.gz',
             file.path('/dcl01/leek/data/recount-website/rse',
-                paste0('rse_', opt$project), project, 'counts_jx.tsv.gz'))
+                paste0('rse_', opt$project), project, 'counts_jx.tsv.gz')
         )
     }
     
