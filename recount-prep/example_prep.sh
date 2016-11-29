@@ -3,18 +3,17 @@
 ## Usage:
 # bash example_prep.sh
 
-## Example in JHPCE
-## Have to run this manually, for now??
-module load R/3.3.x
-module load ucsctools
-module load wiggletools/default
-
 ## Some common variables
 DATADIR="/path/to/rail-rna/output-dir"
 MANIFEST="/path/to/rail-rna/manifest/file"
 BWTOOL="/path/to/bwtool"
 WIGGLE="/path/to/wiggletools"
 WIGTOBIGWIG="/path/to/wigToBigWig"
+
+## If you are using JHPCE https://jhpce.jhu.edu/ load the following modules:
+module load R/3.3.x
+module load ucsctools
+module load wiggletools/default
 
 COUNTS=$DATADIR/cross_sample_results/counts.tsv.gz
 ## Download some required files
