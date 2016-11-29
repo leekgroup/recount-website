@@ -33,6 +33,10 @@ if(FALSE) {
     opt <- list(project = 'gtex', projectid = 'SRP012682',
         'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_gtex.Rdata'
     )
+    ## TCGA
+    opt <- list(project = 'tcga', projectid = 'TCGA',
+        'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_tcga.Rdata'
+    )
 }
 
 ## Create output dir
@@ -58,7 +62,7 @@ names(rse_files) <- dir(rse_path)
 
 rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
     'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
-if(opt$project == 'gtex') {
+if(opt$project != 'sra') {
     ## Add tissue files by pattern matching
     rse_up <- c(rse_up, dir(rse_path, 'rse_exon_|rse_gene_'))
 }
