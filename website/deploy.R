@@ -7,6 +7,11 @@ if(file.exists('../metadata_web/meta_web_gtex.Rdata')) {
     load('../metadata_web/meta_web_gtex.Rdata')
     meta_web <- rbind(m, meta_web)
 }
+if(file.exists('../metadata_web/meta_web_tcga.Rdata')) {
+    m <- meta_web
+    load('../metadata_web/meta_web_tcga.Rdata')
+    meta_web <- rbind(m, meta_web)
+}
 save(meta_web, file = 'meta_web.Rdata')
 
 
@@ -23,5 +28,6 @@ rsconnect::setAccountInfo(name=deploy_info$name, token=deploy_info$token,
 deployApp(appFiles = c('ui.R', 'server.R', 'meta_web.Rdata', 'download.md',
     'www/ucsc-knowngene-hg38-genes-bp-length.Rdata',
     'www/ucsc-knowngene-hg38-exons.Rdata', 'google-analytics.js', 
-    'www/TxDb.Hsapiens.UCSC.hg38.knownGene_3.1.3.tar.gz', 'www/sample_ids.tsv'),
+    'www/TxDb.Hsapiens.UCSC.hg38.knownGene_3.1.3.tar.gz', 'www/sample_ids.tsv',
+    'www/highlight.pack.js', 'www/shiny-showcase.js', 'www/rstudio.css'),
     appName = 'recount', account = deploy_info$name)

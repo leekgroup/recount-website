@@ -1,8 +1,5 @@
 
 ```{r}
-## If needed
-install.packages('devtools')
-
 ## Install recount from Bioconductor
 source('http://bioconductor.org/biocLite.R')
 biocLite('recount')
