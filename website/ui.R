@@ -109,7 +109,7 @@ shinyUI(navbarPage(
         p(HTML('<a href="http://bioconductor.org/packages/release/bioc/vignettes/recount/inst/doc/recount-quickstart.html#accessing-recount-via-sciserver" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'vignette-recount\', 1)"><img src="https://raw.githubusercontent.com/leekgroup/recount-website/master/sciserver_demo/demo1.png" align="center"/></a>'))
     ),
     tags$hr(),
-    p('This research was supported by NIH R01 GM105705. LCT was supported by Consejo Nacional de Ciencia y Tecnología México 351535.'),
+    p('This research was supported by NIH R01 GM105705. LCT was supported by Consejo Nacional de Ciencia y Tecnología México 351535. LCT and AEJ were supported by NIH 1R21MH109956-01.'),
 	p(strong('recount'), ' is hosted on ', HTML('<a href="http://www.sciserver.org" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'sciserver\', 1)">SciServer</a>'), 'a collaborative research environment for large-scale data-driven science. It is being developed at, and administered by, the ', HTML('<a href="http://idies.jhu.edu/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'idies\', 1)">Institute for Data Intensive Engineering and Science (IDIES)</a>'), ' at Johns Hopkins University. SciServer is funded by the National Science Foundation Award ACI-1261715.'),
     p(HTML('<a href="http://idies.jhu.edu/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'idies\', 1)"><img src="http://idies.jhu.edu/wp-content/themes/idies/assets/img/idieslogo.png" align="right"/></a>')),
     tags$br(),
