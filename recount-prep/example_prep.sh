@@ -10,11 +10,13 @@ module load ucsctools
 module load wiggletools/default
 
 ## Some common variables
-DATADIR="/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs"
-COUNTS="/dcl01/leek/data/sunghee_analysis/processed/cross_sample_results/counts.tsv.gz"
-BWTOOL="/dcl01/leek/data/bwtool/bwtool-1.0/bwtool"
-WIGGLE="wiggletools"
+DATADIR="/path/to/rail-rna/output-dir"
+MANIFEST="/path/to/rail-rna/manifest/file"
+BWTOOL="/path/to/bwtool"
+WIGGLE="/path/to/wiggletools"
+WIGTOBIGWIG="/path/to/wigToBigWig"
 
+COUNTS=$DATADIR/cross_sample_results/counts.tsv.gz
 ## Download some required files
 Rscript prep_setup.R
 
@@ -44,8 +46,6 @@ gzip counts_gene.tsv
 Rscript prep_merge.R -h
 
 ## Merge rse objects and create junction rse object
-BWDIR="/dcl01/leek/data/sunghee_analysis/processed/coverage_bigwigs"
-JUNCTIONS="/dcl01/leek/data/sunghee_analysis/processed/cross_sample_results/first_pass_junctions.tsv.gz"
-MANIFEST="/dcl01/leek/data/sunghee/all_s3.manifest"
-WIGTOBIGWIG="wigToBigWig"
+BWDIR=$DATADIR/coverage_bigwigs
+JUNCTIONS=$DATADIR/cross_sample_results/first_pass_junctions.tsv.gz
 Rscript prep_merge.R -b ${BWDIR} -j ${JUNCTIONS} -m ${MANIFEST} -w ${WIGGLE} -t ${WIGTOBIGWIG} -c TRUE
