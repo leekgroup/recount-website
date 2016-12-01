@@ -295,6 +295,9 @@ stopifnot(length(meta) == length(unique(metadata_clean$project)))
 
 xx <- sapply(unique(metadata_clean$project), function(project) {
     project_metadata <- meta[[project]]
+    if(project == 'TCGA'){
+        project_metadata <- project_metadata[, sapply(project_metadata, class) != 'list']
+    }
     write.table(project_metadata, file.path(paste0('project_metadata_',
         opt$project), paste0(project, '.tsv')), sep = '\t', row.names = FALSE,
         quote = FALSE)
