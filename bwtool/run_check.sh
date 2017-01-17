@@ -4,7 +4,7 @@
 #$ -l leek,mem_free=2G,h_vmem=3G
 #$ -pe local 25
 #$ -N check-tsv
-#$ -hold_jid sra.bwtool,gtex.bwtool
+#$ -hold_jid sra.bwtool
 #$ -o ./logs/check-tsv.o.txt
 #$ -e ./logs/check-tsv.e..txt
 
