@@ -55,8 +55,8 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -pe local ${CORES}
-#$ -o ./logs/${PROJECT}.mean.o.\${TASK_ID}.txt
-#$ -e ./logs/${PROJECT}.mean.e.\${TASK_ID}.txt
+#$ -o ./logs/${PROJECT}.mean.o.\$TASK_ID.txt
+#$ -e ./logs/${PROJECT}.mean.e.\$TASK_ID.txt
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
