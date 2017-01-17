@@ -1,5 +1,5 @@
 ## Prepare metadata
-# module load R/3.3
+# module load R/3.3.x
 # mkdir -p logs
 # Rscript get_abstract.R -p "sra" > logs/get_abstract_sra_log.txt 2>&1
 # Rscript get_abstract.R -p "gtex" > logs/get_abstract_gtex_log.txt 2>&1

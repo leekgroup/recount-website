@@ -17,6 +17,6 @@
 #$ -m a
 
 # we merge R output with stdout from SGE, which gets then logged via -o option
-module load R/3.3
+module load R/3.3.x
 R CMD BATCH --no-save --no-restore "<%= rscript %>" /dev/stdout
 exit 0

@@ -3,8 +3,9 @@ library('getopt')
 suppressPackageStartupMessages(library('GenomicRanges'))
 suppressPackageStartupMessages(library('SummarizedExperiment'))
 suppressPackageStartupMessages(library('rtracklayer'))
-suppressPackageStartupMessages(library('TxDb.Hsapiens.UCSC.hg38.knownGene'))
 suppressPackageStartupMessages(library('org.Hs.eg.db'))
+suppressPackageStartupMessages(library('recount'))
+suppressPackageStartupMessages(library('GenomicFeatures'))
 
 ## Specify parameters
 spec <- matrix(c(
@@ -51,9 +52,8 @@ if(FALSE) {
 dir.create(paste0('rse_', opt$project), showWarnings = FALSE)
 
 ## Load GRanges and metadata
-load('/dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38-genes-bp-length.Rdata')
-load('/dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38-exons.Rdata')
-load('/dcl01/leek/data/recount-website/genes/count_groups.Rdata')
+exons <- recount_exons
+genes <- recount_genes
 load(opt$metadata)
 
 ## Subset to project of interest
@@ -375,21 +375,21 @@ if(hasJx) {
         message(paste(Sys.time(),
             'setup reference introns for finding gene ids'))
         
-        transcripts <- transcripts(TxDb.Hsapiens.UCSC.hg38.knownGene,
-            columns = c('tx_name', 'gene_id'))
+        txdb <- makeTxDbFromGFF('ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_25/gencode.v25.annotation.gff3.gz',
+            format = 'gff3', organism = 'Homo sapiens')
+        transcripts <- transcripts(txdb, columns = c('tx_name', 'gene_id'))
         
         ## Find gene symbol
         gene_ids <- lapply(transcripts$gene_id, function(x) {
             if(length(x) == 0) return(NA) else return(x)
         })
         stopifnot(all(elementNROWS(gene_ids) == 1))
-        gene_info <- select(org.Hs.eg.db, unlist(gene_ids),
-            c('ENTREZID', 'GENENAME', 'SYMBOL'), 'ENTREZID')
-        transcripts$symbol <- gene_info$SYMBOL
+        transcripts$symbol <- AnnotationDbi::mapIds(org.Hs.eg.db::org.Hs.eg.db,
+            gsub('\\..*', '', unlist(gene_ids)), 'SYMBOL', 'ENSEMBL',
+            multiVals = 'CharacterList')
         
         ## Build intron reference set
-        introns <- intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene,
-            use.names = TRUE)
+        introns <- intronsByTranscript(txdb, use.names = TRUE)
         introns <- unlist(introns)
         introns$tx_name <- names(introns)
         introns$gene_id <- transcripts$gene_id[match(introns$tx_name,
@@ -400,12 +400,12 @@ if(hasJx) {
         ## Just label as NA the gene id if absent
         introns$gene_id[sapply(introns$gene_id, length) == 0] <- CharacterList(NA)
 
-        ## Make them unique: can't do that, otherwise we lose 19 gene_ids
+        ## Make them unique: can't do that, otherwise we lose some gene_ids
         # introns_test <- unique(introns)
         # length(unique(unlist(introns$gene_id)))
-        # 21014
+        # 35351
         # length(unique(unlist(introns_test$gene_id)))
-        # 20995
+        # 35271
 
         ## Compress by actual range
         introns_unique <- GRanges(seqnames = seqnames(introns),
@@ -418,8 +418,7 @@ if(hasJx) {
         intron_gi <- rep(unlist(introns$gene_id), elementNROWS(introns$gene_id))
         intron_gi <- split(intron_gi, rep(queryHits(intron_oo),
             elementNROWS(introns$gene_id)))
-        intron_sb <- rep(unlist(introns$symbol), elementNROWS(introns$symbol))
-        intron_sb <- split(intron_sb, rep(queryHits(intron_oo),
+        intron_sb <- split(unlist(introns$symbol), rep(queryHits(intron_oo),
             elementNROWS(introns$symbol)))
         introns_unique$tx_name <- CharacterList(lapply(split(introns$tx_name,
             queryHits(intron_oo)), unique))

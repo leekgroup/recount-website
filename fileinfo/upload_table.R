@@ -1,6 +1,6 @@
 ## Usage
 # mkdir -p logs
-# module load R/3.3
+# module load R/3.3.x
 # Rscript upload_table.R > logs/upload_table_log.txt 2>&1
 
 ## Identify files to upload

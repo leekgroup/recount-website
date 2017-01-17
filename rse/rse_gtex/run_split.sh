@@ -10,7 +10,7 @@ date
 mkdir -p logs
 
 ## Split GTEx by tissue
-module load R/3.3
+module load R/3.3.x
 Rscript split_by_tissue.R
 
 echo "**** Job ends ****"

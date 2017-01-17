@@ -55,6 +55,8 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -pe local ${CORES}
+#$ -o ./logs/${PROJECT}.mean.o.\${TASK_ID}.txt
+#$ -e ./logs/${PROJECT}.mean.e.\${TASK_ID}.txt
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
@@ -62,16 +64,13 @@ echo "**** Job starts project \${PROJECTNAME} ****"
 date
 
 ## Run the R script that creates mean bigwig files per project
-module load R/3.3
+module load R/3.3.x
 module load ucsctools
 module load wiggletools/default
 Rscript calculate_means.R -p "${PROJECT}" -m "${METADATA}" -i "\${PROJECTNAME}"
 
 echo "**** Job ends ****"
 date
-
-## Move log files
-mv ${WDIR}/${sname}.*.\${SGE_TASK_ID} ${WDIR}/logs/
 EOF
 
 call="qsub ${WDIR}/.${sname}.sh"

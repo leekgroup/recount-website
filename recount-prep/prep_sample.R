@@ -79,11 +79,9 @@ if(opt$calculate_auc) {
 }
 
 ## Check that files have been downloaded
-bed <- 'ucsc-knowngene-hg38.bed'
-gene <- 'ucsc-knowngene-hg38-genes-bp-length.Rdata'
-exon <- 'ucsc-knowngene-hg38-exons.Rdata'
+bed <- 'Gencode-v25.bed'
 count_groups_file <- 'count_groups.Rdata'
-if(any(!file.exists(c(bed, gene, exon, count_groups_file)))) {
+if(any(!file.exists(c(bed, count_groups_file)))) {
     message(paste(Sys.time(), 'downloading missing files'))
     source('prep_setup.R')
 }
@@ -128,7 +126,7 @@ write.table(as.data.frame(exon_counts), file = file.path('rse_temp',
 
 
 ## Load exons info
-load(exon)
+exon <- recount_exons
 
 ## Create rse_exon
 exons_all <- unlist(exons)
@@ -141,7 +139,7 @@ save(rse_exon, file = file.path('rse_temp', paste0('rse_exon_', names(bw),
 
 ## Summarize counts at gene level
 load(count_groups_file)
-load(gene)
+gene <- recount_genes
 counts_gene <- lapply(split(as.data.frame(exon_counts), count_groups), colSums)
 counts_gene <- do.call(rbind, counts_gene)
 rownames(counts_gene) <- names(genes)

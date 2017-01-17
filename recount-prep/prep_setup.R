@@ -23,16 +23,12 @@ down_file <- function(file_name, repo = 'recount-website') {
 }
 
 ## Download files if necessary
-bed <- 'ucsc-knowngene-hg38.bed'
-gene <- 'ucsc-knowngene-hg38-genes-bp-length.Rdata'
-exon <- 'ucsc-knowngene-hg38-exons.Rdata'
+bed <- 'Gencode-v25.bed'
 count_groups_file <- 'count_groups.Rdata'
 hg38 <- 'hg38.sizes'
 introns <- 'introns_unique.Rdata'
 
 down_file(bed)
-down_file(gene)
-down_file(exon)
 down_file(count_groups_file)
 down_file(hg38, repo = 'runs')
 down_file(introns, repo = 'recount-introns')

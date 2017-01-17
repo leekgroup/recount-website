@@ -1,5 +1,5 @@
 #!/bin/sh
-#$ -N ucsc_intropolis
+#$ -N gencode_intropolis
 #$ -l mem_free=1G,h_vmem=2G,h_fsize=50G
 #$ -m e
 #$ -pe local 12
@@ -29,4 +29,4 @@ echo "**** Job ends ****"
 date
 
 ## Move log files
-mv ucsc_intropolis.* logs/
+mv gencode_intropolis.* logs/

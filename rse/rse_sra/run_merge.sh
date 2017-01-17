@@ -11,7 +11,7 @@ date
 mkdir -p logs
 
 ## Merge all of SRA's RSE objects at the gene and exon levels
-module load R/3.3
+module load R/3.3.x
 Rscript merge_all.R
 
 echo "**** Job ends ****"

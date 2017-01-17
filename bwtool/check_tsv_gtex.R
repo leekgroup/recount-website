@@ -1,5 +1,5 @@
 # qrsh -l mem_free=2G,h_vmem=3G -pe local 25
-# module load R/3.3
+# module load R/3.3.x
 
 library('R.utils')
 library('BiocParallel')
@@ -10,7 +10,7 @@ tsv <- dir('/dcl01/leek/data/recount2/coverage_gtex', pattern = 'tsv', full.name
 names(tsv) <- gsub('.sum.tsv', '', dir('/dcl01/leek/data/recount2/coverage_gtex', pattern = 'tsv'))
 
 system.time( tsv_lines <- bplapply(tsv, countLines, BPPARAM = bp) )
-all(tsv_lines == 226117)
+all(tsv_lines == 329092)
 
 save(tsv_lines, file = 'tsv_lines_gtex.Rdata')
 

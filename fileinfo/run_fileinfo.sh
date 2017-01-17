@@ -48,10 +48,12 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m a
-#$ -l ${MEM}
+#$ -l leek,${MEM}
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -hold_jid copy_means,${PROJECT}.mean,${PROJECT}.rse,split_${PROJECT}
+#$ -o ./logs/${PROJECT}.fileinfo.o.\${TASK_ID}.txt
+#$ -e ./logs/${PROJECT}.fileinfo.e.\${TASK_ID}.txt
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
@@ -60,14 +62,11 @@ date
 
 ## Run the R script that computes md5sum and file sizes as well as the final
 ## list of files to upload
-module load R/3.3
+module load R/3.3.x
 Rscript get_fileinfo.R -p "${PROJECT}" -m "${METADATA}" -i "\${PROJECTNAME}"
 
 echo "**** Job ends ****"
 date
-
-## Move log files
-mv ${WDIR}/${sname}.*.\${SGE_TASK_ID} ${WDIR}/logs/
 EOF
 
 call="qsub ${WDIR}/.${sname}.sh"

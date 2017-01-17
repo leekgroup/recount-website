@@ -16,8 +16,6 @@ save(meta_web, file = 'meta_web.Rdata')
 
 
 dir.create('www', showWarnings = FALSE)
-system('cp ../genes/ucsc-knowngene-hg38-exons.Rdata www/')
-system('cp ../genes/ucsc-knowngene-hg38-genes-bp-length.Rdata www/')
 system('scp e:/dcl01/leek/data/tcga_work/tcga_recount_junctions/sample_ids.tsv www/')
 
 
@@ -26,8 +24,6 @@ load('.deploy_info.Rdata')
 rsconnect::setAccountInfo(name=deploy_info$name, token=deploy_info$token,
     secret=deploy_info$secret)
 deployApp(appFiles = c('ui.R', 'server.R', 'meta_web.Rdata', 'download.md',
-    'www/ucsc-knowngene-hg38-genes-bp-length.Rdata',
-    'www/ucsc-knowngene-hg38-exons.Rdata', 'google-analytics.js', 
-    'www/TxDb.Hsapiens.UCSC.hg38.knownGene_3.1.3.tar.gz', 'www/sample_ids.tsv',
+    'google-analytics.js', 'www/sample_ids.tsv',
     'www/highlight.pack.js', 'www/shiny-showcase.js', 'www/rstudio.css'),
     appName = 'recount', account = deploy_info$name)

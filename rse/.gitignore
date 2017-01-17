@@ -4,3 +4,8 @@
 ## Output
 logs
 rse_*
+
+## Output files from query_intropolis.R
+jx.tsv.gz
+jx_in_intropolis.tsv.gz
+introns_unique_with_intropolis.Rdata

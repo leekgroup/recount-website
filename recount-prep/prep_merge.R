@@ -346,9 +346,7 @@ save(rse_jx, file = 'rse_jx.Rdata')
 
 ## Clean up
 message(paste(Sys.time(), 'cleaning up temporary files'))
-to_clean <- c(outwig, 'ucsc-knowngene-hg38.bed',
-    'ucsc-knowngene-hg38-genes-bp-length.Rdata',
-    'ucsc-knowngene-hg38-exons.Rdata', 'count_groups.Rdata', 'hg38.sizes',
+to_clean <- c(outwig, 'Gencode-v25.bed', 'count_groups.Rdata', 'hg38.sizes',
     'introns_unique.Rdata')
 sapply(to_clean, unlink)
 unlink('rse_temp', recursive = TRUE)

@@ -1,5 +1,5 @@
 ## Prepare metadata
-# module load R/3.3
+# module load R/3.3.x
 # mkdir -p logs
 # Rscript create_meta_web.R -p "sra" > logs/create_meta_web_sra_log.txt 2>&1
 # Rscript create_meta_web.R -p "gtex" > logs/create_meta_web_gtex_log.txt 2>&1
@@ -53,8 +53,6 @@ meta_web <- data.frame(
     exon = NA,
     junctions = NA,
     phenotype = NA,
-    genes = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-genes-bp-length.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'genes\', 1)">link</a>',
-    exons = '<a href="https://jhubiostatistics.shinyapps.io/recount/ucsc-knowngene-hg38-exons.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'exons\', 1)">link</a>',
     files_info = NA,
     stringsAsFactors = FALSE
 )

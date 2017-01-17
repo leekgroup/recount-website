@@ -21,13 +21,16 @@ mkdir -p ${WDIR}/logs
 
 if [[ "${PROJECT}" == "sra" ]]
 then
-    sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38.bed /dcl01/leek/data/sra/v2 /dcl01/leek/data/recount2/coverage > ${WDIR}/bwtool_cmds_${PROJECT}.txt
+    mkdir -p /dcl01/leek/data/recount2/coverage
+    sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/sra/v2 /dcl01/leek/data/recount2/coverage > ${WDIR}/bwtool_cmds_${PROJECT}.txt
 elif [[ "${PROJECT}" == "gtex" ]]
 then
-    sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38.bed /dcl01/leek/data/gtex /dcl01/leek/data/recount2/coverage_gtex > ${WDIR}/bwtool_cmds_${PROJECT}.txt
+    mkdir -p /dcl01/leek/data/recount2/coverage_gtex
+    sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/gtex /dcl01/leek/data/recount2/coverage_gtex > ${WDIR}/bwtool_cmds_${PROJECT}.txt
 elif [[ "${PROJECT}" == "tcga" ]]
 then
-    sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/ucsc-knowngene-hg38.bed /dcl01/leek/data/tcga/v1 /dcl01/leek/data/recount2/coverage_tcga > ${WDIR}/bwtool_cmds_${PROJECT}.txt
+    mkdir -p /dcl01/leek/data/recount2/coverage_tcga
+    sh /dcl01/leek/data/recount-website/generate_sums.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/tcga/v1 /dcl01/leek/data/recount2/coverage_tcga > ${WDIR}/bwtool_cmds_${PROJECT}.txt
 else
     echo "Specify a valid project: gtex, sra, tcga"
 fi
@@ -43,10 +46,11 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m a
-#$ -l mem_free=1G,h_vmem=2G,h_fsize=100G
+#$ -l leek,mem_free=1G,h_vmem=2G,h_fsize=100G
 #$ -N ${sname}
 #$ -t 1:${LINES}
-#$ -hold_jid genes-hg38-ucsc
+#$ -o ./logs/${PROJECT}.bwtool.o.\${TASK_ID}.txt
+#$ -e ./logs/${PROJECT}.bwtool.e.\${TASK_ID}.txt
 
 ## Get the bwtool command
 bwtoolcmd=\$(awk "NR==\${SGE_TASK_ID}" ${WDIR}/bwtool_cmds_${PROJECT}.txt)
@@ -64,9 +68,6 @@ echo "\${bwtoolcmd}"
 
 echo "**** Job ends ****"
 date
-
-## Move log files
-mv ${WDIR}/${sname}.*.\${SGE_TASK_ID} ${WDIR}/logs/
 EOF
 
 call="qsub ${WDIR}/.${sname}.sh"

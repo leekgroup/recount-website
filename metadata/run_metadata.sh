@@ -43,6 +43,8 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -pe local 3
 #$ -N ${sname}
 #$ -hold_jid tcga_prep_meta
+#$ -o ./logs/${PROJECT}.metadata.o.txt
+#$ -e ./logs/${PROJECT}.metadata.e.txt
 
 echo "**** Job starts ****"
 date
@@ -53,9 +55,6 @@ Rscript create_metadata.R -p "${PROJECT}"
 
 echo "**** Job ends ****"
 date
-
-## Move log files
-mv ${WDIR}/${sname}.* ${WDIR}/logs/
 EOF
 
 call="qsub ${WDIR}/.${sname}.sh"
