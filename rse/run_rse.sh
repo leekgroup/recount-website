@@ -48,7 +48,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m a
-#$ -l ${MEM}
+#$ -l leek,${MEM}
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -hold_jid ${PROJECT}.metadata
