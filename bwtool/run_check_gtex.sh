@@ -6,7 +6,7 @@
 #$ -N check-tsv-gtex
 #$ -hold_jid gtex.bwtool
 #$ -o ./logs/check-tsv-gtex.o.txt
-#$ -e ./logs/check-tsv-gtex.e..txt
+#$ -e ./logs/check-tsv-gtex.e.txt
 
 echo '**** Job starts ****'
 date

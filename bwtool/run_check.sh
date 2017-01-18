@@ -6,7 +6,7 @@
 #$ -N check-tsv
 #$ -hold_jid sra.bwtool
 #$ -o ./logs/check-tsv.o.txt
-#$ -e ./logs/check-tsv.e..txt
+#$ -e ./logs/check-tsv.e.txt
 
 echo '**** Job starts ****'
 date
