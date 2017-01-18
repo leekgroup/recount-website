@@ -1,6 +1,6 @@
 #!/bin/sh
 #$ -N gencode_intropolis
-#$ -l mem_free=1G,h_vmem=2G,h_fsize=50G
+#$ -l leek,mem_free=1G,h_vmem=2G,h_fsize=50G
 #$ -m e
 #$ -pe local 12
 #$ -cwd
