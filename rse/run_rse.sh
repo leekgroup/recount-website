@@ -21,7 +21,7 @@ mkdir -p ${WDIR}/logs
 if [[ "${PROJECT}" == "sra" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=50G,h_vmem=160G,h_fsize=50G"
+    MEM="leek,mem_free=50G,h_vmem=160G,h_fsize=50G"
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
@@ -48,7 +48,7 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
 #$ -m a
-#$ -l leek,${MEM}
+#$ -l ${MEM}
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -hold_jid ${PROJECT}.metadata
