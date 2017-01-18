@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -cwd
 #$ -m e
-#$ -l leek,mem_free=2G,h_vmem=3G
+#$ -l mem_free=2G,h_vmem=3G
 #$ -pe local 25
 #$ -N check-tsv-tcga
 #$ -hold_jid tcga.bwtool
