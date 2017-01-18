@@ -91,6 +91,11 @@ if(!file.exists(jx_file_bed)) {
     hasJx <- FALSE
 }
 
+if(opt$project == 'gtex') {
+    hasJx <- FALSE
+    message(paste('Skipping rse_jx for GTEx'))
+}
+
 if(hasJx) {
     ## Load junctions sample information
     message(paste(Sys.time(), 'loading junctions sample information'))
@@ -321,7 +326,7 @@ if(hasJx) {
     print(object.size(jx_counts), units = 'Mb')
 
     ## Save junction counts
-    if(opt$project != 'gtex') {
+    if(!opt$project %in% c('gtex', 'tcga')) {
         message(paste(Sys.time(), 'writing file', file.path(outdir,
             'counts_jx.tsv')))
         write.table(as.data.frame(jx_counts), file = file.path(outdir,
