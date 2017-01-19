@@ -52,6 +52,7 @@ if(FALSE) {
 dir.create(paste0('rse_', opt$project), showWarnings = FALSE)
 
 ## Load GRanges and metadata
+load('/dcl01/leek/data/recount-website/genes/count_groups.Rdata')
 exons <- recount_exons
 genes <- recount_genes
 load(opt$metadata)
