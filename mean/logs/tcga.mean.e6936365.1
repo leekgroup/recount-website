@@ -1,0 +1,265 @@
+Loading required package: methods
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
+    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unsplit
+
+Loading required package: S4Vectors
+Loading required package: stats4
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:base’:
+
+    colMeans, colSums, expand.grid, rowMeans, rowSums
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+2016-11-21 11:00:23 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part1.wig
+2016-11-21 11:31:08 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part2.wig
+2016-11-21 12:14:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part3.wig
+2016-11-21 12:46:19 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part4.wig
+2016-11-21 13:11:03 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part5.wig
+2016-11-21 13:31:32 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part6.wig
+2016-11-21 13:53:28 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part7.wig
+2016-11-21 14:17:58 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part8.wig
+2016-11-21 14:42:53 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part9.wig
+2016-11-21 15:05:24 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part10.wig
+2016-11-21 15:31:22 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part11.wig
+2016-11-21 15:56:58 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part12.wig
+2016-11-21 16:20:09 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part13.wig
+2016-11-21 16:40:56 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part14.wig
+2016-11-21 17:03:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part15.wig
+2016-11-21 17:30:01 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part16.wig
+2016-11-21 17:53:38 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part17.wig
+2016-11-21 18:16:01 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part18.wig
+2016-11-21 18:40:14 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part19.wig
+2016-11-21 19:03:41 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part20.wig
+2016-11-21 19:29:08 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part21.wig
+2016-11-21 19:51:26 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part22.wig
+2016-11-21 20:14:54 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part23.wig
+2016-11-21 20:38:05 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part24.wig
+2016-11-21 21:04:28 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part25.wig
+2016-11-21 21:28:17 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part26.wig
+2016-11-21 21:53:14 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part27.wig
+2016-11-21 22:18:11 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part28.wig
+2016-11-21 22:38:50 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part29.wig
+2016-11-21 22:59:24 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part30.wig
+2016-11-21 23:24:26 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part31.wig
+2016-11-21 23:50:24 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part32.wig
+2016-11-22 00:14:37 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part33.wig
+2016-11-22 00:37:06 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part34.wig
+2016-11-22 01:04:43 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part35.wig
+2016-11-22 01:31:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part36.wig
+2016-11-22 01:57:03 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part37.wig
+2016-11-22 02:21:55 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part38.wig
+2016-11-22 02:49:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part39.wig
+2016-11-22 03:10:34 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part40.wig
+2016-11-22 03:30:10 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part41.wig
+2016-11-22 03:51:20 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part42.wig
+2016-11-22 04:14:29 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part43.wig
+2016-11-22 04:38:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part44.wig
+2016-11-22 05:02:31 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part45.wig
+2016-11-22 05:24:27 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part46.wig
+2016-11-22 05:48:05 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part47.wig
+2016-11-22 06:12:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part48.wig
+2016-11-22 06:34:04 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part49.wig
+2016-11-22 06:55:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part50.wig
+2016-11-22 07:17:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part51.wig
+2016-11-22 08:12:04 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part52.wig
+2016-11-22 08:36:41 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part53.wig
+2016-11-22 09:07:20 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part54.wig
+2016-11-22 09:34:51 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part55.wig
+2016-11-22 09:56:20 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part56.wig
+2016-11-22 10:19:18 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part57.wig
+2016-11-22 10:46:45 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part58.wig
+2016-11-22 11:09:42 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part59.wig
+2016-11-22 11:33:31 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part60.wig
+2016-11-22 11:59:13 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part61.wig
+2016-11-22 12:20:19 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part62.wig
+2016-11-22 12:40:32 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part63.wig
+2016-11-22 13:10:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part64.wig
+2016-11-22 13:33:31 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part65.wig
+2016-11-22 13:57:26 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part66.wig
+2016-11-22 14:52:39 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part67.wig
+2016-11-22 15:16:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part68.wig
+2016-11-22 16:16:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part69.wig
+2016-11-22 16:57:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part70.wig
+2016-11-22 17:23:44 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part71.wig
+2016-11-22 20:07:59 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part72.wig
+2016-11-22 20:51:38 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part73.wig
+2016-11-22 22:49:54 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part74.wig
+2016-11-22 23:28:35 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part75.wig
+2016-11-23 00:24:43 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part76.wig
+2016-11-23 01:30:03 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part77.wig
+2016-11-23 02:45:20 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part78.wig
+2016-11-23 03:08:42 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part79.wig
+2016-11-23 03:31:48 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part80.wig
+2016-11-23 05:16:34 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part81.wig
+2016-11-23 05:41:51 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part82.wig
+2016-11-23 06:34:17 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part83.wig
+2016-11-23 07:06:08 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part84.wig
+2016-11-23 07:37:36 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part85.wig
+2016-11-23 08:10:14 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part86.wig
+2016-11-23 08:49:30 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part87.wig
+2016-11-23 09:30:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part88.wig
+2016-11-23 10:16:01 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part89.wig
+2016-11-23 10:36:05 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part90.wig
+2016-11-23 10:57:12 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part91.wig
+2016-11-23 11:44:25 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part92.wig
+2016-11-23 12:17:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part93.wig
+2016-11-23 12:44:11 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part94.wig
+2016-11-23 13:04:49 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part95.wig
+2016-11-23 13:25:17 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part96.wig
+2016-11-23 13:43:06 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part97.wig
+2016-11-23 14:17:07 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part98.wig
+2016-11-23 14:58:59 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part99.wig
+2016-11-23 15:17:09 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part100.wig
+2016-11-23 15:45:23 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part101.wig
+2016-11-23 16:11:09 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part102.wig
+2016-11-23 16:31:54 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part103.wig
+2016-11-23 16:53:51 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part104.wig
+2016-11-23 17:24:01 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part105.wig
+2016-11-23 18:26:18 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part106.wig
+2016-11-23 20:13:38 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part107.wig
+2016-11-23 21:03:50 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part108.wig
+2016-11-23 21:34:32 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part109.wig
+2016-11-23 22:10:17 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part110.wig
+2016-11-23 22:34:05 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part111.wig
+2016-11-23 23:00:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part112.wig
+2016-11-21 11:00:32 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part113.wig
+2016-11-21 11:28:31 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part114.wig
+2016-11-21 12:20:28 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part115.wig
+2016-11-21 12:45:53 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part116.wig
+2016-11-21 13:09:57 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part117.wig
+2016-11-21 13:32:35 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part118.wig
+2016-11-21 13:54:26 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part119.wig
+2016-11-21 14:22:03 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part120.wig
+2016-11-21 14:51:10 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part121.wig
+2016-11-21 15:18:26 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part122.wig
+2016-11-21 15:41:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part123.wig
+2016-11-21 16:03:18 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part124.wig
+2016-11-21 16:28:37 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part125.wig
+2016-11-21 16:56:50 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part126.wig
+2016-11-21 17:21:22 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part127.wig
+2016-11-21 17:46:53 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part128.wig
+2016-11-21 18:13:29 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part129.wig
+2016-11-21 18:37:08 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part130.wig
+2016-11-21 19:01:28 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part131.wig
+2016-11-21 19:25:12 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part132.wig
+2016-11-21 19:54:03 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part133.wig
+2016-11-21 20:21:02 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part134.wig
+2016-11-21 20:43:36 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part135.wig
+2016-11-21 21:11:23 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part136.wig
+2016-11-21 21:34:06 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part137.wig
+2016-11-21 21:58:08 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part138.wig
+2016-11-21 22:21:24 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part139.wig
+2016-11-21 22:45:31 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part140.wig
+2016-11-21 23:08:07 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part141.wig
+2016-11-21 23:31:15 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part142.wig
+2016-11-21 23:53:19 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part143.wig
+2016-11-22 00:18:28 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part144.wig
+2016-11-22 00:41:17 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part145.wig
+2016-11-22 01:07:00 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part146.wig
+2016-11-22 01:30:41 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part147.wig
+2016-11-22 01:59:54 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part148.wig
+2016-11-22 02:19:55 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part149.wig
+2016-11-22 02:46:13 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part150.wig
+2016-11-22 03:09:23 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part151.wig
+2016-11-22 03:40:23 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part152.wig
+2016-11-22 04:08:42 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part153.wig
+2016-11-22 04:30:36 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part154.wig
+2016-11-22 04:56:08 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part155.wig
+2016-11-22 05:19:56 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part156.wig
+2016-11-22 05:42:05 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part157.wig
+2016-11-22 06:05:27 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part158.wig
+2016-11-22 06:37:44 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part159.wig
+2016-11-22 07:02:53 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part160.wig
+2016-11-22 08:16:52 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part161.wig
+2016-11-22 08:41:35 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part162.wig
+2016-11-22 09:06:34 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part163.wig
+2016-11-22 09:27:32 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part164.wig
+2016-11-22 09:50:27 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part165.wig
+2016-11-22 10:17:47 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part166.wig
+2016-11-22 10:42:20 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part167.wig
+2016-11-22 11:07:24 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part168.wig
+2016-11-22 11:26:04 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part169.wig
+2016-11-22 11:49:04 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part170.wig
+2016-11-22 12:16:55 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part171.wig
+2016-11-22 12:36:36 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part172.wig
+2016-11-22 12:59:29 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part173.wig
+2016-11-22 13:27:09 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part174.wig
+2016-11-22 13:49:59 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part175.wig
+2016-11-22 14:18:08 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part176.wig
+2016-11-22 14:48:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part177.wig
+2016-11-22 15:13:40 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part178.wig
+2016-11-22 15:46:29 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part179.wig
+2016-11-22 16:15:40 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part180.wig
+2016-11-22 20:16:39 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part181.wig
+2016-11-22 21:18:30 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part182.wig
+2016-11-22 22:59:26 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part183.wig
+2016-11-23 00:24:11 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part184.wig
+2016-11-23 01:06:39 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part185.wig
+2016-11-23 02:36:06 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part186.wig
+2016-11-23 03:04:41 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part187.wig
+2016-11-23 04:00:30 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part188.wig
+2016-11-23 04:44:14 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part189.wig
+2016-11-23 05:20:49 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part190.wig
+2016-11-23 05:43:45 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part191.wig
+2016-11-23 06:22:50 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part192.wig
+2016-11-23 06:48:04 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part193.wig
+2016-11-23 07:11:46 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part194.wig
+2016-11-23 07:44:07 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part195.wig
+2016-11-23 08:27:28 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part196.wig
+2016-11-23 09:12:53 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part197.wig
+2016-11-23 10:16:38 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part198.wig
+2016-11-23 10:40:14 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part199.wig
+2016-11-23 11:03:57 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part200.wig
+2016-11-23 11:40:37 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part201.wig
+2016-11-23 12:11:06 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part202.wig
+2016-11-23 12:32:57 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part203.wig
+2016-11-23 12:50:51 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part204.wig
+2016-11-23 13:11:32 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part205.wig
+2016-11-23 13:38:12 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part206.wig
+2016-11-23 13:59:21 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part207.wig
+2016-11-23 14:32:11 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part208.wig
+2016-11-23 15:05:53 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part209.wig
+2016-11-23 15:27:30 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part210.wig
+2016-11-23 15:50:03 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part211.wig
+2016-11-23 16:11:24 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part212.wig
+2016-11-23 16:41:49 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part213.wig
+2016-11-23 17:16:35 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part214.wig
+2016-11-23 18:20:35 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part215.wig
+2016-11-23 19:49:03 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part216.wig
+2016-11-23 20:56:59 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part217.wig
+2016-11-23 21:27:33 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part218.wig
+2016-11-23 22:08:45 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part219.wig
+2016-11-23 22:42:41 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part220.wig
+2016-11-23 23:02:59 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part221.wig
+2016-11-23 23:34:45 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part222.wig
+2016-11-24 00:02:52 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part223.wig
+2016-11-24 00:24:26 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part224.wig
+2016-11-24 00:52:27 creating file /dcl01/leek/data/recount-website/mean/means_tcga/.TCGA/sum_TCGA_part225.wig
+2016-11-25 12:08:47 creating file /dcl01/leek/data/recount-website/mean/means_tcga/mean_TCGA.bw
+2016-11-25 12:40:08
+Session info -----------------------------------------------------------------------------------------------------------
+Packages ---------------------------------------------------------------------------------------------------------------
