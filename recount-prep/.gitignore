@@ -1,8 +1,6 @@
 ## Some temporary files
 rse_temp
-ucsc-knowngene-hg38.bed
-ucsc-knowngene-hg38-genes-bp-length.Rdata
-ucsc-knowngene-hg38-exons.Rdata
+Gencode-v25.bed
 count_groups.Rdata
 counts_exon.tsv.gz
 counts_gene.tsv.gz
