@@ -22,14 +22,17 @@ if [[ "${PROJECT}" == "sra" ]]
 then
     echo "$PROJECT"
     MEM="leek,mem_free=50G,h_vmem=160G,h_fsize=50G"
+    EMAIL="a"
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=300G,h_vmem=400G,h_fsize=50G"
+    MEM="mem_free=100G,h_vmem=150G,h_fsize=50G"
+    EMAIL="e"
 elif [[ "${PROJECT}" == "tcga" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=300G,h_vmem=400G,h_fsize=50G"
+    MEM="mem_free=100G,h_vmem=150G,h_fsize=50G"
+    EMAIL="e"
 else
     echo "Specify a valid project: gtex, sra, tcga"
 fi
@@ -47,7 +50,7 @@ sname="${PROJECT}.rse"
 cat > ${WDIR}/.${sname}.sh <<EOF
 #!/bin/bash
 #$ -cwd
-#$ -m a
+#$ -m ${EMAIL}
 #$ -l ${MEM}
 #$ -N ${sname}
 #$ -t 1:${LINES}
