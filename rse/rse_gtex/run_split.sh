@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -cwd
 #$ -m e
-#$ -l leek,mem_free=50G,h_vmem=70G,h_fsize=100G
+#$ -l mem_free=50G,h_vmem=70G,h_fsize=100G
 #$ -N split_gtex
 #$ -hold_jid gtex.rse
 
