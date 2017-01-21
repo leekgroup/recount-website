@@ -26,12 +26,12 @@ then
 elif [[ "${PROJECT}" == "gtex" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=100G,h_vmem=150G,h_fsize=50G"
+    MEM="mem_free=200G,h_vmem=250G,h_fsize=100G"
     EMAIL="e"
 elif [[ "${PROJECT}" == "tcga" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=100G,h_vmem=150G,h_fsize=50G"
+    MEM="mem_free=200G,h_vmem=250G,h_fsize=100G"
     EMAIL="e"
 else
     echo "Specify a valid project: gtex, sra, tcga"
