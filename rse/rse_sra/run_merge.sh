@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -cwd
 #$ -m e
-#$ -l mem_free=220G,h_vmem=300G,h_fsize=100G
+#$ -l mem_free=270G,h_vmem=350G,h_fsize=100G
 #$ -N merge_sra
 #$ -hold_jid sra.rse
 

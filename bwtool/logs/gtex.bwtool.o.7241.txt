@@ -1,0 +1,5 @@
+**** Job starts sample SRR1414400_SRS639217_SRX605107_male_skin.not.sun.exposed.suprapubic ****
+Wed Jan 18 08:28:49 EST 2017
+sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/gtex/batch_27/coverage_bigwigs/SRR1414400_SRS639217_SRX605107_male_skin.not.sun.exposed.suprapubic.bw /dcl01/leek/data/recount2/coverage_gtex
+**** Job ends ****
+Wed Jan 18 08:30:43 EST 2017

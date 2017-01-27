@@ -1,0 +1,5 @@
+**** Job starts sample 79A8F606-9A9B-45F4-99E2-61B8498AB4BD ****
+Wed Jan 18 11:00:47 EST 2017
+sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/tcga/v1/batch_2/coverage_bigwigs/79A8F606-9A9B-45F4-99E2-61B8498AB4BD.bw /dcl01/leek/data/recount2/coverage_tcga
+**** Job ends ****
+Wed Jan 18 11:02:57 EST 2017

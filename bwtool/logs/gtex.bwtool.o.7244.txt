@@ -1,0 +1,5 @@
+**** Job starts sample SRR1356619_SRS629771_SRX579148_male_brain.frontal.cortex.ba9 ****
+Wed Jan 18 08:28:50 EST 2017
+sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/gtex/batch_27/coverage_bigwigs/SRR1356619_SRS629771_SRX579148_male_brain.frontal.cortex.ba9.bw /dcl01/leek/data/recount2/coverage_gtex
+**** Job ends ****
+Wed Jan 18 08:30:43 EST 2017

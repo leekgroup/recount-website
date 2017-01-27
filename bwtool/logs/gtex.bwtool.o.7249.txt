@@ -1,0 +1,5 @@
+**** Job starts sample SRR1351410_SRS629478_SRX577150_male_artery.tibial ****
+Wed Jan 18 08:29:04 EST 2017
+sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/gtex/batch_27/coverage_bigwigs/SRR1351410_SRS629478_SRX577150_male_artery.tibial.bw /dcl01/leek/data/recount2/coverage_gtex
+**** Job ends ****
+Wed Jan 18 08:30:53 EST 2017

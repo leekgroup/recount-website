@@ -1,0 +1,5 @@
+**** Job starts sample SRR2019152 ****
+Tue Jan 17 20:33:45 EST 2017
+sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/sra/v2/batch_0/coverage_bigwigs/SRR2019152.bw /dcl01/leek/data/recount2/coverage
+**** Job ends ****
+Tue Jan 17 20:34:48 EST 2017

@@ -1,0 +1,5 @@
+**** Job starts sample A08B85EA-D1E7-4B77-8DEC-36294305B9F7 ****
+Wed Jan 18 11:00:48 EST 2017
+sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/tcga/v1/batch_2/coverage_bigwigs/A08B85EA-D1E7-4B77-8DEC-36294305B9F7.bw /dcl01/leek/data/recount2/coverage_tcga
+**** Job ends ****
+Wed Jan 18 11:02:36 EST 2017
