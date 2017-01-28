@@ -1,5 +1,7 @@
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
 Loading required package: colorout
 Loading required package: methods
+Loading required package: stats4
 Loading required package: BiocGenerics
 Loading required package: parallel
 
@@ -22,10 +24,9 @@ The following objects are masked from ‘package:base’:
     is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
     paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
     Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
-    unique, unsplit
+    unique, unsplit, which, which.max, which.min
 
 Loading required package: S4Vectors
-Loading required package: stats4
 
 Attaching package: ‘S4Vectors’
 
@@ -35,41 +36,39 @@ The following objects are masked from ‘package:base’:
 
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
-2016-11-26 12:34:02 number of samples per project
+2017-01-28 12:13:01 number of samples per project
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   11280   11280   11280   11280   11280   11280 
-2016-11-26 12:34:02 number missing
+2017-01-28 12:13:01 number missing
      accession number_samples        species       abstract           gene 
              0              0              0              0              0 
-          exon      junctions      phenotype          genes          exons 
-             0              0              0              0              0 
-    files_info 
-             0 
+          exon      junctions      phenotype     files_info 
+             0              0              0              0 
    user  system elapsed 
-  6.417   0.188   6.761 
-2016-11-26 12:34:02
+ 12.141   0.275  13.035 
+2017-01-28 12:13:01
 Session info -----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.0 Patched (2016-05-20 r70657)
+ version  R version 3.3.1 Patched (2016-09-30 r71426)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2016-11-26                                 
+ date     2017-01-28                                 
 
 Packages ---------------------------------------------------------------------------------------------------------------
  package       * version date       source                            
- BiocGenerics  * 0.18.0  2016-07-22 Bioconductor                      
+ BiocGenerics  * 0.20.0  2016-11-17 Bioconductor                      
  colorout      * 1.1-2   2016-07-22 Github (jalvesaq/colorout@6d84420)
- devtools        1.12.0  2016-06-24 CRAN (R 3.3.0)                    
- digest          0.6.10  2016-08-02 CRAN (R 3.3.0)                    
- GenomeInfoDb  * 1.8.7   2016-09-12 Bioconductor                      
- GenomicRanges * 1.24.3  2016-09-12 Bioconductor                      
- getopt        * 1.20.0  2013-08-30 CRAN (R 3.3.0)                    
- IRanges       * 2.6.1   2016-07-22 Bioconductor                      
+ devtools        1.12.0  2016-12-05 CRAN (R 3.3.1)                    
+ digest          0.6.12  2017-01-27 CRAN (R 3.3.1)                    
+ GenomeInfoDb  * 1.10.2  2017-01-17 Bioconductor                      
+ GenomicRanges * 1.26.2  2017-01-17 Bioconductor                      
+ getopt        * 1.20.0  2013-08-30 CRAN (R 3.3.1)                    
+ IRanges       * 2.8.1   2016-11-18 Bioconductor                      
  memoise         1.0.0   2016-01-29 CRAN (R 3.3.0)                    
- S4Vectors     * 0.10.3  2016-09-12 Bioconductor                      
- withr           1.0.2   2016-06-20 CRAN (R 3.3.0)                    
- XVector         0.12.1  2016-09-12 Bioconductor                      
- zlibbioc        1.18.0  2016-05-05 Bioconductor                      
+ S4Vectors     * 0.12.1  2016-12-05 Bioconductor                      
+ withr           1.0.2   2016-06-20 CRAN (R 3.3.1)                    
+ XVector         0.14.0  2016-11-18 Bioconductor                      
+ zlibbioc        1.20.0  2016-10-20 Bioconductor                      
