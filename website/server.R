@@ -1,6 +1,7 @@
 library('shiny')
 library('DT')
 library('markdown')
+library('shinyBS')
 
 load('meta_web.Rdata')
 
@@ -15,9 +16,10 @@ colnames(meta_web)[colnames(meta_web) == 'files_info'] <- 'files info'
 
 
 shinyServer(function(input, output, session) {
+    createAlert(session, 'annotationalert', 'gencode', 'Annotation change: now using Gencode v25', 'Gene and exon counts are now based on Gencode v25 CHR annotation. This adds non-protein coding genes to recount! We will no longer support the UCSC hg38 knownGene annotation.')
+    
     output$metadata <- DT::renderDataTable(
-        meta_web[not_massive, - which(colnames(meta_web) %in% c('genes',
-            'exons'))],
+        meta_web[not_massive, ],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
             'abstract')),
         style = 'bootstrap', rownames = FALSE, filter = 'top',
@@ -31,8 +33,7 @@ shinyServer(function(input, output, session) {
         )
     )
     output$popular <- DT::renderDataTable(
-        meta_web[popular_i, - which(colnames(meta_web) %in% c('genes',
-            'exons'))],
+        meta_web[popular_i, ],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
             'abstract')),
         style = 'bootstrap', rownames = FALSE, filter = 'top',
@@ -46,8 +47,7 @@ shinyServer(function(input, output, session) {
         )
     )
     output$gtex <- DT::renderDataTable(
-        meta_web[gtex_i, - which(colnames(meta_web) %in%
-            c('genes', 'exons'))],
+        meta_web[gtex_i, ],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
             'abstract')),
         style = 'bootstrap', rownames = FALSE, filter = 'top',
@@ -61,8 +61,7 @@ shinyServer(function(input, output, session) {
         )
     )
     output$tcga <- DT::renderDataTable(
-        meta_web[tcga_i, - which(colnames(meta_web) %in%
-            c('genes', 'exons'))],
+        meta_web[tcga_i, ],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
             'abstract')),
         style = 'bootstrap', rownames = FALSE, filter = 'top',
