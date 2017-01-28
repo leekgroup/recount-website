@@ -1,3 +1,4 @@
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
 Loading required package: colorout
 [1] "Removing GTEx bigWigs"
 [1] 93043     3
@@ -21,22 +22,22 @@ FALSE  TRUE
 6       rse_jx.Rdata DRP000366
 [1] 83380     3
    user  system elapsed 
- 16.205   3.510 186.741 
-2016-11-29 11:57:58
+ 12.053   2.434 143.703 
+2017-01-28 12:08:21
 Session info -----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.0 Patched (2016-05-20 r70657)
+ version  R version 3.3.1 Patched (2016-09-30 r71426)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2016-11-29                                 
+ date     2017-01-28                                 
 
 Packages ---------------------------------------------------------------------------------------------------------------
  package  * version date       source                            
  colorout * 1.1-2   2016-07-22 Github (jalvesaq/colorout@6d84420)
- devtools   1.12.0  2016-06-24 CRAN (R 3.3.0)                    
- digest     0.6.10  2016-08-02 CRAN (R 3.3.0)                    
+ devtools   1.12.0  2016-12-05 CRAN (R 3.3.1)                    
+ digest     0.6.12  2017-01-27 CRAN (R 3.3.1)                    
  memoise    1.0.0   2016-01-29 CRAN (R 3.3.0)                    
- withr      1.0.2   2016-06-20 CRAN (R 3.3.0)                    
+ withr      1.0.2   2016-06-20 CRAN (R 3.3.1)                    
