@@ -1,5 +1,53 @@
 **** Job starts ****
-Fri Nov 18 13:56:16 EST 2016
+Fri Feb 24 13:28:20 EST 2017
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
+Loading required package: methods
+Loading required package: SummarizedExperiment
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
+    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unsplit, which, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:base’:
+
+    colMeans, colSums, expand.grid, rowMeans, rowSums
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Setting options('download.file.method.GEOquery'='auto')
+Setting options('GEOquery.inmemory.gpl'=FALSE)
 [1] "The following variables are still lists but do not match the 11285 rows expected and will be left as lists"
 [[1]]
 [1] 21700    12
@@ -171,8 +219,8 @@ gdc_file_id
 [1] 11285   887
 [1] "Removing columns that are duplicated"
 cl
-character   integer      list   logical   numeric 
-      664       131         5         3        84 
+character    factor   integer      list   logical   numeric 
+      257       394       144         5         3        84 
 [1] "logical columns"
   i j ident
 3 2 3  TRUE
@@ -191,71 +239,69 @@ character   integer      list   logical   numeric
 [1] "character columns"
         i   j ident
 141     1 142  TRUE
-4640    8  28  TRUE
-4650    8  38  TRUE
-4660    8  48  TRUE
-9938   16 114  TRUE
-10586  17 115  TRUE
-11233  18 116  TRUE
-11879  19 117  TRUE
-12524  20 118  TRUE
-13168  21 119  TRUE
-14365  23  33  TRUE
-14375  23  43  TRUE
-16285  26  36  TRUE
-16295  26  46  TRUE
-16923  27  37  TRUE
-16933  27  47  TRUE
-17560  28  38  TRUE
-17570  28  48  TRUE
-18831  30  40  TRUE
-18841  30  50  TRUE
-19465  31  41  TRUE
-19475  31  51  TRUE
-20730  33  43  TRUE
-22620  36  46  TRUE
-23248  37  47  TRUE
-23875  38  48  TRUE
-25126  40  50  TRUE
-25750  41  51  TRUE
-32577  52  91  TRUE
-32587  52 101  TRUE
-32590  52 104  TRUE
-32596  52 110  TRUE
-33782  54  75  TRUE
-33794  54  87  TRUE
-33843  54 136  TRUE
-34551  55 235  TRUE
-37410  60  64  TRUE
-40491  65 140  TRUE
-45181  73  74  TRUE
-45189  73  82  TRUE
-45191  73  84  TRUE
-45192  73  85  TRUE
-45779  74  82  TRUE
-45781  74  84  TRUE
-45782  74  85  TRUE
-46373  75  87  TRUE
-46422  75 136  TRUE
-50465  82  84  TRUE
-50466  82  85  TRUE
-51048  83  86  TRUE
-51627  84  85  TRUE
-53412  87 136  TRUE
-55675  91 101  TRUE
-55678  91 104  TRUE
-55684  91 110  TRUE
-56313  92 167  TRUE
-61353 101 104  TRUE
-61359 101 110  TRUE
-63042 104 110  TRUE
-67519 112 143  TRUE
-68068 113 141  TRUE
-81141 137 290  TRUE
-87303 149 206  TRUE
-89334 153 187  TRUE
-92894 160 198  TRUE
-95910 166 211  TRUE
+1791    8  28  TRUE
+1801    8  38  TRUE
+1811    8  48  TRUE
+3833   16 114  TRUE
+4074   17 115  TRUE
+4314   18 116  TRUE
+4553   19 117  TRUE
+4791   20 118  TRUE
+5028   21 119  TRUE
+5411   23  33  TRUE
+5421   23  43  TRUE
+6110   26  36  TRUE
+6120   26  46  TRUE
+6341   27  37  TRUE
+6351   27  47  TRUE
+6571   28  38  TRUE
+6581   28  48  TRUE
+7028   30  40  TRUE
+7038   30  50  TRUE
+7255   31  41  TRUE
+7265   31  51  TRUE
+7706   33  43  TRUE
+8375   36  46  TRUE
+8596   37  47  TRUE
+8816   38  48  TRUE
+9253   40  50  TRUE
+9470   41  51  TRUE
+11820  52  91  TRUE
+11830  52 101  TRUE
+11833  52 104  TRUE
+11839  52 110  TRUE
+12211  54  75  TRUE
+12223  54  87  TRUE
+12272  54 136  TRUE
+13397  60  64  TRUE
+14443  65 140  TRUE
+15877  73  74  TRUE
+15885  73  82  TRUE
+15887  73  84  TRUE
+15888  73  85  TRUE
+16068  74  82  TRUE
+16070  74  84  TRUE
+16071  74  85  TRUE
+16255  75  87  TRUE
+16304  75 136  TRUE
+17498  82  84  TRUE
+17499  82  85  TRUE
+17674  83  86  TRUE
+17846  84  85  TRUE
+18410  87 136  TRUE
+19045  91 101  TRUE
+19048  91 104  TRUE
+19054  91 110  TRUE
+19276  92 167  TRUE
+20653 101 104  TRUE
+20659 101 110  TRUE
+21121 104 110  TRUE
+22342 112 143  TRUE
+22484 113 141  TRUE
+27067 149 206  TRUE
+27470 153 187  TRUE
+28181 160 198  TRUE
+28755 166 211  TRUE
 [1] "Character columns that are repeated (see other list below)"
  [1] "gdc_associated_entities.case_id"                                
  [2] "gdc_metadata_files.state.analysis"                              
@@ -284,22 +330,20 @@ character   integer      list   logical   numeric
 [25] "gdc_cases.diagnoses.updated_datetime"                           
 [26] "gdc_cases.diagnoses.treatments.updated_datetime"                
 [27] "gdc_cases.exposures.updated_datetime"                           
-[28] "xml_gender"                                                     
-[29] "gdc_cases.project.disease_type"                                 
-[30] "gdc_acl"                                                        
-[31] "gdc_cases.diagnoses.last_known_disease_status"                  
-[32] "gdc_cases.diagnoses.tumor_grade"                                
-[33] "gdc_cases.diagnoses.progression_or_recurrence"                  
-[34] "gdc_cases.diagnoses.prior_malignancy"                           
-[35] "gdc_cases.diagnoses.site_of_resection_or_biopsy"                
-[36] "cgc_sample_oct_embedded"                                        
-[37] "gdc_associated_entities.entity_submitter_id"                    
-[38] "gdc_associated_entities.entity_id"                              
-[39] "xml_alcohol_history_documented"                                 
-[40] "cgc_portion_sample"                                             
-[41] "cgc_case_investigation"                                         
-[42] "cgc_case_disease_type"                                          
-[43] "cgc_portion_is_ffpe"                                            
+[28] "gdc_cases.project.disease_type"                                 
+[29] "gdc_acl"                                                        
+[30] "gdc_cases.diagnoses.last_known_disease_status"                  
+[31] "gdc_cases.diagnoses.tumor_grade"                                
+[32] "gdc_cases.diagnoses.progression_or_recurrence"                  
+[33] "gdc_cases.diagnoses.prior_malignancy"                           
+[34] "gdc_cases.diagnoses.site_of_resection_or_biopsy"                
+[35] "cgc_sample_oct_embedded"                                        
+[36] "gdc_associated_entities.entity_submitter_id"                    
+[37] "gdc_associated_entities.entity_id"                              
+[38] "cgc_portion_sample"                                             
+[39] "cgc_case_investigation"                                         
+[40] "cgc_case_disease_type"                                          
+[41] "cgc_portion_is_ffpe"                                            
 [1] "Character columns that are duplicates of the previous list"
  [1] "gdc_cases.case_id"                                        
  [2] "gdc_state"                                                
@@ -316,25 +360,24 @@ character   integer      list   logical   numeric
 [13] "gdc_metadata_files.file_state.analysis"                   
 [14] "gdc_cases.updated_datetime"                               
 [15] "gdc_cases.demographic.updated_datetime"                   
-[16] "gdc_cases.demographic.gender"                             
-[17] "gdc_cases.project.name"                                   
-[18] "gdc_cases.project.program.dbgap_accession_number"         
-[19] "gdc_cases.diagnoses.classification_of_tumor"              
-[20] "gdc_cases.diagnoses.tissue_or_organ_of_origin"            
-[21] "gdc_cases.samples.oct_embedded"                           
-[22] "gdc_cases.samples.portions.analytes.aliquots.submitter_id"
-[23] "gdc_cases.samples.portions.analytes.aliquots.aliquot_id"  
-[24] "gdc_cases.exposures.alcohol_history"                      
-[25] "cgc_file_sample"                                          
-[26] "cgc_file_investigation"                                   
-[27] "cgc_file_disease_type"                                    
-[28] "cgc_sample_is_ffpe"                                       
+[16] "gdc_cases.project.name"                                   
+[17] "gdc_cases.project.program.dbgap_accession_number"         
+[18] "gdc_cases.diagnoses.classification_of_tumor"              
+[19] "gdc_cases.diagnoses.tissue_or_organ_of_origin"            
+[20] "gdc_cases.samples.oct_embedded"                           
+[21] "gdc_cases.samples.portions.analytes.aliquots.submitter_id"
+[22] "gdc_cases.samples.portions.analytes.aliquots.aliquot_id"  
+[23] "cgc_file_sample"                                          
+[24] "cgc_file_investigation"                                   
+[25] "cgc_file_disease_type"                                    
+[26] "cgc_sample_is_ffpe"                                       
 [1] "Dimensions of the final merged metadata"
-[1] 11285   841
+[1] 11285   843
 [1] FALSE
 [1] "Final dimensions of the metadata"
-[1] 11284   863
-[1] "2016-11-18 16:04:07 EST"
+[1] 11284   865
+[1] "2017-02-24 16:38:25 EST"
+Session info -----------------------------------------------------------------------------------------------------------
  setting  value                                      
  version  R version 3.3.1 Patched (2016-09-30 r71426)
  system   x86_64, linux-gnu                          
@@ -342,90 +385,94 @@ character   integer      list   logical   numeric
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2016-11-18                                 
+ date     2017-02-24                                 
 
- package              * version  date       source        
- acepack                1.4.1    2016-10-29 CRAN (R 3.3.1)
- AnnotationDbi          1.36.0   2016-11-18 Bioconductor  
- assertthat             0.1      2013-12-06 CRAN (R 3.3.0)
- Biobase              * 2.34.0   2016-10-20 Bioconductor  
- BiocGenerics         * 0.20.0   2016-11-17 Bioconductor  
- BiocParallel         * 1.8.1    2016-11-17 Bioconductor  
- biomaRt                2.30.0   2016-10-20 Bioconductor  
- Biostrings             2.42.0   2016-11-18 Bioconductor  
- bitops                 1.0-6    2013-08-17 CRAN (R 3.3.0)
- BSgenome               1.42.0   2016-11-18 Bioconductor  
- bumphunter             1.14.0   2016-11-18 Bioconductor  
- chron                  2.3-47   2015-06-24 CRAN (R 3.3.0)
- cluster                2.0.4    2016-04-18 CRAN (R 3.3.1)
- codetools              0.2-14   2015-07-15 CRAN (R 3.3.1)
- colorspace             1.3-1    2016-11-18 CRAN (R 3.3.1)
- data.table             1.9.6    2015-09-19 CRAN (R 3.3.1)
- DBI                    0.5-1    2016-09-10 CRAN (R 3.3.1)
- derfinder              1.8.0    2016-11-17 Bioconductor  
- derfinderHelper        1.8.0    2016-11-17 Bioconductor  
- devtools             * 1.12.0   2016-06-24 CRAN (R 3.3.1)
- digest                 0.6.10   2016-08-02 CRAN (R 3.3.1)
- doRNG                  1.6      2014-03-07 CRAN (R 3.3.0)
- downloader             0.4      2015-07-09 cran (@0.4)   
- foreach                1.4.3    2015-10-13 CRAN (R 3.3.0)
- foreign                0.8-67   2016-09-13 CRAN (R 3.3.1)
- Formula                1.2-1    2015-04-07 CRAN (R 3.3.0)
- GenomeInfoDb         * 1.10.1   2016-11-17 Bioconductor  
- GenomicAlignments      1.10.0   2016-11-18 Bioconductor  
- GenomicFeatures        1.26.0   2016-11-18 Bioconductor  
- GenomicFiles           1.10.3   2016-11-18 Bioconductor  
- GenomicRanges        * 1.26.1   2016-11-18 Bioconductor  
- GEOquery               2.40.0   2016-10-21 Bioconductor  
- ggplot2                2.2.0    2016-11-11 CRAN (R 3.3.1)
- gridExtra              2.2.1    2016-02-29 CRAN (R 3.3.0)
- gtable                 0.2.0    2016-02-26 CRAN (R 3.3.0)
- Hmisc                  4.0-0    2016-11-01 CRAN (R 3.3.1)
- htmlTable              1.7      2016-10-19 CRAN (R 3.3.1)
- htmltools              0.3.5    2016-03-21 CRAN (R 3.3.0)
- httr                   1.2.1    2016-07-03 cran (@1.2.1) 
- IRanges              * 2.8.1    2016-11-18 Bioconductor  
- iterators              1.0.8    2015-10-13 CRAN (R 3.3.0)
- jsonlite             * 1.1      2016-09-14 CRAN (R 3.3.1)
- knitr                  1.15     2016-11-09 CRAN (R 3.3.1)
- lattice                0.20-34  2016-09-06 CRAN (R 3.3.1)
- latticeExtra           0.6-28   2016-02-09 CRAN (R 3.3.0)
- lazyeval               0.2.0    2016-06-12 CRAN (R 3.3.1)
- locfit                 1.5-9.1  2013-04-20 CRAN (R 3.3.0)
- magrittr               1.5      2014-11-22 CRAN (R 3.3.1)
- Matrix                 1.2-7.1  2016-09-01 CRAN (R 3.3.1)
- matrixStats            0.51.0   2016-10-09 CRAN (R 3.3.1)
- memoise                1.0.0    2016-01-29 CRAN (R 3.3.0)
- munsell                0.4.3    2016-02-13 CRAN (R 3.3.0)
- nnet                   7.3-12   2016-02-02 CRAN (R 3.3.1)
- pkgmaker               0.22     2014-05-14 CRAN (R 3.3.0)
- plyr                   1.8.4    2016-06-08 CRAN (R 3.3.1)
- qvalue                 2.6.0    2016-11-17 Bioconductor  
- R6                     2.2.0    2016-10-05 CRAN (R 3.3.1)
- RColorBrewer           1.1-2    2014-12-07 CRAN (R 3.3.0)
- Rcpp                   0.12.8   2016-11-17 CRAN (R 3.3.1)
- RCurl                  1.95-4.8 2016-03-01 CRAN (R 3.3.0)
- recount              * 1.0.0    2016-11-18 Bioconductor  
- registry               0.3      2015-07-08 CRAN (R 3.3.0)
- rentrez                1.0.4    2016-10-26 CRAN (R 3.3.1)
- reshape2               1.4.2    2016-10-22 CRAN (R 3.3.1)
- rngtools               1.2.4    2014-03-06 CRAN (R 3.3.0)
- rpart                  4.1-10   2015-06-29 CRAN (R 3.3.1)
- Rsamtools              1.26.1   2016-11-18 Bioconductor  
- RSQLite                1.0.0    2014-10-25 CRAN (R 3.3.0)
- rtracklayer            1.34.1   2016-11-18 Bioconductor  
- S4Vectors            * 0.12.0   2016-11-18 Bioconductor  
- scales                 0.4.1    2016-11-09 CRAN (R 3.3.1)
- stringi                1.1.2    2016-10-01 CRAN (R 3.3.1)
- stringr                1.1.0    2016-08-19 CRAN (R 3.3.1)
- SummarizedExperiment * 1.4.0    2016-11-18 Bioconductor  
- survival               2.40-1   2016-10-30 CRAN (R 3.3.1)
- tibble                 1.2      2016-08-26 CRAN (R 3.3.1)
- VariantAnnotation      1.20.1   2016-11-18 Bioconductor  
- withr                  1.0.2    2016-06-20 CRAN (R 3.3.1)
- XML                    3.98-1.5 2016-11-10 CRAN (R 3.3.1)
- xtable                 1.8-2    2016-02-05 CRAN (R 3.3.0)
- XVector                0.14.0   2016-11-18 Bioconductor  
- zlibbioc               1.20.0   2016-10-20 Bioconductor  
+Packages ---------------------------------------------------------------------------------------------------------------
+ package              * version  date       source                                      
+ acepack                1.4.1    2016-10-29 CRAN (R 3.3.1)                              
+ AnnotationDbi          1.36.2   2017-02-07 Bioconductor                                
+ assertthat             0.1      2013-12-06 CRAN (R 3.3.0)                              
+ backports              1.0.5    2017-01-18 CRAN (R 3.3.1)                              
+ base64enc              0.1-3    2015-07-28 CRAN (R 3.3.0)                              
+ Biobase              * 2.34.0   2016-10-20 Bioconductor                                
+ BiocGenerics         * 0.20.0   2016-11-17 Bioconductor                                
+ BiocParallel         * 1.8.1    2016-12-06 Bioconductor                                
+ biomaRt                2.30.0   2016-12-06 Bioconductor                                
+ Biostrings             2.42.1   2016-12-06 Bioconductor                                
+ bitops                 1.0-6    2013-08-17 CRAN (R 3.3.0)                              
+ BSgenome               1.42.0   2016-11-18 Bioconductor                                
+ bumphunter             1.14.0   2016-12-06 Bioconductor                                
+ checkmate              1.8.2    2016-11-02 CRAN (R 3.3.1)                              
+ cluster                2.0.4    2016-04-18 CRAN (R 3.3.1)                              
+ codetools              0.2-14   2015-07-15 CRAN (R 3.3.1)                              
+ colorspace             1.3-2    2016-12-14 CRAN (R 3.3.1)                              
+ data.table             1.10.4   2017-02-01 CRAN (R 3.3.1)                              
+ DBI                    0.5-1    2016-09-10 CRAN (R 3.3.1)                              
+ derfinder              1.8.0    2016-12-06 Bioconductor                                
+ derfinderHelper        1.8.0    2016-11-17 Bioconductor                                
+ devtools             * 1.12.0   2016-12-05 CRAN (R 3.3.1)                              
+ digest                 0.6.12   2017-01-27 CRAN (R 3.3.1)                              
+ doRNG                  1.6      2014-03-07 CRAN (R 3.3.0)                              
+ downloader             0.4      2015-07-09 cran (@0.4)                                 
+ foreach                1.4.3    2015-10-13 CRAN (R 3.3.0)                              
+ foreign                0.8-67   2016-09-13 CRAN (R 3.3.1)                              
+ Formula                1.2-1    2015-04-07 CRAN (R 3.3.0)                              
+ GenomeInfoDb         * 1.10.3   2017-02-14 Bioconductor                                
+ GenomicAlignments      1.10.0   2016-11-18 Bioconductor                                
+ GenomicFeatures        1.26.2   2016-12-19 Bioconductor                                
+ GenomicFiles           1.10.3   2016-11-18 Bioconductor                                
+ GenomicRanges        * 1.26.2   2017-01-17 Bioconductor                                
+ GEOquery               2.40.0   2016-10-21 Bioconductor                                
+ ggplot2                2.2.1    2016-12-30 CRAN (R 3.3.1)                              
+ gridExtra              2.2.1    2016-02-29 CRAN (R 3.3.0)                              
+ gtable                 0.2.0    2016-02-26 CRAN (R 3.3.0)                              
+ Hmisc                  4.0-2    2016-12-31 CRAN (R 3.3.1)                              
+ htmlTable              1.9      2017-01-26 CRAN (R 3.3.1)                              
+ htmltools              0.3.5    2016-03-21 CRAN (R 3.3.0)                              
+ htmlwidgets            0.8      2016-11-09 CRAN (R 3.3.1)                              
+ httr                   1.2.1    2016-07-03 cran (@1.2.1)                               
+ IRanges              * 2.8.1    2016-11-18 Bioconductor                                
+ iterators              1.0.8    2015-10-13 CRAN (R 3.3.0)                              
+ jsonlite             * 1.2      2016-12-31 CRAN (R 3.3.1)                              
+ knitr                  1.15.1   2016-11-22 CRAN (R 3.3.1)                              
+ lattice                0.20-34  2016-09-06 CRAN (R 3.3.1)                              
+ latticeExtra           0.6-28   2016-02-09 CRAN (R 3.3.0)                              
+ lazyeval               0.2.0    2016-06-12 CRAN (R 3.3.1)                              
+ locfit                 1.5-9.1  2013-04-20 CRAN (R 3.3.0)                              
+ magrittr               1.5      2014-11-22 CRAN (R 3.3.1)                              
+ Matrix                 1.2-7.1  2016-09-01 CRAN (R 3.3.1)                              
+ matrixStats            0.51.0   2016-10-09 CRAN (R 3.3.1)                              
+ memoise                1.0.0    2016-01-29 CRAN (R 3.3.0)                              
+ munsell                0.4.3    2016-02-13 CRAN (R 3.3.0)                              
+ nnet                   7.3-12   2016-02-02 CRAN (R 3.3.1)                              
+ pkgmaker               0.22     2014-05-14 CRAN (R 3.3.0)                              
+ plyr                   1.8.4    2016-06-08 CRAN (R 3.3.1)                              
+ qvalue                 2.6.0    2016-11-17 Bioconductor                                
+ R6                     2.2.0    2016-10-05 CRAN (R 3.3.1)                              
+ RColorBrewer           1.1-2    2014-12-07 CRAN (R 3.3.0)                              
+ Rcpp                   0.12.9   2017-01-14 CRAN (R 3.3.1)                              
+ RCurl                  1.95-4.8 2016-03-01 CRAN (R 3.3.0)                              
+ recount              * 1.0.12   2017-02-22 Github (bioconductor-mirror/recount@7f7e1d8)
+ registry               0.3      2015-07-08 CRAN (R 3.3.0)                              
+ rentrez                1.0.4    2016-10-26 CRAN (R 3.3.1)                              
+ reshape2               1.4.2    2016-10-22 CRAN (R 3.3.1)                              
+ rngtools               1.2.4    2014-03-06 CRAN (R 3.3.0)                              
+ rpart                  4.1-10   2015-06-29 CRAN (R 3.3.1)                              
+ Rsamtools              1.26.1   2016-11-18 Bioconductor                                
+ RSQLite                1.1-2    2017-01-08 CRAN (R 3.3.1)                              
+ rtracklayer            1.34.2   2017-02-21 cran (@1.34.2)                              
+ S4Vectors            * 0.12.1   2016-12-05 Bioconductor                                
+ scales                 0.4.1    2016-11-09 CRAN (R 3.3.1)                              
+ stringi                1.1.2    2016-10-01 CRAN (R 3.3.1)                              
+ stringr                1.1.0    2016-08-19 CRAN (R 3.3.1)                              
+ SummarizedExperiment * 1.4.0    2016-11-18 Bioconductor                                
+ survival               2.40-1   2016-10-30 CRAN (R 3.3.1)                              
+ tibble                 1.2      2016-08-26 CRAN (R 3.3.1)                              
+ VariantAnnotation      1.20.2   2016-12-05 Bioconductor                                
+ withr                  1.0.2    2016-06-20 CRAN (R 3.3.1)                              
+ XML                    3.98-1.5 2016-11-10 CRAN (R 3.3.1)                              
+ xtable                 1.8-2    2016-02-05 CRAN (R 3.3.0)                              
+ XVector                0.14.0   2016-11-18 Bioconductor                                
+ zlibbioc               1.20.0   2016-10-20 Bioconductor                                
 **** Job ends ****
-Fri Nov 18 16:04:08 EST 2016
+Fri Feb 24 16:38:26 EST 2017
