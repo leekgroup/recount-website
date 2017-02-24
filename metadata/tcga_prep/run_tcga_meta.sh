@@ -4,6 +4,8 @@
 #$ -l mem_free=20G,h_vmem=21G
 #$ -pe local 10
 #$ -N tcga_prep_meta
+#$ -o ./logs/tcga_prep_meta.txt
+#$ -e ./logs/tcga_prep_meta.txt
 
 echo "**** Job starts ****"
 date
@@ -15,6 +17,3 @@ Rscript tcga_meta.R
 
 echo "**** Job ends ****"
 date
-
-## Move log files
-mv tcga_prep_meta.* logs/
