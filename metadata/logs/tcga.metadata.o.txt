@@ -1,13 +1,13 @@
 **** Job starts ****
-Fri Nov 18 16:41:36 EST 2016
+Fri Feb 24 16:57:04 EST 2017
 [1] "Number of dimensions"
-[1] 11284   864
+[1] 11284   866
 [1] "Number of unique project IDs"
 [1] 1
 [1] "Number of unique run IDs"
 [1] 10340
 [1] "First couple of rows"
-DataFrame with 6 rows and 864 columns
+DataFrame with 6 rows and 866 columns
       project    sample experiment       run read_count_as_reported_by_sra
   <character> <logical>  <logical> <logical>                     <logical>
   reads_downloaded proportion_of_reads_reported_by_sra_downloaded paired_end
@@ -299,41 +299,41 @@ DataFrame with 6 rows and 864 columns
   cgc_follow_up_vital_status cgc_follow_up_days_to_death    cgc_follow_up_id
                  <character>                   <integer>         <character>
   xml_bcr_patient_barcode xml_additional_studies xml_tissue_source_site
-              <character>            <character>            <character>
+              <character>              <integer>               <factor>
   xml_patient_id xml_informed_consent_verified xml_icd_o_3_site
-     <character>                   <character>      <character>
+     <character>                      <factor>      <character>
   xml_icd_o_3_histology  xml_icd_10 xml_tissue_prospective_collection_indicator
-            <character> <character>                                 <character>
-  xml_tissue_retrospective_collection_indicator xml_days_to_birth xml_race_list
-                                    <character>         <integer>   <character>
-           xml_ethnicity xml_other_dx xml_history_of_neoadjuvant_treatment
-             <character>  <character>                          <character>
-  xml_vital_status xml_days_to_last_followup xml_days_to_death
-       <character>                 <integer>         <integer>
-  xml_radiation_therapy xml_postoperative_rx_tx
-            <character>             <character>
-  xml_person_neoplasm_cancer_status xml_has_new_tumor_events_information
-                        <character>                          <character>
-  xml_day_of_form_completion xml_month_of_form_completion
-                   <integer>                    <integer>
-  xml_year_of_form_completion xml_has_follow_ups_information
-                    <integer>                    <character>
-  xml_has_drugs_information xml_has_radiations_information
-                <character>                    <character>
-  xml_primary_pathology_histological_type
-                              <character>
+            <character> <character>                                    <factor>
+  xml_tissue_retrospective_collection_indicator xml_days_to_birth xml_gender
+                                       <factor>         <integer>   <factor>
+  xml_race_list          xml_ethnicity xml_other_dx
+       <factor>               <factor>     <factor>
+  xml_history_of_neoadjuvant_treatment xml_vital_status
+                              <factor>         <factor>
+  xml_days_to_last_followup xml_days_to_death xml_radiation_therapy
+                  <integer>         <integer>              <factor>
+  xml_postoperative_rx_tx xml_person_neoplasm_cancer_status
+                 <factor>                          <factor>
+  xml_has_new_tumor_events_information xml_day_of_form_completion
+                           <character>                  <integer>
+  xml_month_of_form_completion xml_year_of_form_completion
+                     <integer>                   <integer>
+  xml_has_follow_ups_information xml_has_drugs_information
+                     <character>               <character>
+  xml_has_radiations_information xml_primary_pathology_histological_type
+                     <character>                             <character>
   xml_primary_pathology_leiomyosarcoma_histologic_subtype
-                                              <character>
+                                                 <factor>
   xml_primary_pathology_primary_tumor_lower_uterus_segment
-                                               <character>
+                                                  <factor>
   xml_primary_pathology_leiomyosarcoma_major_vessel_involvement
-                                                    <character>
+                                                       <factor>
   xml_primary_pathology_synovial_sarcoma xml_primary_pathology_tumor_depth
-                             <character>                       <character>
+                                <factor>                          <factor>
   xml_primary_pathology_tumor_tissue_sites
-                               <character>
+                                  <factor>
   xml_primary_pathology_tumor_tissue_site_other
-                                    <character>
+                                       <factor>
   xml_primary_pathology_days_to_initial_pathologic_diagnosis
                                                    <integer>
   xml_primary_pathology_age_at_initial_pathologic_diagnosis
@@ -341,13 +341,13 @@ DataFrame with 6 rows and 864 columns
   xml_primary_pathology_year_of_initial_pathologic_diagnosis
                                                    <integer>
   xml_primary_pathology_margin_status xml_primary_pathology_residual_tumor
-                          <character>                          <character>
+                             <factor>                             <factor>
   xml_primary_pathology_tumor_total_necrosis_percent
-                                         <character>
+                                            <factor>
   xml_primary_pathology_tumor_necrosis_percent
                                      <integer>
   xml_primary_pathology_mitotic_count xml_primary_pathology_tumor_multifocal
-                            <numeric>                            <character>
+                            <numeric>                               <factor>
   xml_primary_pathology_discontiguous_lesion_count
                                          <integer>
   xml_primary_pathology_tumor_sizes
@@ -357,121 +357,121 @@ DataFrame with 6 rows and 864 columns
   xml_primary_pathology_pathologic_tumor_burden
                                       <numeric>
   xml_primary_pathology_local_disease_recurrence
-                                     <character>
+                                        <factor>
   xml_primary_pathology_metastatic_diagnosis
-                                 <character>
+                                    <factor>
   xml_primary_pathology_metastatic_site_at_diagnosis
-                                         <character>
+                                            <factor>
   xml_primary_pathology_metastatic_site_at_diagnosis_other
-                                               <character>
+                                                  <factor>
   xml_primary_pathology_contiguous_organ_resection_site
-                                            <character>
+                                               <factor>
   xml_primary_pathology_other_contiguous_organ_resection_site
-                                                  <character>
+                                                     <factor>
   xml_primary_pathology_contiguous_organ_invaded
-                                     <character>
+                                        <factor>
   xml_primary_pathology_well_differentiated_liposarcoma_primary_dx
-                                                       <character>
+                                                          <factor>
   xml_primary_pathology_days_to_well_differentiated_liposarcoma_primary_dx
                                                                  <integer>
   xml_primary_pathology_days_to_well_differentiated_liposarcoma_resection
                                                                 <integer>
    xml_tumor_tissue_site xml_adenocarcinoma_invasion
-             <character>                 <character>
+                <factor>                    <factor>
                                 xml_histological_type
-                                          <character>
+                                             <factor>
   xml_histological_type_other xml_tumor_type xml_anatomic_neoplasm_subdivision
-                  <character>    <character>                       <character>
+                     <factor>       <factor>                       <character>
   xml_anatomic_neoplasm_subdivision_other
-                              <character>
+                                 <factor>
   xml_days_to_initial_pathologic_diagnosis
-                               <character>
+                                 <integer>
   xml_age_at_initial_pathologic_diagnosis
-                              <character>
+                                <integer>
   xml_year_of_initial_pathologic_diagnosis
-                               <character>
+                                 <integer>
   xml_initial_pathologic_diagnosis_method xml_init_pathology_dx_method_other
                               <character>                        <character>
   xml_surgery_performed_type xml_primary_lymph_node_presentation_assessment
-                 <character>                                    <character>
+                    <factor>                                       <factor>
   xml_lymph_node_examined_count xml_number_of_lymphnodes_positive_by_he
-                    <character>                             <character>
+                      <integer>                               <integer>
   xml_number_of_lymphnodes_positive_by_ihc xml_neoplasm_histologic_grade
-                                 <integer>                   <character>
+                                 <integer>                      <factor>
   xml_histologic_grading_tier_category xml_maximum_tumor_dimension
-                           <character>                   <numeric>
+                              <factor>                   <numeric>
   xml_residual_tumor xml_patient_death_reason
-         <character>              <character>
+            <factor>                 <factor>
   xml_source_of_patient_death_reason xml_tobacco_smoking_history
-                         <character>                   <integer>
+                            <factor>                   <integer>
   xml_year_of_tobacco_smoking_onset xml_stopped_smoking_year
                           <integer>                <integer>
-  xml_number_pack_years_smoked xml_alcoholic_exposure_category
-                     <numeric>                     <character>
-  xml_frequency_of_alcohol_consumption
-                             <numeric>
+  xml_number_pack_years_smoked xml_alcohol_history_documented
+                     <numeric>                       <factor>
+  xml_alcoholic_exposure_category xml_frequency_of_alcohol_consumption
+                         <factor>                            <numeric>
   xml_amount_of_alcohol_consumption_per_day xml_history_of_diabetes
-                                  <numeric>             <character>
+                                  <numeric>                <factor>
   xml_days_to_diabetes_onset xml_history_of_chronic_pancreatitis
-                   <integer>                         <character>
+                   <integer>                            <factor>
   xml_days_to_pancreatitis_onset xml_family_history_of_cancer
-                       <integer>                  <character>
+                       <integer>                     <factor>
   xml_relative_cancer_types xml_targeted_molecular_therapy
-                <character>                    <character>
+                   <factor>                       <factor>
   xml_history_prior_surgery_type_other xml_primary_therapy_outcome_success
-                           <character>                         <character>
+                              <factor>                            <factor>
   xml_stage_event_system_version xml_stage_event_clinical_stage
-                     <character>                    <character>
+                     <character>                      <integer>
   xml_stage_event_pathologic_stage xml_stage_event_tnm_categories
                        <character>                    <character>
   xml_stage_event_psa xml_stage_event_gleason_grading xml_stage_event_ann_arbor
-          <character>                       <integer>               <character>
+          <character>                       <integer>                 <integer>
   xml_stage_event_serum_markers xml_stage_event_igcccg_stage
-                    <character>                  <character>
+                      <integer>                    <integer>
   xml_stage_event_masaoka_stage xml_days_to_last_known_alive
-                    <character>                    <integer>
+                      <integer>                    <integer>
   xml_preoperative_pretreatment_cea_level xml_non_nodal_tumor_deposits
-                                <numeric>                  <character>
+                                <numeric>                     <factor>
   xml_circumferential_resection_margin xml_venous_invasion
-                             <numeric>         <character>
+                             <numeric>            <factor>
   xml_lymphatic_invasion xml_perineural_invasion_present
-             <character>                     <character>
+                <factor>                        <factor>
   xml_microsatellite_instability xml_number_of_loci_tested
-                     <character>                 <integer>
+                        <factor>                 <integer>
   xml_number_of_abnormal_loci xml_kras_gene_analysis_performed
-                    <integer>                      <character>
+                    <integer>                         <factor>
   xml_kras_mutation_found xml_kras_mutation_codon
-              <character>               <integer>
+                 <factor>               <integer>
   xml_braf_gene_analysis_performed xml_braf_gene_analysis_result
-                       <character>                   <character>
+                          <factor>                      <factor>
   xml_synchronous_colon_cancer_present xml_history_of_colon_polyps
-                           <character>                 <character>
+                              <factor>                    <factor>
   xml_colon_polyps_present
-               <character>
+                  <factor>
   xml_loss_expression_of_mismatch_repair_proteins_by_ihc
-                                             <character>
+                                                <factor>
   xml_loss_expression_of_mismatch_repair_proteins_by_ihc_results
-                                                     <character>
+                                                        <factor>
   xml_number_of_first_degree_relatives_with_cancer_diagnosis
                                                    <integer>
   xml_pleurodesis_performed xml_pleurodesis_performed_90_days
-                <character>                       <character>
+                   <factor>                          <factor>
   xml_history_asbestos_exposure xml_asbestos_exposure_type
-                    <character>                <character>
+                       <factor>                   <factor>
   xml_asbestos_exposure_source xml_asbestos_exposure_age
-                   <character>                 <integer>
+                      <factor>                 <integer>
   xml_asbestos_exposure_years xml_asbestos_exposure_age_last
                     <integer>                      <integer>
   xml_primary_occupation xml_primary_occupation_other
-             <character>                  <character>
+                <factor>                  <character>
   xml_person_occupation_years_number xml_blood_relative_cancer_history_list
                            <integer>                            <character>
   xml_karnofsky_performance_score xml_eastern_cancer_oncology_group
-                      <character>                       <character>
+                        <integer>                         <integer>
   xml_performance_status_scale_timing xml_primary_pathology_tumor_tissue_site
-                          <character>                             <character>
+                          <character>                                <factor>
   xml_primary_pathology_laterality
-                       <character>
+                          <factor>
   xml_primary_pathology_serum_mesothelin_prior_tx
                                         <numeric>
   xml_primary_pathology_serum_mesothelin_lower_limit
@@ -487,31 +487,31 @@ DataFrame with 6 rows and 864 columns
   xml_primary_pathology_suv_of_pleura_max
                                 <numeric>
   xml_primary_pathology_mesothelioma_detection_method xml_prior_glioma
-                                          <character>      <character>
+                                             <factor>         <factor>
   xml_laterality xml_lactate_dehydrogenase_result xml_serum_calcium_result
-     <character>                      <character>              <character>
+        <factor>                         <factor>                 <factor>
   xml_hemoglobin_result xml_platelet_qualitative_result
-            <character>                     <character>
+               <factor>                        <factor>
   xml_white_cell_count_result xml_erythrocyte_sedimentation_rate_result
-                  <character>                               <character>
+                     <factor>                                  <factor>
   xml_number_of_lymphnodes_positive xml_mitotane_therapy
-                          <integer>          <character>
+                          <integer>             <factor>
   xml_mitotane_therapy_adjuvant_setting
-                            <character>
+                               <factor>
   xml_therapeutic_mitotane_levels_achieved
-                               <character>
+                                  <factor>
   xml_therapeutic_mitotane_lvl_recurrence
-                              <character>
+                                 <factor>
   xml_mitotane_therapy_for_macroscopic_residual_disease
-                                            <character>
+                                               <factor>
   xml_therapeutic_mitotane_lvl_macroscopic_residual
-                                        <character>
+                                           <factor>
   xml_therapeutic_mitotane_lvl_progression
-                               <character>
+                                  <factor>
   xml_post_surgical_procedure_assessment_thyroid_gland_carcinoma_status
-                                                            <character>
+                                                               <factor>
   xml_primary_pathology_ct_scan xml_primary_pathology_ct_scan_findings
-                    <character>                            <character>
+                       <factor>                               <factor>
   xml_primary_pathology_primary_lymph_node_presentation_assessment
                                                        <character>
   xml_primary_pathology_lymph_node_examined_count
@@ -523,15 +523,15 @@ DataFrame with 6 rows and 864 columns
   xml_primary_pathology_mitoses_count
                             <integer>
   xml_primary_pathology_metastatic_neoplasm_confirmed_diagnosis_method_names
-                                                                 <character>
+                                                                    <factor>
   xml_primary_pathology_metastatic_neoplasm_initial_diagnosis_anatomic_sites
-                                                                 <character>
+                                                                    <factor>
   xml_primary_pathology_excess_adrenal_hormone_history_types
-                                                 <character>
+                                                    <factor>
   xml_primary_pathology_germline_genotype_testing_report xml_menopause_status
-                                             <character>          <character>
+                                                <factor>             <factor>
   xml_birth_control_pill_history_usage_category
-                                    <character>
+                                       <factor>
   xml_number_of_successful_pregnancies_which_resulted_in_at_least_1_live_birth
                                                                      <integer>
   xml_patient_pregnancy_spontaneous_abortion_count
@@ -541,273 +541,273 @@ DataFrame with 6 rows and 864 columns
   xml_pregnancy_stillbirth_count
                        <integer>
   xml_female_breast_feeding_or_pregnancy_status_indicator
-                                              <character>
+                                                 <factor>
   xml_total_number_of_pregnancies xml_age_began_smoking_in_years
                         <integer>                      <integer>
   xml_patient_history_immune_system_and_related_disorders_names
-                                                    <character>
+                                                       <factor>
   xml_patient_history_immune_system_and_related_disorders_text
-                                                   <character>
+                                                      <factor>
   xml_assessment_timepoint_category xml_days_to_performance_status_assessment
                         <character>                                 <integer>
   xml_tumor_response_cdus_type
-                   <character>
+                      <factor>
   xml_keratinizing_squamous_cell_carcinoma_present_indicator
-                                                 <character>
+                                                    <factor>
   xml_lymph_node_location_positive_pathology_names
-                                       <character>
+                                          <factor>
   xml_lymph_node_location_positive_pathology_text
-                                      <character>
+                                         <factor>
   xml_hysterectomy_performed_type xml_hysterectomy_performed_text
-                      <character>                     <character>
+                         <factor>                        <factor>
   xml_cervical_neoplasm_pathologic_margin_involved_type
-                                            <character>
+                                               <factor>
   xml_cervical_neoplasm_pathologic_margin_involved_text
-                                            <character>
+                                               <factor>
   xml_cervical_carcinoma_pelvic_extension_text
-                                   <character>
+                                      <factor>
   xml_lymphovascular_invasion_indicator
-                            <character>
+                               <factor>
   xml_cervical_carcinoma_corpus_uteri_involvement_indicator
-                                                <character>
+                                                   <factor>
   xml_days_to_fdg_or_ct_pet_performed
                             <integer>
   xml_standardized_uptake_value_cervix_uteri_assessment_measurement
                                                           <numeric>
   xml_fdg_or_ct_pet_performed_outcomes xml_days_to_diagnostic_mri_performed
-                           <character>                            <integer>
+                              <factor>                            <integer>
   xml_diagnostic_mri_result_outcomes
-                         <character>
+                            <factor>
   xml_days_to_diagnostic_computed_tomography_performed
                                              <integer>
   xml_diagnostic_ct_result_outcomes xml_human_papillomavirus_types
-                        <character>                    <character>
+                           <factor>                       <factor>
   xml_human_papillomavirus_other_type_text
-                               <character>
+                                  <factor>
   xml_human_papillomavirus_laboratory_procedure_performed_name
-                                                   <character>
+                                                      <factor>
   xml_human_papillomavirus_laboratory_procedure_performed_text
-                                                   <character>
+                                                      <factor>
   xml_oligonucleotide_primer_pair_laboratory_procedure_performed_name
-                                                          <character>
+                                                             <factor>
   xml_pregnant_at_diagnosis xml_treatment xml_er_detection_method_text
-                <character>   <character>                  <character>
+                   <factor>      <factor>                     <factor>
   xml_pgr_detection_method_text xml_anatomic_neoplasm_subdivisions
-                    <character>                        <character>
+                       <factor>                           <factor>
   xml_her2_neu_chromosone_17_signal_ratio_value
                                       <numeric>
   xml_axillary_lymph_node_stage_method_type
-                                <character>
+                                   <factor>
   xml_axillary_lymph_node_stage_other_method_descriptive_text
-                                                  <character>
+                                                     <factor>
   xml_breast_carcinoma_surgical_procedure_name
-                                   <character>
+                                      <factor>
   xml_breast_neoplasm_other_surgical_procedure_descriptive_text
-                                                    <character>
+                                                       <factor>
   xml_breast_carcinoma_primary_surgical_procedure_name
-                                           <character>
+                                              <factor>
   xml_surgical_procedure_purpose_other_text
-                                <character>
+                                   <factor>
   xml_breast_carcinoma_progesterone_receptor_status
-                                        <character>
+                                           <factor>
   xml_cytokeratin_immunohistochemistry_staining_method_micrometastasis_indicator
-                                                                     <character>
+                                                                        <factor>
   xml_breast_carcinoma_immunohistochemistry_er_pos_finding_scale
-                                                     <character>
+                                                        <factor>
   xml_immunohistochemistry_positive_cell_score
-                                   <character>
+                                      <factor>
   xml_her2_immunohistochemistry_level_result
-                                 <character>
+                                    <factor>
   xml_breast_cancer_surgery_margin_status xml_margin_status
-                              <character>       <character>
+                                 <factor>          <factor>
   xml_lab_procedure_her2_neu_in_situ_hybrid_outcome_type
-                                             <character>
+                                                <factor>
   xml_breast_carcinoma_estrogen_receptor_status
-                                    <character>
+                                       <factor>
   xml_lab_proc_her2_neu_immunohistochemistry_receptor_status
-                                                 <character>
+                                                    <factor>
   xml_pos_finding_progesterone_receptor_other_measurement_scale_text
-                                                         <character>
+                                                            <factor>
   xml_positive_finding_estrogen_receptor_other_measurement_scale_text
-                                                          <character>
+                                                             <factor>
   xml_her2_erbb_pos_finding_cell_percent_category
-                                      <character>
+                                         <factor>
   xml_pos_finding_her2_erbb2_other_measurement_scale_text
-                                              <character>
+                                                 <factor>
   xml_her2_erbb_method_calculation_method_text
-                                   <character>
+                                      <factor>
   xml_her2_neu_and_centromere_17_copy_number_analysis_input_total_number_count
                                                                      <integer>
   xml_her2_and_centromere_17_positive_finding_other_measurement_scale_text
-                                                               <character>
+                                                                  <factor>
   xml_her2_erbb_pos_finding_fluorescence_in_situ_hybridization_calculation_method_text
-                                                                           <character>
+                                                                              <factor>
   xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal_result_range
-                                                                                    <character>
+                                                                                       <factor>
   xml_first_nonlymph_node_metastasis_anatomic_sites
-                                        <character>
+                                           <factor>
   xml_er_level_cell_percentage_category
-                            <character>
+                               <factor>
   xml_progesterone_receptor_level_cell_percent_category
-                                            <character>
+                                               <factor>
   xml_distant_metastasis_present_ind2
-                          <character>
+                             <factor>
   xml_metastatic_breast_carcinoma_estrogen_receptor_status
-                                               <character>
+                                                  <factor>
   xml_metastatic_breast_carcinoma_estrogen_receptor_level_cell_percent_category
-                                                                    <character>
+                                                                       <factor>
   xml_metastatic_breast_carcinoma_immunohistochemistry_er_pos_cell_score
-                                                             <character>
+                                                                <factor>
   xml_metastatic_breast_carcinoma_progesterone_receptor_status
-                                                   <character>
+                                                      <factor>
   xml_metastatic_breast_carcinoma_lab_proc_her2_neu_immunohistochemistry_receptor_status
-                                                                             <character>
+                                                                                <factor>
   xml_metastatic_breast_carcinoma_progesterone_receptor_level_cell_percent_category
-                                                                        <character>
+                                                                           <factor>
   xml_metastatic_breast_carcinoma_immunohistochemistry_pr_pos_cell_score
-                                                             <character>
+                                                                <factor>
   xml_metastatic_breast_carcinoma_her2_erbb_pos_finding_cell_percent_category
-                                                                  <character>
+                                                                     <factor>
   xml_metastatic_breast_carcinoma_erbb2_immunohistochemistry_level_result
-                                                              <character>
+                                                                 <factor>
   xml_metastatic_breast_carcinoma_lab_proc_her2_neu_in_situ_hybridization_outcome_type
-                                                                           <character>
+                                                                              <factor>
   xml_metastatic_breast_carcinoma_her2_neu_chromosone_17_signal_ratio_value
                                                                   <numeric>
   xml_her2_neu_breast_carcinoma_copy_analysis_input_total_number
-                                                     <character>
+                                                        <factor>
   xml_breast_carcinoma_immunohistochemistry_progesterone_receptor_pos_finding_scale
-                                                                        <character>
+                                                                           <factor>
   xml_breast_carcinoma_immunohistochemistry_pos_cell_score xml_country_of_birth
-                                               <character>          <character>
+                                                  <factor>             <factor>
   xml_country_of_procurement xml_state_province_of_procurement
-                 <character>                       <character>
+                    <factor>                          <factor>
   xml_city_of_procurement xml_reflux_history xml_antireflux_treatment_types
-              <character>        <character>                    <character>
+                 <factor>           <factor>                       <factor>
   xml_h_pylori_infection xml_initial_diagnosis_by xml_barretts_esophagus
-             <character>              <character>            <character>
+                <factor>                 <factor>               <factor>
   xml_goblet_cells_present xml_history_of_esophageal_cancer
-               <character>                      <character>
+                  <factor>                         <factor>
   xml_number_of_relatives_diagnosed
                           <integer>
   xml_primary_pathology_esophageal_tumor_cental_location
-                                             <character>
+                                                <factor>
   xml_primary_pathology_esophageal_tumor_involvement_sites
-                                               <character>
+                                                  <factor>
   xml_primary_pathology_columnar_metaplasia_present
-                                        <character>
+                                           <factor>
   xml_primary_pathology_columnar_mucosa_goblet_cell_present
-                                                <character>
+                                                   <factor>
   xml_primary_pathology_columnar_mucosa_dysplasia
-                                      <character>
+                                         <factor>
   xml_primary_pathology_neoplasm_histologic_grade
-                                      <character>
+                                         <factor>
   xml_primary_pathology_initial_pathologic_diagnosis_method
                                                 <character>
   xml_primary_pathology_init_pathology_dx_method_other
                                            <character>
   xml_primary_pathology_lymph_node_metastasis_radiographic_evidence
-                                                        <character>
+                                                           <factor>
   xml_primary_pathology_number_of_lymphnodes_positive_by_ihc
                                                    <integer>
   xml_primary_pathology_planned_surgery_status
-                                   <character>
+                                      <factor>
   xml_primary_pathology_treatment_prior_to_surgery
-                                       <character>
+                                          <factor>
   xml_primary_pathology_karnofsky_performance_score
                                           <integer>
   xml_primary_pathology_eastern_cancer_oncology_group
                                             <integer>
   xml_primary_pathology_radiation_therapy
-                              <character>
+                                 <factor>
   xml_primary_pathology_postoperative_rx_tx xml_history_of_disease
-                                <character>            <character>
+                                   <factor>               <factor>
   xml_tests_performed xml_primary_pathology_follicular_percent
-          <character>                              <character>
+          <character>                                 <factor>
   xml_primary_pathology_lymph_node_involvement_sites
                                          <character>
   xml_primary_pathology_extranodal_involvment_site_other
-                                             <character>
+                                                <factor>
   xml_primary_pathology_extranodal_sites_involvement_number
                                                   <integer>
   xml_primary_pathology_maximum_tumor_dimension
                                       <numeric>
   xml_primary_pathology_maximum_tumor_bulk_anatomic_site
-                                             <character>
+                                                <factor>
   xml_primary_pathology_bone_marrow_biopsy_done
-                                    <character>
+                                       <factor>
   xml_primary_pathology_bone_marrow_involvement
-                                    <character>
+                                       <factor>
   xml_primary_pathology_bone_marrow_sample_histology
-                                         <character>
+                                            <factor>
   xml_presence_of_sarcomatoid_features xml_percent_tumor_sarcomatoid
-                           <character>                     <integer>
+                              <factor>                     <integer>
   xml_history_pheo_or_para_include_benign
-                              <character>
+                                 <factor>
   xml_history_pheo_or_para_anatomic_site xml_primary_pathology_outside_adrenal
-                             <character>                           <character>
+                                <factor>                              <factor>
   xml_primary_pathology_disease_detected_on_screening xml_eye_color
-                                          <character>   <character>
+                                             <factor>      <factor>
   xml_primary_pathology_tumor_tissue_site_list
-                                   <character>
+                                      <factor>
   xml_primary_pathology_tumor_morphology_list
-                                  <character>
+                                     <factor>
   xml_primary_pathology_cytogenetic_abnormality_list
-                                         <character>
+                                            <factor>
   xml_primary_pathology_gene_expression_profile_list
-                                         <character>
+                                            <factor>
   xml_primary_pathology_extravascular_matrix_patterns
-                                          <character>
+                                             <factor>
   xml_primary_pathology_tumor_infiltrating_lymphocytes
-                                           <character>
+                                              <factor>
   xml_primary_pathology_tumor_infiltrating_macrophages
-                                           <character>
+                                              <factor>
   xml_primary_pathology_tumor_basal_diameter
                                    <numeric>
   xml_primary_pathology_tumor_basal_diameter_mx
-                                    <character>
+                                       <factor>
   xml_primary_pathology_tumor_thickness
                               <numeric>
   xml_primary_pathology_tumor_thickness_measurement
-                                        <character>
+                                           <factor>
   xml_primary_pathology_extrascleral_extension
-                                   <character>
+                                      <factor>
   xml_primary_pathology_extranocular_nodule_size
-                                     <character>
+                                        <factor>
   xml_primary_pathology_tumor_shape_pathologic_clinical
-                                            <character>
+                                               <factor>
   xml_primary_pathology_metastatic_site_list
-                                 <character>
+                                    <factor>
   xml_primary_pathology_other_metastatic_site xml_primary_neoplasm_melanoma_dx
-                                  <character>                      <character>
+                                     <factor>                         <factor>
   xml_sites_of_primary_melanomas xml_breslow_depth_value
-                     <character>               <numeric>
+                        <factor>               <numeric>
   xml_melanoma_clark_level_value xml_melanoma_ulceration_indicator
-                     <character>                       <character>
+                        <factor>                          <factor>
   xml_malignant_neoplasm_mitotic_count_rate xml_days_to_submitted_specimen_dx
                                   <numeric>                         <integer>
   xml_distant_metastasis_anatomic_site xml_melanoma_origin_skin_anatomic_site
-                           <character>                            <character>
+                              <factor>                               <factor>
   xml_prior_systemic_therapy_types
-                       <character>
+                          <factor>
   xml_interferon_90_day_prior_excision_admin_indicator
-                                           <character>
+                                              <factor>
   xml_leukemia_specimen_cell_source_type xml_cumulative_agent_total_dose
-                             <character>                       <integer>
+                                <factor>                       <integer>
   xml_prior_hematologic_disorder_diagnosis_indicator xml_total_dose_units
-                                         <character>          <character>
+                                            <factor>             <factor>
   xml_hydroxyurea_agent_administered_day_count
                                      <integer>
   xml_hydroxyurea_administration_prior_registration_clinical_study_indicator
-                                                                 <character>
+                                                                    <factor>
   xml_atra_exposure xml_steroid_therapy_administered
-        <character>                      <character>
+           <factor>                         <factor>
   xml_person_history_nonmedical_leukemia_causing_agent_type
-                                                <character>
+                                                   <factor>
   xml_lab_procedure_blast_cell_outcome_percentage_value
                                               <integer>
   xml_leukemia_french_american_british_morphology_code
-                                           <character>
+                                              <factor>
   xml_immunophenotype_cytochemistry_testing_results
                                         <character>
   xml_lab_procedure_bone_marrow_cellularity_outcome_percent_value
@@ -845,33 +845,33 @@ DataFrame with 6 rows and 864 columns
   xml_lab_procedure_abnormal_lymphocyte_result_percent_value
                                                    <integer>
   xml_cytogenetic_analysis_performed_ind
-                             <character>
+                                <factor>
   xml_fluorescence_in_situ_hybrid_cytogenetics_metaphase_nucleus_result_count
                                                                     <integer>
   xml_acute_myeloid_leukemia_calgb_cytogenetics_risk_category
-                                                  <character>
+                                                     <factor>
   xml_cytogenetic_abnormalities xml_cytogenetic_abnormality_other
-                    <character>                       <character>
+                       <factor>                          <factor>
   xml_fish_evaluation_performed_ind
-                        <character>
+                           <factor>
   xml_fluorescence_in_situ_hybridization_abnormal_result_indicator
-                                                       <character>
+                                                          <factor>
   xml_fish_test_component_results xml_germline_testing_performed
-                      <character>                    <character>
+                      <character>                       <factor>
   xml_disease_detection_molecular_analysis_method_type
-                                           <character>
+                                              <factor>
   xml_molecular_analysis_abnormal_result_indicator
-                                       <character>
+                                          <factor>
   xml_molecular_analysis_abnormality_testing_results xml_horm_ther
-                                         <character>   <character>
+                                            <factor>      <factor>
   xml_prior_tamoxifen_administered_usage_category xml_hypertension xml_diabetes
-                                      <character>      <character>  <character>
+                                         <factor>         <factor>     <factor>
   xml_pregnancies xml_colorectal_cancer
-      <character>           <character>
+         <factor>              <factor>
   xml_primary_pathology_anatomic_neoplasm_subdivision
-                                          <character>
+                                             <factor>
   xml_primary_pathology_surgical_approach xml_primary_pathology_peritoneal_wash
-                              <character>                           <character>
+                                 <factor>                              <factor>
   xml_primary_pathology_pct_tumor_invasion xml_primary_pathology_total_pelv_lnr
                                  <numeric>                            <integer>
   xml_primary_pathology_pln_pos_light_micro xml_primary_pathology_pln_pos_ihc
@@ -881,171 +881,171 @@ DataFrame with 6 rows and 864 columns
   xml_primary_pathology_aln_pos_light_micro xml_primary_pathology_aln_pos_ihc
                                   <integer>                         <integer>
   xml_primary_pathology_total_aor.lnp xml_diagnosis
-                            <integer>   <character>
+                            <integer>      <factor>
   xml_location_in_lung_parenchyma xml_kras_mutation_result
-                      <character>              <character>
+                         <factor>                 <factor>
   xml_egfr_mutation_performed xml_egfr_mutation_result
-                  <character>              <character>
+                     <factor>                 <factor>
   xml_eml4_alk_translocation_performed xml_eml4_alk_translocation_method
-                           <character>                       <character>
+                              <factor>                          <factor>
   xml_pulmonary_function_test_performed xml_pre_bronchodilator_fev1_percent
-                            <character>                           <numeric>
+                               <factor>                           <numeric>
   xml_post_bronchodilator_fev1_percent xml_pre_bronchodilator_fev1_fvc_percent
                              <numeric>                               <numeric>
   xml_post_bronchodilator_fev1_fvc_percent xml_dlco_predictive_percent
                                  <numeric>                   <numeric>
   xml_lymphnode_neck_dissection xml_lymphnode_dissection_method_left
-                    <character>                          <character>
+                       <factor>                             <factor>
   xml_lymphnode_dissection_method_right xml_egfr_amplication_status
-                            <character>                 <character>
+                               <factor>                    <factor>
   xml_presence_of_pathological_nodal_extracapsular_spread
-                                              <character>
+                                                 <factor>
   xml_lymphovascular_invasion_present xml_hpv_status_by_p16_testing
-                          <character>                   <character>
+                             <factor>                      <factor>
   xml_hpv_status_by_ish_testing
-                    <character>
+                       <factor>
   xml_patient_personal_medical_history_thyroid_gland_disorder_names
-                                                        <character>
+                                                           <factor>
   xml_patient_personal_medical_history_thyroid_other_specify_text
-                                                      <character>
+                                                         <factor>
   xml_first_degree_relative_history_thyroid_gland_carcinoma_diagnosis_relationship_types
-                                                                             <character>
+                                                                                <factor>
   xml_person_lifetime_risk_radiation_exposure_indicator
-                                            <character>
+                                               <factor>
   xml_primary_thyroid_gland_neoplasm_location_anatomic_site
-                                                <character>
+                                                   <factor>
   xml_primary_neoplasm_focus_type xml_neoplasm_dimension
-                      <character>            <character>
+                         <factor>            <character>
   xml_lymph_node_preoperative_scan_indicator
-                                 <character>
+                                    <factor>
   xml_lymph_node_preoperative_assessment_diagnostic_imaging_types
-                                                      <character>
+                                                         <factor>
   xml_extrathyroid_carcinoma_present_extension_status
-                                          <character>
+                                             <factor>
   xml_metastatic_neoplasm_confirmed_diagnosis_method_names
-                                               <character>
+                                                  <factor>
   xml_metastatic_neoplasm_confirmed_diagnosis_method_text xml_metastatic_site
-                                              <character>         <character>
+                                                 <factor>            <factor>
   xml_other_metastatic_site xml_genotype_analysis_performed_indicator
-                <character>                               <character>
+                   <factor>                                  <factor>
   xml_genotyping_results_gene_mutation_not_reported_reasons
-                                                <character>
+                                                   <factor>
   xml_braf_gene_genotyping_outcome_lab_results_text
-                                        <character>
+                                           <factor>
   xml_ras_family_gene_genotyping_outcome_lab_results_text
-                                              <character>
+                                                 <factor>
   xml_ret_ptc_rearrangement_genotyping_outcome_lab_results_text
-                                                    <character>
+                                                       <factor>
   xml_other_genotyping_outcome_lab_results_text
-                                    <character>
+                                       <factor>
   xml_i_131_total_administered_preparation_technique
-                                         <character>
+                                            <factor>
   xml_i_131_first_administered_dose xml_i_131_subsequent_administered_dose
-                        <character>                            <character>
+                           <factor>                               <factor>
   xml_i_131_total_administered_dose
-                        <character>
+                           <factor>
   xml_radiation_therapy_administered_preparation_technique_text
-                                                    <character>
+                                                       <factor>
   xml_radiation_therapy_administered_dose_text
-                                   <character>
+                                      <factor>
   xml_radiosensitizing_agent_administered_indicator
-                                        <character>
+                                           <factor>
   xml_person_occupation_description_text xml_occupation_primary_job
-                             <character>                <character>
+                                <factor>                   <factor>
   xml_chemical_exposure_text xml_person_primary_industry_text
-                 <character>                      <character>
+                    <factor>                         <factor>
   xml_diagnosis_subtype xml_disease_extracapsular_extension_ind.3
-            <character>                               <character>
+               <factor>                                  <factor>
   xml_bladder_carcinoma_extracapsular_extension_status xml_metastatic_site_list
-                                           <character>              <character>
+                                              <factor>                 <factor>
   xml_person_concomitant_prostate_carcinoma_occurrence_indicator
-                                                     <character>
+                                                        <factor>
   xml_person_concomitant_prostate_carcinoma_pathologic_t_stage
-                                                   <character>
+                                                      <factor>
   xml_history_non_muscle_invasive_blca xml_history_ionizing_rt_to_head
-                           <character>                     <character>
+                              <factor>                        <factor>
                        xml_tumor_location xml_supratentorial_localization
-                              <character>                     <character>
+                                 <factor>                        <factor>
   xml_seizure_history xml_headache_history xml_mental_status_changes
-          <character>          <character>               <character>
+             <factor>             <factor>                  <factor>
   xml_visual_changes xml_sensory_changes xml_motor_movement_changes
-         <character>         <character>                <character>
+            <factor>            <factor>                   <factor>
   xml_first_presenting_symptom xml_first_presenting_symptom_longest_duration
-                   <character>                                   <character>
+                      <factor>                                      <factor>
   xml_asthma_history xml_eczema_history xml_hay_fever_history
-         <character>        <character>           <character>
+            <factor>           <factor>              <factor>
   xml_mold_or_dust_allergy_history
-                       <character>
+                          <factor>
   xml_first_diagnosis_age_asth_ecz_hay_fev_mold_dust xml_food_allergy_history
-                                         <character>              <character>
+                                            <factor>                 <factor>
   xml_food_allergy_types xml_first_diagnosis_age_of_food_allergy
-             <character>                             <character>
+                <factor>                                <factor>
   xml_animal_insect_allergy_history xml_animal_insect_allergy_types
-                        <character>                     <character>
+                           <factor>                        <factor>
   xml_first_diagnosis_age_of_animal_insect_allergy
-                                       <character>
+                                          <factor>
   xml_preoperative_corticosteroids xml_preoperative_antiseizure_meds
-                       <character>                       <character>
+                          <factor>                          <factor>
   xml_family_history_of_primary_brain_tumor xml_ldh1_mutation_tested
-                                <character>              <character>
+                                   <factor>                 <factor>
   xml_ldh1_mutation_test_method xml_ldh1_mutation_found
-                    <character>             <character>
+                       <factor>                <factor>
   xml_inherited_genetic_syndrome_found xml_inherited_genetic_syndrome_result
-                           <character>                           <character>
+                              <factor>                              <factor>
   xml_history_of_undescended_testis xml_level_of_non_descent
-                        <character>              <character>
+                           <factor>                 <factor>
   xml_undescended_testis_corrected xml_undescended_testis_corrected_age
-                       <character>                          <character>
+                          <factor>                             <factor>
   xml_undescended_testis_method_left xml_undescended_testis_method_right
-                         <character>                         <character>
+                            <factor>                            <factor>
   xml_history_hypospadias xml_history_fertility
-              <character>           <character>
+                 <factor>              <factor>
   xml_family_history_testicular_cancer xml_relation_testicular_cancer_list
-                           <character>                         <character>
+                              <factor>                            <factor>
   xml_family_history_other_cancer xml_postoperative_tx_list
-                      <character>               <character>
+                         <factor>                  <factor>
   xml_primary_pathology_bilateral_diagnosis_timing_type
-                                            <character>
+                                               <factor>
   xml_primary_pathology_days_to_bilateral_tumor_dx
                                          <integer>
   xml_primary_pathology_synchronous_tumor_histology_list
-                                             <character>
+                                                <factor>
   xml_primary_pathology_testis_tumor_macroextent
-                                     <character>
+                                        <factor>
   xml_primary_pathology_testis_tumor_macroextent_other
-                                           <character>
+                                              <factor>
   xml_primary_pathology_testis_tumor_microextent
-                                     <character>
+                                        <factor>
   xml_primary_pathology_histology_list
-                           <character>
+                              <factor>
   xml_primary_pathology_intratubular_germ_cell_neoplasm
-                                            <character>
+                                               <factor>
   xml_primary_pathology_lymphovascular_invasion_present
-                                            <character>
+                                               <factor>
   xml_primary_pathology_pre_orchi_serum_marker_info
                                         <character>
   xml_primary_pathology_post_orchi_serum_marker_info
                                          <character>
   xml_primary_pathology_post_orchi_lymph_node_dissection
-                                             <character>
+                                                <factor>
   xml_primary_pathology_molecular_test_result_list
-                                       <character>
+                                          <factor>
   xml_primary_pathology_first_treatment_success xml_surgical_approach
-                                    <character>           <character>
+                                       <factor>              <factor>
   xml_peritoneal_wash xml_pct_tumor_invasion xml_total_pelv_lnr
-          <character>              <numeric>          <integer>
+             <factor>              <numeric>          <integer>
   xml_pln_pos_light_micro xml_pln_pos_ihc xml_total_pelv_lnp xml_total_aor_lnr
                 <integer>       <integer>          <integer>         <integer>
   xml_aln_pos_light_micro xml_aln_pos_ihc xml_total_aor.lnp
                 <integer>       <integer>         <integer>
   xml_relative_family_cancer_history xml_cancer_first_degree_relative
-                         <character>                        <integer>
+                            <factor>                        <integer>
   xml_history_hepato_carcinoma_risk_factors
-                                <character>
+                                   <factor>
   xml_post_op_ablation_embolization_tx xml_specimen_collection_method_name
-                           <character>                         <character>
+                              <factor>                            <factor>
   xml_vascular_tumor_cell_type xml_child_pugh_classification_grade
-                   <character>                         <character>
+                      <factor>                            <factor>
   xml_fetoprotein_outcome_value xml_fetoprotein_outcome_lower_limit
                       <integer>                           <integer>
   xml_fetoprotein_outcome_upper_limit xml_platelet_result_lower_limit
@@ -1063,39 +1063,39 @@ DataFrame with 6 rows and 864 columns
   xml_creatinine_value_in_mg_dl xml_creatinine_lower_level
                       <numeric>                  <numeric>
   xml_creatinine_upper_limit  xml_fibrosis_ishak_score
-                   <numeric>               <character>
+                   <numeric>                  <factor>
   xml_adjacent_hepatic_tissue_inflammation_extent_type
-                                           <character>
+                                              <factor>
                                     xml_viral_hepatitis_serologies
-                                                       <character>
+                                                          <factor>
                                                                                                                   xml_ablations
-                                                                                                                    <character>
+                                                                                                                       <factor>
   xml_tumor_residual_disease xml_jewish_origin           xml_zone_of_origin
-                 <character>       <character>                  <character>
+                    <factor>          <factor>                     <factor>
   xml_tumor_levels xml_days_to_bone_scan_performed
-       <character>                       <integer>
+          <factor>                       <integer>
                           xml_bone_scan_results
-                                    <character>
+                                       <factor>
   xml_diagnostic_ct_abd_pelvis_performed
-                             <character>
+                                <factor>
      xml_diagnostic_ct_abd_pelvis_results xml_diagnostic_mri_performed
-                              <character>                  <character>
+                                 <factor>                     <factor>
   xml_diagnostic_mri_results xml_lymphnodes_examined
-                 <character>             <character>
+                    <factor>                <factor>
   xml_number_of_lymphnodes_examined xml_biochemical_recurrence
-                          <integer>                <character>
+                          <integer>                   <factor>
   xml_days_to_first_biochemical_recurrence
                                  <integer>
   xml_primary_pathology_specimen_collection_method_name
-                                            <character>
+                                               <factor>
   xml_primary_pathology_history_prior_surgery_type_other
-                                             <character>
+                                                <factor>
   xml_primary_pathology_vascular_tumor_cell_type
-                                     <character>
+                                        <factor>
   xml_primary_pathology_perineural_invasion_present
-                                        <character>
+                                           <factor>
   xml_primary_pathology_child_pugh_classification_grade
-                                            <character>
+                                               <factor>
   xml_primary_pathology_ca_19_9_level xml_primary_pathology_ca_19_9_level_lower
                             <numeric>                                 <numeric>
   xml_primary_pathology_ca_19_9_level_upper
@@ -1137,19 +1137,19 @@ DataFrame with 6 rows and 864 columns
   xml_primary_pathology_creatinine_upper_limit
                                      <numeric>
   xml_primary_pathology_fibrosis_ishak_score
-                                 <character>
+                                    <factor>
   xml_primary_pathology_cholangitis_tissue_evidence xml_antireflux_treatment
-                                        <character>              <character>
+                                           <factor>                 <factor>
   xml_family_history_of_stomach_cancer
-                           <character>
+                              <factor>
   xml_number_of_relatives_with_stomach_cancer
                                     <integer>
   xml_primary_pathology_histological_type_list
-                                   <character>
+                                      <factor>
   xml_primary_pathology_history_myasthenia_gravis
-                                      <character>
+                                         <factor>
   xml_primary_pathology_section_myasthenia_gravis
-                                      <character>
+                                         <factor>
                                                                               tsv_path
                                                                            <character>
  [ reached getOption("max.print") -- omitted 6 rows ]
@@ -1677,7 +1677,7 @@ DataFrame with 6 rows and 864 columns
                                                                       xml_bcr_patient_barcode 
                                                                                            39 
                                                                        xml_additional_studies 
-                                                                                        11158 
+                                                                                         7267 
                                                                        xml_tissue_source_site 
                                                                                            46 
                                                                                xml_patient_id 
@@ -1696,6 +1696,8 @@ DataFrame with 6 rows and 864 columns
                                                                                           863 
                                                                             xml_days_to_birth 
                                                                                           165 
+                                                                                   xml_gender 
+                                                                                           39 
                                                                                 xml_race_list 
                                                                                          1384 
                                                                                 xml_ethnicity 
@@ -1807,11 +1809,11 @@ DataFrame with 6 rows and 864 columns
                                                       xml_anatomic_neoplasm_subdivision_other 
                                                                                         11255 
                                                      xml_days_to_initial_pathologic_diagnosis 
-                                                                                         1425 
+                                                                                         1424 
                                                       xml_age_at_initial_pathologic_diagnosis 
                                                                                          1348 
                                                      xml_year_of_initial_pathologic_diagnosis 
-                                                                                         1419 
+                                                                                         1401 
                                                       xml_initial_pathologic_diagnosis_method 
                                                                                          7509 
                                                            xml_init_pathology_dx_method_other 
@@ -1821,9 +1823,9 @@ DataFrame with 6 rows and 864 columns
                                                xml_primary_lymph_node_presentation_assessment 
                                                                                          6462 
                                                                 xml_lymph_node_examined_count 
-                                                                                         7250 
+                                                                                         7138 
                                                       xml_number_of_lymphnodes_positive_by_he 
-                                                                                         7154 
+                                                                                         7030 
                                                      xml_number_of_lymphnodes_positive_by_ihc 
                                                                                         10459 
                                                                 xml_neoplasm_histologic_grade 
@@ -1846,6 +1848,8 @@ DataFrame with 6 rows and 864 columns
                                                                                          9998 
                                                                  xml_number_pack_years_smoked 
                                                                                          9492 
+                                                               xml_alcohol_history_documented 
+                                                                                        10383 
                                                               xml_alcoholic_exposure_category 
                                                                                         11182 
                                                          xml_frequency_of_alcohol_consumption 
@@ -1873,7 +1877,7 @@ DataFrame with 6 rows and 864 columns
                                                                xml_stage_event_system_version 
                                                                                          3475 
                                                                xml_stage_event_clinical_stage 
-                                                                                         8843 
+                                                                                         8575 
                                                              xml_stage_event_pathologic_stage 
                                                                                          3707 
                                                                xml_stage_event_tnm_categories 
@@ -1883,13 +1887,13 @@ DataFrame with 6 rows and 864 columns
                                                               xml_stage_event_gleason_grading 
                                                                                         10636 
                                                                     xml_stage_event_ann_arbor 
-                                                                                        11238 
+                                                                                        11236 
                                                                 xml_stage_event_serum_markers 
-                                                                                        11147 
+                                                                                        11145 
                                                                  xml_stage_event_igcccg_stage 
-                                                                                        11241 
+                                                                                        11145 
                                                                 xml_stage_event_masaoka_stage 
-                                                                                        11164 
+                                                                                        11162 
                                                                  xml_days_to_last_known_alive 
                                                                                         11108 
                                                       xml_preoperative_pretreatment_cea_level 
@@ -1957,9 +1961,9 @@ DataFrame with 6 rows and 864 columns
                                                        xml_blood_relative_cancer_history_list 
                                                                                         11024 
                                                               xml_karnofsky_performance_score 
-                                                                                        10289 
+                                                                                        10005 
                                                             xml_eastern_cancer_oncology_group 
-                                                                                         9565 
+                                                                                         9229 
                                                           xml_performance_status_scale_timing 
                                                                                          9787 
                                                       xml_primary_pathology_tumor_tissue_site 
@@ -3406,7 +3410,7 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                                       xml_bcr_patient_barcode 
                                                                                  3.456221e-01 
                                                                        xml_additional_studies 
-                                                                                 9.888337e+01 
+                                                                                 6.440092e+01 
                                                                        xml_tissue_source_site 
                                                                                  4.076569e-01 
                                                                                xml_patient_id 
@@ -3425,6 +3429,8 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                                                  7.647997e+00 
                                                                             xml_days_to_birth 
                                                                                  1.462247e+00 
+                                                                                   xml_gender 
+                                                                                 3.456221e-01 
                                                                                 xml_race_list 
                                                                                  1.226515e+01 
                                                                                 xml_ethnicity 
@@ -3536,11 +3542,11 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                       xml_anatomic_neoplasm_subdivision_other 
                                                                                  9.974300e+01 
                                                      xml_days_to_initial_pathologic_diagnosis 
-                                                                                 1.262850e+01 
+                                                                                 1.261964e+01 
                                                       xml_age_at_initial_pathologic_diagnosis 
                                                                                  1.194612e+01 
                                                      xml_year_of_initial_pathologic_diagnosis 
-                                                                                 1.257533e+01 
+                                                                                 1.241581e+01 
                                                       xml_initial_pathologic_diagnosis_method 
                                                                                  6.654555e+01 
                                                            xml_init_pathology_dx_method_other 
@@ -3550,9 +3556,9 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                xml_primary_lymph_node_presentation_assessment 
                                                                                  5.726693e+01 
                                                                 xml_lymph_node_examined_count 
-                                                                                 6.425027e+01 
+                                                                                 6.325771e+01 
                                                       xml_number_of_lymphnodes_positive_by_he 
-                                                                                 6.339950e+01 
+                                                                                 6.230060e+01 
                                                      xml_number_of_lymphnodes_positive_by_ihc 
                                                                                  9.268876e+01 
                                                                 xml_neoplasm_histologic_grade 
@@ -3575,6 +3581,8 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                                                  8.860333e+01 
                                                                  xml_number_pack_years_smoked 
                                                                                  8.411911e+01 
+                                                               xml_alcohol_history_documented 
+                                                                                 9.201524e+01 
                                                               xml_alcoholic_exposure_category 
                                                                                  9.909607e+01 
                                                          xml_frequency_of_alcohol_consumption 
@@ -3602,7 +3610,7 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                                xml_stage_event_system_version 
                                                                                  3.079582e+01 
                                                                xml_stage_event_clinical_stage 
-                                                                                 7.836760e+01 
+                                                                                 7.599256e+01 
                                                              xml_stage_event_pathologic_stage 
                                                                                  3.285183e+01 
                                                                xml_stage_event_tnm_categories 
@@ -3612,13 +3620,13 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                               xml_stage_event_gleason_grading 
                                                                                  9.425736e+01 
                                                                     xml_stage_event_ann_arbor 
-                                                                                 9.959234e+01 
+                                                                                 9.957462e+01 
                                                                 xml_stage_event_serum_markers 
-                                                                                 9.878589e+01 
+                                                                                 9.876817e+01 
                                                                  xml_stage_event_igcccg_stage 
-                                                                                 9.961893e+01 
+                                                                                 9.876817e+01 
                                                                 xml_stage_event_masaoka_stage 
-                                                                                 9.893655e+01 
+                                                                                 9.891882e+01 
                                                                  xml_days_to_last_known_alive 
                                                                                  9.844027e+01 
                                                       xml_preoperative_pretreatment_cea_level 
@@ -3686,9 +3694,9 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                        xml_blood_relative_cancer_history_list 
                                                                                  9.769585e+01 
                                                               xml_karnofsky_performance_score 
-                                                                                 9.118220e+01 
+                                                                                 8.866537e+01 
                                                             xml_eastern_cancer_oncology_group 
-                                                                                 8.476604e+01 
+                                                                                 8.178837e+01 
                                                           xml_performance_status_scale_timing 
                                                                                  8.673343e+01 
                                                       xml_primary_pathology_tumor_tissue_site 
@@ -4612,7 +4620,7 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
                                                                                      tsv_path 
                                                                                  0.000000e+00 
    user  system elapsed 
- 37.251   0.865  39.751 
+ 27.508   0.881  30.571 
  setting  value                                      
  version  R version 3.3.1 Patched (2016-09-30 r71426)
  system   x86_64, linux-gnu                          
@@ -4620,91 +4628,94 @@ xml_fluorescence_in_situ_hybridization_diagnostic_procedure_chromosome_17_signal
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2016-11-18                                 
+ date     2017-02-24                                 
 
- package              * version  date       source        
- acepack                1.4.1    2016-10-29 CRAN (R 3.3.1)
- AnnotationDbi          1.36.0   2016-11-18 Bioconductor  
- assertthat             0.1      2013-12-06 CRAN (R 3.3.0)
- Biobase              * 2.34.0   2016-10-20 Bioconductor  
- BiocGenerics         * 0.20.0   2016-11-17 Bioconductor  
- BiocParallel         * 1.8.1    2016-11-17 Bioconductor  
- biomaRt                2.30.0   2016-10-20 Bioconductor  
- Biostrings             2.42.0   2016-11-18 Bioconductor  
- bitops                 1.0-6    2013-08-17 CRAN (R 3.3.0)
- BSgenome               1.42.0   2016-11-18 Bioconductor  
- bumphunter             1.14.0   2016-11-18 Bioconductor  
- chron                  2.3-47   2015-06-24 CRAN (R 3.3.0)
- cluster                2.0.4    2016-04-18 CRAN (R 3.3.1)
- codetools              0.2-14   2015-07-15 CRAN (R 3.3.1)
- colorspace             1.3-1    2016-11-18 CRAN (R 3.3.1)
- data.table             1.9.6    2015-09-19 CRAN (R 3.3.1)
- DBI                    0.5-1    2016-09-10 CRAN (R 3.3.1)
- derfinder              1.8.0    2016-11-17 Bioconductor  
- derfinderHelper        1.8.0    2016-11-17 Bioconductor  
- devtools               1.12.0   2016-06-24 CRAN (R 3.3.1)
- digest                 0.6.10   2016-08-02 CRAN (R 3.3.1)
- doRNG                  1.6      2014-03-07 CRAN (R 3.3.0)
- downloader             0.4      2015-07-09 cran (@0.4)   
- foreach                1.4.3    2015-10-13 CRAN (R 3.3.0)
- foreign                0.8-67   2016-09-13 CRAN (R 3.3.1)
- Formula                1.2-1    2015-04-07 CRAN (R 3.3.0)
- GenomeInfoDb         * 1.10.1   2016-11-17 Bioconductor  
- GenomicAlignments      1.10.0   2016-11-18 Bioconductor  
- GenomicFeatures        1.26.0   2016-11-18 Bioconductor  
- GenomicFiles           1.10.3   2016-11-18 Bioconductor  
- GenomicRanges        * 1.26.1   2016-11-18 Bioconductor  
- GEOquery               2.40.0   2016-10-21 Bioconductor  
- getopt               * 1.20.0   2013-08-30 CRAN (R 3.3.1)
- ggplot2                2.2.0    2016-11-11 CRAN (R 3.3.1)
- gridExtra              2.2.1    2016-02-29 CRAN (R 3.3.0)
- gtable                 0.2.0    2016-02-26 CRAN (R 3.3.0)
- Hmisc                  4.0-0    2016-11-01 CRAN (R 3.3.1)
- htmlTable              1.7      2016-10-19 CRAN (R 3.3.1)
- htmltools              0.3.5    2016-03-21 CRAN (R 3.3.0)
- httr                   1.2.1    2016-07-03 cran (@1.2.1) 
- IRanges              * 2.8.1    2016-11-18 Bioconductor  
- iterators              1.0.8    2015-10-13 CRAN (R 3.3.0)
- jsonlite               1.1      2016-09-14 CRAN (R 3.3.1)
- knitr                  1.15     2016-11-09 CRAN (R 3.3.1)
- lattice                0.20-34  2016-09-06 CRAN (R 3.3.1)
- latticeExtra           0.6-28   2016-02-09 CRAN (R 3.3.0)
- lazyeval               0.2.0    2016-06-12 CRAN (R 3.3.1)
- locfit                 1.5-9.1  2013-04-20 CRAN (R 3.3.0)
- magrittr               1.5      2014-11-22 CRAN (R 3.3.1)
- Matrix                 1.2-7.1  2016-09-01 CRAN (R 3.3.1)
- matrixStats            0.51.0   2016-10-09 CRAN (R 3.3.1)
- memoise                1.0.0    2016-01-29 CRAN (R 3.3.0)
- munsell                0.4.3    2016-02-13 CRAN (R 3.3.0)
- nnet                   7.3-12   2016-02-02 CRAN (R 3.3.1)
- pkgmaker               0.22     2014-05-14 CRAN (R 3.3.0)
- plyr                   1.8.4    2016-06-08 CRAN (R 3.3.1)
- qvalue                 2.6.0    2016-11-17 Bioconductor  
- R6                     2.2.0    2016-10-05 CRAN (R 3.3.1)
- RColorBrewer           1.1-2    2014-12-07 CRAN (R 3.3.0)
- Rcpp                   0.12.8   2016-11-17 CRAN (R 3.3.1)
- RCurl                  1.95-4.8 2016-03-01 CRAN (R 3.3.0)
- recount              * 1.0.0    2016-11-18 Bioconductor  
- registry               0.3      2015-07-08 CRAN (R 3.3.0)
- rentrez                1.0.4    2016-10-26 CRAN (R 3.3.1)
- reshape2               1.4.2    2016-10-22 CRAN (R 3.3.1)
- rngtools               1.2.4    2014-03-06 CRAN (R 3.3.0)
- rpart                  4.1-10   2015-06-29 CRAN (R 3.3.1)
- Rsamtools              1.26.1   2016-11-18 Bioconductor  
- RSQLite                1.0.0    2014-10-25 CRAN (R 3.3.0)
- rtracklayer            1.34.1   2016-11-18 Bioconductor  
- S4Vectors            * 0.12.0   2016-11-18 Bioconductor  
- scales                 0.4.1    2016-11-09 CRAN (R 3.3.1)
- stringi                1.1.2    2016-10-01 CRAN (R 3.3.1)
- stringr                1.1.0    2016-08-19 CRAN (R 3.3.1)
- SummarizedExperiment * 1.4.0    2016-11-18 Bioconductor  
- survival               2.40-1   2016-10-30 CRAN (R 3.3.1)
- tibble                 1.2      2016-08-26 CRAN (R 3.3.1)
- VariantAnnotation      1.20.1   2016-11-18 Bioconductor  
- withr                  1.0.2    2016-06-20 CRAN (R 3.3.1)
- XML                  * 3.98-1.5 2016-11-10 CRAN (R 3.3.1)
- xtable                 1.8-2    2016-02-05 CRAN (R 3.3.0)
- XVector                0.14.0   2016-11-18 Bioconductor  
- zlibbioc               1.20.0   2016-10-20 Bioconductor  
+ package              * version  date       source                                      
+ acepack                1.4.1    2016-10-29 CRAN (R 3.3.1)                              
+ AnnotationDbi          1.36.2   2017-02-07 Bioconductor                                
+ assertthat             0.1      2013-12-06 CRAN (R 3.3.0)                              
+ backports              1.0.5    2017-01-18 CRAN (R 3.3.1)                              
+ base64enc              0.1-3    2015-07-28 CRAN (R 3.3.0)                              
+ Biobase              * 2.34.0   2016-10-20 Bioconductor                                
+ BiocGenerics         * 0.20.0   2016-11-17 Bioconductor                                
+ BiocParallel         * 1.8.1    2016-12-06 Bioconductor                                
+ biomaRt                2.30.0   2016-12-06 Bioconductor                                
+ Biostrings             2.42.1   2016-12-06 Bioconductor                                
+ bitops                 1.0-6    2013-08-17 CRAN (R 3.3.0)                              
+ BSgenome               1.42.0   2016-11-18 Bioconductor                                
+ bumphunter             1.14.0   2016-12-06 Bioconductor                                
+ checkmate              1.8.2    2016-11-02 CRAN (R 3.3.1)                              
+ cluster                2.0.4    2016-04-18 CRAN (R 3.3.1)                              
+ codetools              0.2-14   2015-07-15 CRAN (R 3.3.1)                              
+ colorspace             1.3-2    2016-12-14 CRAN (R 3.3.1)                              
+ data.table             1.10.4   2017-02-01 CRAN (R 3.3.1)                              
+ DBI                    0.5-1    2016-09-10 CRAN (R 3.3.1)                              
+ derfinder              1.8.0    2016-12-06 Bioconductor                                
+ derfinderHelper        1.8.0    2016-11-17 Bioconductor                                
+ devtools               1.12.0   2016-12-05 CRAN (R 3.3.1)                              
+ digest                 0.6.12   2017-01-27 CRAN (R 3.3.1)                              
+ doRNG                  1.6      2014-03-07 CRAN (R 3.3.0)                              
+ downloader             0.4      2015-07-09 cran (@0.4)                                 
+ foreach                1.4.3    2015-10-13 CRAN (R 3.3.0)                              
+ foreign                0.8-67   2016-09-13 CRAN (R 3.3.1)                              
+ Formula                1.2-1    2015-04-07 CRAN (R 3.3.0)                              
+ GenomeInfoDb         * 1.10.3   2017-02-14 Bioconductor                                
+ GenomicAlignments      1.10.0   2016-11-18 Bioconductor                                
+ GenomicFeatures        1.26.2   2016-12-19 Bioconductor                                
+ GenomicFiles           1.10.3   2016-11-18 Bioconductor                                
+ GenomicRanges        * 1.26.2   2017-01-17 Bioconductor                                
+ GEOquery               2.40.0   2016-10-21 Bioconductor                                
+ getopt               * 1.20.0   2013-08-30 CRAN (R 3.3.1)                              
+ ggplot2                2.2.1    2016-12-30 CRAN (R 3.3.1)                              
+ gridExtra              2.2.1    2016-02-29 CRAN (R 3.3.0)                              
+ gtable                 0.2.0    2016-02-26 CRAN (R 3.3.0)                              
+ Hmisc                  4.0-2    2016-12-31 CRAN (R 3.3.1)                              
+ htmlTable              1.9      2017-01-26 CRAN (R 3.3.1)                              
+ htmltools              0.3.5    2016-03-21 CRAN (R 3.3.0)                              
+ htmlwidgets            0.8      2016-11-09 CRAN (R 3.3.1)                              
+ httr                   1.2.1    2016-07-03 cran (@1.2.1)                               
+ IRanges              * 2.8.1    2016-11-18 Bioconductor                                
+ iterators              1.0.8    2015-10-13 CRAN (R 3.3.0)                              
+ jsonlite               1.2      2016-12-31 CRAN (R 3.3.1)                              
+ knitr                  1.15.1   2016-11-22 CRAN (R 3.3.1)                              
+ lattice                0.20-34  2016-09-06 CRAN (R 3.3.1)                              
+ latticeExtra           0.6-28   2016-02-09 CRAN (R 3.3.0)                              
+ lazyeval               0.2.0    2016-06-12 CRAN (R 3.3.1)                              
+ locfit                 1.5-9.1  2013-04-20 CRAN (R 3.3.0)                              
+ magrittr               1.5      2014-11-22 CRAN (R 3.3.1)                              
+ Matrix                 1.2-7.1  2016-09-01 CRAN (R 3.3.1)                              
+ matrixStats            0.51.0   2016-10-09 CRAN (R 3.3.1)                              
+ memoise                1.0.0    2016-01-29 CRAN (R 3.3.0)                              
+ munsell                0.4.3    2016-02-13 CRAN (R 3.3.0)                              
+ nnet                   7.3-12   2016-02-02 CRAN (R 3.3.1)                              
+ pkgmaker               0.22     2014-05-14 CRAN (R 3.3.0)                              
+ plyr                   1.8.4    2016-06-08 CRAN (R 3.3.1)                              
+ qvalue                 2.6.0    2016-11-17 Bioconductor                                
+ R6                     2.2.0    2016-10-05 CRAN (R 3.3.1)                              
+ RColorBrewer           1.1-2    2014-12-07 CRAN (R 3.3.0)                              
+ Rcpp                   0.12.9   2017-01-14 CRAN (R 3.3.1)                              
+ RCurl                  1.95-4.8 2016-03-01 CRAN (R 3.3.0)                              
+ recount              * 1.0.12   2017-02-22 Github (bioconductor-mirror/recount@7f7e1d8)
+ registry               0.3      2015-07-08 CRAN (R 3.3.0)                              
+ rentrez                1.0.4    2016-10-26 CRAN (R 3.3.1)                              
+ reshape2               1.4.2    2016-10-22 CRAN (R 3.3.1)                              
+ rngtools               1.2.4    2014-03-06 CRAN (R 3.3.0)                              
+ rpart                  4.1-10   2015-06-29 CRAN (R 3.3.1)                              
+ Rsamtools              1.26.1   2016-11-18 Bioconductor                                
+ RSQLite                1.1-2    2017-01-08 CRAN (R 3.3.1)                              
+ rtracklayer            1.34.2   2017-02-21 cran (@1.34.2)                              
+ S4Vectors            * 0.12.1   2016-12-05 Bioconductor                                
+ scales                 0.4.1    2016-11-09 CRAN (R 3.3.1)                              
+ stringi                1.1.2    2016-10-01 CRAN (R 3.3.1)                              
+ stringr                1.1.0    2016-08-19 CRAN (R 3.3.1)                              
+ SummarizedExperiment * 1.4.0    2016-11-18 Bioconductor                                
+ survival               2.40-1   2016-10-30 CRAN (R 3.3.1)                              
+ tibble                 1.2      2016-08-26 CRAN (R 3.3.1)                              
+ VariantAnnotation      1.20.2   2016-12-05 Bioconductor                                
+ withr                  1.0.2    2016-06-20 CRAN (R 3.3.1)                              
+ XML                  * 3.98-1.5 2016-11-10 CRAN (R 3.3.1)                              
+ xtable                 1.8-2    2016-02-05 CRAN (R 3.3.0)                              
+ XVector                0.14.0   2016-11-18 Bioconductor                                
+ zlibbioc               1.20.0   2016-10-20 Bioconductor                                
 **** Job ends ****
-Fri Nov 18 16:42:16 EST 2016
+Fri Feb 24 16:57:35 EST 2017
