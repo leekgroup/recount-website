@@ -51,6 +51,6 @@ The following objects are masked from ‘package:base’:
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
 Missing files counts_jx.tsv.gz rse_jx.Rdata
-2017-01-22 01:22:55
+2017-02-25 14:27:11
 Session info -----------------------------------------------------------------------------------------------------------
 Packages ---------------------------------------------------------------------------------------------------------------
