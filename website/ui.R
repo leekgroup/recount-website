@@ -78,7 +78,7 @@ shinyUI(navbarPage(
         h5('Junction raw coverage file'),
         HTML('The link jx_cov points to the raw junction coverage file that contains the junction ids (comma-separated), the sample ids (comma-separated), and the actual coverage value for the junction. Sample ids can be matched to run and project accession numbers using <a href="https://jhubiostatistics.shinyapps.io/recount/sample_ids.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'sample-ids\', 1)">sample_ids.tsv</a> (junction id, project accession, run accession).'),
         h5('Junction BED file'),
-        p('The link jx_bed points to the BED file with one entry per junction present in the given project. The name of the junction includes the junction id, the donor, acceptor, and overall (if present in both) transcript names based on Gencode v24.'),
+        p('The link jx_bed points to the BED file with one entry per junction present in the given project. The name of the junction includes the junction id, the donor, acceptor, and overall (if present in both) transcript names based on Gencode v24. See the known issues for an important detail on these BED files.'),
         h5('phenotype'),
         p('The phenotype information (sample metadata) in a tsv file used for both RangedSummarizedExperiment objects. The table includes the SRA study id, the SRA sample id, the SRA experiment id, the SRA run id, the reads counts as reported by SRA, the number of reads aligned by Rail-RNA, the proportion of reads reported by SRA that aligned, whether the sample was paired-end or not, whether we think SRA misreported the paired-end label, the number of mapped read count by Rail-RNA, the coverage AUC, the ', HTML('<a href="http://www.cs.cmu.edu/~ckingsf/sharq/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'sharq\', 1)">SHARQ prototype</a>'), ' tissue, the ', HTML('<a href="http://www.cs.cmu.edu/~ckingsf/sharq/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'sharq\', 1)">SHARQ prototype</a>'), ' cell type, the biosample sumbmission date, the biosample publication date, the biosample update date, the average read length, the GEO accession id, the sample title as extracted from GEO, the sample characteristics as extracted from GEO, and the name of the coverage bigWig file.'),
         h5('files info'),
@@ -96,6 +96,8 @@ shinyUI(navbarPage(
         HTML('Check the <a href="https://github.com/nellore/runs/blob/master/sra/v2/hg38/NOTES">NOTES</a> on the Rail-RNA run on SRA data (version 2) which describes why some samples were discarded.'),
         tags$li('Single-cell studies with pooled samples'),
         HTML('Some single-cell studies like SRP058046 sequenced more than one single-cell but are available only as a pooled sample from the Sequence Read Archive. Currently these studies might not be useful for differential expression analysis via recount2 but can be used for checking if a given exon-exon junction is present or if a given region is expressed. Reported by <a href="https://www.helmholtz-muenchen.de/icb/">Lukas Simon</a>.'),
+        tags$li('BED files have the right end off by 1 base pair'),
+        HTML('Check the R code we used to read in these BED files <a href="https://github.com/leekgroup/recount-website/blob/master/rse/create_rse.R#L341-L346">here</a>.'),
         h5('Found an issue?'),
         HTML('If you found an issue with recount2, please email us or describe the problem at the <a href="https://github.com/leekgroup/recount-website/issues">recount-website issue tracker</a>. Thank you!')
     ),
