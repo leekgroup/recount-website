@@ -97,7 +97,7 @@ shinyUI(navbarPage(
         tags$li('Single-cell studies with pooled samples'),
         HTML('Some single-cell studies like SRP058046 sequenced more than one single-cell but are available only as a pooled sample from the Sequence Read Archive. Currently these studies might not be useful for differential expression analysis via recount2 but can be used for checking if a given exon-exon junction is present or if a given region is expressed. Reported by <a href="https://www.helmholtz-muenchen.de/icb/">Lukas Simon</a>.'),
         tags$li('BED files have the right end off by 1 base pair'),
-        HTML('Check the R code we used to read in these BED files <a href="https://github.com/leekgroup/recount-website/blob/master/rse/create_rse.R#L341-L346">here</a>.'),
+        HTML('Check the R code we used to read in these BED files <a href="https://github.com/leekgroup/recount-website/blob/master/rse/create_rse.R#L341-L346">here</a>. The coordinates in these files are end of exon1 + 1, start of exon2 -1 in zero-based coordinates and should have been end of exon1 + 1, start of exon 2 in zero-based coordinates to be a <a href="https://genome.ucsc.edu/FAQ/FAQformat#format1">proper BED file</a>.'),
         h5('Found an issue?'),
         HTML('If you found an issue with recount2, please email us or describe the problem at the <a href="https://github.com/leekgroup/recount-website/issues">recount-website issue tracker</a>. Thank you!')
     ),
