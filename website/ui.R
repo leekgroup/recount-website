@@ -39,7 +39,7 @@ shinyUI(navbarPage(
         ),
         tags$hr(),
         h3('Support'),
-        p('If you need help with the ', HTML('<a href="http://bioconductor.org/packages/recount" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'bioc-recount\', 1)">recount</a>'), ' Bioconductor package please get in touch via the ', HTML('<a href="https://support.bioconductor.org/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'bioc-support\', 1)">Bioconductor support website</a>'), '(remember to use the ', strong('recount'), ' tag) or via the ', HTML('<a href="https://github.com/leekgroup/recount/issues" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'issues-recount\', 1)">recount Bioconductor package repository</a>.'), ' For support on reproducing the recount2 project, please get in touch via the ', HTML('<a href="https://github.com/leekgroup/recount-website/issues" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'issues-recount-web\', 1)">recount-website repository</a>.'))
+        p('If you need help with the ', HTML('<a href="http://bioconductor.org/packages/recount" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'bioc-recount\', 1)">recount</a>'), ' Bioconductor package please get in touch via the ', HTML('<a href="https://support.bioconductor.org/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'bioc-support\', 1)">Bioconductor support website</a> '), '(remember to use the ', strong('recount'), ' tag). ', HTML('Please check this post on <a href="http://lcolladotor.github.io/2017/03/06/How-to-ask-for-help-for-Bioconductor-packages/#.WMGjvBIrJoM">how to ask for help for Bioconductor packages</a>.'), ' For support on reproducing the recount2 project, please get in touch via the ', HTML('<a href="https://github.com/leekgroup/recount-website/issues" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'issues-recount-web\', 1)">recount-website repository</a>.'))
     ),
     tabPanel('Popular datasets',
         DT::dataTableOutput('popular')
@@ -114,6 +114,10 @@ shinyUI(navbarPage(
         HTML('If you are interested in contributing your human RNA-seq data sequenced on the Illumina platform to recount2, please check how to do so at <a href="https://github.com/leekgroup/recount-contributions">recount-contributions</a>. Thank you!')
     ),
     tags$hr(),
+    h3('Data license'),
+    p('The data in ', strong('recount2'), HTML(' is licensed under CC BY 4.0. The legal text can be found <a href="LICENSE.txt">here</a>.')),
+    tags$hr(),
+    h3('Acknowledgements'),
     p('This research was supported by NIH R01 GM105705. LCT was supported by Consejo Nacional de Ciencia y Tecnología México 351535. LCT and AEJ were supported by NIH 1R21MH109956-01. Amazon Web Services experiments were supported by AWS in Education research grants. Storage costs on S3 for TCGA runs were partially covered by a grant from Seven Bridges Genomics for use of the Cancer Genomics Cloud.'),
 	p(strong('recount2'), ' is hosted on ', HTML('<a href="http://www.sciserver.org" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'sciserver\', 1)">SciServer</a>,'), 'a collaborative research environment for large-scale data-driven science. It is being developed at, and administered by, the ', HTML('<a href="http://idies.jhu.edu/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'idies\', 1)">Institute for Data Intensive Engineering and Science (IDIES)</a>'), ' at Johns Hopkins University. SciServer is funded by the National Science Foundation Award ACI-1261715.'),
     p(HTML('<a href="http://idies.jhu.edu/" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'idies\', 1)"><img src="http://idies.jhu.edu/wp-content/themes/idies/assets/img/idieslogo.png" align="right"/></a>')),
