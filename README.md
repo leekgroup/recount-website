@@ -1,8 +1,7 @@
-recount: A multi-experiment resource of analysis-ready RNA-seq gene and exon count datasets
+Reproducible RNA-seq analysis using _recount2_
 ====
 
 * Website: [jhubiostatistics.shinyapps.io/recount/](https://jhubiostatistics.shinyapps.io/recount/)
-* R package: [leekgroup/recount](https://github.com/leekgroup/recount) with vignettes at [leekgroup.github.io/recount/](http://leekgroup.github.io/recount/)
-
+* Bioconductor package: [recount](https://bioconductor.org/packages/recount). Check the [vignette](http://bioconductor.org/packages/release/bioc/vignettes/recount/inst/doc/recount-quickstart.html) for more information.
 
 The code for this repository started at [nellore/runs](https://github.com/nellore/runs) in case that you are interested in the full commit history.
