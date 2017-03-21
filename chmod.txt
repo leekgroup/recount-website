@@ -1,0 +1,8 @@
+**** Job starts sample ${bwsample} ****
+Mon Feb 13 17:47:49 EST 2017
+Write-protecting (group)
+Mon Feb 13 20:58:20 EST 2017
+Read-protecting (others)
+Mon Feb 13 23:33:32 EST 2017
+**** Job ends ****
+Mon Feb 13 23:33:32 EST 2017
