@@ -42,23 +42,23 @@ upload_table <- rbind(upload_table,
 rownames(upload_table) <- NULL
 
 ## Internal table with all paths for recount.bwtool
-local_url <- upload_table
-is.bw <- grepl('[.]bw$', local_url$file_name)
-local_url$url <- NA
-local_url$url[!is.bw] <- paste0('http://duffel.rail.bio/recount/',
-    local_url$project[!is.bw], '/', local_url$file_name[!is.bw])
-local_url$url[is.bw] <- paste0('http://duffel.rail.bio/recount/',
-    local_url$project[is.bw], '/bw/', local_url$file_name[is.bw])
-save(local_url, file = 'local_url.RData', compress = 'xz')
+#local_url <- upload_table
+#is.bw <- grepl('[.]bw$', local_url$file_name)
+#local_url$url <- NA
+#local_url$url[!is.bw] <- paste0('http://duffel.rail.bio/recount/',
+#    local_url$project[!is.bw], '/', local_url$file_name[!is.bw])
+#local_url$url[is.bw] <- paste0('http://duffel.rail.bio/recount/',
+#    local_url$project[is.bw], '/bw/', local_url$file_name[is.bw])
+#save(local_url, file = 'local_url.RData', compress = 'xz')
 
 ## Remove GTEx bigWigs for now
-print('Removing GTEx bigWigs')
-dim(upload_table)
-gtex <- upload_table$project == 'SRP012682' & grepl('bw',
-    upload_table$file_name)
-table(gtex)
-upload_table <- upload_table[!gtex, ]
-rownames(upload_table) <- NULL
+#print('Removing GTEx bigWigs')
+#dim(upload_table)
+#gtex <- upload_table$project == 'SRP012682' & grepl('bw',
+#    upload_table$file_name)
+#table(gtex)
+#upload_table <- upload_table[!gtex, ]
+#rownames(upload_table) <- NULL
 
 ## Explore table a little bit
 print('Final table: minor exploration')
