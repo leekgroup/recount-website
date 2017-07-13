@@ -143,7 +143,7 @@ save(rse_exon, file = file.path('rse_temp', paste0('rse_exon_', names(bw),
 
 ## Summarize counts at gene level
 load(count_groups_file)
-gene <- recount_genes
+genes <- recount_genes
 counts_gene <- lapply(split(as.data.frame(exon_counts), count_groups), colSums)
 counts_gene <- do.call(rbind, counts_gene)
 rownames(counts_gene) <- names(genes)
