@@ -126,7 +126,7 @@ write.table(as.data.frame(exon_counts), file = file.path('rse_temp',
 
 
 ## Load exons info
-exon <- recount_exons
+exons <- recount_exons
 
 ## Create rse_exon
 exons_all <- unlist(exons)
