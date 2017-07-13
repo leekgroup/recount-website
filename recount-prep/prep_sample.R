@@ -12,6 +12,7 @@ spec <- matrix(c(
     'wiggletools', 'w', 2, 'character',
     "Path to wiggletools. If not provided, it's assumed that it is on the $PATH",
     'calculate_auc', 'a', 2, 'logical', 'Whether to calculate the AUC',
+    'tempdir', 'd', 2, 'character' , 'Path to a temporary directory to use. If left unspecified, it will use tempdir()',
 	'help' , 'h', 0, 'logical', 'Display help'
 ), byrow=TRUE, ncol=5)
 opt <- getopt(spec)
@@ -49,6 +50,7 @@ if(jhpce & is.null(opt$wiggletools)) {
 if(is.null(opt$bwtool)) opt$bwtool <- 'bwtool'
 if(is.null(opt$calculate_auc)) opt$calculate_auc <- FALSE
 if(is.null(opt$wiggletools)) opt$wiggletools <- 'wiggletools'
+if(is.null(opt$tempdir)) opt$tempdir <- tempdir()
     
 ## Print options used
 message(paste(Sys.time(), 'options used:'))
@@ -71,7 +73,7 @@ if(!opt$calculate_auc) {
 
 if(opt$calculate_auc) {
     ## Choose name for temporary file
-    auc_file <- file.path(tempdir(), paste0(names(bw), '.auc'))
+    auc_file <- file.path(opt$tempdir, paste0(names(bw), '.auc'))
     system(paste(opt$wiggletools, 'AUC', auc_file, bw))
     ## Depending on your version of wiggletools, you might need to use:
     #system(paste(opt$wiggletools, 'print' , auc_file, 'AUC', bw))
@@ -101,7 +103,7 @@ metadata$reads_downloaded <- as.integer(
 metadata$paired_end <- as.logical(NA)
 
 ## Run bwtool to count at the exon level
-bw_tsv <- file.path(tempdir(), paste0(names(bw), '.tsv'))
+bw_tsv <- file.path(opt$tempdir, paste0(names(bw), '.tsv'))
 cmd_bwtool <- paste(opt$bwtool, 'summary', bed, bw, 
     "/dev/stdout -fill=0 -with-sum | cut -f1-3,10 | awk -v CONVFMT=%.17g '{print $1 \"\t\" $2 \"\t\" $3 \"\t\" $4}' >",
     bw_tsv)
