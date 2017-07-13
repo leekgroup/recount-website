@@ -74,9 +74,9 @@ if(!opt$calculate_auc) {
 if(opt$calculate_auc) {
     ## Choose name for temporary file
     auc_file <- file.path(opt$tempdir, paste0(names(bw), '.auc'))
-    system(paste(opt$wiggletools, 'AUC', auc_file, bw))
+    system(paste(opt$wiggletools, 'print' , auc_file, 'AUC', bw))
     ## Depending on your version of wiggletools, you might need to use:
-    #system(paste(opt$wiggletools, 'print' , auc_file, 'AUC', bw))
+    # system(paste(opt$wiggletools, 'AUC', auc_file, bw))
     counts$auc <- as.numeric(readLines(auc_file))
     ## Clean up
     unlink(auc_file)
