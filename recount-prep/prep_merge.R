@@ -16,6 +16,7 @@ spec <- matrix(c(
     'wigToBigWig', 't', 2, 'character',
     "Path to wigToBigWig. If not provided, it's assumed that it is on the $PATH",
     'calculate_mean', 'c', 2, 'logical', 'Whether to calculate the AUC',
+    'tempdir', 'd', 2, 'character' , 'Path to a temporary directory to use. If left unspecified, it will use tempdir()',
 	'help' , 'h', 0, 'logical', 'Display help'
 ), byrow=TRUE, ncol=5)
 opt <- getopt(spec)
@@ -74,6 +75,7 @@ if(jhpce & is.null(opt$wigToBigWig)) {
 if(is.null(opt$calculate_mean)) opt$calculate_mean <- TRUE
 if(is.null(opt$wiggletools)) opt$wiggletools <- 'wiggletools'
 if(is.null(opt$wigToBigWig)) opt$wigToBigWig <- 'wigToBigWig'
+if(is.null(opt$tempdir)) opt$tempdir <- tempdir()
     
 ## Print options used
 message(paste(Sys.time(), 'options used:'))
@@ -173,9 +175,8 @@ if(opt$calculate_mean) {
         ## Calculate sums per subsets
         system.time( tmpfiles <- mapply(function(m, i) {
             cmd <- scaleWig(m)
-        
-            tmpdir <- tempdir()     
-            tmpwig <- file.path(tmpdir, paste0('sum_part', i, '.wig'))
+           
+            tmpwig <- file.path(opt$tempdir, paste0('sum_part', i, '.wig'))
             message(paste(Sys.time(), 'creating file', tmpwig))
             cmd <- paste(opt$wiggletools, 'write', tmpwig, 'sum', cmd)
             runCmd(cmd, i)
