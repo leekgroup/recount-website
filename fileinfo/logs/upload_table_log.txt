@@ -15,24 +15,31 @@ Loading required package: colorout
 4     rse_gene.Rdata DRP000366
 5   counts_jx.tsv.gz DRP000366
 6       rse_jx.Rdata DRP000366
-[1] 93043     3
+[1] 93041     3
    user  system elapsed 
- 12.992  53.967 112.304 
-2017-03-21 12:32:26
-Session info -----------------------------------------------------------------------------------------------------------
+ 11.098   1.118  13.898 
+2017-10-24 15:53:37
+Session info ----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.1 Patched (2016-09-30 r71426)
+ version  R version 3.3.3 Patched (2017-03-15 r72696)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2017-03-21                                 
+ date     2017-10-24                                 
 
-Packages ---------------------------------------------------------------------------------------------------------------
- package  * version date       source                            
- colorout * 1.1-2   2016-07-22 Github (jalvesaq/colorout@6d84420)
- devtools   1.12.0  2016-12-05 CRAN (R 3.3.1)                    
- digest     0.6.12  2017-01-27 CRAN (R 3.3.1)                    
- memoise    1.0.0   2016-01-29 CRAN (R 3.3.0)                    
- withr      1.0.2   2016-06-20 CRAN (R 3.3.1)                    
+Packages --------------------------------------------------------------------------------------------------------------
+ package   * version date       source                            
+ base      * 3.3.3   2017-05-18 local                             
+ colorout  * 1.1-2   2016-07-22 Github (jalvesaq/colorout@6d84420)
+ datasets  * 3.3.3   2017-05-18 local                             
+ devtools    1.13.3  2017-08-02 CRAN (R 3.3.3)                    
+ digest      0.6.12  2017-01-27 CRAN (R 3.3.1)                    
+ graphics  * 3.3.3   2017-05-18 local                             
+ grDevices * 3.3.3   2017-05-18 local                             
+ memoise     1.1.0   2017-04-21 CRAN (R 3.3.1)                    
+ methods     3.3.3   2017-05-18 local                             
+ stats     * 3.3.3   2017-05-18 local                             
+ utils     * 3.3.3   2017-05-18 local                             
+ withr       2.0.0   2017-07-28 CRAN (R 3.3.3)                    

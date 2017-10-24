@@ -31,7 +31,7 @@ then
 elif [[ "${PROJECT}" == "tcga" ]]
 then
     echo "$PROJECT"
-    MEM="mem_free=200G,h_vmem=250G,h_fsize=100G"
+    MEM="mem_free=250G,h_vmem=270G,h_fsize=100G"
     EMAIL="e"
 else
     echo "Specify a valid project: gtex, sra, tcga"
@@ -55,8 +55,8 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -N ${sname}
 #$ -t 1:${LINES}
 #$ -hold_jid ${PROJECT}.metadata
-#$ -o ./logs/${PROJECT}.rse.o.\$TASK_ID.txt
-#$ -e ./logs/${PROJECT}.rse.e.\$TASK_ID.txt
+#$ -o ./logs/${PROJECT}.rse.\$TASK_ID.txt
+#$ -e ./logs/${PROJECT}.rse.\$TASK_ID.txt
 
 PROJECTNAME=\$(awk "NR==\${SGE_TASK_ID}" ${MAINDIR}/metadata/project_ids_${PROJECT}.txt)
 
@@ -64,7 +64,7 @@ echo "**** Job starts project \${PROJECTNAME} ****"
 date
 
 ## Run the R script that creates the count and rse files for exons and genes
-module load R/3.3.x
+module load conda_R/3.4
 Rscript create_rse.R -p "${PROJECT}" -m "${METADATA}" -i "\${PROJECTNAME}"
 
 echo "**** Job ends ****"

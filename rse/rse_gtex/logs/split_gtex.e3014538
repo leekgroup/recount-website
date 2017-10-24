@@ -1,0 +1,115 @@
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
+Loading required package: methods
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
+    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unsplit, which, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:base’:
+
+    colMeans, colSums, expand.grid, rowMeans, rowSums
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+2017-10-18 11:46:01 loading exon level RSE object
+2017-10-18 11:58:36 loading gene level RSE object
+2017-10-18 12:05:23 splitting by tissue at the exon level
+2017-10-18 12:05:23 splitting exon level information by tissue
+2017-10-18 12:21:11 saving exon level information for tissue lung
+2017-10-18 12:26:18 saving exon level information for tissue brain
+2017-10-18 12:44:39 saving exon level information for tissue heart
+2017-10-18 12:50:50 saving exon level information for tissue skin
+2017-10-18 13:04:15 saving exon level information for tissue adipose_tissue
+2017-10-18 13:12:38 saving exon level information for tissue uterus
+2017-10-18 13:14:02 saving exon level information for tissue nerve
+2017-10-18 13:19:10 saving exon level information for tissue muscle
+2017-10-18 13:25:26 saving exon level information for tissue ovary
+2017-10-18 13:27:11 saving exon level information for tissue blood
+2017-10-18 13:36:28 saving exon level information for tissue colon
+2017-10-18 13:41:15 saving exon level information for tissue adrenal_gland
+2017-10-18 13:43:20 saving exon level information for tissue thyroid
+2017-10-18 13:48:26 saving exon level information for tissue esophagus
+2017-10-18 13:58:29 saving exon level information for tissue blood_vessel
+2017-10-18 14:08:02 saving exon level information for tissue liver
+2017-10-18 14:09:46 saving exon level information for tissue prostate
+2017-10-18 14:11:26 saving exon level information for tissue testis
+2017-10-18 14:14:37 saving exon level information for tissue kidney
+2017-10-18 14:15:11 saving exon level information for tissue pancreas
+2017-10-18 14:17:37 saving exon level information for tissue stomach
+2017-10-18 14:20:20 saving exon level information for tissue small_intestine
+2017-10-18 14:21:46 saving exon level information for tissue breast
+2017-10-18 14:24:43 saving exon level information for tissue pituitary
+2017-10-18 14:26:26 saving exon level information for tissue cervix_uteri
+2017-10-18 14:26:39 saving exon level information for tissue vagina
+2017-10-18 14:27:58 saving exon level information for tissue bone_marrow
+2017-10-18 14:29:15 saving exon level information for tissue spleen
+2017-10-18 14:31:10 saving exon level information for tissue salivary_gland
+2017-10-18 14:32:07 saving exon level information for tissue bladder
+2017-10-18 14:32:18 saving exon level information for tissue fallopian_tube
+2017-10-18 14:32:25 splitting by tissue at the gene level
+2017-10-18 14:32:25 splitting gene level information by tissue
+2017-10-18 14:37:48 saving gene level information for tissue lung
+2017-10-18 14:38:30 saving gene level information for tissue brain
+2017-10-18 14:40:32 saving gene level information for tissue heart
+2017-10-18 14:41:09 saving gene level information for tissue skin
+2017-10-18 14:43:12 saving gene level information for tissue adipose_tissue
+2017-10-18 14:44:55 saving gene level information for tissue uterus
+2017-10-18 14:45:07 saving gene level information for tissue nerve
+2017-10-18 14:45:35 saving gene level information for tissue muscle
+2017-10-18 14:46:08 saving gene level information for tissue ovary
+2017-10-18 14:46:17 saving gene level information for tissue blood
+2017-10-18 14:47:01 saving gene level information for tissue colon
+2017-10-18 14:47:33 saving gene level information for tissue adrenal_gland
+2017-10-18 14:47:48 saving gene level information for tissue thyroid
+2017-10-18 14:48:17 saving gene level information for tissue esophagus
+2017-10-18 14:49:14 saving gene level information for tissue blood_vessel
+2017-10-18 14:50:17 saving gene level information for tissue liver
+2017-10-18 14:50:29 saving gene level information for tissue prostate
+2017-10-18 14:50:39 saving gene level information for tissue testis
+2017-10-18 14:50:59 saving gene level information for tissue kidney
+2017-10-18 14:51:02 saving gene level information for tissue pancreas
+2017-10-18 14:51:18 saving gene level information for tissue stomach
+2017-10-18 14:51:34 saving gene level information for tissue small_intestine
+2017-10-18 14:51:43 saving gene level information for tissue breast
+2017-10-18 14:52:00 saving gene level information for tissue pituitary
+2017-10-18 14:52:11 saving gene level information for tissue cervix_uteri
+2017-10-18 14:52:12 saving gene level information for tissue vagina
+2017-10-18 14:52:20 saving gene level information for tissue bone_marrow
+2017-10-18 14:52:29 saving gene level information for tissue spleen
+2017-10-18 14:52:38 saving gene level information for tissue salivary_gland
+2017-10-18 14:52:44 saving gene level information for tissue bladder
+2017-10-18 14:52:46 saving gene level information for tissue fallopian_tube
+Session info ----------------------------------------------------------------------------------------------------------
+Packages --------------------------------------------------------------------------------------------------------------

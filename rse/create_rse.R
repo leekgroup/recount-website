@@ -42,6 +42,10 @@ if(FALSE) {
     ## Largest one, to find memory needed
     opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
         projectid = 'SRP025982')
+        
+    ## For quick testing
+    opt <- list(project = 'sra', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_sra.Rdata',
+            projectid = 'SRP009615')
     
     ## GTEx
     opt <- list(project = 'gtex', 'metadata' = '/dcl01/leek/data/recount-website/metadata/metadata_gtex.Rdata',
@@ -574,9 +578,11 @@ if(any(!hasGeneExon)) {
         colData = DataFrame(metadata_clean), rowRanges = exons_all)
     message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_exon.Rdata')))
     save(rse_exon, file = file.path(outdir, 'rse_exon.Rdata'))
+    rm(rse_exon)
 
     ## Summarize counts at gene level
     counts_gene <- lapply(split(as.data.frame(counts), count_groups), colSums)
+    rm(counts)
     counts_gene <- do.call(rbind, counts_gene)
     rownames(counts_gene) <- names(genes)
 
@@ -587,17 +593,21 @@ if(any(!hasGeneExon)) {
 
     ## Save gene counts
     message(paste(Sys.time(), 'writing file', file.path(outdir, 'counts_gene.tsv')))
-    write.table(as.data.frame(counts_gene), file = file.path(outdir,
+    xx <- as.data.frame(counts_gene)
+    xx$gene_id <- rownames(xx)
+    write.table(xx, file = file.path(outdir,
         'counts_gene.tsv'), sep = '\t', row.names = FALSE, quote = FALSE,
         col.names = TRUE)
+    rm(xx)
     system(paste('gzip', file.path(outdir, 'counts_gene.tsv')))
 
     ## Create gene level rse
     rse_gene <- SummarizedExperiment(assays = list('counts' = counts_gene),
         colData = DataFrame(metadata_clean), rowRanges = genes)
     message(paste(Sys.time(), 'writing file', file.path(outdir, 'rse_gene.Rdata')))
+    rm(counts_gene)
     save(rse_gene, file = file.path(outdir, 'rse_gene.Rdata'))
-    rm(counts, counts_gene, rse_exon, rse_gene)
+    rm(rse_gene)
 }
 
 

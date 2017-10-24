@@ -2,11 +2,11 @@
 #$ -cwd
 #$ -m e
 #$ -l mem_free=2G,h_vmem=3G
-#$ -pe local 25
+#$ -pe local 10
 #$ -N check-tsv-gtex
 #$ -hold_jid gtex.bwtool
-#$ -o ./logs/check-tsv-gtex.o.txt
-#$ -e ./logs/check-tsv-gtex.e.txt
+#$ -o ./logs/check-tsv-gtex.txt
+#$ -e ./logs/check-tsv-gtex.txt
 
 echo '**** Job starts ****'
 date

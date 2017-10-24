@@ -49,8 +49,8 @@ cat > ${WDIR}/.${sname}.sh <<EOF
 #$ -l leek,mem_free=1G,h_vmem=2G,h_fsize=100G
 #$ -N ${sname}
 #$ -t 1:${LINES}
-#$ -o ./logs/${PROJECT}.bwtool.o.\$TASK_ID.txt
-#$ -e ./logs/${PROJECT}.bwtool.e.\$TASK_ID.txt
+#$ -o ./logs/${PROJECT}.bwtool.\$TASK_ID.txt
+#$ -e ./logs/${PROJECT}.bwtool.\$TASK_ID.txt
 
 ## Get the bwtool command
 bwtoolcmd=\$(awk "NR==\${SGE_TASK_ID}" ${WDIR}/bwtool_cmds_${PROJECT}.txt)

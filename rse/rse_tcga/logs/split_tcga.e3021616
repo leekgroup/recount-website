@@ -1,0 +1,105 @@
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
+Loading required package: methods
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
+    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unsplit, which, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:base’:
+
+    colMeans, colSums, expand.grid, rowMeans, rowSums
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+2017-10-19 14:00:12 loading exon level RSE object
+2017-10-19 14:09:47 loading gene level RSE object
+2017-10-19 14:11:14 splitting by tissue at the exon level
+2017-10-19 14:11:14 splitting exon level information by tissue
+2017-10-19 14:20:25 saving exon level information for tissue liver
+2017-10-19 14:24:41 saving exon level information for tissue prostate
+2017-10-19 14:31:05 saving exon level information for tissue colorectal
+2017-10-19 14:38:43 saving exon level information for tissue bladder
+2017-10-19 14:43:28 saving exon level information for tissue brain
+2017-10-19 14:51:56 saving exon level information for tissue breast
+2017-10-19 15:06:33 saving exon level information for tissue uterus
+2017-10-19 15:13:05 saving exon level information for tissue soft_tissue
+2017-10-19 15:15:59 saving exon level information for tissue kidney
+2017-10-19 15:27:58 saving exon level information for tissue adrenal_gland
+2017-10-19 15:30:50 saving exon level information for tissue lymph_nodes
+2017-10-19 15:31:21 saving exon level information for tissue pleura
+2017-10-19 15:32:22 saving exon level information for tissue thymus
+2017-10-19 15:33:44 saving exon level information for tissue lung
+2017-10-19 15:49:47 saving exon level information for tissue ovary
+2017-10-19 15:56:37 saving exon level information for tissue stomach
+2017-10-19 16:04:47 saving exon level information for tissue bone_marrow
+2017-10-19 16:06:43 saving exon level information for tissue thyroid
+2017-10-19 16:16:35 saving exon level information for tissue cervix
+2017-10-19 16:20:50 saving exon level information for tissue head_and_neck
+2017-10-19 16:28:50 saving exon level information for tissue eye
+2017-10-19 16:29:58 saving exon level information for tissue skin
+2017-10-19 16:37:13 saving exon level information for tissue pancreas
+2017-10-19 16:41:06 saving exon level information for tissue testis
+2017-10-19 16:44:26 saving exon level information for tissue esophagus
+2017-10-19 16:47:40 saving exon level information for tissue bile_duct
+2017-10-19 16:48:11 splitting by tissue at the gene level
+2017-10-19 16:48:11 splitting gene level information by tissue
+2017-10-19 16:48:58 saving gene level information for tissue liver
+2017-10-19 16:49:24 saving gene level information for tissue prostate
+2017-10-19 16:50:02 saving gene level information for tissue colorectal
+2017-10-19 16:50:48 saving gene level information for tissue bladder
+2017-10-19 16:51:17 saving gene level information for tissue brain
+2017-10-19 16:52:07 saving gene level information for tissue breast
+2017-10-19 16:53:33 saving gene level information for tissue uterus
+2017-10-19 16:54:14 saving gene level information for tissue soft_tissue
+2017-10-19 16:54:31 saving gene level information for tissue kidney
+2017-10-19 16:55:42 saving gene level information for tissue adrenal_gland
+2017-10-19 16:56:00 saving gene level information for tissue lymph_nodes
+2017-10-19 16:56:04 saving gene level information for tissue pleura
+2017-10-19 16:56:10 saving gene level information for tissue thymus
+2017-10-19 16:56:19 saving gene level information for tissue lung
+2017-10-19 16:57:39 saving gene level information for tissue ovary
+2017-10-19 16:58:11 saving gene level information for tissue stomach
+2017-10-19 16:58:45 saving gene level information for tissue bone_marrow
+2017-10-19 16:58:56 saving gene level information for tissue thyroid
+2017-10-19 16:59:35 saving gene level information for tissue cervix
+2017-10-19 16:59:56 saving gene level information for tissue head_and_neck
+2017-10-19 17:00:32 saving gene level information for tissue eye
+2017-10-19 17:00:38 saving gene level information for tissue skin
+2017-10-19 17:01:09 saving gene level information for tissue pancreas
+2017-10-19 17:01:22 saving gene level information for tissue testis
+2017-10-19 17:01:33 saving gene level information for tissue esophagus
+2017-10-19 17:01:49 saving gene level information for tissue bile_duct
+Session info ----------------------------------------------------------------------------------------------------------
+Packages --------------------------------------------------------------------------------------------------------------

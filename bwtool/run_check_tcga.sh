@@ -2,11 +2,11 @@
 #$ -cwd
 #$ -m e
 #$ -l mem_free=2G,h_vmem=3G
-#$ -pe local 25
+#$ -pe local 10
 #$ -N check-tsv-tcga
 #$ -hold_jid tcga.bwtool
-#$ -o ./logs/check-tsv-tcga.o.txt
-#$ -e ./logs/check-tsv-tcga.e.txt
+#$ -o ./logs/check-tsv-tcga.txt
+#$ -e ./logs/check-tsv-tcga.txt
 
 echo '**** Job starts ****'
 date

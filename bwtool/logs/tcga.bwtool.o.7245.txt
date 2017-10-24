@@ -1,5 +1,5 @@
 **** Job starts sample ED9794C0-AC60-4B54-8214-D26714871BBF ****
-Wed Jan 18 11:00:47 EST 2017
+Fri Oct 13 17:11:11 EDT 2017
 sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/tcga/v1/batch_2/coverage_bigwigs/ED9794C0-AC60-4B54-8214-D26714871BBF.bw /dcl01/leek/data/recount2/coverage_tcga
 **** Job ends ****
-Wed Jan 18 11:02:21 EST 2017
+Fri Oct 13 17:14:41 EDT 2017

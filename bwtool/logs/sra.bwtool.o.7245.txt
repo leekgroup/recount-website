@@ -1,5 +1,5 @@
 **** Job starts sample SRR1700189 ****
-Tue Jan 17 20:33:45 EST 2017
+Thu Oct 12 19:26:58 EDT 2017
 sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/sra/v2/batch_0/coverage_bigwigs/SRR1700189.bw /dcl01/leek/data/recount2/coverage
 **** Job ends ****
-Tue Jan 17 20:35:21 EST 2017
+Thu Oct 12 19:30:11 EDT 2017

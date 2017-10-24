@@ -2,11 +2,11 @@
 #$ -cwd
 #$ -m e
 #$ -l mem_free=2G,h_vmem=3G
-#$ -pe local 25
+#$ -pe local 10
 #$ -N check-tsv
 #$ -hold_jid sra.bwtool
-#$ -o ./logs/check-tsv.o.txt
-#$ -e ./logs/check-tsv.e.txt
+#$ -o ./logs/check-tsv.txt
+#$ -e ./logs/check-tsv.txt
 
 echo '**** Job starts ****'
 date

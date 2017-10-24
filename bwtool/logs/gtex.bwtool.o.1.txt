@@ -1,5 +1,5 @@
 **** Job starts sample SRR811491_SRS408333_SRX260441_male_whole.blood ****
-Wed Jan 18 06:38:35 EST 2017
+Fri Oct 13 10:40:11 EDT 2017
 sh /dcl01/leek/data/recount-website/sum.sh /dcl01/leek/data/bwtool/bwtool-1.0/bwtool /dcl01/leek/data/recount-website/genes/Gencode-v25.bed /dcl01/leek/data/gtex/batch_14/coverage_bigwigs/SRR811491_SRS408333_SRX260441_male_whole.blood.bw /dcl01/leek/data/recount2/coverage_gtex
 **** Job ends ****
-Wed Jan 18 06:40:32 EST 2017
+Fri Oct 13 10:44:01 EDT 2017

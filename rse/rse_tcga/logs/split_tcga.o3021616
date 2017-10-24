@@ -1,0 +1,44 @@
+**** Job starts ****
+Thu Oct 19 14:00:03 EDT 2017
+[1] "2017-10-19 17:01:53 EDT"
+     user    system   elapsed 
+10053.716   571.227 10909.325 
+ setting  value                                      
+ version  R version 3.3.3 Patched (2017-03-15 r72696)
+ system   x86_64, linux-gnu                          
+ ui       X11                                        
+ language (EN)                                       
+ collate  en_US.UTF-8                                
+ tz       <NA>                                       
+ date     2017-10-19                                 
+
+ package              * version  date       source        
+ base                 * 3.3.3    2017-05-18 local         
+ Biobase              * 2.34.0   2016-10-20 Bioconductor  
+ BiocGenerics         * 0.20.0   2017-06-05 Bioconductor  
+ bitops                 1.0-6    2013-08-17 CRAN (R 3.3.0)
+ datasets             * 3.3.3    2017-05-18 local         
+ devtools               1.13.3   2017-08-02 CRAN (R 3.3.3)
+ digest                 0.6.12   2017-01-27 CRAN (R 3.3.1)
+ GenomeInfoDb         * 1.10.3   2017-02-14 Bioconductor  
+ GenomicRanges        * 1.26.4   2017-06-05 Bioconductor  
+ graphics             * 3.3.3    2017-05-18 local         
+ grDevices            * 3.3.3    2017-05-18 local         
+ grid                   3.3.3    2017-05-18 local         
+ IRanges              * 2.8.2    2017-06-05 Bioconductor  
+ lattice                0.20-34  2016-09-06 CRAN (R 3.3.3)
+ Matrix                 1.2-8    2017-01-20 CRAN (R 3.3.3)
+ memoise                1.1.0    2017-04-21 CRAN (R 3.3.1)
+ methods              * 3.3.3    2017-05-18 local         
+ parallel             * 3.3.3    2017-05-18 local         
+ RCurl                  1.95-4.8 2016-03-01 CRAN (R 3.3.0)
+ S4Vectors            * 0.12.2   2017-06-05 Bioconductor  
+ stats                * 3.3.3    2017-05-18 local         
+ stats4               * 3.3.3    2017-05-18 local         
+ SummarizedExperiment * 1.4.0    2017-06-05 Bioconductor  
+ utils                * 3.3.3    2017-05-18 local         
+ withr                  2.0.0    2017-07-28 CRAN (R 3.3.3)
+ XVector                0.14.1   2017-03-21 Bioconductor  
+ zlibbioc               1.20.0   2016-10-20 Bioconductor  
+**** Job ends ****
+Thu Oct 19 17:01:55 EDT 2017

@@ -28,13 +28,23 @@ upload_table <- mapply(function(rda, project) {
 upload_table <- do.call(rbind, upload_table)
 
 ## Add files that have all of SRA
+# upload_table <- rbind(upload_table,
+#     data.frame(
+#         path = c(
+#             '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata',
+#             '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_gene.Rdata'
+#         ),
+#         file_name = c('rse_exon.Rdata', 'rse_gene.Rdata'),
+#         project = 'sra', stringsAsFactors = FALSE
+#     )
+# )
+## rse_exon.Rdata failed in the last run (it's too large...)
 upload_table <- rbind(upload_table,
     data.frame(
         path = c(
-            '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata',
             '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_gene.Rdata'
         ),
-        file_name = c('rse_exon.Rdata', 'rse_gene.Rdata'),
+        file_name = c('rse_gene.Rdata'),
         project = 'sra', stringsAsFactors = FALSE
     )
 )
