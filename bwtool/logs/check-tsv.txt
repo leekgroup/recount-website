@@ -32,3 +32,39 @@ The following objects are masked from ‘package:R.oo’:
 
     getClasses, getMethods
 
+      user     system    elapsed 
+     2.194      0.226 379443.241 
+[1] TRUE
+      user     system    elapsed 
+     6.927      0.395 379453.634 
+2017-10-25 04:01:10
+Session info ----------------------------------------------------------------------------------------------------------
+ setting  value                                      
+ version  R version 3.3.3 Patched (2017-03-15 r72696)
+ system   x86_64, linux-gnu                          
+ ui       X11                                        
+ language (EN)                                       
+ collate  en_US.UTF-8                                
+ tz       <NA>                                       
+ date     2017-10-25                                 
+
+Packages --------------------------------------------------------------------------------------------------------------
+ package      * version date       source        
+ base         * 3.3.3   2017-05-18 local         
+ BiocParallel * 1.8.2   2017-04-28 cran (@1.8.2) 
+ datasets     * 3.3.3   2017-05-18 local         
+ devtools       1.13.3  2017-08-02 CRAN (R 3.3.3)
+ digest         0.6.12  2017-01-27 CRAN (R 3.3.1)
+ graphics     * 3.3.3   2017-05-18 local         
+ grDevices    * 3.3.3   2017-05-18 local         
+ memoise        1.1.0   2017-04-21 CRAN (R 3.3.1)
+ methods      * 3.3.3   2017-05-18 local         
+ parallel       3.3.3   2017-05-18 local         
+ R.methodsS3  * 1.7.1   2016-02-16 CRAN (R 3.3.0)
+ R.oo         * 1.21.0  2016-11-01 CRAN (R 3.3.1)
+ R.utils      * 2.5.0   2016-11-07 CRAN (R 3.3.1)
+ stats        * 3.3.3   2017-05-18 local         
+ utils        * 3.3.3   2017-05-18 local         
+ withr          2.0.0   2017-07-28 CRAN (R 3.3.3)
+**** Job ends ****
+Wed Oct 25 04:01:11 EDT 2017
