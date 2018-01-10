@@ -1,6 +1,6 @@
 ## Usage
 # mkdir -p logs
-# module load R/3.3.x
+# module load conda_R/3.4.x
 # Rscript upload_table.R > logs/upload_table_log.txt 2>&1
 
 ## Identify files to upload
@@ -38,18 +38,29 @@ upload_table <- do.call(rbind, upload_table)
 #         project = 'sra', stringsAsFactors = FALSE
 #     )
 # )
-## rse_exon.Rdata failed in the last run (it's too large...)
+
 upload_table <- rbind(upload_table,
     data.frame(
         path = c(
+            '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata',
             '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_gene.Rdata'
         ),
-        file_name = c('rse_gene.Rdata'),
+        file_name = c('rse_exon.Rdata', 'rse_gene.Rdata'),
         project = 'sra', stringsAsFactors = FALSE
     )
 )
 
 rownames(upload_table) <- NULL
+
+## Add versions
+upload_table$version1 <- TRUE
+upload_table$version2 <-  ! (grepl('bw$|^rse_jx|^counts_jx|^rse_tx|bed.gz$|junction_coverage', upload_table$file_name) | upload_table$file_name %in% paste0(unique(upload_table$project), '.tsv') )
+
+## sra/rse_exon.Rdata failed in version 2 (it's too large...)
+upload_table$version2[upload_table$path == '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata'] <- FALSE
+
+## Remove 2 duplicates (rse_tx.RData for GTEx and TCGA)
+upload_table <- upload_table[-which(duplicated(upload_table$path)), ]
 
 ## Internal table with all paths for recount.bwtool
 #local_url <- upload_table
@@ -79,6 +90,10 @@ dim(upload_table)
 save(upload_table, file = 'upload_table.Rdata')
 
 write.table(upload_table, file = 'upload_table.tsv', sep = '\t',
+    row.names = FALSE, quote = FALSE, col.names = FALSE)
+
+write.table(upload_table[upload_table$version2, -(4:5)],
+    file = 'upload_table_only_version2.tsv', sep = '\t',
     row.names = FALSE, quote = FALSE, col.names = FALSE)
 
 ## Reproducibility info

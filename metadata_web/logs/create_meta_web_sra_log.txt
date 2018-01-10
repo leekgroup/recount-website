@@ -1,4 +1,4 @@
-Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.4.x
 Loading required package: colorout
 Loading required package: methods
 Loading required package: stats4
@@ -15,60 +15,73 @@ The following objects are masked from ‘package:parallel’:
 
 The following objects are masked from ‘package:stats’:
 
-    IQR, mad, xtabs
+    IQR, mad, sd, var, xtabs
 
 The following objects are masked from ‘package:base’:
 
-    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
-    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
-    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
-    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
-    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
-    unique, unsplit, which, which.max, which.min
+    anyDuplicated, append, as.data.frame, cbind, colMeans, colnames,
+    colSums, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, lengths, Map, mapply, match,
+    mget, order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which, which.max, which.min
 
 Loading required package: S4Vectors
 
 Attaching package: ‘S4Vectors’
 
-The following objects are masked from ‘package:base’:
+The following object is masked from ‘package:base’:
 
-    colMeans, colSums, expand.grid, rowMeans, rowSums
+    expand.grid
 
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
-2017-01-28 12:12:41 number of samples per project
+2018-01-10 12:00:29 number of samples per project
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    1.00    4.00    8.00   24.57   18.00 1720.00 
-2017-01-28 12:12:41 number missing
+2018-01-10 12:00:29 number missing
      accession number_samples        species       abstract           gene 
              0              0              0             30              5 
-          exon      junctions      phenotype     files_info 
-             5             22              0              5 
+          exon      junctions    transcripts      phenotype     files_info 
+             5             22              5              0              5 
    user  system elapsed 
- 15.109   3.364 173.310 
-2017-01-28 12:12:41
-Session info -----------------------------------------------------------------------------------------------------------
+ 13.221   0.865  14.192 
+2018-01-10 12:00:30
+Session info ----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.1 Patched (2016-09-30 r71426)
+ version  R version 3.4.2 Patched (2017-10-12 r73550)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2017-01-28                                 
+ date     2018-01-10                                 
 
-Packages ---------------------------------------------------------------------------------------------------------------
- package       * version date       source                            
- BiocGenerics  * 0.20.0  2016-11-17 Bioconductor                      
- colorout      * 1.1-2   2016-07-22 Github (jalvesaq/colorout@6d84420)
- devtools        1.12.0  2016-12-05 CRAN (R 3.3.1)                    
- digest          0.6.12  2017-01-27 CRAN (R 3.3.1)                    
- GenomeInfoDb  * 1.10.2  2017-01-17 Bioconductor                      
- GenomicRanges * 1.26.2  2017-01-17 Bioconductor                      
- getopt        * 1.20.0  2013-08-30 CRAN (R 3.3.1)                    
- IRanges       * 2.8.1   2016-11-18 Bioconductor                      
- memoise         1.0.0   2016-01-29 CRAN (R 3.3.0)                    
- S4Vectors     * 0.12.1  2016-12-05 Bioconductor                      
- withr           1.0.2   2016-06-20 CRAN (R 3.3.1)                    
- XVector         0.14.0  2016-11-18 Bioconductor                      
- zlibbioc        1.20.0  2016-10-20 Bioconductor                      
+Packages --------------------------------------------------------------------------------------------------------------
+ package          * version   date       source                            
+ base             * 3.4.2     2017-10-13 local                             
+ BiocGenerics     * 0.24.0    2017-11-29 Bioconductor                      
+ bitops             1.0-6     2013-08-17 CRAN (R 3.4.1)                    
+ colorout         * 1.1-2     2017-08-10 Github (jalvesaq/colorout@020a14d)
+ compiler           3.4.2     2017-10-13 local                             
+ datasets         * 3.4.2     2017-10-13 local                             
+ devtools           1.13.4    2017-11-09 CRAN (R 3.4.2)                    
+ digest             0.6.13    2017-12-14 CRAN (R 3.4.2)                    
+ GenomeInfoDb     * 1.14.0    2017-11-29 Bioconductor                      
+ GenomeInfoDbData   1.0.0     2018-01-09 Bioconductor                      
+ GenomicRanges    * 1.30.1    2018-01-09 Bioconductor                      
+ getopt           * 1.20.1    2017-11-29 CRAN (R 3.4.2)                    
+ graphics         * 3.4.2     2017-10-13 local                             
+ grDevices        * 3.4.2     2017-10-13 local                             
+ IRanges          * 2.12.0    2017-11-29 Bioconductor                      
+ memoise            1.1.0     2017-04-21 CRAN (R 3.4.1)                    
+ methods          * 3.4.2     2017-10-13 local                             
+ parallel         * 3.4.2     2017-10-13 local                             
+ RCurl              1.95-4.10 2018-01-04 CRAN (R 3.4.2)                    
+ S4Vectors        * 0.16.0    2017-11-29 Bioconductor                      
+ stats            * 3.4.2     2017-10-13 local                             
+ stats4           * 3.4.2     2017-10-13 local                             
+ utils            * 3.4.2     2017-10-13 local                             
+ withr              2.1.1     2017-12-19 CRAN (R 3.4.2)                    
+ XVector            0.18.0    2017-11-29 Bioconductor                      
+ zlibbioc           1.24.0    2017-11-07 Bioconductor                      

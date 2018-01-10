@@ -57,14 +57,18 @@ rownames(metadata) <- NULL
 ## Locate counts and rse files
 rse_path <- file.path('/dcl01/leek/data/recount-website/rse',
     paste0('rse_', opt$project), opt$projectid)
-rse_files <- dir(rse_path, full.names = TRUE)
-names(rse_files) <- dir(rse_path)
+rse_tx_path <- file.path('/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx',
+        opt$projectid)
+rse_files <- c(dir(rse_path, full.names = TRUE),
+    dir(rse_tx_path, full.names = TRUE))
+names(rse_files) <- c(dir(rse_path), dir(rse_tx_path))
+
 
 rse_up <- c('counts_exon.tsv.gz', 'counts_gene.tsv.gz', 'rse_exon.Rdata',
-    'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata')
+    'rse_gene.Rdata', 'counts_jx.tsv.gz', 'rse_jx.Rdata', 'rse_tx.RData')
 if(opt$project != 'sra') {
     ## Add tissue files by pattern matching
-    rse_up <- c(rse_up, dir(rse_path, 'rse_exon_|rse_gene_'))
+    rse_up <- c(rse_up, dir(rse_path, 'rse_exon_|rse_gene_'), dir(rse_tx_path, 'rse_tx'))
 }
 
 if(!all(rse_up %in% names(rse_files))) {

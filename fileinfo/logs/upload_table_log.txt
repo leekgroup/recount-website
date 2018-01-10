@@ -1,4 +1,4 @@
-Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.4.x
 Loading required package: colorout
 [1] "Final table: minor exploration"
                                                                        path
@@ -8,38 +8,39 @@ Loading required package: colorout
 4     /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_gene.Rdata
 5   /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/counts_jx.tsv.gz
 6       /dcl01/leek/data/recount-website/rse/rse_sra/DRP000366/rse_jx.Rdata
-           file_name   project
-1 counts_exon.tsv.gz DRP000366
-2 counts_gene.tsv.gz DRP000366
-3     rse_exon.Rdata DRP000366
-4     rse_gene.Rdata DRP000366
-5   counts_jx.tsv.gz DRP000366
-6       rse_jx.Rdata DRP000366
-[1] 93041     3
+           file_name   project version1 version2
+1 counts_exon.tsv.gz DRP000366     TRUE     TRUE
+2 counts_gene.tsv.gz DRP000366     TRUE     TRUE
+3     rse_exon.Rdata DRP000366     TRUE     TRUE
+4     rse_gene.Rdata DRP000366     TRUE     TRUE
+5   counts_jx.tsv.gz DRP000366     TRUE    FALSE
+6       rse_jx.Rdata DRP000366     TRUE    FALSE
+[1] 95136     5
    user  system elapsed 
- 11.098   1.118  13.898 
-2017-10-24 15:53:37
+  4.497   1.231  10.598 
+2018-01-10 11:03:26
 Session info ----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.3 Patched (2017-03-15 r72696)
+ version  R version 3.4.2 Patched (2017-10-12 r73550)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2017-10-24                                 
+ date     2018-01-10                                 
 
 Packages --------------------------------------------------------------------------------------------------------------
  package   * version date       source                            
- base      * 3.3.3   2017-05-18 local                             
- colorout  * 1.1-2   2016-07-22 Github (jalvesaq/colorout@6d84420)
- datasets  * 3.3.3   2017-05-18 local                             
- devtools    1.13.3  2017-08-02 CRAN (R 3.3.3)                    
- digest      0.6.12  2017-01-27 CRAN (R 3.3.1)                    
- graphics  * 3.3.3   2017-05-18 local                             
- grDevices * 3.3.3   2017-05-18 local                             
- memoise     1.1.0   2017-04-21 CRAN (R 3.3.1)                    
- methods     3.3.3   2017-05-18 local                             
- stats     * 3.3.3   2017-05-18 local                             
- utils     * 3.3.3   2017-05-18 local                             
- withr       2.0.0   2017-07-28 CRAN (R 3.3.3)                    
+ base      * 3.4.2   2017-10-13 local                             
+ colorout  * 1.1-2   2017-08-10 Github (jalvesaq/colorout@020a14d)
+ compiler    3.4.2   2017-10-13 local                             
+ datasets  * 3.4.2   2017-10-13 local                             
+ devtools    1.13.4  2017-11-09 CRAN (R 3.4.2)                    
+ digest      0.6.13  2017-12-14 CRAN (R 3.4.2)                    
+ graphics  * 3.4.2   2017-10-13 local                             
+ grDevices * 3.4.2   2017-10-13 local                             
+ memoise     1.1.0   2017-04-21 CRAN (R 3.4.1)                    
+ methods     3.4.2   2017-10-13 local                             
+ stats     * 3.4.2   2017-10-13 local                             
+ utils     * 3.4.2   2017-10-13 local                             
+ withr       2.1.1   2017-12-19 CRAN (R 3.4.2)                    

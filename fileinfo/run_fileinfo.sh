@@ -62,7 +62,7 @@ date
 
 ## Run the R script that computes md5sum and file sizes as well as the final
 ## list of files to upload
-module load R/3.3.x
+module load conda_R/3.4.x
 Rscript get_fileinfo.R -p "${PROJECT}" -m "${METADATA}" -i "\${PROJECTNAME}"
 
 echo "**** Job ends ****"

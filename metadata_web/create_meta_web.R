@@ -1,5 +1,5 @@
 ## Prepare metadata
-# module load R/3.3.x
+# module load conda_R/3.4.x
 # mkdir -p logs
 # Rscript create_meta_web.R -p "sra" > logs/create_meta_web_sra_log.txt 2>&1
 # Rscript create_meta_web.R -p "gtex" > logs/create_meta_web_gtex_log.txt 2>&1
@@ -52,6 +52,7 @@ meta_web <- data.frame(
     gene = NA,
     exon = NA,
     junctions = NA,
+    transcripts = NA,
     phenotype = NA,
     files_info = NA,
     stringsAsFactors = FALSE
@@ -95,24 +96,47 @@ for(project in projects) {
         file.path('/dcl01/leek/data/recount-website/rse/',
             paste0('rse_', opt$project), project, 'counts_gene.tsv.gz')
     )
+    tx_files <- paste0('/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx/',
+        project, '/rse_tx.RData')
     
     meta_web$gene[projects == project] <- paste(c(
         paste0(
+            '<a href="http://duffel.rail.bio/recount/v2/', project,
+            '/rse_gene.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">RSE v2</a>'
+        ),
+        paste0(' <a href="http://duffel.rail.bio/recount/v2/', project,
+        '/counts_gene.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-gene\', 1)">counts v2</a>'
+        ),
+        paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/rse_gene.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">RSE</a>'
-        ), 
+            '/rse_gene.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">RSE v1</a>'
+        ),
         paste0(' <a href="http://duffel.rail.bio/recount/', project,
-        '/counts_gene.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-gene\', 1)">counts</a>')
-        )[file.exists(gene_files)], collapse = ' ')
+        '/counts_gene.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-gene\', 1)">counts v1</a>')
+        )[rep(file.exists(gene_files), each = 2)], collapse = ' ')
     meta_web$exon[projects == project] <- paste(c(
         paste0(
-            '<a href="http://duffel.rail.bio/recount/', project,
-            '/rse_exon.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">RSE</a>'
-        ), 
+            '<a href="http://duffel.rail.bio/recount/v2/', project,
+            '/rse_exon.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">RSE v2</a>'
+        ),
+        paste0(
+            '<a href="http://duffel.rail.bio/recount/v2/', project,
+        '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts v2</a>'
+        ),
         paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-        '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts</a>')
-        )[file.exists(exon_files)], collapse = ' ')
+            '/rse_exon.Rdata" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">RSE v1</a>'
+        ),
+        paste0(
+            '<a href="http://duffel.rail.bio/recount/', project,
+        '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts v1</a>')
+        )[file.exists(exon_files)], collapse = ' ')    
+    meta_web$transcripts[projects == project] <- paste(c(
+        paste0(
+            '<a href="http://duffel.rail.bio/recount/', project,
+            '/rse_tx.RData" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">RSE</a>'
+        ))[file.exists(tx_files)], collapse = ' ')
+    
     if(opt$project != 'sra') {      
         ## Add tissue files
         rse_dir <- ifelse(opt$project == 'gtex',
@@ -124,19 +148,40 @@ for(project in projects) {
         extra_gene <- dir(rse_dir, 'rse_gene_')
         names(extra_gene) <- gsub('_', ' ', gsub('rse_gene_|.Rdata', '',
             extra_gene))
+        rse_tx_dir <- ifelse(opt$project == 'gtex',
+            '/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx/SRP012682',
+            '/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx/TCGA')
+        extra_tx <- dir(rse_tx_dir, 'rse_tx_.*Rdata')
+        names(extra_tx) <- gsub('_', ' ', gsub('rse_tx_|.Rdata', '',
+            extra_tx))
         
         meta_web$gene[projects == project] <- paste(
-            meta_web$gene[projects == project], 'RSE by tissue:',
+            meta_web$gene[projects == project], 'RSE by tissue (version 2):',
+            paste0(
+                '<a href="http://duffel.rail.bio/recount/v2/', project,
+                '/', extra_gene, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">', names(extra_gene),'</a>'
+            , collapse = ' '), 'RSE by tissue (version 1):',
             paste0(
                 '<a href="http://duffel.rail.bio/recount/', project,
                 '/', extra_gene, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-gene\', 1)">', names(extra_gene),'</a>'
             , collapse = ' '), collapse = ' ')
         
         meta_web$exon[projects == project] <- paste(
-            meta_web$exon[projects == project], 'RSE by tissue:',
+            meta_web$exon[projects == project], 'RSE by tissue (version 2):',
+            paste0(
+                '<a href="http://duffel.rail.bio/recount/v2/', project,
+                '/', extra_exon, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">', names(extra_exon),'</a>'
+            , collapse = ' '), 'RSE by tissue (version 1):',
             paste0(
                 '<a href="http://duffel.rail.bio/recount/', project,
                 '/', extra_exon, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-exon\', 1)">', names(extra_exon),'</a>'
+            , collapse = ' '), collapse = ' ')
+            
+        meta_web$transcripts[projects == project] <- paste(
+            meta_web$tx[projects == project], 'RSE by tissue:',
+            paste0(
+                '<a href="http://duffel.rail.bio/recount/', project,
+                '/', extra_tx, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">', names(extra_tx),'</a>'
             , collapse = ' '), collapse = ' ')
     }
     
@@ -163,9 +208,14 @@ for(project in projects) {
             '.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-phenotype\', 1)">link</a>')
     }
     if(file.exists(file.path('/dcl01/leek/data/recount-website/fileinfo/', paste0('fileinfo_', opt$project), project, 'files_info.tsv'))) {
-        meta_web$files_info[projects == project] <- paste0(
+        meta_web$files_info[projects == project] <- paste(c(
+            paste0(
+            '<a href="http://duffel.rail.bio/recount/v2/', project,
+            '/files_info.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-filesinfo\', 1)">v2</a>'),
+            paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/files_info.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-filesinfo\', 1)">link</a>')
+            '/files_info.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-filesinfo\', 1)">v1</a>')
+        ), collapse = ' ')
     }
 }
 

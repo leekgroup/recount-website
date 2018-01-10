@@ -1,6 +1,7 @@
 **** Job starts project SRP025982 ****
-Sun Oct 22 03:54:26 EDT 2017
-Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.3.x
+Tue Jan  9 15:43:56 EST 2018
+Loading conda_R/3.4.x
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.4.x
 Loading required package: lattice
 Loading required package: survival
 Loading required package: Formula
@@ -10,7 +11,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 Loading required package: methods
 Loading required package: stats4
@@ -25,114 +26,114 @@ The following objects are masked from ‘package:parallel’:
     clusterExport, clusterMap, parApply, parCapply, parLapply,
     parLapplyLB, parRapply, parSapply, parSapplyLB
 
-The following object is masked from ‘package:Hmisc’:
-
-    combine
-
 The following objects are masked from ‘package:stats’:
 
-    IQR, mad, xtabs
+    IQR, mad, sd, var, xtabs
 
 The following objects are masked from ‘package:base’:
 
-    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
-    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
-    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
-    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
-    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
-    unique, unsplit, which, which.max, which.min
+    anyDuplicated, append, as.data.frame, cbind, colMeans, colnames,
+    colSums, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, lengths, Map, mapply, match,
+    mget, order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which, which.max, which.min
 
 Loading required package: S4Vectors
 
 Attaching package: ‘S4Vectors’
 
-The following objects are masked from ‘package:base’:
+The following object is masked from ‘package:base’:
 
-    colMeans, colSums, expand.grid, rowMeans, rowSums
+    expand.grid
 
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
 [1] "Time spent calculating md5sums"
-   user  system elapsed 
-303.777 114.489 770.902 
+     user    system   elapsed 
+  365.664   161.897 10817.888 
 [1] "Time spent calculating file sizes"
    user  system elapsed 
-  0.067   0.097   0.143 
-[1] "The total file size for project SRP025982 is 118.232 Gb."
-   user  system elapsed 
-310.825 115.528 779.244 
-2017-10-22 04:07:26
+  0.071   0.090   0.184 
+[1] "The total file size for project SRP025982 is 121.053 Gb."
+     user    system   elapsed 
+  373.232   162.519 10826.399 
+2018-01-09 18:44:24
 Session info ----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.3.3 Patched (2017-03-15 r72696)
+ version  R version 3.4.2 Patched (2017-10-12 r73550)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       <NA>                                       
- date     2017-10-22                                 
+ date     2018-01-09                                 
 
 Packages --------------------------------------------------------------------------------------------------------------
- package       * version  date       source        
- acepack         1.4.1    2016-10-29 CRAN (R 3.3.1)
- backports       1.1.1    2017-09-25 CRAN (R 3.3.3)
- base          * 3.3.3    2017-05-18 local         
- base64enc       0.1-3    2015-07-28 CRAN (R 3.3.0)
- BiocGenerics  * 0.20.0   2017-06-05 Bioconductor  
- bitops          1.0-6    2013-08-17 CRAN (R 3.3.0)
- checkmate       1.8.4    2017-09-25 CRAN (R 3.3.3)
- cluster         2.0.5    2016-10-08 CRAN (R 3.3.3)
- colorspace      1.3-2    2016-12-14 CRAN (R 3.3.1)
- data.table      1.10.4   2017-02-01 CRAN (R 3.3.1)
- datasets      * 3.3.3    2017-05-18 local         
- devtools        1.13.3   2017-08-02 CRAN (R 3.3.3)
- digest          0.6.12   2017-01-27 CRAN (R 3.3.1)
- foreign         0.8-67   2016-09-13 CRAN (R 3.3.3)
- Formula       * 1.2-2    2017-07-10 CRAN (R 3.3.3)
- GenomeInfoDb  * 1.10.3   2017-02-14 Bioconductor  
- GenomicRanges * 1.26.4   2017-06-05 Bioconductor  
- getopt        * 1.20.0   2013-08-30 CRAN (R 3.3.1)
- ggplot2       * 2.2.1    2016-12-30 CRAN (R 3.3.1)
- graphics      * 3.3.3    2017-05-18 local         
- grDevices     * 3.3.3    2017-05-18 local         
- grid            3.3.3    2017-05-18 local         
- gridExtra       2.3      2017-09-09 CRAN (R 3.3.3)
- gtable          0.2.0    2016-02-26 CRAN (R 3.3.0)
- Hmisc         * 4.0-3    2017-05-02 CRAN (R 3.3.1)
- htmlTable       1.9      2017-01-26 CRAN (R 3.3.1)
- htmltools       0.3.6    2017-04-28 CRAN (R 3.3.1)
- htmlwidgets     0.9      2017-07-10 CRAN (R 3.3.3)
- IRanges       * 2.8.2    2017-06-05 Bioconductor  
- knitr           1.17     2017-08-10 CRAN (R 3.3.3)
- lattice       * 0.20-34  2016-09-06 CRAN (R 3.3.3)
- latticeExtra    0.6-28   2016-02-09 CRAN (R 3.3.0)
- lazyeval        0.2.0    2016-06-12 CRAN (R 3.3.1)
- magrittr        1.5      2014-11-22 CRAN (R 3.3.1)
- Matrix          1.2-8    2017-01-20 CRAN (R 3.3.3)
- memoise         1.1.0    2017-04-21 CRAN (R 3.3.1)
- methods       * 3.3.3    2017-05-18 local         
- munsell         0.4.3    2016-02-13 CRAN (R 3.3.0)
- nnet            7.3-12   2016-02-02 CRAN (R 3.3.3)
- parallel      * 3.3.3    2017-05-18 local         
- plyr            1.8.4    2016-06-08 CRAN (R 3.3.1)
- RColorBrewer    1.1-2    2014-12-07 CRAN (R 3.3.0)
- Rcpp            0.12.12  2017-07-15 CRAN (R 3.3.3)
- RCurl           1.95-4.8 2016-03-01 CRAN (R 3.3.0)
- rlang           0.1.2    2017-08-09 CRAN (R 3.3.3)
- rpart           4.1-10   2015-06-29 CRAN (R 3.3.3)
- S4Vectors     * 0.12.2   2017-06-05 Bioconductor  
- scales          0.5.0    2017-08-24 CRAN (R 3.3.3)
- splines         3.3.3    2017-05-18 local         
- stats         * 3.3.3    2017-05-18 local         
- stats4        * 3.3.3    2017-05-18 local         
- stringi         1.1.5    2017-04-07 CRAN (R 3.3.1)
- stringr         1.2.0    2017-02-18 CRAN (R 3.3.1)
- survival      * 2.41-3   2017-04-04 CRAN (R 3.3.1)
- tibble          1.3.3    2017-05-28 CRAN (R 3.3.3)
- tools         * 3.3.3    2017-05-18 local         
- utils         * 3.3.3    2017-05-18 local         
- withr           2.0.0    2017-07-28 CRAN (R 3.3.3)
- XVector         0.14.1   2017-03-21 Bioconductor  
- zlibbioc        1.20.0   2016-10-20 Bioconductor  
+ package          * version   date       source        
+ acepack            1.4.1     2016-10-29 CRAN (R 3.4.1)
+ backports          1.1.2     2017-12-13 CRAN (R 3.4.2)
+ base             * 3.4.2     2017-10-13 local         
+ base64enc          0.1-3     2015-07-28 CRAN (R 3.4.1)
+ BiocGenerics     * 0.24.0    2017-11-29 Bioconductor  
+ bitops             1.0-6     2013-08-17 CRAN (R 3.4.1)
+ checkmate          1.8.5     2017-10-24 CRAN (R 3.4.2)
+ cluster            2.0.6     2017-03-10 CRAN (R 3.4.2)
+ colorspace         1.3-2     2016-12-14 CRAN (R 3.4.1)
+ compiler           3.4.2     2017-10-13 local         
+ data.table         1.10.4-3  2017-10-27 CRAN (R 3.4.2)
+ datasets         * 3.4.2     2017-10-13 local         
+ devtools           1.13.4    2017-11-09 CRAN (R 3.4.2)
+ digest             0.6.13    2017-12-14 CRAN (R 3.4.2)
+ foreign            0.8-69    2017-06-22 CRAN (R 3.4.2)
+ Formula          * 1.2-2     2017-07-10 CRAN (R 3.4.1)
+ GenomeInfoDb     * 1.14.0    2017-11-29 Bioconductor  
+ GenomeInfoDbData   1.0.0     2018-01-09 Bioconductor  
+ GenomicRanges    * 1.30.1    2018-01-09 Bioconductor  
+ getopt           * 1.20.1    2017-11-29 CRAN (R 3.4.2)
+ ggplot2          * 2.2.1     2016-12-30 CRAN (R 3.4.1)
+ graphics         * 3.4.2     2017-10-13 local         
+ grDevices        * 3.4.2     2017-10-13 local         
+ grid               3.4.2     2017-10-13 local         
+ gridExtra          2.3       2017-09-09 CRAN (R 3.4.1)
+ gtable             0.2.0     2016-02-26 CRAN (R 3.4.1)
+ Hmisc            * 4.1-1     2018-01-03 CRAN (R 3.4.2)
+ htmlTable          1.11.1    2017-12-27 CRAN (R 3.4.2)
+ htmltools          0.3.6     2017-04-28 CRAN (R 3.4.1)
+ htmlwidgets        0.9       2017-07-10 CRAN (R 3.4.1)
+ IRanges          * 2.12.0    2017-11-29 Bioconductor  
+ knitr              1.18      2017-12-27 CRAN (R 3.4.2)
+ lattice          * 0.20-35   2017-03-25 CRAN (R 3.4.2)
+ latticeExtra       0.6-28    2016-02-09 CRAN (R 3.4.1)
+ lazyeval           0.2.1     2017-10-29 CRAN (R 3.4.2)
+ magrittr           1.5       2014-11-22 CRAN (R 3.4.1)
+ Matrix             1.2-11    2017-08-21 CRAN (R 3.4.2)
+ memoise            1.1.0     2017-04-21 CRAN (R 3.4.1)
+ methods          * 3.4.2     2017-10-13 local         
+ munsell            0.4.3     2016-02-13 CRAN (R 3.4.1)
+ nnet               7.3-12    2016-02-02 CRAN (R 3.4.2)
+ parallel         * 3.4.2     2017-10-13 local         
+ pillar             1.0.1     2017-11-27 CRAN (R 3.4.2)
+ plyr               1.8.4     2016-06-08 CRAN (R 3.4.1)
+ RColorBrewer       1.1-2     2014-12-07 CRAN (R 3.4.1)
+ Rcpp               0.12.14   2017-11-23 CRAN (R 3.4.2)
+ RCurl              1.95-4.10 2018-01-04 CRAN (R 3.4.2)
+ rlang              0.1.6     2017-12-21 CRAN (R 3.4.2)
+ rpart              4.1-11    2017-03-13 CRAN (R 3.4.2)
+ rstudioapi         0.7       2017-09-07 CRAN (R 3.4.1)
+ S4Vectors        * 0.16.0    2017-11-29 Bioconductor  
+ scales             0.5.0     2017-08-24 CRAN (R 3.4.1)
+ splines            3.4.2     2017-10-13 local         
+ stats            * 3.4.2     2017-10-13 local         
+ stats4           * 3.4.2     2017-10-13 local         
+ stringi            1.1.6     2017-11-17 CRAN (R 3.4.2)
+ stringr            1.2.0     2017-02-18 CRAN (R 3.4.1)
+ survival         * 2.41-3    2017-04-04 CRAN (R 3.4.2)
+ tibble             1.4.1     2017-12-25 CRAN (R 3.4.2)
+ tools            * 3.4.2     2017-10-13 local         
+ utils            * 3.4.2     2017-10-13 local         
+ withr              2.1.1     2017-12-19 CRAN (R 3.4.2)
+ XVector            0.18.0    2017-11-29 Bioconductor  
+ zlibbioc           1.24.0    2017-11-07 Bioconductor  
 **** Job ends ****
-Sun Oct 22 04:07:26 EDT 2017
+Tue Jan  9 18:44:25 EST 2018
