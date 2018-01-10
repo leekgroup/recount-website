@@ -14,7 +14,7 @@ disjoin(exons)
 
 Output:
 
-```
+```{r}
 exons
 GRanges object with 3 ranges and 0 metadata columns:
       seqnames    ranges strand

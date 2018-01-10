@@ -80,7 +80,7 @@ shinyUI(navbarPage(
         h5('counts gene'),
         p('A tsv file with the count matrix used to create the RangedSummarizedExperiment object at the gene level. Version 2 files include the gene ids in an extra column.'),
         h5('RSE exon'),
-        p('The RangedSummarizedExperiment object for the counts summarized at the exon level using the Gencode v25 (GRCh38.p7, CHR) annotation as provided by ', HTML('<a href="https://www.gencodegenes.org/releases/25.html" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'gencode\', 1)">gencode</a>. This GRangesList object recount::recount_exons has 1 element per gene. For each gene this object contains the reduced exons (version 1) or disjoint exons (version 2) such that they are non-overlapping within a gene. See the version section below for more information.')),
+        p('The RangedSummarizedExperiment object for the counts summarized at the exon level using the Gencode v25 (GRCh38.p7, CHR) annotation as provided by ', HTML('<a href="https://www.gencodegenes.org/releases/25.html" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'gencode\', 1)">Gencode</a>. This GRangesList object recount::recount_exons has 1 element per gene. For each gene this object contains the reduced exons (version 1) or disjoint exons (version 2) such that they are non-overlapping within a gene. See the version section below for more information.')),
         h5('counts exon'),
         p('A tsv file with the count matrix used to create the RangedSummarizedExperiment object at the exon level.'),
         h5('RSE junctions'),
