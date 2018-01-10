@@ -26,5 +26,5 @@ rsconnect::setAccountInfo(name=deploy_info$name, token=deploy_info$token,
 deployApp(appFiles = c('ui.R', 'server.R', 'meta_web.Rdata', 'download.md',
     'google-analytics.js', 'www/sample_ids.tsv',
     'www/highlight.pack.js', 'www/shiny-showcase.js', 'www/rstudio.css',
-    'www/LICENSE.txt'),
+    'www/LICENSE.txt', 'reducedexons.md'),
     appName = 'recount', account = deploy_info$name)
