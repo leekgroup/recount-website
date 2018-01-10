@@ -130,7 +130,7 @@ for(project in projects) {
         paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
         '/counts_exon.tsv.gz" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-counts-exon\', 1)">counts v1</a>')
-        )[file.exists(exon_files)], collapse = ' ')    
+        )[rep(file.exists(exon_files), each = 2)], collapse = ' ')    
     meta_web$transcripts[projects == project] <- paste(c(
         paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
