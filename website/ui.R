@@ -28,7 +28,8 @@ shinyUI(navbarPage(
             tags$li(HTML('<b>Nellore A</b>, Jaffe AE, Fortin JP, Alquicira-Hernández J, Collado-Torres L, Wang S, Phillips RA, Karbhari N, Hansen KD, Langmead B, Leek JT. <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1118-6" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'rail-rna-paper\', 1)">Human splicing diversity and the extent of unannotated splice junctions across human RNA-seq samples on the Sequence Read Archive</a>. <i>Genome Biology</i>, 2016. doi: 10.1186/s13059-016-1118-6.')),
             tags$li(HTML('<b>Ellis SE</b>, Collado-Torres L, Jaffe AE, Leek JT. <a href="https://www.biorxiv.org/content/early/2017/06/03/145656" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'phenopredict\', 1)">Improving the value of public RNA-seq expression data by phenotype prediction</a>. <i>bioRxiv</i>, 2017. doi: 10.1101/145656.')),
             tags$li(HTML('<b>Collado-Torres L</b>, Nellore A, Jaffe AE. <a href="https://f1000research.com/articles/6-1558/v1" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'recount-workflow\', 1)">recount workflow: Accessing over 70,000 human RNA-seq samples with Bioconductor</a>. <i>F1000Research</i>, 2017. doi: 10.12688/f1000research.12223.1.')),
-            tags$li(HTML('<b>Wilks C</b>, Gaddipati P, Nellore A, Langmead B. <a href="https://academic.oup.com/bioinformatics/article/34/1/114/4101942" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'snaptron-bioinfo\', 1)">Snaptron: querying splicing patterns across tens of thousands of RNA-seq samples</a>. <i>Bioinformatics</i>, 2018. doi: 10.1093/bioinformatics/btx547.'))
+            tags$li(HTML('<b>Wilks C</b>, Gaddipati P, Nellore A, Langmead B. <a href="https://academic.oup.com/bioinformatics/article/34/1/114/4101942" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'snaptron-bioinfo\', 1)">Snaptron: querying splicing patterns across tens of thousands of RNA-seq samples</a>. <i>Bioinformatics</i>, 2018. doi: 10.1093/bioinformatics/btx547.')),
+            tags$li(HTML('<b>Fu J</b>, Kammers K, Nellore A, Collado-Torres L, Leek JT, Taub MA. <a href="https://www.biorxiv.org/content/early/2018/01/12/247346" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'snaptron-bioinfo\', 1)">RNA-seq transcript quantification from reduced-representation data in recount2</a>. <i>bioRxiv</i>, 2018. doi: 10.1101/247346.'))
         ),
         tags$hr(),
         h3('The Datasets'),
@@ -88,7 +89,7 @@ shinyUI(navbarPage(
         h5('counts jx'),
         p('A tsv file with the count matrix used to create the RangedSummarizedExperiment object at the junction level. This file is present only if the project has at least one junction detected.'),
         h5('RSE transcript'),
-        p('A RangedSummarizedExperiment object with the transcript quantifications as done by Fu et al, 2018.'),
+        p('A RangedSummarizedExperiment object with the transcript quantifications as done by Fu et al, bioRxiv, 2018.'),
         h5('Junction raw coverage file'),
         HTML('The link jx_cov points to the raw junction coverage file that contains the junction ids (comma-separated), the sample ids (comma-separated), and the actual coverage value for the junction. Sample ids can be matched to run and project accession numbers using <a href="https://jhubiostatistics.shinyapps.io/recount/sample_ids.tsv" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'sample-ids\', 1)">sample_ids.tsv</a> (junction id, project accession, run accession).'),
         h5('Junction BED file'),
@@ -106,7 +107,7 @@ shinyUI(navbarPage(
         h3('Difference between versions'),
         h5('Version 1: reduced exons'),
         p('Exon counts are derived from reduced exons, such that each exonic base is only counted once.'),
-        h5('Version 2: disjoint exons, released January 2018'),
+        h5('Version 2: disjoint exons, released January 12, 2018'),
         p('Exon counts are derived from disjoint exons, which also result in each exonic based being counted just once. However, disjoint exons are more useful than reduced exons because it is possible to reconstruct the actual exons with these counts. The following code might be helpful to understand the difference.'),
         includeMarkdown('reducedexons.md'),
         p('We realized this in the peer-review process of the recount workflow paper. For backward compatibility, we provide both versions of files. The disjoint exon count files are larger than the reduced exon counts. The gene counts did not change between versions, just a handful of gene symbols, for which we updated the gene files. The gene count text files (counts_gene.tsv.gz) now include the gene ids as an extra column as was requested by several users. The file information document now includes the md5sum for the new files (including the transcript files).'),

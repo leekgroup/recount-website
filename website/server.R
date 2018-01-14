@@ -16,8 +16,8 @@ colnames(meta_web)[colnames(meta_web) == 'files_info'] <- 'files info'
 
 
 shinyServer(function(input, output, session) {
-    createAlert(session, 'updatealert', 'update', 'Transcript counts are now available thanks to the work of Fu et al.
-    Exon counts are now from disjoint exons (v2) instead of reduced ones (v1). Check the Documentation for further information.')
+    createAlert(session, 'updatealert', 'update', 'Transcript counts are now available thanks to the work of Fu et al, bioRxiv, 2018.
+    Exon counts are now from disjoint exons (v2) instead of reduced ones (v1). Check the Documentation tab for further information.')
     
     output$metadata <- DT::renderDataTable(
         meta_web[not_massive, ],

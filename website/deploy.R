@@ -27,4 +27,5 @@ deployApp(appFiles = c('ui.R', 'server.R', 'meta_web.Rdata', 'download.md',
     'google-analytics.js', 'www/sample_ids.tsv',
     'www/highlight.pack.js', 'www/shiny-showcase.js', 'www/rstudio.css',
     'www/LICENSE.txt', 'reducedexons.md'),
-    appName = 'recount', account = deploy_info$name)
+    appName = 'recount')#, account = deploy_info$name)
+Y
