@@ -117,7 +117,7 @@ shinyUI(navbarPage(
         tags$hr(),
         h3('Known issues'),
         tags$li('Rail-RNA run on SRA data'),
-        HTML('Check the <a href="https://github.com/nellore/runs/blob/master/sra/v2/hg38/NOTES">NOTES</a> on the Rail-RNA run on SRA data (version 2) which describes why some samples were discarded.'),
+        HTML('Check the <a href="https://github.com/nellore/runs/blob/master/sra/v2/hg38/NOTES">NOTES</a> on the Rail-RNA run on SRA data (version 2) which describes why some samples were discarded. Also check this <a href="https://github.com/leekgroup/recount-website/issues/11">known issue</a> listing the samples with 0 reads downloaded that are then missing from the RSE files.'),
         tags$li('Single-cell studies with pooled samples'),
         HTML('Some single-cell studies like SRP058046 sequenced more than one single-cell but are available only as a pooled sample from the Sequence Read Archive. Currently these studies might not be useful for differential expression analysis via recount2 but can be used for checking if a given exon-exon junction is present or if a given region is expressed. Reported by <a href="https://www.helmholtz-muenchen.de/icb/">Lukas Simon</a>.'),
         tags$li('BED files have the right end off by 1 base pair'),
