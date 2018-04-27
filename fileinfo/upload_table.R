@@ -95,6 +95,16 @@ write.table(upload_table, file = 'upload_table.tsv', sep = '\t',
 write.table(upload_table[upload_table$version2, -(4:5)],
     file = 'upload_table_only_version2.tsv', sep = '\t',
     row.names = FALSE, quote = FALSE, col.names = FALSE)
+    
+## Table for updating rse_tx.RData files and fixing md5sum issue for the jx
+## files (and potentially some metadata files, though unlikely for most)
+upload_table$update_tx <- grepl('rse_tx|tsv$|rse_jx|counts_jx.tsv.gz', upload_table$file_name)
+# head(upload_table, n = 100)
+# table(upload_table$file_name[upload_table$update_tx & !grepl('tsv$', upload_table$file_name)])
+
+write.table(upload_table[upload_table$update_tx, -(4:ncol(upload_table))],
+    file = 'upload_table_only_update_tx.tsv', sep = '\t',
+    row.names = FALSE, quote = FALSE, col.names = FALSE)
 
 ## Reproducibility info
 proc.time()
