@@ -96,7 +96,7 @@ for(project in projects) {
         file.path('/dcl01/leek/data/recount-website/rse/',
             paste0('rse_', opt$project), project, 'counts_gene.tsv.gz')
     )
-    tx_files <- paste0('/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx/',
+    tx_files <- paste0('/dcl01/leek/data/ta_poc/recount_out/rse_new/',
         project, '/rse_tx.RData')
     
     meta_web$gene[projects == project] <- paste(c(
@@ -149,8 +149,8 @@ for(project in projects) {
         names(extra_gene) <- gsub('_', ' ', gsub('rse_gene_|.Rdata', '',
             extra_gene))
         rse_tx_dir <- ifelse(opt$project == 'gtex',
-            '/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx/SRP012682',
-            '/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx/TCGA')
+            '/dcl01/leek/data/ta_poc/recount_out/rse_new/SRP012682',
+            '/dcl01/leek/data/ta_poc/recount_out/rse_new/TCGA')
         extra_tx <- dir(rse_tx_dir, 'rse_tx_.*Rdata')
         names(extra_tx) <- gsub('_', ' ', gsub('rse_tx_|.Rdata', '',
             extra_tx))

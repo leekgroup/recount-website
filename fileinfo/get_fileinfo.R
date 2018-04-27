@@ -57,7 +57,7 @@ rownames(metadata) <- NULL
 ## Locate counts and rse files
 rse_path <- file.path('/dcl01/leek/data/recount-website/rse',
     paste0('rse_', opt$project), opt$projectid)
-rse_tx_path <- file.path('/dcl01/leek/data/ta_poc/recount_out/rse/rse_tx',
+rse_tx_path <- file.path('/dcl01/leek/data/ta_poc/recount_out/rse_new',
         opt$projectid)
 rse_files <- c(dir(rse_path, full.names = TRUE),
     dir(rse_tx_path, full.names = TRUE))
