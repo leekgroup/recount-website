@@ -54,7 +54,7 @@ rownames(upload_table) <- NULL
 
 ## Add versions
 upload_table$version1 <- TRUE
-upload_table$version2 <-  ! (grepl('bw$|^rse_jx|^counts_jx|^rse_tx|bed.gz$|junction_coverage', upload_table$file_name) | upload_table$file_name %in% paste0(unique(upload_table$project), '.tsv') )
+upload_table$version2 <-  ! (grepl('bw$|^rse_jx|^counts_jx|bed.gz$|junction_coverage', upload_table$file_name) | upload_table$file_name %in% paste0(unique(upload_table$project), '.tsv') )
 
 ## sra/rse_exon.Rdata failed in version 2 (it's too large...)
 upload_table$version2[upload_table$path == '/dcl01/leek/data/recount-website/rse/rse_sra/all/rse_exon.Rdata'] <- FALSE

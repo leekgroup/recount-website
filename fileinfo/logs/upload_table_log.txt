@@ -16,8 +16,8 @@ Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.4.x
 6       rse_jx.Rdata DRP000366     TRUE    FALSE
 [1] 95136     5
    user  system elapsed 
-  5.756   1.381   8.743 
-2018-04-27 10:10:16
+  4.707   1.473  12.880 
+2018-05-02 16:16:05
 Session info ----------------------------------------------------------------------------------------------------------
  setting  value                                      
  version  R version 3.4.3 Patched (2018-01-20 r74142)
@@ -26,7 +26,7 @@ Session info -------------------------------------------------------------------
  language (EN)                                       
  collate  en_US.UTF-8                                
  tz       US/Eastern                                 
- date     2018-04-27                                 
+ date     2018-05-02                                 
 
 Packages --------------------------------------------------------------------------------------------------------------
  package   * version date       source        
