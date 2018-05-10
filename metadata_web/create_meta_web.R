@@ -155,8 +155,8 @@ for(project in projects) {
         rse_tx_dir <- ifelse(opt$project == 'gtex',
             '/dcl01/leek/data/ta_poc/recount_out/rse_new/SRP012682',
             '/dcl01/leek/data/ta_poc/recount_out/rse_new/TCGA')
-        extra_tx <- dir(rse_tx_dir, 'rse_tx_.*Rdata')
-        names(extra_tx) <- gsub('_', ' ', gsub('rse_tx_|.Rdata', '',
+        extra_tx <- dir(rse_tx_dir, 'rse_tx_.*R[d|D]ata')
+        names(extra_tx) <- gsub('_', ' ', gsub('rse_tx_|.R[d|D]ata', '',
             extra_tx))
         
         meta_web$gene[projects == project] <- paste(
