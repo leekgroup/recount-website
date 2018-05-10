@@ -1,5 +1,4 @@
 Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.4.x
-Loading required package: colorout
 Loading required package: methods
 Loading required package: stats4
 Loading required package: BiocGenerics
@@ -36,52 +35,53 @@ The following object is masked from ‘package:base’:
 
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
-2018-01-10 12:44:36 number of samples per project
+2018-05-09 20:27:28 number of samples per project
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    1.00    4.00    8.00   24.57   18.00 1720.00 
-2018-01-10 12:44:36 number missing
+2018-05-09 20:27:28 number missing
      accession number_samples        species       abstract           gene 
              0              0              0             30              5 
           exon      junctions    transcripts      phenotype     files_info 
              5             22              5              0              5 
    user  system elapsed 
- 13.565   0.818  14.471 
-2018-01-10 12:44:37
+ 15.800   3.501 709.088 
+2018-05-09 20:27:29
 Session info ----------------------------------------------------------------------------------------------------------
  setting  value                                      
- version  R version 3.4.2 Patched (2017-10-12 r73550)
+ version  R version 3.4.3 Patched (2018-01-20 r74142)
  system   x86_64, linux-gnu                          
  ui       X11                                        
  language (EN)                                       
  collate  en_US.UTF-8                                
- tz       <NA>                                       
- date     2018-01-10                                 
+ tz       US/Eastern                                 
+ date     2018-05-09                                 
 
 Packages --------------------------------------------------------------------------------------------------------------
- package          * version   date       source                            
- base             * 3.4.2     2017-10-13 local                             
- BiocGenerics     * 0.24.0    2017-11-29 Bioconductor                      
- bitops             1.0-6     2013-08-17 CRAN (R 3.4.1)                    
- colorout         * 1.1-2     2017-08-10 Github (jalvesaq/colorout@020a14d)
- compiler           3.4.2     2017-10-13 local                             
- datasets         * 3.4.2     2017-10-13 local                             
- devtools           1.13.4    2017-11-09 CRAN (R 3.4.2)                    
- digest             0.6.13    2017-12-14 CRAN (R 3.4.2)                    
- GenomeInfoDb     * 1.14.0    2017-11-29 Bioconductor                      
- GenomeInfoDbData   1.0.0     2018-01-09 Bioconductor                      
- GenomicRanges    * 1.30.1    2018-01-09 Bioconductor                      
- getopt           * 1.20.1    2017-11-29 CRAN (R 3.4.2)                    
- graphics         * 3.4.2     2017-10-13 local                             
- grDevices        * 3.4.2     2017-10-13 local                             
- IRanges          * 2.12.0    2017-11-29 Bioconductor                      
- memoise            1.1.0     2017-04-21 CRAN (R 3.4.1)                    
- methods          * 3.4.2     2017-10-13 local                             
- parallel         * 3.4.2     2017-10-13 local                             
- RCurl              1.95-4.10 2018-01-04 CRAN (R 3.4.2)                    
- S4Vectors        * 0.16.0    2017-11-29 Bioconductor                      
- stats            * 3.4.2     2017-10-13 local                             
- stats4           * 3.4.2     2017-10-13 local                             
- utils            * 3.4.2     2017-10-13 local                             
- withr              2.1.1     2017-12-19 CRAN (R 3.4.2)                    
- XVector            0.18.0    2017-11-29 Bioconductor                      
- zlibbioc           1.24.0    2017-11-07 Bioconductor                      
+ package          * version   date       source        
+ base             * 3.4.3     2018-01-20 local         
+ BiocGenerics     * 0.24.0    2017-11-29 Bioconductor  
+ bitops             1.0-6     2013-08-17 CRAN (R 3.4.1)
+ colorspace         1.3-2     2016-12-14 CRAN (R 3.4.1)
+ compiler           3.4.3     2018-01-20 local         
+ datasets         * 3.4.3     2018-01-20 local         
+ devtools           1.13.5    2018-02-18 CRAN (R 3.4.3)
+ digest             0.6.15    2018-01-28 cran (@0.6.15)
+ GenomeInfoDb     * 1.14.0    2017-11-29 Bioconductor  
+ GenomeInfoDbData   1.0.0     2018-01-09 Bioconductor  
+ GenomicRanges    * 1.30.3    2018-04-18 Bioconductor  
+ getopt           * 1.20.2    2018-02-16 CRAN (R 3.4.3)
+ graphics         * 3.4.3     2018-01-20 local         
+ grDevices        * 3.4.3     2018-01-20 local         
+ IRanges          * 2.12.0    2017-11-29 Bioconductor  
+ memoise            1.1.0     2017-04-21 CRAN (R 3.4.1)
+ methods          * 3.4.3     2018-01-20 local         
+ parallel         * 3.4.3     2018-01-20 local         
+ Rcpp               0.12.16   2018-03-13 CRAN (R 3.4.3)
+ RCurl              1.95-4.10 2018-01-04 CRAN (R 3.4.2)
+ S4Vectors        * 0.16.0    2017-11-29 Bioconductor  
+ stats            * 3.4.3     2018-01-20 local         
+ stats4           * 3.4.3     2018-01-20 local         
+ utils            * 3.4.3     2018-01-20 local         
+ withr              2.1.2     2018-03-15 CRAN (R 3.4.3)
+ XVector            0.18.0    2017-11-29 Bioconductor  
+ zlibbioc           1.24.0    2017-11-07 Bioconductor  
