@@ -109,6 +109,8 @@ shinyUI(navbarPage(
         p('Exon counts are derived from reduced exons, such that each exonic base is only counted once.'),
         h5('Version 2: disjoint exons, released January 12, 2018'),
         p('Exon counts are derived from disjoint exons, which also result in each exonic based being counted just once. However, disjoint exons are more useful than reduced exons because it is possible to reconstruct the actual exons with these counts. The following code might be helpful to understand the difference.'),
+        h5('Version 2: transcript RSE files, May, 2018'),
+        p('Transcript RSE files were re-calculated by Fu et al. For details check the second version of the pre-print.'),
         includeMarkdown('reducedexons.md'),
         p('We realized this in the peer-review process of the recount workflow paper. For backward compatibility, we provide both versions of files. The disjoint exon count files are larger than the reduced exon counts. The gene counts did not change between versions, just a handful of gene symbols, for which we updated the gene files. The gene count text files (counts_gene.tsv.gz) now include the gene ids as an extra column as was requested by several users. The file information document now includes the md5sum for the new files (including the transcript files).'),
         tags$hr(),
