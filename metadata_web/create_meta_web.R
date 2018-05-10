@@ -182,7 +182,7 @@ for(project in projects) {
             , collapse = ' '), collapse = ' ')
             
         meta_web$transcripts[projects == project] <- paste(
-            meta_web$exon[projects == project], 'RSE by tissue (version 2):',
+            meta_web$tx[projects == project], 'RSE by tissue (version 2):',
             paste0(
                 '<a href="http://duffel.rail.bio/recount/v2/', project,
                 '/', extra_tx, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">', names(extra_tx),'</a>'
