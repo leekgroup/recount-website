@@ -35,17 +35,17 @@ The following object is masked from ‘package:base’:
 
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
-2018-05-09 20:45:06 number of samples per project
+2018-05-09 20:56:16 number of samples per project
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    9662    9662    9662    9662    9662    9662 
-2018-05-09 20:45:06 number missing
+2018-05-09 20:56:16 number missing
      accession number_samples        species       abstract           gene 
              0              0              0              0              0 
           exon      junctions    transcripts      phenotype     files_info 
              0              0              0              0              0 
    user  system elapsed 
-  5.106   0.328   5.822 
-2018-05-09 20:45:06
+  5.070   0.253   5.380 
+2018-05-09 20:56:16
 Session info ----------------------------------------------------------------------------------------------------------
  setting  value                                      
  version  R version 3.4.3 Patched (2018-01-20 r74142)
