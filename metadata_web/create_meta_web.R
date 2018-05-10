@@ -133,9 +133,13 @@ for(project in projects) {
         )[rep(file.exists(exon_files), each = 2)], collapse = ' ')    
     meta_web$transcripts[projects == project] <- paste(c(
         paste0(
+            '<a href="http://duffel.rail.bio/recount/v2/', project,
+            '/rse_tx.RData" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">RSE v2</a>'
+        ),
+        paste0(
             '<a href="http://duffel.rail.bio/recount/', project,
-            '/rse_tx.RData" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">RSE</a>'
-        ))[file.exists(tx_files)], collapse = ' ')
+            '/rse_tx.RData" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">RSE v1</a>'
+        ))[rep(file.exists(tx_files), each = 2)], collapse = ' ')
     
     if(opt$project != 'sra') {      
         ## Add tissue files
@@ -178,7 +182,11 @@ for(project in projects) {
             , collapse = ' '), collapse = ' ')
             
         meta_web$transcripts[projects == project] <- paste(
-            meta_web$tx[projects == project], 'RSE by tissue:',
+            meta_web$exon[projects == project], 'RSE by tissue (version 2):',
+            paste0(
+                '<a href="http://duffel.rail.bio/recount/v2/', project,
+                '/', extra_tx, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">', names(extra_tx),'</a>'
+            , collapse = ' '), 'RSE by tissue (version 1):',
             paste0(
                 '<a href="http://duffel.rail.bio/recount/', project,
                 '/', extra_tx, '" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-tx\', 1)">', names(extra_tx),'</a>'
