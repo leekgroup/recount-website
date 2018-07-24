@@ -2,8 +2,8 @@
 ## SciServer compute http://www.sciserver.org/ to access the recount data.
 
 # Install recount
-source("https://bioconductor.org/biocLite.R")
-biocLite(c('recount', 'DESeq2'))
+install.packages("BiocManager")
+BiocManager::install(c('recount', 'DESeq2'))
 
 # Load package
 library('recount')

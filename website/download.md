@@ -1,8 +1,8 @@
 
 ```{r}
 ## Install recount from Bioconductor
-source('http://bioconductor.org/biocLite.R')
-biocLite('recount')
+install.packages("BiocManager")
+BiocManager::install('recount')
 
 ## Browse the vignetets for a quick description of how to use the package
 library('recount')
