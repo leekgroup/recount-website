@@ -125,7 +125,9 @@ shinyUI(navbarPage(
         tags$li('BED files have the right end off by 1 base pair'),
         HTML('Check the R code we used to read in these BED files <a href="https://github.com/leekgroup/recount-website/blob/master/rse/create_rse.R#L341-L346">here</a>. The coordinates in these files are end of exon1 + 1, start of exon2 -1 in zero-based coordinates and should have been end of exon1 + 1, start of exon 2 in zero-based coordinates to be a <a href="https://genome.ucsc.edu/FAQ/FAQformat#format1">proper BED file</a>.'),
         h5('Found an issue?'),
-        HTML('If you found an issue with recount2, please email us or describe the problem at the <a href="https://github.com/leekgroup/recount-website/issues">recount-website issue tracker</a>. Thank you!')
+        HTML('If you found an issue with recount2, please email us or describe the problem at the <a href="https://github.com/leekgroup/recount-website/issues">recount-website issue tracker</a>. Thank you!'),
+        h3('FAQ'),
+        tags$li('When is the next version going to be released? We are currently (summer 2018) determining what will be the next phase of the recount project. Please stay tuned, thanks!')
     ),
     tabPanel('Download data with R',
         p('The following R code shows how to use the', HTML('<a href="http://bioconductor.org/packages/recount" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'bioc-recount\', 1)">recount</a>'), 'Bioconductor package for downloading data. In this example we will download the data for study SRP009615.'),
