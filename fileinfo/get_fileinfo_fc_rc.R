@@ -34,10 +34,10 @@ write.table(data.frame(file = names(upload_files), md5sum = files_md5sum,
 fc_rc_url_table <- data.frame(
     path = upload_files,
     file_name = names(upload_files),
-    project = gsub('_.*', '', gsub('rse_fc_|\\.rda', '', names(upload_files))),
+    project = gsub('_.*', '', gsub('rse_fc_|\\.Rdata', '', names(upload_files))),
     version1 = NA,
     version2 = NA,
-    url = NA,
+    url = paste0('http://idies.jhu.edu/recount/data/fc_rc/', names(upload_files)),
     stringsAsFactors = FALSE)
 rownames(fc_rc_url_table) <- NULL
 

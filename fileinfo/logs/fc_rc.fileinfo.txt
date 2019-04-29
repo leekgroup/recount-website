@@ -1,24 +1,24 @@
 Loading git
 Adding LIBD modules
 **** Job starts ****
-Tue Apr 23 13:02:22 EDT 2019
+Mon Apr 29 15:42:17 EDT 2019
 **** JHPCE info ****
 User: lcollado
-Job id: 7043295
+Job id: 7071355
 Job name: fc_rc.fileinfo
-Hostname: compute-080
+Hostname: compute-082
 Task id: 
 [1] "Time spent calculating md5sums"
     user   system  elapsed 
- 333.349  132.411 1642.587 
+ 341.493  132.101 1745.923 
 [1] "Time spent calculating file sizes"
    user  system elapsed 
-  4.169  19.995  87.163 
-[1] "The total file size for fc_rc is 92.164 Gb."
+  4.182  13.858  17.457 
+[1] "The total file size for fc_rc is 95.752 Gb."
 [1] "Reproducibility information:"
-[1] "2019-04-23 13:31:13 EDT"
+[1] "2019-04-29 16:11:42 EDT"
     user   system  elapsed 
- 338.298  152.534 1730.887 
+ 346.455  146.066 1764.783 
 ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────
  setting  value                                                 
  version  R version 3.5.3 Patched (2019-03-11 r76311)           
@@ -29,7 +29,7 @@ Task id:
  collate  en_US.UTF-8                                           
  ctype    en_US.UTF-8                                           
  tz       US/Eastern                                            
- date     2019-04-23                                            
+ date     2019-04-29                                            
 
 ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────
  package     * version date       lib source        
@@ -43,4 +43,4 @@ Task id:
 [2] /jhpce/shared/jhpce/core/conda/miniconda-3/envs/svnR-3.5.x/R/3.5.x/lib64/R/site-library
 [3] /jhpce/shared/jhpce/core/conda/miniconda-3/envs/svnR-3.5.x/R/3.5.x/lib64/R/library
 **** Job ends ****
-Tue Apr 23 13:31:13 EDT 2019
+Mon Apr 29 16:11:42 EDT 2019
