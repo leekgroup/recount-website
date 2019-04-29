@@ -24,7 +24,7 @@ for(i in seq_len(nrow(meta_web))) {
     proj <- gsub('.*">|</a>', '', meta_web$accession[i])
     if(proj %in% fc_rc_url_table$project) {
         
-        proj_file <- paste0('rse_fc_', proj, '.rda')
+        proj_file <- paste0('rse_fc_', proj, '.Rdata')
         
         res <- paste0(
             '<a href="', fc_rc_url_table$url[fc_rc_url_table$file_name == proj_file],'" onclick="ga(\'send\', \'event\', \'click\', \'link\', \'data-rse-fc-rc\', 1)">RSE</a>'
