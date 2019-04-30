@@ -16,7 +16,7 @@ colnames(meta_web)[colnames(meta_web) == 'files_info'] <- 'files info'
 
 
 shinyServer(function(input, output, session) {
-    createAlert(session, 'updatealert', 'update', 'FANTOM-CAT/recount2 RSE objects are now available thanks to Luidy-Imada, Matam et al, bioRxiv, 2019. Check the Documentation tab for further information.')
+    createAlert(session, 'updatealert', 'update', 'FANTOM-CAT/recount2 RSE objects are now available thanks to Luidy-Imada, Sanchez et al, bioRxiv, 2019. Check the Documentation tab for further information.')
     
     output$metadata <- DT::renderDataTable(
         meta_web[not_massive, ],
