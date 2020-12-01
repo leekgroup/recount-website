@@ -207,8 +207,8 @@ colnames(jx_info) <- c('chr', 'start', 'end', 'sample_ids', 'reads')
 
 ## Create the counts matrix
 message(paste(Sys.time(), 'processing count information'))
-jx_info_samples <- strsplit(jx_info$sample_ids, ',')
-jx_info_reads <- strsplit(jx_info$reads, ',')
+jx_info_samples <- strsplit(as.character(jx_info$sample_ids), ',')
+jx_info_reads <- strsplit(as.character(jx_info$reads), ',')
 stopifnot(identical(elementNROWS(jx_info_samples), elementNROWS(jx_info_reads)))
 jx_info_tab <- data.frame(
     jx_id = rep(seq_len(nrow(jx_info)), elementNROWS(jx_info_samples)),
