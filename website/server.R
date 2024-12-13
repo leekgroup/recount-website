@@ -5,6 +5,13 @@ library('shinyBS')
 
 load('meta_web.Rdata')
 
+## For removing the onclick code. Doesn't seem to resolve
+## https://github.com/leekgroup/recount-website/issues/25
+#
+# for(i in colnames(meta_web)) {
+#     meta_web[[i]] <- gsub(', 1\\)\\"', "", gsub("ga\\('send', 'event', 'click', 'link', '(srainfo|data[A-z|0-9|-]+)'", "", gsub(' onclick=\\"', "", (meta_web[[i]]))))
+# }
+
 not_massive <- meta_web$number_samples < 9662
 popular_i <- meta_web$number_samples > 400 & not_massive
 gtex_i <- meta_web$number_samples == 9662
@@ -17,7 +24,7 @@ colnames(meta_web)[colnames(meta_web) == 'files_info'] <- 'files info'
 
 shinyServer(function(input, output, session) {
     createAlert(session, 'updatealert', 'update', 'FANTOM-CAT/recount2 RSE objects are now available thanks to Imada, Sanchez et al, bioRxiv, 2019. Check the Documentation tab for further information.')
-    
+
     output$metadata <- DT::renderDataTable(
         meta_web[not_massive, ],
         escape = which(colnames(meta_web) %in% c('number of samples', 'species',
@@ -74,7 +81,7 @@ shinyServer(function(input, output, session) {
             order = list(list(1, 'desc'))
         )
     )
-    
+
     output$downloadData <- downloadHandler(
         filename = function() { paste0('recount_selection_', Sys.time(),
             '.csv') },
