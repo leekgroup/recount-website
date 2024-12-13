@@ -12,6 +12,12 @@ load('meta_web.Rdata')
 #     meta_web[[i]] <- gsub(', 1\\)\\"', "", gsub("ga\\('send', 'event', 'click', 'link', '(srainfo|data[A-z|0-9|-]+)'", "", gsub(' onclick=\\"', "", (meta_web[[i]]))))
 # }
 
+## Resolve https://github.com/leekgroup/recount-website/issues/25 by using
+## https instead of http for duffel
+for(i in colnames(meta_web)) {
+    meta_web[[i]] <- gsub("http://duffel", "https://duffel", meta_web[[i]])
+}
+
 not_massive <- meta_web$number_samples < 9662
 popular_i <- meta_web$number_samples > 400 & not_massive
 gtex_i <- meta_web$number_samples == 9662
