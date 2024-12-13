@@ -5,13 +5,6 @@ library('shinyBS')
 
 load('meta_web.Rdata')
 
-## For removing the onclick code. Doesn't seem to resolve
-## https://github.com/leekgroup/recount-website/issues/25
-#
-# for(i in colnames(meta_web)) {
-#     meta_web[[i]] <- gsub(', 1\\)\\"', "", gsub("ga\\('send', 'event', 'click', 'link', '(srainfo|data[A-z|0-9|-]+)'", "", gsub(' onclick=\\"', "", (meta_web[[i]]))))
-# }
-
 ## Resolve https://github.com/leekgroup/recount-website/issues/25 by using
 ## https instead of http for duffel
 for(i in colnames(meta_web)) {
